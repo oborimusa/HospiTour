@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Professional Dashboard | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
+        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
+        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
+        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
+        .main-content{ margin-left: 250px; padding: 20px; }
+        .card-metric{ border-left: 5px solid var(--gold); }
+        .text-gold{ color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h5 class="text-white">HospiPro</h5>
+            <small class="text-gold">Service Professional</small>
+        </div>
+        <a href="professional-dashboard.html" class="active">🏠 Dashboard</a>
+        <a href="professional-profile.html">👤 Profile & Portfolio</a>
+        <a href="professional-bookings.html">🗓️ Booking Management</a>
+        <a href="professional-clients.html">👥 Client Management</a>
+        <a href="professional-billing.html">💵 Billing & Payments</a>
+        <hr class="text-white-50">
+        <a href="#" id="logoutBtn">➡️ Log Out</a>
+    </div>
+
+    <div class="main-content">
+        <h1 class="mb-4 text-brown">Welcome, <span id="userName">Professional</span>!</h1>
+        <p class="small text-muted mb-4" id="planLevel">Loading Plan Level...</p>
+        
+        <h3 class="mb-3 text-brown">Performance Snapshot</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Upcoming Bookings (7 Days)</div>
+                    <h2 class="fw-bold text-brown" id="metricBookings">3</h2>
+                    <p class="small mb-0 text-success">View all pending requests.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Estimated Earnings (This Month)</div>
+                    <h2 class="fw-bold text-brown" id="metricEarnings">$1,450</h2>
+                    <p class="small mb-0 text-info" id="earningsHint">Excludes pending payments (Pro+ required).</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Profile Rating</div>
+                    <h2 class="fw-bold text-brown" id="metricRating">4.8 <span class="small">/ 5</span></h2>
+                    <p class="small mb-0 text-success">Based on 12 reviews.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-3 text-brown">Quick Actions</h3>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <a href="professional-profile.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">Update Profile</h5>
+                    <p class="small text-muted mb-0">Showcase new portfolio work.</p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="professional-bookings.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">Manage Availability</h5>
+                    <p class="small text-muted mb-0">Block dates or update your calendar.</p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="professional-clients.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">Contact Client</h5>
+                    <p class="small text-muted mb-0">Review client history and contact details.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // CONFIG: Use your actual project config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
+            authDomain: "hospipro-86b8d.firebaseapp.com",
+            projectId: "hospipro-86b8d",
+            storageBucket: "hospipro-86b8d.firebasestorage.app",
+            messagingSenderId: "801856698977",
+            appId: "1:801856698977:web:05562aaf88584d2af0c820",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        const logoutBtn = document.getElementById('logoutBtn');
+        const planLevelEl = document.getElementById('planLevel');
+        const userNameEl = document.getElementById('userName');
+
+        // Simulating data based on a fetched plan level
+        function updateMetrics(plan) {
+            planLevelEl.textContent = `Current Plan: ${plan.toUpperCase()} | Marketplace Active`;
+            
+            if (plan === 'free') {
+                document.getElementById('metricBookings').textContent = '1';
+                document.getElementById('metricEarnings').textContent = '$--';
+                document.getElementById('earningsHint').textContent = 'Upgrade to Pro to track earnings.';
+                document.getElementById('metricRating').textContent = 'N/A';
+            } else if (plan === 'pro') {
+                document.getElementById('metricBookings').textContent = '5';
+                document.getElementById('metricEarnings').textContent = '$1,450';
+            } else if (plan === 'enterprise') {
+                document.getElementById('metricBookings').textContent = '12';
+                document.getElementById('metricEarnings').textContent = '$5,200';
+            }
+        }
+
+        // Authentication and Role Check
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Check user's role and plan from Firestore
+                const userRef = doc(db, 'users', user.uid); // Assumes role/plan is stored here
+                const userSnap = await getDoc(userRef);
+
+                if (userSnap.exists() && userSnap.data().accountType === 'professional') {
+                    // User is logged in AND is a professional. Proceed.
+                    const userPlan = userSnap.data().plan || 'free'; 
+                    // Use email start as a temporary name placeholder
+                    userNameEl.textContent = user.email.split('@')[0]; 
+                    updateMetrics(userPlan);
+                } else {
+                    // Logged in but wrong role (or role not set)
+                    alert("Access Denied. You must be logged in as a Service Professional.");
+                    window.location.href = "login.html";
+                }
+            } else {
+                // Not logged in
+                window.location.href = "login.html";
+            }
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth);
+                window.location.href = "login.html";
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        });
+    </script>
+</body>
+</html>

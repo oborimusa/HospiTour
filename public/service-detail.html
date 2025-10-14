@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title id="pageTitle">Service Detail | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --gold: #c9a44c;
+            --brown: #3b2f2f;
+        }
+        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
+        .navbar-custom{background:var(--brown);}
+        .hero-profile{background-color: #fff; padding: 40px 0; border-bottom: 1px solid #eee;}
+        .logo-lg{width:120px;height:120px;object-fit:cover;border-radius:12px;border:2px solid #eee;}
+        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
+        .btn-gold:hover{opacity:.95;}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
+                <strong class="text-white">HospiPro</strong>
+            </a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="services.html">← Back to Marketplace</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-profile">
+        <div class="container d-flex align-items-center gap-4">
+            <img id="providerLogo" src="img/default-logo.png" alt="Provider Logo" class="logo-lg">
+            <div>
+                <h1 id="providerName" class="text-brown fw-bold">Loading Professional...</h1>
+                <p class="lead text-muted mb-1" id="providerCity">City, Location</p>
+                <span class="badge bg-success" id="providerRating">5.0 ★</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <div class="row g-5">
+            
+            <div class="col-lg-8">
+                <h3 class="mb-3 text-brown">About Us</h3>
+                <p id="providerDescription" class="mb-5">Detailed profile description goes here...</p>
+
+                <h3 class="mb-3 text-brown">Services Offered</h3>
+                <div id="serviceList" class="row g-3">
+                    <div class="col-12 text-muted">Loading services...</div>
+                    </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card p-4 shadow-sm">
+                    <h4 class="mb-3 text-brown">Book This Professional</h4>
+                    <form id="bookingForm">
+                        <div class="mb-3">
+                            <label for="clientName" class="form-label small">Your Name</label>
+                            <input type="text" class="form-control" id="clientName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="clientEmail" class="form-label small">Your Email</label>
+                            <input type="email" class="form-control" id="clientEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingDate" class="form-label small">Preferred Date</label>
+                            <input type="date" class="form-control" id="bookingDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="bookingDetails" class="form-label small">Event/Service Details</label>
+                            <textarea class="form-control" id="bookingDetails" rows="3" placeholder="Tell us about your event, guests, and specific needs." required></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-gold">Send Booking Request</button>
+                        </div>
+                        <div id="bookingMessage" class="mt-3 small text-center"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-light py-4 mt-5 border-top">
+        <div class="container text-center small text-muted">
+            &copy; <span id="year"></span> HospiPro. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDoc, doc, query, where, getDocs, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // 1. CONFIG: Replace with your project's config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
+            authDomain: "hospipro-86b8d.firebaseapp.com",
+            projectId: "hospipro-86b8d",
+            storageBucket: "hospipro-86b8d.firebasestorage.app",
+            messagingSenderId: "801856698977",
+            appId: "1:801856698977:web:05562aaf88584d2af0c820",
+        };
+
+        // 2. INIT
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // 3. UI Elements
+        const providerNameEl = document.getElementById('providerName');
+        const providerCityEl = document.getElementById('providerCity');
+        const providerLogoEl = document.getElementById('providerLogo');
+        const providerDescriptionEl = document.getElementById('providerDescription');
+        const serviceListEl = document.getElementById('serviceList');
+        const pageTitleEl = document.getElementById('pageTitle');
+        const bookingForm = document.getElementById('bookingForm');
+        const bookingMessageEl = document.getElementById('bookingMessage');
+        
+        let providerUid = null; // To store the professional's UID for booking submission
+
+        // 4. DATA FETCHING
+        async function loadProviderDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const providerDocId = urlParams.get('id'); // This is the Firestore document ID from 'providers' collection
+            
+            if (!providerDocId) {
+                providerNameEl.textContent = "Error: Provider ID Missing.";
+                return;
+            }
+
+            try {
+                // Fetch Provider Profile
+                const providerRef = doc(db, 'providers', providerDocId);
+                const providerSnap = await getDoc(providerRef);
+
+                if (!providerSnap.exists()) {
+                    providerNameEl.textContent = "Error: Provider Not Found.";
+                    return;
+                }
+
+                const providerData = providerSnap.data();
+                providerUid = providerData.uid; // Save UID for booking submission
+
+                // Update UI with Profile Data
+                pageTitleEl.textContent = `${providerData.name} | HospiPro`;
+                providerNameEl.textContent = providerData.name || 'Service Professional';
+                providerCityEl.textContent = providerData.city || 'Location Not Specified';
+                providerLogoEl.src = providerData.logoUrl || 'img/default-logo.png';
+                providerDescriptionEl.textContent = providerData.description || 'This professional is ready to take on your service needs.';
+                
+                // Load Services offered by this provider
+                await loadProviderServices(providerData.uid);
+
+            } catch (error) {
+                console.error("Error loading provider details:", error);
+                providerNameEl.textContent = "Error loading data.";
+            }
+        }
+        
+        async function loadProviderServices(uid) {
+            serviceListEl.innerHTML = `<div class="col-12 text-muted">Fetching service catalog...</div>`;
+            try {
+                const servicesRef = collection(db, 'services');
+                const q = query(servicesRef, where('providerUid', '==', uid));
+                const snapshot = await getDocs(q);
+                
+                serviceListEl.innerHTML = '';
+                if (snapshot.empty) {
+                    serviceListEl.innerHTML = `<div class="col-12 text-muted">No services listed yet.</div>`;
+                    return;
+                }
+
+                snapshot.forEach(docSnap => {
+                    const s = docSnap.data();
+                    const col = document.createElement('div');
+                    col.className = 'col-md-6';
+                    col.innerHTML = `
+                        <div class="card p-3 h-100">
+                            <h6 class="fw-bold">${s.title}</h6>
+                            <div class="small text-muted mb-2">${s.category} • ${s.price || 'Price Upon Request'}</div>
+                            <p class="small">${s.description.substring(0, 100) + '...'}</p>
+                        </div>
+                    `;
+                    serviceListEl.appendChild(col);
+                });
+
+            } catch (error) {
+                console.error("Error loading services:", error);
+                serviceListEl.innerHTML = `<div class="col-12 text-danger">Could not load services.</div>`;
+            }
+        }
+
+        // 5. BOOKING SUBMISSION HANDLER
+        bookingForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            bookingMessageEl.textContent = '';
+            
+            if (!providerUid) {
+                bookingMessageEl.innerHTML = `<span class="text-danger">Error: Cannot submit booking without provider ID.</span>`;
+                return;
+            }
+
+            const clientName = document.getElementById('clientName').value;
+            const clientEmail = document.getElementById('clientEmail').value;
+            const bookingDate = document.getElementById('bookingDate').value;
+            const bookingDetails = document.getElementById('bookingDetails').value;
+
+            try {
+                // Submit request to a 'bookings' collection
+                await addDoc(collection(db, 'bookings'), {
+                    providerUid: providerUid,
+                    clientName: clientName,
+                    clientEmail: clientEmail,
+                    preferredDate: new Date(bookingDate),
+                    details: bookingDetails,
+                    status: 'Pending',
+                    createdAt: new Date(),
+                });
+
+                bookingMessageEl.innerHTML = `<span class="text-success">Request sent successfully! The professional will contact you soon.</span>`;
+                bookingForm.reset();
+
+            } catch (error) {
+                console.error("Booking submission error:", error);
+                bookingMessageEl.innerHTML = `<span class="text-danger">Failed to send request. Please try again.</span>`;
+            }
+        });
+
+        // Initial load
+        loadProviderDetails();
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

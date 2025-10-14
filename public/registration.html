@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register as a Service Provider | HospiPro</title>
+  <meta name="description" content="Register your hospitality business on HospiPro to find new customers, grow your brand, and get hired for top opportunities." />
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffaf4;
+      color: #3e2723;
+    }
+
+    .navbar {
+      background-color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #8b5e00;
+    }
+
+    .hero {
+      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
+                  url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+      height: 50vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+    }
+
+    .step-title {
+      font-weight: 600;
+      color: #8b5e00;
+      margin-bottom: 1rem;
+    }
+
+    .category-card {
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 15px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .category-card:hover, .category-card.active {
+      background-color: #fff4de;
+      border-color: #b8860b;
+    }
+
+    .progress-bar {
+      background-color: #b8860b;
+    }
+
+    .btn-gold {
+      background-color: #b8860b;
+      color: white;
+      border-radius: 10px;
+      font-weight: 500;
+    }
+
+    footer {
+      background-color: #3e2723;
+      color: #fffaf4;
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="img/logo1.png" alt="HospiPro logo" style="width: 40px;" class="me-2">
+        HospiPro
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero mt-5">
+    <div class="container">
+      <h1>Grow Your Hospitality Business with HospiPro</h1>
+      <p class="lead mt-3">Join thousands of professionals showcasing their services and getting hired.</p>
+    </div>
+  </section>
+
+  <!-- Registration Steps -->
+  <section class="container py-5">
+    <div class="text-center mb-4">
+      <h4 class="step-title">Step 1 of 5: What Service Do You Provide?</h4>
+      <p>Select all categories that match your business.</p>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress mb-4" style="height: 10px;">
+      <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+    <!-- Categories -->
+    <div class="row g-3">
+      <div class="col-md-4">
+        <div class="category-card">🍽️ Catering & Event Services</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">🏨 Accommodation & Shortlets</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">💆‍♀️ Beauty & Spa Services</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">🎉 Event Planning & Decorations</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">🧹 Cleaning & Laundry Services</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">🚚 Logistics & Errand Services</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">📸 Photography & Videography</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">🏋️ Wellness & Fitness</div>
+      </div>
+      <div class="col-md-4">
+        <div class="category-card">💼 Training & Consulting</div>
+      </div>
+    </div>
+
+    <!-- Continue Button -->
+    <div class="text-center mt-5">
+      <button id="continueBtn" class="btn btn-gold px-5 py-2">Continue</button>
+    </div>
+
+    <!-- Why Join -->
+    <div class="mt-5 text-center">
+      <h5 class="text-gold fw-bold mb-3">Why Professionals Choose HospiPro</h5>
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <p><strong>1️⃣ Register for free</strong><br>Showcase your services and get seen by clients.</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>2️⃣ Get notified about new jobs</strong><br>We’ll alert you when new matching opportunities arise.</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>3️⃣ Get hired & keep 100%</strong><br>No commissions — everything you earn is yours.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="row text-center mt-5">
+      <div class="col-md-4">
+        <h3 class="fw-bold text-gold">₦84M+</h3>
+        <p>earned by HospiPro pros</p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="fw-bold text-gold">2,200+</h3>
+        <p>customer requests in the past week</p>
+      </div>
+      <div class="col-md-4">
+        <h3 class="fw-bold text-gold">7,000+</h3>
+        <p>registered professionals</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 HospiPro. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Highlight selected categories
+    document.querySelectorAll('.category-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('active');
+      });
+    });
+
+    // Continue button (redirect to step 2 later)
+    document.getElementById('continueBtn').addEventListener('click', () => {
+      alert('Next: Fill in your business details (Step 2)');
+      // You can redirect to another step page e.g.:
+      // window.location.href = 'registration-step2.html';
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

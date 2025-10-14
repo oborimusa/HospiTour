@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Business Dashboard | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
+        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
+        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
+        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
+        .main-content{ margin-left: 250px; padding: 20px; }
+        .card-metric{ border-left: 5px solid var(--gold); }
+        .text-gold{ color: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h5 class="text-white">HospiPro</h5>
+            <small class="text-gold">Business Operations</small>
+        </div>
+        <a href="dashboard.html" class="active">🏠 Dashboard</a>
+        <a href="rooms.html">🛏️ Accommodation Mgmt</a>
+        <a href="restaurant.html">🍽️ Restaurant & F&B</a>
+        <a href="events.html">🗓️ Events & Planning</a>
+        <a href="settings.html">⚙️ Settings & Billing</a>
+        <hr class="text-white-50">
+        <a href="#" id="logoutBtn">➡️ Log Out</a>
+    </div>
+
+    <div class="main-content">
+        <h1 class="mb-4 text-brown">Operations Overview</h1>
+        <p class="small text-muted mb-4" id="planLevel">Loading Plan Level...</p>
+        
+        <div class="row g-4 mb-5">
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Current Occupancy Rate</div>
+                    <h2 class="fw-bold text-brown" id="metricOccupancy">--%</h2>
+                    <p class="small mb-0 text-success">↑ 5.2% from last month</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Pending F&B Orders</div>
+                    <h2 class="fw-bold text-brown" id="metricOrders">--</h2>
+                    <p class="small mb-0 text-danger" id="ordersHint">Requires Order Management (Pro+)</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card p-3 card-metric">
+                    <div class="small text-muted">Revenue Forecast (7 Days)</div>
+                    <h2 class="fw-bold text-brown" id="metricRevenue">$----</h2>
+                    <p class="small mb-0 text-info" id="revenueHint">Requires Advanced Metrics (Pro+)</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="mb-3 text-brown">Quick Access</h3>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <a href="rooms.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">New Reservation</h5>
+                    <p class="small text-muted mb-0">Book a guest and allocate a room.</p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="restaurant.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">New Order (POS)</h5>
+                    <p class="small text-muted mb-0">Process a food or beverage order (Pro+).</p>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="events.html" class="card text-decoration-none p-3 shadow-sm h-100">
+                    <h5 class="text-brown">Event Calendar</h5>
+                    <p class="small text-muted mb-0">View today's scheduled events and tasks.</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // CONFIG: Use your actual project config
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
+            authDomain: "hospipro-86b8d.firebaseapp.com",
+            projectId: "hospipro-86b8d",
+            storageBucket: "hospipro-86b8d.firebasestorage.app",
+            messagingSenderId: "801856698977",
+            appId: "1:801856698977:web:05562aaf88584d2af0c820",
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        const logoutBtn = document.getElementById('logoutBtn');
+        const planLevelEl = document.getElementById('planLevel');
+        
+        // Simulating data based on a fetched plan level
+        function updateMetrics(plan) {
+            planLevelEl.textContent = `Current Plan: ${plan.toUpperCase()} | Subscription Active`;
+            
+            if (plan === 'free') {
+                document.getElementById('metricOccupancy').textContent = '45%';
+                document.getElementById('metricOrders').textContent = 'N/A';
+                document.getElementById('metricRevenue').textContent = 'N/A';
+            } else if (plan === 'pro') {
+                document.getElementById('metricOccupancy').textContent = '82%';
+                document.getElementById('metricOrders').textContent = '12';
+                document.getElementById('ordersHint').textContent = 'Pending orders requiring action.';
+                document.getElementById('metricRevenue').textContent = '$5,120';
+            } else if (plan === 'enterprise') {
+                document.getElementById('metricOccupancy').textContent = '95%';
+                document.getElementById('metricOrders').textContent = '6';
+                document.getElementById('ordersHint').textContent = 'All teams notified.';
+                document.getElementById('metricRevenue').textContent = '$15,890';
+            }
+        }
+
+        // Authentication and Role Check
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // Check user's role and plan from Firestore
+                const userRef = doc(db, 'users', user.uid); // Assumes role/plan is stored here
+                const userSnap = await getDoc(userRef);
+
+                if (userSnap.exists() && userSnap.data().accountType === 'business') {
+                    // User is logged in AND is a business. Proceed.
+                    const userPlan = userSnap.data().plan || 'free'; // Default to free if not set
+                    updateMetrics(userPlan);
+                } else {
+                    // Logged in but wrong role (or role not set)
+                    alert("Access Denied. You must be logged in as a Business/Employer.");
+                    window.location.href = "login.html";
+                }
+            } else {
+                // Not logged in
+                window.location.href = "login.html";
+            }
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth);
+                window.location.href = "login.html";
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        });
+    </script>
+</body>
+</html>

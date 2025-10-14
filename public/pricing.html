@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Pricing & Plans | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --gold: #c9a44c;
+            --brown: #3b2f2f;
+        }
+        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
+        .navbar-custom{background:var(--brown);}
+        .pricing-section{padding: 60px 0;}
+        .price-card{
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 3px solid transparent;
+            height: 100%;
+        }
+        .price-card.featured{
+            border-color: var(--gold);
+            box-shadow: 0 6px 15px rgba(201, 164, 76, 0.3);
+        }
+        .price-card h3{color: var(--brown);}
+        .price-tag{font-size: 2.5rem; font-weight: 700; color: var(--gold);}
+        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
+        .btn-gold:hover{opacity:.95;}
+        .feature-list{list-style: none; padding-left: 0;}
+        .feature-list li{margin-bottom: 8px; font-size: 0.95rem;}
+        .feature-list li::before{content: '✓'; color: green; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;}
+        .feature-list li.limited::before{content: '–'; color: orange; font-weight: bold;}
+        .feature-list li.exclude::before{content: '✗'; color: red; font-weight: bold;}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
+                <strong class="text-white">HospiPro</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="index.html#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="services.html">Services Marketplace</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="login.html">Login</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-gold" href="signup.html">Sign Up Free</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="pricing-section">
+        <div class="container">
+            <h1 class="text-center display-5 fw-bold mb-3 text-brown">Simple Pricing for Every Role</h1>
+            <p class="text-center lead text-muted mb-5">Choose the plan that fits your business or professional needs.</p>
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-card">
+                        <h3 class="mb-3">Free Plan 🆓</h3>
+                        <div class="price-tag mb-3">
+                            $0<span class="small text-muted fw-normal"> / month</span>
+                        </div>
+                        <p class="text-muted small">Essential tools to get started and manage basic operations.</p>
+                        
+                        <a href="signup.html" class="btn btn-outline-secondary d-grid mb-4">Start for Free</a>
+
+                        <h5 class="small fw-bold text-brown">Core Features:</h5>
+                        <ul class="feature-list small">
+                            <li class="limited">Limited Dashboard Access</li>
+                            <li class="limited">Basic Customer Support</li>
+                            <li>Basic Professional Profile (Service Listings)</li>
+                            <li>Basic Booking System (Scheduling)</li>
+                            <li>Basic Accommodation / Menu Management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="price-card featured">
+                        <h3 class="mb-3">Pro Plan ⭐</h3>
+                        <div class="price-tag mb-3">
+                            $29<span class="small text-muted fw-normal"> / month</span>
+                        </div>
+                        <p class="text-muted small">Unlock full operational efficiency and client engagement tools.</p>
+                        
+                        <a href="signup.html" class="btn btn-gold d-grid mb-4">Start 14-Day Free Trial</a>
+
+                        <h5 class="small fw-bold text-brown">All Free Features, PLUS:</h5>
+                        <ul class="feature-list small">
+                            <li>Advanced Dashboard & Analytics</li>
+                            <li>Priority Customer Support</li>
+                            <li>**Integration with Payment Gateway** 🔒</li>
+                            <li>Advanced Booking Forms & Reminders</li>
+                            <li>Order Management (POS) / Housekeeping Status</li>
+                            <li>Basic Client Management</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-8">
+                    <div class="price-card">
+                        <h3 class="mb-3">Enterprise Plan 🏢</h3>
+                        <div class="price-tag mb-3">
+                            Custom Pricing
+                        </div>
+                        <p class="text-muted small">The full-suite solution for large enterprises requiring custom scale and integration.</p>
+                        
+                        <a href="#" class="btn btn-outline-primary d-grid mb-4">Contact Sales</a>
+
+                        <h5 class="small fw-bold text-brown">All Pro Features, PLUS:</h5>
+                        <ul class="feature-list small">
+                            <li>Custom Dashboard & Advanced Reporting</li>
+                            <li>Dedicated Customer Support</li>
+                            <li>**Advanced API Access** for custom systems</li>
+                            <li>Full Inventory & Transportation Management</li>
+                            <li>Advanced Client and Guest Management</li>
+                            <li>Event Ticketing & Registration</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-light py-4 mt-5 border-top">
+        <div class="container text-center small text-muted">
+            &copy; <span id="year"></span> HospiPro. All rights reserved. | <a href="pricing.html" class="text-muted">Pricing</a> | <a href="#" class="text-muted">Terms</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

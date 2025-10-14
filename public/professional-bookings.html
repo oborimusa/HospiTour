@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Booking Management | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
+        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
+        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
+        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
+        .main-content{ margin-left: 250px; padding: 20px; }
+        .booking-card-pending{ border-left: 5px solid #ffc107; }
+        .booking-card-confirmed{ border-left: 5px solid #198754; }
+    </style>
+</head>
+<body>
+    
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h5 class="text-white">HospiPro</h5>
+            <small class="text-gold">Service Professional</small>
+        </div>
+        <a href="professional-dashboard.html">🏠 Dashboard</a>
+        <a href="professional-profile.html">👤 Profile & Portfolio</a>
+        <a href="professional-bookings.html" class="active">🗓️ Booking Management</a>
+        <a href="professional-clients.html">👥 Client Management</a>
+        <a href="professional-billing.html">💵 Billing & Payments</a>
+        <hr class="text-white-50">
+        <a href="#" id="logoutBtn">➡️ Log Out</a>
+    </div>
+
+    <div class="main-content">
+        <h1 class="mb-4 text-brown">Booking Management</h1>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#availabilityModal">Manage Availability</button>
+            <button class="btn btn-outline-danger" id="formCustomBtn">Form Customization (Pro+)</button>
+        </div>
+
+        <h3 class="mb-3 text-brown">Booking Inbox (Incoming Requests)</h3>
+        
+        <div class="row g-4 mb-5">
+            
+            <div class="col-lg-6">
+                <div class="card p-3 booking-card-pending">
+                    <p class="mb-1 fw-bold">Request from: Jane Doe</p>
+                    <small class="text-muted">Service: Full Catering | Date: 2025-11-20</small>
+                    <div class="mt-2 d-flex gap-2">
+                        <button class="btn btn-sm btn-warning">View Details</button>
+                        <button class="btn btn-sm btn-success">Confirm Booking</button>
+                        <button class="btn btn-sm btn-outline-danger">Decline</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card p-3 booking-card-confirmed">
+                    <p class="mb-1 fw-bold">Confirmed: Q4 Conference Planning</p>
+                    <small class="text-muted">Client: ABC Corp | Date: 2025-10-28</small>
+                    <div class="mt-2 d-flex gap-2">
+                        <button class="btn btn-sm btn-info">Send Reminder (Pro+)</button>
+                        <button class="btn btn-sm btn-outline-secondary">Complete Job</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-5">
+
+        <h3 class="mb-3 text-brown">Advanced Booking Tools (Pro+)</h3>
+        
+        <div class="row g-4">
+             <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <h5>Automated Notifications</h5>
+                    <p class="small text-muted">Set up automatic email or SMS reminders for clients.</p>
+                    <button class="btn btn-sm btn-outline-primary" id="notificationBtn" disabled>Configure Reminders (Pro+)</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <h5>Booking Form Preview</h5>
+                    <p class="small text-muted">See how clients view your custom booking form.</p>
+                    <button class="btn btn-sm btn-outline-secondary">View Live Form</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="availabilityModal" tabindex="-1" aria-labelledby="availabilityModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="availabilityModalLabel">Manage Availability</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="small text-muted">Block out dates or mark yourself as fully booked.</p>
+                    <form>
+                        <div class="mb-3"><label class="form-label small">Date to Block</label><input type="date" class="form-control" required></div>
+                        <div class="mb-3"><label class="form-label small">Reason/Note</label><input type="text" class="form-control"></div>
+                        <button type="submit" class="btn btn-danger d-block w-100">Block Date</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module">
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        
+        const auth = getAuth();
+        const logoutBtn = document.getElementById('logoutBtn');
+        const formCustomBtn = document.getElementById('formCustomBtn');
+        const notificationBtn = document.getElementById('notificationBtn');
+        
+        // Simulate plan gating for Pro+ features
+        const userPlan = 'free'; 
+        
+        if (userPlan !== 'pro' && userPlan !== 'enterprise') {
+            formCustomBtn.classList.remove('btn-outline-danger');
+            formCustomBtn.classList.add('btn-secondary');
+            formCustomBtn.disabled = true;
+            formCustomBtn.title = 'Upgrade to Pro Plan to customize your booking forms.';
+
+            notificationBtn.disabled = true;
+            notificationBtn.textContent = 'Configure Reminders (Upgrade to Pro)';
+        }
+        
+        // Logout functionality (Reused)
+        logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth);
+                window.location.href = "login.html";
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        });
+    </script>
+</body>
+</html>

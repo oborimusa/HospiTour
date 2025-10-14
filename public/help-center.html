@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Help Center & Docs | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{
+            --gold: #c9a44c;
+            --brown: #3b2f2f;
+        }
+        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
+        .navbar-custom{background:var(--brown);}
+        .hero-section{background-color: #fff; padding: 40px 0; border-bottom: 1px solid #eee;}
+        .doc-card{border-left: 4px solid var(--gold); transition: box-shadow 0.2s;}
+        .doc-card:hover{box-shadow: 0 4px 10px rgba(0,0,0,0.1);}
+        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
+        .btn-gold:hover{opacity:.95;}
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container">
+            <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
+                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
+                <strong class="text-white">HospiPro</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" aria-current="page" href="help-center.html">Help/Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-gold" href="login.html">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container">
+            <h1 class="text-brown fw-bold">HospiPro Help Center</h1>
+            <p class="lead text-muted">Find guides, documentation, and answers to your questions.</p>
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="form-control form-control-lg" placeholder="Search articles, e.g., 'setting up payments' or 'room management'">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container py-5">
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-brown mb-3">🚀 Getting Started</h4>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Understanding Role Selection (Business vs. Professional)</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Choosing the Right Pricing Plan</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Initial Account Setup Checklist</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-brown mb-3">🏢 Business Operations</h4>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">How to manage Room Reservations and Status</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Using the F&B Order Management (POS) system</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Adding and managing Staff User Roles</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <h4 class="text-brown mb-3">👤 Service Professional</h4>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Optimizing Your Marketplace Profile & Portfolio</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Handling Incoming Booking Requests and payments</a>
+                </div>
+                <div class="card p-3 doc-card mb-2">
+                    <a href="#" class="text-decoration-none text-dark fw-bold">Setting up Payment Gateway (Pro+ Guide)</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <h4 class="text-muted">Can't find what you need?</h4>
+            <a href="contact.html" class="btn btn-lg btn-outline-secondary">Contact Support</a>
+        </div>
+    </main>
+
+    <footer class="bg-light py-4 mt-5 border-top">
+        <div class="container text-center small text-muted">
+            &copy; <span id="year"></span> HospiPro. All rights reserved. | <a href="legal.html" class="text-muted">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

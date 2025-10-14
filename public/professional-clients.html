@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Client Management | HospiPro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
+        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
+        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
+        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
+        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
+        .main-content{ margin-left: 250px; padding: 20px; }
+    </style>
+</head>
+<body>
+    
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h5 class="text-white">HospiPro</h5>
+            <small class="text-gold">Service Professional</small>
+        </div>
+        <a href="professional-dashboard.html">🏠 Dashboard</a>
+        <a href="professional-profile.html">👤 Profile & Portfolio</a>
+        <a href="professional-bookings.html">🗓️ Booking Management</a>
+        <a href="professional-clients.html" class="active">👥 Client Management</a>
+        <a href="professional-billing.html">💵 Billing & Payments</a>
+        <hr class="text-white-50">
+        <a href="#" id="logoutBtn">➡️ Log Out</a>
+    </div>
+
+    <div class="main-content">
+        <h1 class="mb-4 text-brown">Client Management</h1>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="col-md-6">
+                <input type="text" class="form-control" placeholder="Search client by name or email...">
+            </div>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#newClientModal">Add Client Manually</button>
+        </div>
+
+        <h3 class="mb-3 text-brown">Client List</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Last Booking Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>John Doe (The Grand Hotel)</td>
+                    <td>john.doe@hotel.com</td>
+                    <td>2025-09-15</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td><button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientDetailModal">View</button></td>
+                </tr>
+                <tr>
+                    <td>Sarah Smith</td>
+                    <td>sarah.s@gmail.com</td>
+                    <td>2025-05-10</td>
+                    <td><span class="badge bg-warning">Inactive</span></td>
+                    <td><button class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#clientDetailModal">View</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <hr class="my-5">
+
+        <h3 class="mb-3 text-brown">Client History and Communication</h3>
+        <div class="card p-4 bg-light shadow-sm">
+            <h5 class="text-danger">Advanced Client History (Enterprise+)</h5>
+            <p class="small text-muted">Upgrade to the **Enterprise Plan** to unlock complete booking history, detailed communication logs, and integrated notes for every client.</p>
+            <button class="btn btn-sm btn-outline-danger w-50" id="historyBtn" disabled>Access Full CRM Features</button>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="clientDetailModal" tabindex="-1" aria-labelledby="clientDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="clientDetailModalLabel">Client Details: John Doe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Email:</strong> john.doe@hotel.com</p>
+                    <p><strong>Phone:</strong> +234 800 123 4567</p>
+                    <hr>
+                    <h6 class="text-brown">Recent Bookings (Last 3)</h6>
+                    <ul class="list-group small">
+                        <li class="list-group-item">Catering for Sept 15 (Completed)</li>
+                        <li class="list-group-item">Planning Consultation (Paid)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="newClientModal" tabindex="-1" aria-labelledby="newClientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newClientModalLabel">Manually Add Client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3"><input type="text" class="form-control" placeholder="Client Name" required></div>
+                        <div class="mb-3"><input type="email" class="form-control" placeholder="Client Email" required></div>
+                        <button type="submit" class="btn btn-success d-block w-100">Save Client</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script type="module">
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        
+        const auth = getAuth();
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Logout functionality (Reused)
+        logoutBtn.addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth);
+                window.location.href = "login.html";
+            } catch (error) {
+                console.error("Logout failed:", error);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drecot Hospitality Hub - Pricing</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+       
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.pricing {
+    max-width: 800px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.plans {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.plan {
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    width: calc(33.33% - 20px);
+}
+
+.plan.popular {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.plan h2 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+.plan p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan li {
+    margin-bottom: 10px;
+}
+
+.plan button {
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+.plan button:hover {
+    background-color: #3e8e41;
+}
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero">
+            <h1>Welcome to Drecot Hospitality Hub</h1>
+            <p>Streamline your hospitality operations with our all-in-one solution.</p>
+            <button>Learn More</button>
+        </section>
+        <section id="features">
+            <h2>Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Property Management System</h3>
+                    <p>Manage room inventory, rates, and availability.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Booking Engine</h3>
+                    <p>Allow guests to book rooms directly through your website.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Guest Management</h3>
+                    <p>Store guest information, preferences, and history.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Reporting and Analytics</h3>
+                    <p>Get insights into your business performance.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Payment Gateway</h3>
+                    <p>Secure payment processing for guests.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Integration</h3>
+                    <p>Integrate with popular third-party services.</p>
+                </div>
+            </div>
+        </section>
+        <section id="pricing">
+            <h2>Pricing</h2>
+            <div class="plans">
+                <div class="plan">
+                    <h3>Free Plan</h3>
+                    <p>$0/month</p>
+                    <ul>
+                        <li>Up to 10 users</li>
+                        <li>Basic features</li>
+                        <li>Limited support</li>
+                    </ul>
+                    <button>Sign Up</button>
+                </div>
+                <div class="plan popular">
+                    <h3>Pro Plan</h3>
+                    <p>$29/month</p>
+                    <ul>
+                        <li>Up to 50 users</li>
+                        <li>Advanced features</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button>Sign Up</button>
+                </div>
+                <div class="plan">
+                    <h3>Enterprise Plan</h3>
+                    <p>Custom pricing</p>
+                    <ul>
+                        <li>Unlimited users</li>
+                        <li>Custom features</li>
+                        <li>Dedicated support</li>
+                    </ul>
+                    <button>Contact Us</button>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We're a team of hospitality experts dedicated to helping you succeed.</p>
+        </section>
+        <section id="contact">
+            <h2>Get in Touch</h2>
+            <p>Contact us to learn more about how Drecot Hospitality Hub can help your business.</p>
+            <form>
+                <input type="email" placeholder="Email">
+                <textarea placeholder="Message"></textarea>
+                <button>Send</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Drecot Hospitality Hub</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us | HospiPro</title>
+    <meta
+      name="description"
+      content="Learn more about Drecot Hospitality Hub — our mission, vision, and commitment to transforming Africa’s hospitality industry."
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="CSS/style.css">
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+        background: #fffdf9;
+        color: #3b2f2f;
+        scroll-behavior: smooth;
+      }
+      .navbar {
+        background: #3b2f2f;
+      }
+      .navbar-brand {
+        font-family: "Playfair Display", serif;
+        color: white !important;
+        font-size: 1.6rem;
+      }
+      .nav-link {
+        color: #fff !important;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+      .nav-link:hover {
+        color: #d4af37 !important;
+      }
+      .navbar-toggler {
+        border: none;
+        background: #d4af37;
+      }
+
+      .hero {
+        background: linear-gradient(
+            rgba(59, 47, 47, 0.7),
+            rgba(59, 47, 47, 0.7)
+          ),
+          url("img/hospitality-bg.jpg") center/cover no-repeat;
+        color: #fff;
+        text-align: center;
+        padding: 120px 15px;
+      }
+      .hero h1 {
+        font-family: "Playfair Display", serif;
+        color: #d4af37;
+        font-size: 2.8rem;
+      }
+      .btn-gold {
+        background: #d4af37;
+        color: #3b2f2f;
+        font-weight: 600;
+        border-radius: 6px;
+      }
+      .btn-gold:hover {
+        background: #c19b2d;
+        color: #fff;
+      }
+
+      .stats {
+        background: #f6f2e8;
+        padding: 60px 15px;
+        text-align: center;
+      }
+      .stat-number {
+        color: #d4af37;
+        font-size: 2.2rem;
+        font-weight: 700;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: #3b2f2f;
+        margin-bottom: 35px;
+        text-align: center;
+      }
+      .service-card,
+      .biz-card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        text-align: center;
+        padding: 30px 20px;
+        transition: 0.3s;
+        height: 100%;
+      }
+      .service-card:hover,
+      .biz-card:hover {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+      }
+      .biz-logo {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+      }
+      .cta {
+        background: #f6f2e8;
+        padding: 70px 15px;
+        text-align: center;
+      }
+      footer {
+        background: #3b2f2f;
+        color: #fff;
+        padding: 45px 0;
+        text-align: center;
+      }
+      footer a {
+        color: #d4af37;
+        text-decoration: none;
+      }
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      #searchBar input,
+      #searchBar select {
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        padding: 10px 12px;
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.2rem;
+        }
+        .hero p {
+          font-size: 1rem;
+        }
+        .stats .col-md-4 {
+          margin-bottom: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="img/logo1.png" alt="Hospiple logo" style="width: 40px; margin-right: 8px;">
+        <span style="font-size: 30px; font-weight: bold;">HospiPro</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <i class="bi bi-list text-dark fs-2"></i>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="nav">
+        <ul class="navbar-nav text-left">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
+          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+          <li class="nav-item"><a class="nav-link active text-warning" href="hire.html">Service Providers</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <section class="container my-5">
+      <div class="text-center mb-4">
+        <h1 class="fw-bold" style="margin-top: 150px">
+          About HospiPro
+        </h1>
+        <p class="text-muted">
+          Empowering Africa’s hospitality ecosystem with innovation and
+          technology.
+        </p>
+      </div>
+
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <p>
+            HospiPro is a revolutionary online platform designed
+            to empower hospitality businesses in Africa and beyond. Our mission
+            is to provide a one-stop solution for hotels, restaurants, bars,
+            event planners, and catering services to streamline operations,
+            enhance customer relationships, and drive growth.
+          </p>
+          <p>
+            Founded in 2025, we aim to bridge the gap between tradition and
+            technology in Africa’s booming hospitality sector.
+          </p>
+        </div>
+        <div class="col-md-6">
+          <img
+            src="img/about-team.jpg"
+            class="img-fluid rounded shadow"
+            alt="Drecot Team"
+          />
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="mb-0">
+        &copy; 2025 HospiPro. All rights reserved.
+      </p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
