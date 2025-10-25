@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Location Details | HospiTour Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --gold: #c9a44c;
+      --brown: #3b2f2f;
+      --light-brown: #4a3c3c;
+      --cream: #f7f5f1;
+      --light-cream: #fefdfb;
+    }
+
+    body {
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--cream);
+      color: var(--brown);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .navbar {
+      background-color: var(--brown);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-weight: bold;
+      color: white;
+    }
+
+    .registration-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 30px;
+      flex: 1;
+    }
+
+    .registration-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .registration-header {
+      background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    .registration-body {
+      padding: 40px;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      align-items: center;
+    }
+
+    .step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-weight: 600;
+      color: var(--brown);
+      position: relative;
+    }
+
+    .step.active {
+      background-color: var(--gold);
+      color: white;
+    }
+
+    .step.completed {
+      background-color: var(--gold);
+      color: white;
+    }
+
+    .step.completed::after {
+      content: '✓';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .step-line {
+      flex-grow: 1;
+      height: 2px;
+      background-color: #e9ecef;
+      margin: 0 5px;
+      align-self: center;
+      max-width: 100px;
+    }
+
+    .step-line.active {
+      background-color: var(--gold);
+    }
+
+    .step-label {
+      position: absolute;
+      top: 45px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: 0.8rem;
+      color: var(--brown);
+    }
+
+    .step.active .step-label {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .section-title {
+      position: relative;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+      color: var(--brown);
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+    }
+
+    .form-control, .form-select {
+      border-radius: 8px;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+    }
+
+    .form-label {
+      font-weight: 500;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .btn-gold {
+      background-color: var(--gold);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      background-color: #b8943a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+    }
+
+    .btn-outline-gold {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 8px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-outline-gold:hover {
+      background-color: var(--gold);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .help-text {
+      font-size: 0.85rem;
+      color: #6c757d;
+      margin-top: 5px;
+    }
+
+    .service-area-card {
+      border: 2px solid #e9ecef;
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .service-area-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    .service-area-card.selected {
+      border-color: var(--gold);
+      background-color: rgba(201, 164, 76, 0.05);
+    }
+
+    .area-icon {
+      font-size: 2rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    footer {
+      background-color: var(--brown);
+      color: var(--cream);
+      padding: 20px 0;
+      text-align: center;
+      margin-top: 50px;
+    }
+
+    .progress {
+      height: 8px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+    }
+
+    .progress-bar {
+      background-color: var(--gold);
+      border-radius: 10px;
+    }
+
+    .map-placeholder {
+      background: linear-gradient(45deg, var(--cream), var(--light-cream));
+      border-radius: 10px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--brown);
+      border: 2px dashed #ddd;
+    }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .hours-table tr {
+      border-bottom: 1px solid #eee;
+    }
+
+    .hours-table td {
+      padding: 10px 0;
+    }
+
+    .hours-table select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+      .registration-body {
+        padding: 25px;
+      }
+      
+      .step-label {
+        display: none;
+      }
+      
+      .step-line {
+        max-width: 40px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-crown me-2"></i>
+        HospiTour
+      </a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link text-white" href="login.html">Already have an account? Log In</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Registration Form -->
+  <div class="registration-container">
+    <div class="registration-card">
+      <div class="registration-header">
+        <h1>Set Your Business Location</h1>
+        <p class="mb-0">Step 3: Tell customers where to find you</p>
+      </div>
+
+      <div class="registration-body">
+        <!-- Progress Bar -->
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+          <div class="step completed">
+            <span>1</span>
+            <div class="step-label">Services</div>
+          </div>
+          <div class="step-line active"></div>
+          <div class="step completed">
+            <span>2</span>
+            <div class="step-label">Business Details</div>
+          </div>
+          <div class="step-line active"></div>
+          <div class="step active">
+            <span>3</span>
+            <div class="step-label">Location</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <span>4</span>
+            <div class="step-label">Pricing</div>
+          </div>
+          <div class="step-line"></div>
+          <div class="step">
+            <span>5</span>
+            <div class="step-label">Review</div>
+          </div>
+        </div>
+
+        <form id="locationDetailsForm">
+          <!-- Business Address -->
+          <div class="mb-5">
+            <h3 class="section-title">Business Address</h3>
+            
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3">
+                <label for="streetAddress" class="form-label">Street Address *</label>
+                <input type="text" class="form-control" id="streetAddress" placeholder="123 Main Street" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="unit" class="form-label">Unit/Suite (Optional)</label>
+                <input type="text" class="form-control" id="unit" placeholder="Suite 100">
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-4 mb-3">
+                <label for="city" class="form-label">City *</label>
+                <input type="text" class="form-control" id="city" placeholder="New York" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="state" class="form-label">State/Province *</label>
+                <input type="text" class="form-control" id="state" placeholder="NY" required>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="zipCode" class="form-label">ZIP/Postal Code *</label>
+                <input type="text" class="form-control" id="zipCode" placeholder="10001" required>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-md-6 mb-3">
+                <label for="country" class="form-label">Country *</label>
+                <select class="form-select" id="country" required>
+                  <option value="" selected disabled>Select country</option>
+                  <option value="US">United States</option>
+                  <option value="CA">Canada</option>
+                  <option value="UK">United Kingdom</option>
+                  <option value="AU">Australia</option>
+                  <option value="NG">Nigeria</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="timezone" class="form-label">Timezone *</label>
+                <select class="form-select" id="timezone" required>
+                  <option value="" selected disabled>Select timezone</option>
+                  <option value="est">Eastern Time (ET)</option>
+                  <option value="cst">Central Time (CT)</option>
+                  <option value="mst">Mountain Time (MT)</option>
+                  <option value="pst">Pacific Time (PT)</option>
+                  <option value="gmt">Greenwich Mean Time (GMT)</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Map Preview -->
+            <div class="mb-3">
+              <label class="form-label">Location Preview</label>
+              <div class="map-placeholder">
+                <div class="text-center">
+                  <i class="fas fa-map-marker-alt fa-2x text-gold mb-2"></i>
+                  <p class="mb-0">Map will appear here with your location</p>
+                  <small class="text-muted">Interactive map available in Pro+ plans</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Service Areas -->
+          <div class="mb-5">
+            <h3 class="section-title">Service Areas</h3>
+            <p class="text-muted mb-4">Where do you provide your services?</p>
+            
+            <div class="row g-3 mb-4">
+              <div class="col-md-4">
+                <div class="service-area-card" data-area-type="onsite">
+                  <div class="area-icon">
+                    <i class="fas fa-building"></i>
+                  </div>
+                  <h5>On-site Only</h5>
+                  <p class="small text-muted mb-0">Customers come to your location</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="service-area-card" data-area-type="mobile">
+                  <div class="area-icon">
+                    <i class="fas fa-car"></i>
+                  </div>
+                  <h5>Mobile Service</h5>
+                  <p class="small text-muted mb-0">You travel to customer locations</p>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="service-area-card" data-area-type="both">
+                  <div class="area-icon">
+                    <i class="fas fa-sync-alt"></i>
+                  </div>
+                  <h5>Both Options</h5>
+                  <p class="small text-muted mb-0">Offer both on-site and mobile services</p>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="serviceAreaType" required>
+
+            <!-- Service Radius -->
+            <div id="mobileServiceSection" style="display: none;">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="serviceRadius" class="form-label">Service Radius</label>
+                  <select class="form-select" id="serviceRadius">
+                    <option value="" selected disabled>Select service radius</option>
+                    <option value="5">5 miles / 8 km</option>
+                    <option value="10">10 miles / 16 km</option>
+                    <option value="15">15 miles / 24 km</option>
+                    <option value="25">25 miles / 40 km</option>
+                    <option value="50">50 miles / 80 km</option>
+                    <option value="state">Entire state/province</option>
+                    <option value="country">Nationwide</option>
+                  </select>
+                  <div class="help-text">How far are you willing to travel for appointments?</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="travelFee" class="form-label">Travel Fee (Optional)</label>
+                  <div class="input-group">
+                    <span class="input-group-text">$</span>
+                    <input type="number" class="form-control" id="travelFee" placeholder="0.00" min="0" step="0.01">
+                  </div>
+                  <div class="help-text">Additional fee for travel outside your base radius</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Operating Hours -->
+          <div class="mb-5">
+            <h3 class="section-title">Operating Hours</h3>
+            <p class="text-muted mb-4">Set your regular business hours</p>
+            
+            <div class="table-responsive">
+              <table class="hours-table">
+                <tr>
+                  <td width="30%"><strong>Monday</strong></td>
+                  <td width="35%">
+                    <select class="form-select start-time" data-day="monday">
+                      <option value="closed">Closed</option>
+                      <option value="06:00">6:00 AM</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00" selected>9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                    </select>
+                  </td>
+                  <td width="35%">
+                    <select class="form-select end-time" data-day="monday">
+                      <option value="closed">Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00" selected>6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Tuesday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="tuesday">
+                      <option value="closed">Closed</option>
+                      <option value="06:00">6:00 AM</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00" selected>9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="tuesday">
+                      <option value="closed">Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00" selected>6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Wednesday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="wednesday">
+                      <option value="closed">Closed</option>
+                      <option value="06:00">6:00 AM</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00" selected>9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="wednesday">
+                      <option value="closed">Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00" selected>6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Thursday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="thursday">
+                      <option value="closed">Closed</option>
+                      <option value="06:00">6:00 AM</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00" selected>9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="thursday">
+                      <option value="closed">Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00" selected>6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Friday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="friday">
+                      <option value="closed">Closed</option>
+                      <option value="06:00">6:00 AM</option>
+                      <option value="07:00">7:00 AM</option>
+                      <option value="08:00">8:00 AM</option>
+                      <option value="09:00" selected>9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="friday">
+                      <option value="closed">Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00" selected>6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                      <option value="20:00">8:00 PM</option>
+                      <option value="21:00">9:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Saturday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="saturday">
+                      <option value="closed" selected>Closed</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="saturday">
+                      <option value="closed" selected>Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00">6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Sunday</strong></td>
+                  <td>
+                    <select class="form-select start-time" data-day="sunday">
+                      <option value="closed" selected>Closed</option>
+                      <option value="09:00">9:00 AM</option>
+                      <option value="10:00">10:00 AM</option>
+                      <option value="11:00">11:00 AM</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-select end-time" data-day="sunday">
+                      <option value="closed" selected>Closed</option>
+                      <option value="17:00">5:00 PM</option>
+                      <option value="18:00">6:00 PM</option>
+                      <option value="19:00">7:00 PM</option>
+                    </select>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <!-- Form Actions -->
+          <div class="d-flex justify-content-between mt-5">
+            <button type="button" id="backButton" class="btn btn-outline-gold">
+              <i class="fas fa-arrow-left me-2"></i> Back to Business Details
+            </button>
+            <button type="submit" class="btn btn-gold">
+              Continue to Pricing <i class="fas fa-arrow-right ms-2"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 HospiTour. All rights reserved.</p>
+      <div class="mt-3">
+        <a href="#" class="text-gold me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-gold me-3"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-gold me-3"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-gold"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Service area selection
+    document.querySelectorAll('.service-area-card').forEach(card => {
+      card.addEventListener('click', function() {
+        // Remove selected class from all cards
+        document.querySelectorAll('.service-area-card').forEach(c => {
+          c.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked card
+        this.classList.add('selected');
+        
+        // Update hidden input value
+        const areaType = this.getAttribute('data-area-type');
+        document.getElementById('serviceAreaType').value = areaType;
+        
+        // Show/hide mobile service options
+        const mobileSection = document.getElementById('mobileServiceSection');
+        if (areaType === 'mobile' || areaType === 'both') {
+          mobileSection.style.display = 'block';
+        } else {
+          mobileSection.style.display = 'none';
+        }
+      });
+    });
+
+    // Back button functionality
+    document.getElementById('backButton').addEventListener('click', function() {
+      // Save current form data before going back
+      saveFormData();
+      
+      // Redirect back to step 2
+      if (confirm('Your location details will be saved. Go back to business details?')) {
+        if (window.location.protocol === 'file:') {
+          window.location.href = 'registration-step2.html';
+        } else {
+          window.location.href = 'registration-step2.html';
+        }
+      }
+    });
+
+    // Save form data to localStorage
+    function saveFormData() {
+      const operatingHours = {};
+      document.querySelectorAll('.start-time, .end-time').forEach(select => {
+        const day = select.getAttribute('data-day');
+        const type = select.classList.contains('start-time') ? 'start' : 'end';
+        operatingHours[`${day}_${type}`] = select.value;
+      });
+
+      const formData = {
+        streetAddress: document.getElementById('streetAddress').value,
+        unit: document.getElementById('unit').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zipCode: document.getElementById('zipCode').value,
+        country: document.getElementById('country').value,
+        timezone: document.getElementById('timezone').value,
+        serviceAreaType: document.getElementById('serviceAreaType').value,
+        serviceRadius: document.getElementById('serviceRadius').value,
+        travelFee: document.getElementById('travelFee').value,
+        operatingHours: operatingHours
+      };
+      
+      localStorage.setItem('hospitour_location_details', JSON.stringify(formData));
+    }
+
+    // Form submission
+    document.getElementById('locationDetailsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // Validate form
+      const streetAddress = document.getElementById('streetAddress').value;
+      const city = document.getElementById('city').value;
+      const state = document.getElementById('state').value;
+      const zipCode = document.getElementById('zipCode').value;
+      const country = document.getElementById('country').value;
+      const timezone = document.getElementById('timezone').value;
+      const serviceAreaType = document.getElementById('serviceAreaType').value;
+      
+      if (!streetAddress || !city || !state || !zipCode || !country || !timezone || !serviceAreaType) {
+        alert('Please fill in all required fields before continuing.');
+        return;
+      }
+      
+      // Save form data
+      saveFormData();
+      
+      // Show loading state
+      const submitBtn = document.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+      submitBtn.disabled = true;
+      
+      // Simulate API call and navigate to next step
+      setTimeout(() => {
+        // Navigate to Step 4 - Pricing
+        navigateToStep4();
+      }, 1500);
+    });
+
+    // Function to navigate to Step 4
+    function navigateToStep4() {
+      // Check if we're running locally or on a server
+      if (window.location.protocol === 'file:') {
+        // For local file system, create Step 4 dynamically
+        createStep4Pricing();
+      } else {
+        // For web server, redirect to Step 4 page
+        window.location.href = 'registration-step4.html';
+      }
+    }
+
+    // Function to create Step 4 (Pricing) dynamically
+    function createStep4Pricing() {
+      // Hide current form
+      document.getElementById('locationDetailsForm').style.display = 'none';
+      
+      // Create Step 4 content
+      const step4HTML = `
+        <div class="text-center py-4">
+          <div class="mb-4">
+            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+          </div>
+          <h3 class="text-brown mb-3">Location Details Saved Successfully!</h3>
+          <p class="text-muted mb-4">Moving to Step 4: Pricing & Packages</p>
+          
+          <div class="row justify-content-center mb-5">
+            <div class="col-md-8">
+              <div class="card p-4 text-start">
+                <h5 class="text-brown mb-3">Step 4: Pricing & Packages</h5>
+                <p class="text-muted">In this step, you'll set up:</p>
+                <ul class="text-muted">
+                  <li>Service pricing and rates</li>
+                  <li>Package deals and discounts</li>
+                  <li>Payment methods accepted</li>
+                  <li>Deposit and cancellation policies</li>
+                </ul>
+                <p class="text-muted mt-3"><strong>Next:</strong> Step 5 will be the final review before publishing your profile.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="d-flex justify-content-center gap-3">
+            <button id="editLocationInfo" class="btn btn-outline-gold">
+              <i class="fas fa-edit me-2"></i> Edit Location Info
+            </button>
+            <button id="proceedToPricing" class="btn btn-gold">
+              Start Pricing Setup <i class="fas fa-dollar-sign ms-2"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      
+      // Add Step 4 to the page
+      const formContainer = document.querySelector('.registration-body');
+      const step4Div = document.createElement('div');
+      step4Div.id = 'step4Pricing';
+      step4Div.innerHTML = step4HTML;
+      formContainer.appendChild(step4Div);
+      
+      // Update step indicator to show Step 4 as active
+      updateStepIndicator();
+      
+      // Add event listeners for the new buttons
+      document.getElementById('editLocationInfo').addEventListener('click', function() {
+        document.getElementById('step4Pricing').remove();
+        document.getElementById('locationDetailsForm').style.display = 'block';
+        
+        // Reset submit button
+        const submitBtn = document.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = 'Continue to Pricing <i class="fas fa-arrow-right ms-2"></i>';
+        submitBtn.disabled = false;
+        
+        // Reset step indicator
+        resetStepIndicator();
+      });
+      
+      document.getElementById('proceedToPricing').addEventListener('click', function() {
+        alert('In a complete application, this would proceed to Step 4: Pricing setup');
+        // Here you would create the pricing form or redirect to registration-step4.html
+      });
+    }
+
+    // Function to update step indicator for Step 4
+    function updateStepIndicator() {
+      const steps = document.querySelectorAll('.step');
+      const stepLines = document.querySelectorAll('.step-line');
+      
+      // Mark Step 3 as completed
+      steps[2].classList.add('completed');
+      steps[2].classList.remove('active');
+      steps[2].innerHTML = '<span>3</span>';
+      
+      // Activate Step 4
+      steps[3].classList.add('active');
+      stepLines[2].classList.add('active');
+    }
+
+    // Function to reset step indicator to Step 3
+    function resetStepIndicator() {
+      const steps = document.querySelectorAll('.step');
+      const stepLines = document.querySelectorAll('.step-line');
+      
+      // Reset Step 3 as active
+      steps[2].classList.add('active');
+      steps[2].classList.remove('completed');
+      
+      // Reset Step 4
+      steps[3].classList.remove('active');
+      stepLines[2].classList.remove('active');
+    }
+
+    // Load previously saved data if available
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedData = localStorage.getItem('hospitour_location_details');
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        
+        // Populate form fields
+        document.getElementById('streetAddress').value = data.streetAddress || '';
+        document.getElementById('unit').value = data.unit || '';
+        document.getElementById('city').value = data.city || '';
+        document.getElementById('state').value = data.state || '';
+        document.getElementById('zipCode').value = data.zipCode || '';
+        document.getElementById('country').value = data.country || '';
+        document.getElementById('timezone').value = data.timezone || '';
+        document.getElementById('serviceRadius').value = data.serviceRadius || '';
+        document.getElementById('travelFee').value = data.travelFee || '';
+        
+        // Select service area type if exists
+        if (data.serviceAreaType) {
+          const areaCard = document.querySelector(`[data-area-type="${data.serviceAreaType}"]`);
+          if (areaCard) {
+            areaCard.classList.add('selected');
+            document.getElementById('serviceAreaType').value = data.serviceAreaType;
+            
+            // Show mobile service section if applicable
+            if (data.serviceAreaType === 'mobile' || data.serviceAreaType === 'both') {
+              document.getElementById('mobileServiceSection').style.display = 'block';
+            }
+          }
+        }
+        
+        // Populate operating hours
+        if (data.operatingHours) {
+          Object.keys(data.operatingHours).forEach(key => {
+            const select = document.querySelector(`[data-day="${key.split('_')[0]}"].${key.split('_')[1]}-time`);
+            if (select) {
+              select.value = data.operatingHours[key];
+            }
+          });
+        }
+      }
+    });
+
+    // Auto-save form data when fields change
+    document.querySelectorAll('#locationDetailsForm input, #locationDetailsForm select').forEach(element => {
+      element.addEventListener('change', saveFormData);
+    });
+  </script>
+</body>
+</html>

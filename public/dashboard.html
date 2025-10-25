@@ -1,165 +1,660 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Business Dashboard | HospiPro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Business Dashboard | HospiTour</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
-        .card-metric{ border-left: 5px solid var(--gold); }
-        .text-gold{ color: var(--gold); }
-    </style>
-</head>
-<body>
+      :root {
+        --gold: #c9a44c;
+        --brown: #3b2f2f;
+        --light-gold: #f5f0e4;
+        --light-brown: #f7f5f1;
+      }
 
+      body {
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        background: #f7f5f1;
+        margin: 0;
+        padding: 0;
+      }
+
+      .sidebar {
+        width: 280px;
+        background: var(--brown);
+        height: 100vh;
+        position: fixed;
+        padding-top: 20px;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+      }
+
+      .sidebar a {
+        color: rgba(255, 255, 255, 0.8);
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+        margin-bottom: 5px;
+      }
+
+      .sidebar a i {
+        margin-right: 12px;
+        font-size: 1.2rem;
+        width: 24px;
+        text-align: center;
+      }
+
+      .sidebar a:hover,
+      .sidebar a.active {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        border-left: 3px solid var(--gold);
+      }
+
+      .main-content {
+        margin-left: 280px;
+        padding: 30px;
+        min-height: 100vh;
+      }
+
+      .card-metric {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .card-metric::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--gold);
+      }
+
+      .card-metric:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .text-gold {
+        color: var(--gold);
+      }
+
+      .plan-badge {
+        background: var(--gold);
+        color: var(--brown);
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+
+      .quick-access-card {
+        border-radius: 12px;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+        background: white;
+        padding: 20px;
+      }
+
+      .quick-access-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        border-left: 4px solid var(--gold);
+      }
+
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .user-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--light-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--gold);
+        font-size: 1.2rem;
+      }
+
+      .progress-bar-custom {
+        height: 8px;
+        border-radius: 4px;
+        background: #e9ecef;
+        overflow: hidden;
+      }
+
+      .progress-bar-custom .progress {
+        height: 100%;
+        background: var(--gold);
+        border-radius: 4px;
+      }
+
+      .chart-container {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 30px;
+      }
+
+      .notification-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background: #e74c3c;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+      }
+
+      .sidebar-footer {
+        position: absolute;
+        bottom: 20px;
+        width: 100%;
+        padding: 0 20px;
+      }
+
+      @media (max-width: 992px) {
+        .sidebar {
+          width: 70px;
+          overflow: hidden;
+        }
+
+        .sidebar .nav-text {
+          display: none;
+        }
+
+        .sidebar a i {
+          margin-right: 0;
+          font-size: 1.4rem;
+        }
+
+        .main-content {
+          margin-left: 70px;
+        }
+
+        .brand-text {
+          display: none;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+
+        .sidebar a {
+          display: inline-block;
+          width: auto;
+          margin: 5px;
+          border-left: none;
+          border-bottom: 3px solid transparent;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+          border-left: none;
+          border-bottom: 3px solid var(--gold);
+        }
+
+        .main-content {
+          margin-left: 0;
+        }
+
+        .sidebar-footer {
+          position: relative;
+          bottom: auto;
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
     <div class="sidebar">
-        <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
-            <small class="text-gold">Business Operations</small>
+      <div class="text-center mb-4 px-3">
+        <div class="d-flex align-items-center justify-content-center">
+          <div class="user-avatar">
+            <i class="bi bi-building"></i>
+          </div>
+          <div class="ms-2">
+            <h5 class="text-white mb-0 brand-text">HospiTour</h5>
+            <small class="text-gold brand-text">Business Operations</small>
+          </div>
         </div>
-        <a href="dashboard.html" class="active">🏠 Dashboard</a>
-        <a href="rooms.html">🛏️ Accommodation Mgmt</a>
-        <a href="restaurant.html">🍽️ Restaurant & F&B</a>
-        <a href="events.html">🗓️ Events & Planning</a>
-        <a href="settings.html">⚙️ Settings & Billing</a>
-        <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+      </div>
+
+      <a href="dashboard.html" class="active">
+        <i class="bi bi-speedometer2"></i>
+        <span class="nav-text">Dashboard</span>
+      </a>
+      <a href="rooms.html">
+        <i class="bi bi-house-door"></i>
+        <span class="nav-text">Accommodation Mgmt</span>
+      </a>
+      <a href="restaurant.html">
+        <i class="bi bi-cup-hot"></i>
+        <span class="nav-text">Restaurant & F&B</span>
+        <span class="notification-badge">3</span>
+      </a>
+      <a href="events.html">
+        <i class="bi bi-calendar-event"></i>
+        <span class="nav-text">Events & Planning</span>
+      </a>
+      <a href="staff.html">
+        <i class="bi bi-people"></i>
+        <span class="nav-text">Staff Management</span>
+      </a>
+      <a href="settings.html">
+        <i class="bi bi-gear"></i>
+        <span class="nav-text">Settings & Billing</span>
+      </a>
+
+      <div class="sidebar-footer">
+        <hr class="text-white-50" />
+        <a href="#" id="logoutBtn" class="d-flex align-items-center">
+          <i class="bi bi-box-arrow-right"></i>
+          <span class="nav-text">Log Out</span>
+        </a>
+      </div>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Operations Overview</h1>
-        <p class="small text-muted mb-4" id="planLevel">Loading Plan Level...</p>
-        
-        <div class="row g-4 mb-5">
-            <div class="col-lg-4 col-md-6">
-                <div class="card p-3 card-metric">
-                    <div class="small text-muted">Current Occupancy Rate</div>
-                    <h2 class="fw-bold text-brown" id="metricOccupancy">--%</h2>
-                    <p class="small mb-0 text-success">↑ 5.2% from last month</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card p-3 card-metric">
-                    <div class="small text-muted">Pending F&B Orders</div>
-                    <h2 class="fw-bold text-brown" id="metricOrders">--</h2>
-                    <p class="small mb-0 text-danger" id="ordersHint">Requires Order Management (Pro+)</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="card p-3 card-metric">
-                    <div class="small text-muted">Revenue Forecast (7 Days)</div>
-                    <h2 class="fw-bold text-brown" id="metricRevenue">$----</h2>
-                    <p class="small mb-0 text-info" id="revenueHint">Requires Advanced Metrics (Pro+)</p>
-                </div>
-            </div>
+      <div class="dashboard-header">
+        <div>
+          <h1 class="mb-2 text-brown">Operations Overview</h1>
+          <p class="small text-muted mb-0" id="planLevel">
+            Loading Plan Level...
+          </p>
         </div>
 
-        <h3 class="mb-3 text-brown">Quick Access</h3>
-        <div class="row g-3">
-            <div class="col-md-4">
-                <a href="rooms.html" class="card text-decoration-none p-3 shadow-sm h-100">
-                    <h5 class="text-brown">New Reservation</h5>
-                    <p class="small text-muted mb-0">Book a guest and allocate a room.</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="restaurant.html" class="card text-decoration-none p-3 shadow-sm h-100">
-                    <h5 class="text-brown">New Order (POS)</h5>
-                    <p class="small text-muted mb-0">Process a food or beverage order (Pro+).</p>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="events.html" class="card text-decoration-none p-3 shadow-sm h-100">
-                    <h5 class="text-brown">Event Calendar</h5>
-                    <p class="small text-muted mb-0">View today's scheduled events and tasks.</p>
-                </a>
-            </div>
+        <div class="user-info">
+          <div class="user-avatar">
+            <i class="bi bi-person-circle"></i>
+          </div>
+          <div>
+            <p class="mb-0 fw-bold" id="userName">Loading...</p>
+            <p class="mb-0 small text-muted" id="userEmail">Loading...</p>
+          </div>
         </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-lg-4 col-md-6">
+          <div class="card p-4 card-metric">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="small text-muted">Current Occupancy Rate</div>
+              <i class="bi bi-graph-up text-gold"></i>
+            </div>
+            <h2 class="fw-bold text-brown mb-2" id="metricOccupancy">--%</h2>
+            <div class="progress-bar-custom mb-2">
+              <div class="progress" style="width: 45%"></div>
+            </div>
+            <p class="small mb-0 text-success">
+              <i class="bi bi-arrow-up"></i> 5.2% from last month
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card p-4 card-metric">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="small text-muted">Pending F&B Orders</div>
+              <i class="bi bi-cart text-gold"></i>
+            </div>
+            <h2 class="fw-bold text-brown mb-2" id="metricOrders">--</h2>
+            <p class="small mb-0 text-danger" id="ordersHint">
+              <i class="bi bi-info-circle"></i> Requires Order Management (Pro+)
+            </p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="card p-4 card-metric">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <div class="small text-muted">Revenue Forecast (7 Days)</div>
+              <i class="bi bi-currency-dollar text-gold"></i>
+            </div>
+            <h2 class="fw-bold text-brown mb-2" id="metricRevenue">$----</h2>
+            <p class="small mb-0 text-info" id="revenueHint">
+              <i class="bi bi-info-circle"></i> Requires Advanced Metrics (Pro+)
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-5">
+        <div class="col-12">
+          <div class="chart-container">
+            <h4 class="text-brown mb-4">Performance Overview</h4>
+            <div
+              class="d-flex justify-content-center align-items-center"
+              style="
+                height: 200px;
+                background: var(--light-brown);
+                border-radius: 8px;
+              "
+            >
+              <p class="text-muted">
+                Performance charts will appear here for Pro+ users
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="mb-4 text-brown">Quick Access</h3>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a href="rooms.html" class="quick-access-card text-decoration-none">
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">New Reservation</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              Book a guest and allocate a room.
+            </p>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a
+            href="restaurant.html"
+            class="quick-access-card text-decoration-none"
+          >
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">New Order (POS)</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              Process a food or beverage order (Pro+).
+            </p>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="events.html" class="quick-access-card text-decoration-none">
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">Event Calendar</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              View today's scheduled events and tasks.
+            </p>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="staff.html" class="quick-access-card text-decoration-none">
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">Staff Management</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              Manage schedules and team performance.
+            </p>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a href="reports.html" class="quick-access-card text-decoration-none">
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">Reports & Analytics</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              View detailed business insights (Pro+).
+            </p>
+          </a>
+        </div>
+
+        <div class="col-md-4">
+          <a
+            href="settings.html"
+            class="quick-access-card text-decoration-none"
+          >
+            <div class="d-flex align-items-center mb-3">
+              <div class="user-avatar me-3">
+                <i class="bi bi-plus-lg"></i>
+              </div>
+              <h5 class="text-brown mb-0">Account Settings</h5>
+            </div>
+            <p class="small text-muted mb-0">
+              Update your business profile and preferences.
+            </p>
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-5 pt-4 border-top">
+        <div class="row">
+          <div class="col-md-6">
+            <h5 class="text-brown mb-3">Recent Activity</h5>
+            <div class="list-group">
+              <div class="list-group-item border-0 bg-transparent px-0">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">New booking received</h6>
+                  <small class="text-muted">2 hours ago</small>
+                </div>
+                <p class="mb-1 small">Room 204 booked for 3 nights</p>
+              </div>
+              <div class="list-group-item border-0 bg-transparent px-0">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Check-out completed</h6>
+                  <small class="text-muted">5 hours ago</small>
+                </div>
+                <p class="mb-1 small">Room 105 is now available</p>
+              </div>
+              <div class="list-group-item border-0 bg-transparent px-0">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Maintenance request</h6>
+                  <small class="text-muted">1 day ago</small>
+                </div>
+                <p class="mb-1 small">AC unit in Room 312 needs service</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h5 class="text-brown mb-3">Upcoming Events</h5>
+            <div class="list-group">
+              <div class="list-group-item border-0 bg-transparent px-0">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Corporate Conference</h6>
+                  <small class="text-muted">Tomorrow, 9:00 AM</small>
+                </div>
+                <p class="mb-1 small">Grand Ballroom - 150 attendees</p>
+              </div>
+              <div class="list-group-item border-0 bg-transparent px-0">
+                <div class="d-flex w-100 justify-content-between">
+                  <h6 class="mb-1">Wedding Reception</h6>
+                  <small class="text-muted">This Saturday, 4:00 PM</small>
+                </div>
+                <p class="mb-1 small">Garden Pavilion - 80 guests</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signOut,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // CONFIG: Use your actual project config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-            authDomain: "hospipro-86b8d.firebaseapp.com",
-            projectId: "hospipro-86b8d",
-            storageBucket: "hospipro-86b8d.firebasestorage.app",
-            messagingSenderId: "801856698977",
-            appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        };
+      // CONFIG: Use your actual project config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+        authDomain: "hospitour-6a1da.firebaseapp.com",
+        projectId: "hospitour-6a1da",
+        storageBucket: "hospitour-6a1da.appspot.com", // Fixed this line
+        messagingSenderId: "73315471607",
+        appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+        measurementId: "G-V82ZQPV48F",
+      };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        
-        const logoutBtn = document.getElementById('logoutBtn');
-        const planLevelEl = document.getElementById('planLevel');
-        
-        // Simulating data based on a fetched plan level
-        function updateMetrics(plan) {
-            planLevelEl.textContent = `Current Plan: ${plan.toUpperCase()} | Subscription Active`;
-            
-            if (plan === 'free') {
-                document.getElementById('metricOccupancy').textContent = '45%';
-                document.getElementById('metricOrders').textContent = 'N/A';
-                document.getElementById('metricRevenue').textContent = 'N/A';
-            } else if (plan === 'pro') {
-                document.getElementById('metricOccupancy').textContent = '82%';
-                document.getElementById('metricOrders').textContent = '12';
-                document.getElementById('ordersHint').textContent = 'Pending orders requiring action.';
-                document.getElementById('metricRevenue').textContent = '$5,120';
-            } else if (plan === 'enterprise') {
-                document.getElementById('metricOccupancy').textContent = '95%';
-                document.getElementById('metricOrders').textContent = '6';
-                document.getElementById('ordersHint').textContent = 'All teams notified.';
-                document.getElementById('metricRevenue').textContent = '$15,890';
-            }
+     // In dashboard.html, replace the Firebase initialization with:
+try {
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+} catch (error) {
+    console.error('Firebase initialization failed, using localStorage:', error);
+    // Use localStorage fallback
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        window.location.href = 'login.html';
+        return;
+    }
+    updateMetrics(currentUser.plan || 'free', currentUser);
+}
+
+      const logoutBtn = document.getElementById("logoutBtn");
+      const planLevelEl = document.getElementById("planLevel");
+      const userNameEl = document.getElementById("userName");
+      const userEmailEl = document.getElementById("userEmail");
+
+      // Simulating data based on a fetched plan level
+      function updateMetrics(plan, userData) {
+        planLevelEl.textContent = `Current Plan: ${plan.toUpperCase()} | Subscription Active`;
+
+        if (userData) {
+          userNameEl.textContent = userData.name || "Business User";
+          userEmailEl.textContent = userData.email || "user@example.com";
         }
 
-        // Authentication and Role Check
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                // Check user's role and plan from Firestore
-                const userRef = doc(db, 'users', user.uid); // Assumes role/plan is stored here
-                const userSnap = await getDoc(userRef);
+        if (plan === "free") {
+          document.getElementById("metricOccupancy").textContent = "45%";
+          document.querySelector(".progress-bar-custom .progress").style.width =
+            "45%";
+          document.getElementById("metricOrders").textContent = "N/A";
+          document.getElementById("metricRevenue").textContent = "N/A";
+        } else if (plan === "pro") {
+          document.getElementById("metricOccupancy").textContent = "82%";
+          document.querySelector(".progress-bar-custom .progress").style.width =
+            "82%";
+          document.getElementById("metricOrders").textContent = "12";
+          document.getElementById("ordersHint").textContent =
+            "Pending orders requiring action.";
+          document.getElementById("ordersHint").className =
+            "small mb-0 text-warning";
+          document.getElementById("metricRevenue").textContent = "$5,120";
+          document.getElementById("revenueHint").textContent =
+            "Based on current bookings and historical data";
+          document.getElementById("revenueHint").className =
+            "small mb-0 text-success";
+        } else if (plan === "enterprise") {
+          document.getElementById("metricOccupancy").textContent = "95%";
+          document.querySelector(".progress-bar-custom .progress").style.width =
+            "95%";
+          document.getElementById("metricOrders").textContent = "6";
+          document.getElementById("ordersHint").textContent =
+            "All teams notified.";
+          document.getElementById("ordersHint").className =
+            "small mb-0 text-success";
+          document.getElementById("metricRevenue").textContent = "$15,890";
+          document.getElementById("revenueHint").textContent =
+            "Includes projected events and catering";
+          document.getElementById("revenueHint").className =
+            "small mb-0 text-success";
+        }
+      }
 
-                if (userSnap.exists() && userSnap.data().accountType === 'business') {
-                    // User is logged in AND is a business. Proceed.
-                    const userPlan = userSnap.data().plan || 'free'; // Default to free if not set
-                    updateMetrics(userPlan);
-                } else {
-                    // Logged in but wrong role (or role not set)
-                    alert("Access Denied. You must be logged in as a Business/Employer.");
-                    window.location.href = "login.html";
-                }
-            } else {
-                // Not logged in
-                window.location.href = "login.html";
-            }
-        });
+      // Authentication and Role Check
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          // Check user's role and plan from Firestore
+          const userRef = doc(db, "users", user.uid); // Assumes role/plan is stored here
+          const userSnap = await getDoc(userRef);
 
-        // Logout functionality
-        logoutBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            try {
-                await signOut(auth);
-                window.location.href = "login.html";
-            } catch (error) {
-                console.error("Logout failed:", error);
-            }
-        });
+          if (userSnap.exists() && userSnap.data().accountType === "business") {
+            // User is logged in AND is a business. Proceed.
+            const userData = userSnap.data();
+            const userPlan = userData.plan || "free"; // Default to free if not set
+            updateMetrics(userPlan, userData);
+          } else {
+            // Logged in but wrong role (or role not set)
+            alert(
+              "Access Denied. You must be logged in as a Business/Employer."
+            );
+            window.location.href = "login.html";
+          }
+        } else {
+          // Not logged in
+          window.location.href = "login.html";
+        }
+      });
+
+      // Logout functionality
+      logoutBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+        try {
+          await signOut(auth);
+          window.location.href = "login.html";
+        } catch (error) {
+          console.error("Logout failed:", error);
+        }
+      });
     </script>
-</body>
+  </body>
 </html>

@@ -3,132 +3,598 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Profile & Portfolio | HospiPro</title>
+    <title>Profile & Portfolio | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
-        .portfolio-img{ height: 150px; object-fit: cover; border-radius: 8px; }
+        :root{ 
+            --gold: #c9a44c; 
+            --brown: #3b2f2f; 
+            --light-brown: #4a3c3c;
+            --cream: #f7f5f1;
+            --light-cream: #fefdfb;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--cream);
+            color: var(--brown);
+        }
+        
+        .sidebar{ 
+            width: 250px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.7); 
+            padding: 12px 15px; 
+            display: block; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 0 30px 30px 0;
+            margin-right: 10px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: var(--light-brown); 
+            color: white; 
+            border-left: 3px solid var(--gold);
+            transform: translateX(5px);
+        }
+        
+        .main-content{ 
+            margin-left: 250px; 
+            padding: 30px;
+            min-height: 100vh;
+        }
+        
+        .text-gold{ color: var(--gold); }
+        .text-brown { color: var(--brown); }
+        .bg-gold { background-color: var(--gold); }
+        .bg-brown { background-color: var(--brown); }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background-color: #b8943a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+        }
+        
+        .btn-outline-gold {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-gold:hover {
+            background-color: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .profile-header {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+            border-radius: 15px;
+            padding: 30px;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--gold);
+            object-fit: cover;
+            background: linear-gradient(45deg, var(--gold), var(--brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        
+        .stats-card {
+            background: var(--light-cream);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            background: var(--light-cream);
+            min-height: 200px;
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            background: linear-gradient(45deg, var(--gold), var(--brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(59, 47, 47, 0.9));
+            color: white;
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .skill-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--gold);
+            border-radius: 10px;
+            transition: width 0.8s ease;
+        }
+        
+        .placeholder-img {
+            background: linear-gradient(45deg, var(--gold), var(--brown));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar .text-center h5, .sidebar .text-center small, .sidebar a span {
+                display: none;
+            }
+            
+            .sidebar a {
+                text-align: center;
+                padding: 15px 5px;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar .d-flex {
+                justify-content: space-between;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
     
     <div class="sidebar">
         <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
+            <h5 class="text-white">HospiTour</h5>
             <small class="text-gold">Service Professional</small>
         </div>
-        <a href="professional-dashboard.html">🏠 Dashboard</a>
-        <a href="professional-profile.html" class="active">👤 Profile & Portfolio</a>
-        <a href="professional-bookings.html">🗓️ Booking Management</a>
-        <a href="professional-clients.html">👥 Client Management</a>
-        <a href="professional-billing.html">💵 Billing & Payments</a>
-        <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> Dashboard</a>
+        <a href="professional-profile.html" class="active"><i class="fas fa-user me-2"></i> Profile & Portfolio</a>
+        <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> Booking Management</a>
+        <a href="professional-clients.html"><i class="fas fa-users me-2"></i> Client Management</a>
+        <a href="professional-billing.html"><i class="fas fa-money-bill-wave me-2"></i> Billing & Payments</a>
+        <hr class="text-white-50 my-4">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Log Out</a>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Profile & Portfolio Management</h1>
-
-        <ul class="nav nav-tabs mb-4" id="profileTab" role="tablist">
-            <li class="nav-item" role="presentation"><button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details" type="button" role="tab">Profile Details</button></li>
-            <li class="nav-item" role="presentation"><button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services" type="button" role="tab">Services Offered</button></li>
-            <li class="nav-item" role="presentation"><button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab">Reviews & Ratings</button></li>
-        </ul>
-
-        <div class="tab-content">
-            
-            <div class="tab-pane fade show active" id="details" role="tabpanel">
-                <h3 class="mb-3 text-brown">Public Profile Editor</h3>
-                <div class="alert alert-info small" role="alert">
-                    **Pro Plan** unlocks advanced features like portfolio image uploads.
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-brown mb-0">Profile & Portfolio</h1>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <small class="text-muted">Current Plan</small>
+                    <div class="badge bg-light text-brown">Free</div>
                 </div>
-                <form>
-                    <div class="mb-3">
-                        <label class="form-label">Professional Name/Company</label>
-                        <input type="text" class="form-control" value="[Professional Name]" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Location/City</label>
-                        <input type="text" class="form-control" placeholder="Lagos, Nigeria" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">About/Description (Max 500 characters)</label>
-                        <textarea class="form-control" rows="4">Basic description of services...</textarea>
-                    </div>
-                    
-                    <h5 class="mt-4">Portfolio (Pro+ Feature)</h5>
-                    <div class="row g-3 mb-3" id="portfolioSection">
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/200x150?text=Portfolio+Image+1" alt="Portfolio 1" class="w-100 portfolio-img border">
-                        </div>
-                        <div class="col-md-4">
-                            <img src="https://via.placeholder.com/200x150?text=Portfolio+Image+2" alt="Portfolio 2" class="w-100 portfolio-img border">
-                        </div>
-                        <div class="col-md-4">
-                            <button class="btn btn-outline-secondary w-100 h-100" id="uploadBtn" disabled>Upload Image</button>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Save Profile Details</button>
-                </form>
-            </div>
-
-            <div class="tab-pane fade" id="services" role="tabpanel">
-                <h3 class="mb-3 text-brown">Manage Your Service Listings</h3>
-                <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#newServiceModal">Add New Service</button>
-                
-                <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">Full-Day Event Planning</span>
-                        <span class="badge bg-secondary">Category: Planning</span>
-                        <button class="btn btn-sm btn-outline-warning">Edit</button>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span class="fw-bold">Wedding Buffet Catering (100 Guests)</span>
-                        <span class="badge bg-secondary">Category: Catering</span>
-                        <button class="btn btn-sm btn-outline-warning">Edit</button>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="tab-pane fade" id="reviews" role="tabpanel">
-                <h3 class="mb-3 text-brown">Client Feedback</h3>
-                <div class="alert alert-success d-inline-block p-2 mb-4">
-                    **Overall Rating: 4.8 / 5** (12 total reviews)
-                </div>
-                
-                <ul class="list-group small">
-                    <li class="list-group-item">
-                        **5 Stars** - "Excellent catering service! Highly recommended." - *Client A*
-                    </li>
-                    <li class="list-group-item">
-                        **4 Stars** - "The planning was great, communication could be faster." - *Client B*
-                    </li>
-                </ul>
+                <button class="btn btn-gold btn-sm">
+                    <i class="fas fa-crown me-1"></i> Upgrade Plan
+                </button>
             </div>
         </div>
-    </div>
-    
-    <div class="modal fade" id="newServiceModal" tabindex="-1" aria-labelledby="newServiceModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="newServiceModalLabel">Add New Service</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="row align-items-center">
+                <div class="col-md-3 text-center">
+                    <div class="profile-avatar">SJ</div>
+                    <div class="mt-3">
+                        <button class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-camera me-1"></i> Change Photo
+                        </button>
+                    </div>
                 </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3"><input type="text" class="form-control" placeholder="Service Title (e.g., 'Half-Day Consulting')" required></div>
-                        <div class="mb-3"><select class="form-select"><option>Catering</option><option>Event Planning</option><option>Laundry</option><option>Other</option></select></div>
-                        <div class="mb-3"><textarea class="form-control" placeholder="Detailed description of the service"></textarea></div>
-                        <div class="mb-3"><input type="text" class="form-control" placeholder="Starting Price (e.g., $500)"></div>
-                        <button type="submit" class="btn btn-success d-block w-100">Create Listing</button>
-                    </form>
+                <div class="col-md-6">
+                    <h2 class="mb-1">Sarah Johnson</h2>
+                    <p class="mb-2">Professional Event Planner & Caterer</p>
+                    <div class="d-flex align-items-center mb-2">
+                        <span class="text-gold me-3">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-white ms-1">4.7 (128 reviews)</span>
+                        </span>
+                    </div>
+                    <p class="mb-0 small">Specializing in weddings, corporate events, and private parties with 8+ years of experience creating memorable experiences.</p>
+                </div>
+                <div class="col-md-3 text-end">
+                    <button class="btn btn-gold mb-2">
+                        <i class="fas fa-edit me-2"></i> Edit Profile
+                    </button>
+                    <button class="btn btn-outline-light">
+                        <i class="fas fa-eye me-2"></i> Preview Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-5">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white rounded p-2 me-3">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">142</div>
+                            <small class="text-muted">Total Bookings</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success text-white rounded p-2 me-3">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">4.7</div>
+                            <small class="text-muted">Average Rating</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-info text-white rounded p-2 me-3">
+                            <i class="fas fa-redo"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">72%</div>
+                            <small class="text-muted">Repeat Clients</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning text-white rounded p-2 me-3">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">8</div>
+                            <small class="text-muted">Years Experience</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-5">
+            <div class="col-lg-8">
+                <!-- About Section -->
+                <div class="card p-4 mb-4">
+                    <h3 class="section-title text-brown">About Me</h3>
+                    <p>I'm a passionate event planner with over 8 years of experience creating unforgettable moments. Specializing in weddings, corporate events, and private celebrations, I believe every event tells a unique story.</p>
+                    
+                    <h5 class="mt-4 mb-3">Services Offered</h5>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Wedding Planning</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Corporate Events</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Catering Services</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Venue Decoration</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Entertainment Booking</li>
+                                <li class="mb-2"><i class="fas fa-check text-success me-2"></i> Event Coordination</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills & Expertise -->
+                <div class="card p-4 mb-4">
+                    <h3 class="section-title text-brown">Skills & Expertise</h3>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Event Planning</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Client Management</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Budget Management</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 88%"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Vendor Coordination</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" style="width: 92%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Portfolio Section -->
+                <div class="card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="section-title text-brown mb-0">Portfolio</h3>
+                        <button class="btn btn-outline-gold btn-sm" id="addPortfolioBtn">
+                            <i class="fas fa-plus me-2"></i> Add Project
+                        </button>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <div class="portfolio-img placeholder-img">Wedding</div>
+                                <div class="portfolio-overlay">
+                                    <h6 class="mb-1">Johnson Wedding</h6>
+                                    <p class="small mb-0">Elegant outdoor wedding with 150 guests</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <div class="portfolio-img placeholder-img">Conference</div>
+                                <div class="portfolio-overlay">
+                                    <h6 class="mb-1">Tech Conference 2024</h6>
+                                    <p class="small mb-0">Annual corporate event for 300 attendees</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <div class="portfolio-img placeholder-img">Birthday</div>
+                                <div class="portfolio-overlay">
+                                    <h6 class="mb-1">50th Birthday Celebration</h6>
+                                    <p class="small mb-0">Luxury private party with custom catering</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="portfolio-item">
+                                <div class="portfolio-img placeholder-img">Gala</div>
+                                <div class="portfolio-overlay">
+                                    <h6 class="mb-1">Charity Gala Dinner</h6>
+                                    <p class="small mb-0">Fundraising event with 200 guests</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <!-- Contact Information -->
+                <div class="card p-4 mb-4">
+                    <h5 class="mb-3">Contact Information</h5>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center text-muted mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <span>sarah.johnson@example.com</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            <span>New York, NY</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted">
+                            <i class="fas fa-globe me-2"></i>
+                            <span>www.sarahevents.com</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-gold w-100">
+                        <i class="fas fa-share-alt me-2"></i> Share Profile
+                    </button>
+                </div>
+
+                <!-- Professional Tools -->
+                <div class="card p-4 mb-4">
+                    <h5 class="mb-3">Professional Tools</h5>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-certificate text-warning me-2"></i>
+                            <span>Verified Professional</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-shield-alt text-primary me-2"></i>
+                            <span>Background Checked</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-medal text-success me-2"></i>
+                            <span>Top Rated 2024</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Features -->
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Pro+</span>
+                    <h5 class="mb-3">Advanced Features</h5>
+                    <div class="mb-3">
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-video text-info me-2"></i>
+                            <span>Video Portfolio (Pro+)</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-chart-line text-success me-2"></i>
+                            <span>Performance Analytics (Pro+)</span>
+                        </div>
+                        <div class="d-flex align-items-center text-muted mb-3">
+                            <i class="fas fa-bullhorn text-warning me-2"></i>
+                            <span>Featured Listings (Pro+)</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-gold w-100" id="upgradeProfileBtn">
+                        <i class="fas fa-crown me-2"></i> Upgrade Profile
+                    </button>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card p-4 mt-4">
+                    <h5 class="mb-3">Quick Actions</h5>
+                    <button class="btn btn-outline-gold w-100 mb-2">
+                        <i class="fas fa-download me-2"></i> Download Media Kit
+                    </button>
+                    <button class="btn btn-outline-gold w-100 mb-2">
+                        <i class="fas fa-file-pdf me-2"></i> Generate Portfolio PDF
+                    </button>
+                    <button class="btn btn-outline-gold w-100">
+                        <i class="fas fa-qrcode me-2"></i> Share QR Code
+                    </button>
                 </div>
             </div>
         </div>
@@ -136,30 +602,54 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script type="module">
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        
-        const auth = getAuth();
+    <script>
+        // Simple JavaScript without Firebase dependencies
         const logoutBtn = document.getElementById('logoutBtn');
-        const uploadBtn = document.getElementById('uploadBtn');
+        const addPortfolioBtn = document.getElementById('addPortfolioBtn');
+        const upgradeProfileBtn = document.getElementById('upgradeProfileBtn');
         
-        // Simulate plan gating for Portfolio Upload
+        // Simulate plan gating for Pro+ features
         const userPlan = 'free'; 
         
-        if (userPlan === 'pro' || userPlan === 'enterprise') {
-            uploadBtn.disabled = false;
-            uploadBtn.textContent = 'Upload Image';
+        if (userPlan !== 'pro' && userPlan !== 'enterprise') {
+            addPortfolioBtn.disabled = true;
+            addPortfolioBtn.textContent = 'Add Project (Upgrade to Pro)';
+            addPortfolioBtn.title = 'Upgrade to Pro Plan to add portfolio projects.';
         }
         
-        // Logout functionality (Reused)
-        logoutBtn.addEventListener('click', async (e) => {
+        // Logout functionality (simplified)
+        logoutBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            try {
-                await signOut(auth);
-                window.location.href = "login.html";
-            } catch (error) {
-                console.error("Logout failed:", error);
+            if (confirm('Are you sure you want to log out?')) {
+                alert('Redirecting to login page...');
+                // In a real app, this would redirect to login page
+                // window.location.href = "login.html";
             }
+        });
+
+        // Add click handlers for feature buttons
+        addPortfolioBtn.addEventListener('click', () => {
+            if (!addPortfolioBtn.disabled) {
+                alert("Opening portfolio upload...");
+            } else {
+                alert("Please upgrade to Pro+ plan to add portfolio projects.");
+            }
+        });
+
+        upgradeProfileBtn.addEventListener('click', () => {
+            alert("Redirecting to upgrade options...");
+        });
+
+        // Animate skill bars on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillBars = document.querySelectorAll('.skill-progress');
+            skillBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0';
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 500);
+            });
         });
     </script>
 </body>

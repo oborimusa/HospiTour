@@ -1,182 +1,554 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Service Marketplace | HospiPro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Service Marketplace | HospiTour</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{
-            --gold: #c9a44c;
-            --brown: #3b2f2f;
+      :root {
+        --gold: #c9a44c;
+        --brown: #3b2f2f;
+        --light-brown: #5a4a4a;
+        --cream: #f7f5f1;
+        --light-cream: #fefdf9;
+      }
+      
+      body {
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial;
+        background: var(--cream);
+        color: var(--brown);
+      }
+      
+      .navbar-custom {
+        background: var(--brown);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      
+      .hero-section {
+        background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+        padding: 60px 0 40px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 300px;
+        height: 300px;
+        background: rgba(201, 164, 76, 0.1);
+        border-radius: 50%;
+        transform: translate(30%, -30%);
+      }
+      
+      .service-card {
+        height: 100%;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+        background-color: #fff;
+        border: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      }
+      
+      .logo-preview-sm {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 10px;
+        border: 2px solid rgba(201, 164, 76, 0.2);
+      }
+      
+      .btn-gold {
+        background: var(--gold);
+        color: var(--brown);
+        border: none;
+        font-weight: 600;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-gold:hover {
+        background: #b8943a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(201, 164, 76, 0.3);
+      }
+      
+      .text-brown {
+        color: var(--brown);
+      }
+      
+      .text-gold {
+        color: var(--gold);
+      }
+      
+      .bg-brown {
+        background-color: var(--brown);
+      }
+      
+      .bg-gold {
+        background-color: var(--gold);
+      }
+      
+      .section-title {
+        position: relative;
+        padding-bottom: 12px;
+        margin-bottom: 25px;
+      }
+      
+      .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--gold);
+        border-radius: 3px;
+      }
+      
+      .search-container {
+        position: relative;
+      }
+      
+      .search-icon {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gold);
+        z-index: 5;
+      }
+      
+      .search-input {
+        padding-left: 45px;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        height: 50px;
+      }
+      
+      .search-input:focus {
+        border-color: var(--gold);
+        box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+      }
+      
+      .filter-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 20px 0;
+      }
+      
+      .filter-tab {
+        padding: 8px 16px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .filter-tab:hover, .filter-tab.active {
+        background: var(--gold);
+        color: var(--brown);
+        border-color: var(--gold);
+      }
+      
+      .stats-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+      }
+      
+      .stats-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0;
+        color: var(--brown);
+      }
+      
+      .stats-label {
+        font-size: 0.9rem;
+        color: #6c757d;
+      }
+      
+      .rating-stars {
+        color: var(--gold);
+        font-size: 0.9rem;
+      }
+      
+      .verified-badge {
+        background: var(--gold);
+        color: var(--brown);
+        font-size: 0.7rem;
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-weight: 600;
+      }
+      
+      @media (max-width: 768px) {
+        .hero-section {
+          padding: 40px 0 30px;
         }
-        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
-        .navbar-custom{background:var(--brown);}
-        .hero-section{background-color: #fff; padding: 40px 0; border-bottom: 1px solid #eee;}
-        .service-card{height: 100%; border-radius: 12px; transition: transform 0.2s; cursor: pointer;}
-        .service-card:hover{transform: translateY(-3px); box-shadow: 0 6px 15px rgba(0,0,0,0.1);}
-        .logo-preview-sm{width:40px;height:40px;object-fit:cover;border-radius:8px;margin-right:10px;}
-        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
-        .btn-gold:hover{opacity:.95;}
+        
+        .filter-tabs {
+          justify-content: center;
+        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container">
-            <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
-                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
-                <strong class="text-white">HospiPro</strong>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="index.html#features">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white active" aria-current="page" href="services.html">Services Marketplace</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="pricing.html">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="login.html">Login</a>
-                    </li>
-                    <li class="nav-item ms-lg-3">
-                        <a class="btn btn-gold" href="signup.html">Sign Up Free</a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container">
+        <a
+          class="navbar-brand text-white d-flex align-items-center gap-2"
+          href="index.html"
+        >
+          <img src="img/logo1.png" alt="HospiTour" style="width: 30px" />
+          <strong class="text-white">HospiTour</strong>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="index.html#features"
+                >Features</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-white active"
+                aria-current="page"
+                href="services.html"
+                >Marketplace</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="pricing.html">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="login.html">Login</a>
+            </li>
+            <li class="nav-item ms-lg-3">
+              <a class="btn btn-gold" href="signup.html">Sign Up Free</a>
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <div class="hero-section">
-        <div class="container">
-            <h1 class="text-brown fw-bold">Find Local Service Professionals</h1>
-            <p class="lead text-muted">Browse verified caterers, event planners, staffing agencies, and more.</p>
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" id="searchBox" class="form-control" placeholder="Search by service, name, or category...">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-8">
+            <h1 class="fw-bold mb-3">Find Local Service Professionals</h1>
+            <p class="lead mb-4">
+              Browse verified caterers, event planners, staffing agencies, and more for your hospitality needs.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="row text-center">
+              <div class="col-4">
+                <div class="stats-card">
+                  <p class="stats-number">200+</p>
+                  <p class="stats-label">Professionals</p>
                 </div>
+              </div>
+              <div class="col-4">
+                <div class="stats-card">
+                  <p class="stats-number">50+</p>
+                  <p class="stats-label">Cities</p>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="stats-card">
+                  <p class="stats-number">4.8</p>
+                  <p class="stats-label">Avg Rating</p>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
+        
+        <div class="row mt-4">
+          <div class="col-lg-8">
+            <div class="search-container">
+              <i class="fas fa-search search-icon"></i>
+              <input
+                type="text"
+                id="searchBox"
+                class="form-control search-input"
+                placeholder="Search by service, name, or category..."
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div class="filter-tabs">
+          <div class="filter-tab active" data-filter="all">All Services</div>
+          <div class="filter-tab" data-filter="catering">Catering</div>
+          <div class="filter-tab" data-filter="event">Event Planning</div>
+          <div class="filter-tab" data-filter="cleaning">Cleaning</div>
+          <div class="filter-tab" data-filter="staffing">Staffing</div>
+          <div class="filter-tab" data-filter="beverage">Bar & Beverage</div>
+        </div>
+      </div>
     </div>
 
     <main class="container py-5">
-        <div id="serviceListings" class="row g-4">
-            <div class="col-12 text-center text-muted">Loading available professionals...</div>
+      <h2 class="section-title">Available Professionals</h2>
+      
+      <div id="serviceListings" class="row g-4">
+        <div class="col-12 text-center text-muted py-5">
+          <div class="spinner-border text-gold mb-3" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          <p>Loading available professionals...</p>
         </div>
-        <div id="noResults" class="col-12 text-center text-muted mt-5" style="display: none;">No professionals matched your search.</div>
+      </div>
+      
+      <div
+        id="noResults"
+        class="col-12 text-center text-muted mt-5 py-5"
+        style="display: none"
+      >
+        <i class="fas fa-search fa-2x mb-3" style="opacity: 0.5;"></i>
+        <h4 class="text-brown">No professionals matched your search</h4>
+        <p>Try adjusting your search terms or filters</p>
+      </div>
     </main>
 
     <footer class="bg-light py-4 mt-5 border-top">
-        <div class="container text-center small text-muted">
-            &copy; <span id="year"></span> HospiPro. All rights reserved.
-        </div>
+      <div class="container text-center small text-muted">
+        &copy; <span id="year"></span> HospiTour. All rights reserved.
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        getDocs,
+        query,
+      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        // 1. CONFIG: Replace with your project's config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-            authDomain: "hospipro-86b8d.firebaseapp.com",
-            projectId: "hospipro-86b8d",
-            storageBucket: "hospipro-86b8d.firebasestorage.app",
-            messagingSenderId: "801856698977",
-            appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        };
+      // 1. CONFIG: Replace with your project's config
+      const firebaseConfig = {
+        apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+        authDomain: "hospitour-6a1da.firebaseapp.com",
+        projectId: "hospitour-6a1da",
+        storageBucket: "hospitour-6a1da.firebasestorage.app",
+        messagingSenderId: "73315471607",
+        appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+        measurementId: "G-V82ZQPV48F",
+      };
 
-        // 2. INIT
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+      // 2. INIT
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
 
-        // 3. UI Elements
-        const serviceListingsEl = document.getElementById('serviceListings');
-        const searchBox = document.getElementById('searchBox');
-        const noResultsEl = document.getElementById('noResults');
-        let allProfessionals = [];
+      // 3. UI Elements
+      const serviceListingsEl = document.getElementById("serviceListings");
+      const searchBox = document.getElementById("searchBox");
+      const noResultsEl = document.getElementById("noResults");
+      const filterTabs = document.querySelectorAll('.filter-tab');
+      
+      let allProfessionals = [];
+      let currentFilter = 'all';
 
-        // 4. DATA FETCHING
-        async function fetchProfessionals() {
-            serviceListingsEl.innerHTML = `<div class="col-12 text-center text-muted">Loading available professionals...</div>`;
-            try {
-                // Fetch documents from the 'providers' collection where the accountType is 'professional'
-                // NOTE: We rely on the signup.html logic to create this field in the 'users' or 'providers' collection
-                const providersRef = collection(db, 'providers'); // Assuming you use 'providers' for professional data
-                const q = query(providersRef); // Simple fetch all for MVP, will filter client-side
-
-                const snapshot = await getDocs(q);
-                allProfessionals = [];
-                snapshot.forEach(docSnap => {
-                    const data = docSnap.data();
-                    // Filter to only include profiles that look complete enough to list
-                    if (data.name && data.logoUrl) { 
-                        allProfessionals.push({ id: docSnap.id, ...data });
-                    }
-                });
-                
-                renderProfessionals(allProfessionals);
-
-            } catch (error) {
-                console.error("Error fetching professionals:", error);
-                serviceListingsEl.innerHTML = `<div class="col-12 text-center text-danger">Failed to load marketplace data.</div>`;
-            }
-        }
+      // 4. DATA FETCHING (Corrected collection reference)
+      async function fetchProfessionals() {
+        serviceListingsEl.innerHTML = `
+          <div class="col-12 text-center text-muted py-5">
+            <div class="spinner-border text-gold mb-3" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading available professionals...</p>
+          </div>
+        `;
         
-        // 5. RENDERING
-        function renderProfessionals(professionals) {
-            serviceListingsEl.innerHTML = '';
-            noResultsEl.style.display = 'none';
+        try {
+          // *** FIX: Changed 'providers' to 'professionals' collection ***
+          const professionalsRef = collection(db, "professionals");
+          const q = query(professionalsRef);
 
-            if (professionals.length === 0) {
-                noResultsEl.style.display = 'block';
-                return;
+          const snapshot = await getDocs(q);
+          allProfessionals = [];
+
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            // Basic filter to ensure a profile has a name before listing
+            if (data.name) {
+              allProfessionals.push({ id: docSnap.id, ...data });
             }
+          });
 
-            professionals.forEach(p => {
-                const col = document.createElement('div');
-                col.className = 'col-lg-4 col-md-6';
-                col.innerHTML = `
-                    <a href="service-detail.html?id=${p.id}" class="card service-card p-3 text-decoration-none text-dark">
-                        <div class="d-flex align-items-start">
-                            <img src="${p.logoUrl || 'img/default-logo.png'}" alt="${p.name}" class="logo-preview-sm">
-                            <div>
-                                <h5 class="mb-0">${p.name}</h5>
-                                <div class="small text-muted">${p.city || 'Available Nationwide'}</div>
-                            </div>
-                        </div>
-                        <p class="mt-2 small mb-1">
-                            ${p.description ? p.description.substring(0, 80) + '...' : 'Specializing in various hospitality services.'}
-                        </p>
-                        <div class="mt-2 small fw-bold text-brown">View Profile & Book →</div>
-                    </a>
-                `;
-                serviceListingsEl.appendChild(col);
-            });
+          renderProfessionals(allProfessionals);
+        } catch (error) {
+          console.error("Error fetching professionals:", error);
+          // This is often a security rule error if the page is blocked from reading
+          serviceListingsEl.innerHTML = `
+            <div class="col-12 text-center text-danger py-5">
+              <i class="fas fa-exclamation-triangle fa-2x mb-3"></i>
+              <h4>Failed to load marketplace data</h4>
+              <p>Please check Firestore Security Rules or try again later.</p>
+            </div>
+          `;
         }
-        
-        // 6. SEARCH FILTERING
-        searchBox.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            const filtered = allProfessionals.filter(p => 
-                p.name.toLowerCase().includes(searchTerm) ||
-                (p.city && p.city.toLowerCase().includes(searchTerm)) ||
-                (p.description && p.description.toLowerCase().includes(searchTerm))
-            );
-            renderProfessionals(filtered);
+      }
+
+      // 5. RENDERING
+      function renderProfessionals(professionals) {
+        serviceListingsEl.innerHTML = "";
+        noResultsEl.style.display = "none";
+
+        if (professionals.length === 0) {
+          noResultsEl.style.display = "block";
+          return;
+        }
+
+        professionals.forEach((p) => {
+          const col = document.createElement("div");
+          col.className = "col-lg-4 col-md-6 mb-4";
+
+          // Use a default image if logoUrl is missing or empty
+          const logoUrl =
+            p.logoUrl && p.logoUrl.startsWith("http")
+              ? p.logoUrl
+              : "img/default-logo.png";
+          const city = p.city || "Available Nationally";
+          const description =
+            p.description || "Specializing in various hospitality services.";
+          const shortDescription =
+            description.substring(0, 100) +
+            (description.length > 100 ? "..." : "");
+            
+          const rating = p.rating || 4.5;
+          const reviewCount = p.reviewCount || 12;
+
+          col.innerHTML = `
+            <div class="card service-card h-100">
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex align-items-start mb-3">
+                  <img src="${logoUrl}" alt="${p.name}" class="logo-preview-sm">
+                  <div class="ms-3 flex-grow-1">
+                    <div class="d-flex justify-content-between align-items-start">
+                      <h5 class="card-title mb-1 text-brown">${p.name}</h5>
+                      <span class="verified-badge">Verified</span>
+                    </div>
+                    <div class="small text-muted mb-2">
+                      <i class="fas fa-map-marker-alt me-1"></i>${city}
+                    </div>
+                    <div class="rating-stars mb-1">
+                      ${generateStarRating(rating)}
+                      <span class="ms-1 text-muted">(${reviewCount})</span>
+                    </div>
+                  </div>
+                </div>
+                <p class="card-text small text-muted flex-grow-1">${shortDescription}</p>
+                <div class="mt-auto pt-3">
+                  <a href="service-detail.html?id=${p.id}" class="btn btn-gold w-100 d-flex align-items-center justify-content-center">
+                    <span>View Profile & Book</span>
+                    <i class="fas fa-arrow-right ms-2"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+          serviceListingsEl.appendChild(col);
         });
+      }
+      
+      // Helper function to generate star rating HTML
+      function generateStarRating(rating) {
+        let stars = '';
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+        
+        for (let i = 0; i < fullStars; i++) {
+          stars += '<i class="fas fa-star"></i>';
+        }
+        
+        if (hasHalfStar) {
+          stars += '<i class="fas fa-star-half-alt"></i>';
+        }
+        
+        const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        for (let i = 0; i < emptyStars; i++) {
+          stars += '<i class="far fa-star"></i>';
+        }
+        
+        return stars;
+      }
 
-        // Initial load
-        fetchProfessionals();
-        document.getElementById('year').textContent = new Date().getFullYear();
+      // 6. SEARCH FILTERING
+      function filterProfessionals() {
+        const searchTerm = searchBox.value.toLowerCase().trim();
+        const filtered = allProfessionals.filter((p) => {
+          // Apply category filter
+          if (currentFilter !== 'all') {
+            const categoryMatch = p.category && p.category.toLowerCase().includes(currentFilter);
+            if (!categoryMatch) return false;
+          }
+          
+          // Apply search term filter
+          const nameMatch = p.name.toLowerCase().includes(searchTerm);
+          const cityMatch = p.city && p.city.toLowerCase().includes(searchTerm);
+          const descMatch = p.description && p.description.toLowerCase().includes(searchTerm);
+          const categorySearchMatch = p.category && p.category.toLowerCase().includes(searchTerm);
+          
+          return nameMatch || cityMatch || descMatch || categorySearchMatch;
+        });
+        renderProfessionals(filtered);
+      }
+
+      // Event listeners
+      searchBox.addEventListener("input", filterProfessionals);
+      
+      filterTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          filterTabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          currentFilter = tab.dataset.filter;
+          filterProfessionals();
+        });
+      });
+
+      // Initial load
+      fetchProfessionals();
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
-</body>
+  </body>
 </html>

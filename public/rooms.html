@@ -3,118 +3,520 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Accommodation Management | HospiPro</title>
+    <title>Accommodation Management | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
-        .room-status-card{ border-radius: 8px; margin-bottom: 15px; }
-        .bg-available{ background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
-        .bg-occupied{ background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
-        .bg-cleaning{ background-color: #fff3cd; color: #856404; border: 1px solid #ffeeba; }
+        :root{ 
+            --gold: #c9a44c; 
+            --brown: #3b2f2f; 
+            --light-brown: #5a4a4a;
+            --cream: #f7f5f1;
+            --light-cream: #fefdf9;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--cream); 
+            color: var(--brown);
+        }
+        
+        .sidebar{ 
+            width: 250px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.7); 
+            padding: 12px 15px; 
+            display: block; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            margin: 0 8px 4px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: var(--light-brown); 
+            color: white; 
+            border-left: 3px solid var(--gold); 
+        }
+        
+        .main-content{ 
+            margin-left: 250px; 
+            padding: 25px; 
+            background: var(--light-cream);
+            min-height: 100vh;
+        }
+        
+        .text-gold {
+            color: var(--gold);
+        }
+        
+        .text-brown {
+            color: var(--brown);
+        }
+        
+        .bg-brown {
+            background-color: var(--brown);
+        }
+        
+        .bg-gold {
+            background-color: var(--gold);
+        }
+        
+        .card {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        
+        .room-status-card {
+            border-radius: 10px;
+            margin-bottom: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .room-status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+        }
+        
+        .bg-available { 
+            background-color: #d4edda; 
+            color: #155724; 
+            border: 1px solid #c3e6cb; 
+        }
+        
+        .bg-available::before {
+            background-color: #28a745;
+        }
+        
+        .bg-occupied { 
+            background-color: #f8d7da; 
+            color: #721c24; 
+            border: 1px solid #f5c6cb; 
+        }
+        
+        .bg-occupied::before {
+            background-color: #dc3545;
+        }
+        
+        .bg-cleaning { 
+            background-color: #fff3cd; 
+            color: #856404; 
+            border: 1px solid #ffeeba; 
+        }
+        
+        .bg-cleaning::before {
+            background-color: #ffc107;
+        }
+        
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+        
+        .stats-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+        }
+        
+        .btn-gold:hover {
+            background-color: #b8943a;
+            color: white;
+        }
+        
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .room-card {
+            border-radius: 10px;
+            padding: 20px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .room-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .room-type {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 15px;
+        }
+        
+        .room-details {
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+        
+        .room-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .action-btn {
+            font-size: 0.85rem;
+            padding: 6px 12px;
+            flex: 1;
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(201, 164, 76, 0.1);
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar a span {
+                display: none;
+            }
+            
+            .sidebar .text-center h5, .sidebar .text-center small {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar a {
+                display: inline-block;
+                width: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .room-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
     
     <div class="sidebar">
         <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
+            <h5 class="text-white">HospiTour</h5>
             <small class="text-gold">Business Operations</small>
         </div>
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="rooms.html" class="active">🛏️ Accommodation Mgmt</a>
-        <a href="restaurant.html">🍽️ Restaurant & F&B</a>
-        <a href="events.html">🗓️ Events & Planning</a>
-        <a href="settings.html">⚙️ Settings & Billing</a>
+        <a href="dashboard.html"><i class="fas fa-home me-2"></i><span>Dashboard</span></a>
+        <a href="rooms.html" class="active"><i class="fas fa-bed me-2"></i><span>Accommodation Mgmt</span></a>
+        <a href="restaurant.html"><i class="fas fa-utensils me-2"></i><span>Restaurant & F&B</span></a>
+        <a href="events.html"><i class="fas fa-calendar-alt me-2"></i><span>Events & Planning</span></a>
+        <a href="settings.html"><i class="fas fa-cog me-2"></i><span>Settings & Billing</span></a>
         <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span>Log Out</span></a>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Accommodation Management</h1>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="mb-1 text-brown">Accommodation Management</h1>
+                <p class="text-muted">Manage room status, reservations, and guest services</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#newBookingModal">
+                    <i class="fas fa-plus-circle me-2"></i>New Reservation
+                </button>
+            </div>
+        </div>
         
-        <div class="d-flex justify-content-between mb-4">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newBookingModal">New Reservation</button>
-            <button class="btn btn-outline-secondary" id="rateMgmtBtn">Rate Management (Pro+)</button>
+        <div class="row mb-5">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <p class="stats-number">24</p>
+                    <p class="stats-label">Total Rooms</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <p class="stats-number">18</p>
+                    <p class="stats-label">Occupied</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <p class="stats-number">4</p>
+                    <p class="stats-label">Available</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <p class="stats-number">2</p>
+                    <p class="stats-label">Cleaning</p>
+                </div>
+            </div>
         </div>
 
-        <h3 class="mb-3 text-brown">Room Status Overview</h3>
-        <div id="roomGrid" class="row g-3">
-            <div class="col-md-3">
-                <div class="card p-3 room-status-card bg-occupied">
-                    <h5 class="mb-1">Room 101</h5>
-                    <p class="small mb-0">Guest: John Doe</p>
-                    <span class="small fw-bold">Status: Occupied</span>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <h3 class="section-title">Room Status Overview</h3>
+                
+                <div class="room-grid">
+                    <div class="card room-card bg-occupied">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="room-number">Room 101</div>
+                                <div class="room-type">Deluxe King</div>
+                            </div>
+                            <span class="badge bg-danger status-badge">Occupied</span>
+                        </div>
+                        <div class="room-details">
+                            <p class="mb-1"><i class="fas fa-user me-2"></i>Guest: John Doe</p>
+                            <p class="mb-1"><i class="fas fa-calendar me-2"></i>Check-out: Oct 15</p>
+                            <p class="mb-0"><i class="fas fa-phone me-2"></i>Ext: 2101</p>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn btn-sm btn-outline-danger action-btn">Check Out</button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn">Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card room-card bg-cleaning">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="room-number">Room 102</div>
+                                <div class="room-type">Standard Queen</div>
+                            </div>
+                            <span class="badge bg-warning status-badge">Cleaning</span>
+                        </div>
+                        <div class="room-details">
+                            <p class="mb-1"><i class="fas fa-broom me-2"></i>Housekeeping in progress</p>
+                            <p class="mb-1"><i class="fas fa-clock me-2"></i>Started: 10:30 AM</p>
+                            <p class="mb-0"><i class="fas fa-user me-2"></i>Staff: Maria</p>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn btn-sm btn-outline-warning action-btn">Update Status</button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn">Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card room-card bg-available">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="room-number">Room 103</div>
+                                <div class="room-type">Deluxe Twin</div>
+                            </div>
+                            <span class="badge bg-success status-badge">Available</span>
+                        </div>
+                        <div class="room-details">
+                            <p class="mb-1"><i class="fas fa-check-circle me-2"></i>Ready for check-in</p>
+                            <p class="mb-1"><i class="fas fa-door-open me-2"></i>Last cleaned: Today</p>
+                            <p class="mb-0"><i class="fas fa-wifi me-2"></i>WiFi: Active</p>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn btn-sm btn-outline-success action-btn">Check In</button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn">Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card room-card bg-available">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div>
+                                <div class="room-number">Room 104</div>
+                                <div class="room-type">Executive Suite</div>
+                            </div>
+                            <span class="badge bg-success status-badge">Available</span>
+                        </div>
+                        <div class="room-details">
+                            <p class="mb-1"><i class="fas fa-check-circle me-2"></i>Ready for check-in</p>
+                            <p class="mb-1"><i class="fas fa-door-open me-2"></i>Last cleaned: Today</p>
+                            <p class="mb-0"><i class="fas fa-wifi me-2"></i>WiFi: Active</p>
+                        </div>
+                        <div class="room-actions">
+                            <button class="btn btn-sm btn-outline-success action-btn">Check In</button>
+                            <button class="btn btn-sm btn-outline-secondary action-btn">Details</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card p-3 room-status-card bg-cleaning">
-                    <h5 class="mb-1">Room 102</h5>
-                    <p class="small mb-0">Housekeeping required</p>
-                    <span class="small fw-bold">Status: Cleaning</span>
+            
+            <div class="col-lg-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h3 class="section-title mb-0">Quick Actions</h3>
+                </div>
+                
+                <div class="card p-3 mb-4">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-secondary" id="rateMgmtBtn">
+                            <i class="fas fa-chart-line me-2"></i>Rate Management (Pro+)
+                        </button>
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-calendar-plus me-2"></i>Bulk Reservations
+                        </button>
+                        <button class="btn btn-outline-info">
+                            <i class="fas fa-concierge-bell me-2"></i>Guest Services
+                        </button>
+                        <button class="btn btn-outline-warning">
+                            <i class="fas fa-broom me-2"></i>Housekeeping Schedule
+                        </button>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">Today's Check-Ins/Outs</h3>
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Room</th>
+                                        <th>Guest</th>
+                                        <th>Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="fw-bold">101</td>
+                                        <td>John Doe</td>
+                                        <td>11:00 AM</td>
+                                        <td><button class="btn btn-sm btn-info">Check Out</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">205</td>
+                                        <td>Jane Smith</td>
+                                        <td>3:00 PM</td>
+                                        <td><button class="btn btn-sm btn-success">Check In</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fw-bold">307</td>
+                                        <td>Robert Brown</td>
+                                        <td>4:30 PM</td>
+                                        <td><button class="btn btn-sm btn-success">Check In</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card p-3 room-status-card bg-available">
-                    <h5 class="mb-1">Room 103</h5>
-                    <p class="small mb-0">Ready for check-in</p>
-                    <span class="small fw-bold">Status: Available</span>
-                </div>
-            </div>
-            </div>
-
-        <hr class="my-5">
-
-        <h3 class="mb-3 text-brown">Today's Check-Ins/Outs</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Room</th>
-                    <th>Guest</th>
-                    <th>Check-In</th>
-                    <th>Check-Out</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>101</td>
-                    <td>John Doe</td>
-                    <td>2025-10-12</td>
-                    <td>2025-10-15</td>
-                    <td><button class="btn btn-sm btn-info">View Profile</button></td>
-                </tr>
-                <tr>
-                    <td>205</td>
-                    <td>Jane Smith</td>
-                    <td>2025-10-14</td>
-                    <td>2025-10-14 (Out)</td>
-                    <td><button class="btn btn-sm btn-success">Check Out</button></td>
-                </tr>
-            </tbody>
-        </table>
-
+        </div>
     </div>
     
     <div class="modal fade" id="newBookingModal" tabindex="-1" aria-labelledby="newBookingModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header bg-brown text-white">
                     <h5 class="modal-title" id="newBookingModalLabel">Create New Reservation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3"><input type="text" class="form-control" placeholder="Guest Name" required></div>
-                        <div class="mb-3"><input type="email" class="form-control" placeholder="Guest Email" required></div>
-                        <div class="mb-3"><input type="date" class="form-control" placeholder="Check-In Date" required></div>
-                        <div class="mb-3"><input type="date" class="form-control" placeholder="Check-Out Date" required></div>
-                        <div class="mb-3"><select class="form-select" required><option value="">Select Room Type</option></select></div>
-                        <button type="submit" class="btn btn-primary d-block w-100">Confirm Booking</button>
+                        <div class="mb-3">
+                            <label class="form-label">Guest Name</label>
+                            <input type="text" class="form-control" placeholder="Enter guest name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Guest Email</label>
+                            <input type="email" class="form-control" placeholder="guest@example.com" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Check-In Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Check-Out Date</label>
+                                <input type="date" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Room Type</label>
+                            <select class="form-select" required>
+                                <option value="">Select Room Type</option>
+                                <option value="standard">Standard Queen</option>
+                                <option value="deluxe">Deluxe King</option>
+                                <option value="suite">Executive Suite</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Special Requests</label>
+                            <textarea class="form-control" placeholder="Any special requirements or preferences" rows="2"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold d-block w-100">
+                            <i class="fas fa-check-circle me-2"></i>Confirm Booking
+                        </button>
                     </form>
                 </div>
             </div>
@@ -154,6 +556,24 @@
             } catch (error) {
                 console.error("Logout failed:", error);
             }
+        });
+        
+        // Add interactive elements to room cards
+        document.querySelectorAll('.action-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const card = this.closest('.room-card');
+                const roomNumber = card.querySelector('.room-number').textContent;
+                
+                if (this.textContent.includes('Check In')) {
+                    alert(`Starting check-in process for ${roomNumber}`);
+                } else if (this.textContent.includes('Check Out')) {
+                    alert(`Starting check-out process for ${roomNumber}`);
+                } else if (this.textContent.includes('Update Status')) {
+                    alert(`Updating status for ${roomNumber}`);
+                } else if (this.textContent.includes('Details')) {
+                    alert(`Showing details for ${roomNumber}`);
+                }
+            });
         });
     </script>
 </body>

@@ -3,85 +3,220 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Register as a Service Provider | HospiPro</title>
+  <title>Register as a Service Provider | HospiTour</title>
   <meta name="description" content="Register your hospitality business on HospiPro to find new customers, grow your brand, and get hired for top opportunities." />
 
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    :root {
+      --gold: #c9a44c;
+      --brown: #3b2f2f;
+      --light-brown: #4a3c3c;
+      --cream: #f7f5f1;
+      --light-cream: #fefdfb;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fffaf4;
-      color: #3e2723;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--cream);
+      color: var(--brown);
     }
 
     .navbar {
-      background-color: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      background-color: var(--brown);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
     .navbar-brand {
       font-weight: bold;
-      color: #8b5e00;
+      color: white;
     }
 
     .hero {
-      background: linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
-                  url('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
-      height: 50vh;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+      height: 40vh;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       text-align: center;
+      margin-top: 76px;
     }
 
     .hero h1 {
-      font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
+      font-weight: 700;
     }
 
     .step-title {
       font-weight: 600;
-      color: #8b5e00;
+      color: var(--brown);
       margin-bottom: 1rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .step-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
     }
 
     .category-card {
-      border: 1px solid #eee;
+      border: 1px solid #e0e0e0;
       border-radius: 12px;
-      padding: 15px;
+      padding: 20px;
       transition: all 0.3s ease;
       cursor: pointer;
+      background: var(--light-cream);
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .category-card:hover, .category-card.active {
       background-color: #fff4de;
-      border-color: #b8860b;
+      border-color: var(--gold);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .category-icon {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--brown);
     }
 
     .progress-bar {
-      background-color: #b8860b;
+      background-color: var(--gold);
+      border-radius: 10px;
+    }
+
+    .progress {
+      height: 10px;
+      border-radius: 10px;
+      background-color: #e9ecef;
     }
 
     .btn-gold {
-      background-color: #b8860b;
+      background-color: var(--gold);
       color: white;
-      border-radius: 10px;
-      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-gold:hover {
+      background-color: #b8943a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+    }
+
+    .benefit-card {
+      background: var(--light-cream);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-top: 4px solid var(--gold);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      text-align: center;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .benefit-icon {
+      font-size: 2.5rem;
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+
+    .stats-card {
+      background: var(--light-cream);
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      border-top: 4px solid var(--gold);
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+    }
+
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 5px;
     }
 
     footer {
-      background-color: #3e2723;
-      color: #fffaf4;
-      padding: 20px 0;
+      background-color: var(--brown);
+      color: var(--cream);
+      padding: 30px 0;
       text-align: center;
       margin-top: 50px;
+    }
+
+    .registration-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    .step-indicator {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #e9ecef;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 10px;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    .step.active {
+      background-color: var(--gold);
+      color: white;
+    }
+
+    .step-line {
+      flex-grow: 1;
+      height: 2px;
+      background-color: #e9ecef;
+      margin: 0 5px;
+      align-self: center;
+    }
+
+    .step-line.active {
+      background-color: var(--gold);
     }
   </style>
 </head>
@@ -92,14 +227,17 @@
   <nav class="navbar navbar-expand-lg py-3 fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">
-        <img src="img/logo1.png" alt="HospiPro logo" style="width: 40px;" class="me-2">
-        HospiPro
+        <i class="fas fa-crown me-2"></i>
+        HospiTour
       </a>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link text-white" href="login.html">Already have an account? Log In</a>
+      </div>
     </div>
   </nav>
 
   <!-- Hero -->
-  <section class="hero mt-5">
+  <section class="hero">
     <div class="container">
       <h1>Grow Your Hospitality Business with HospiPro</h1>
       <p class="lead mt-3">Join thousands of professionals showcasing their services and getting hired.</p>
@@ -107,91 +245,164 @@
   </section>
 
   <!-- Registration Steps -->
-  <section class="container py-5">
+  <section class="registration-container">
+    <div class="step-indicator">
+      <div class="step active">1</div>
+      <div class="step-line"></div>
+      <div class="step">2</div>
+      <div class="step-line"></div>
+      <div class="step">3</div>
+      <div class="step-line"></div>
+      <div class="step">4</div>
+      <div class="step-line"></div>
+      <div class="step">5</div>
+    </div>
+
     <div class="text-center mb-4">
-      <h4 class="step-title">Step 1 of 5: What Service Do You Provide?</h4>
+      <h4 class="step-title d-inline-block">What Service Do You Provide?</h4>
       <p>Select all categories that match your business.</p>
     </div>
 
     <!-- Progress Bar -->
-    <div class="progress mb-4" style="height: 10px;">
+    <div class="progress mb-5">
       <div class="progress-bar" role="progressbar" style="width: 20%;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 
     <!-- Categories -->
-    <div class="row g-3">
+    <div class="row g-4 mb-5">
       <div class="col-md-4">
-        <div class="category-card">🍽️ Catering & Event Services</div>
+        <div class="category-card">
+          <div class="category-icon">🍽️</div>
+          <h6>Catering & Event Services</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">🏨 Accommodation & Shortlets</div>
+        <div class="category-card">
+          <div class="category-icon">🏨</div>
+          <h6>Accommodation & Shortlets</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">💆‍♀️ Beauty & Spa Services</div>
+        <div class="category-card">
+          <div class="category-icon">💆‍♀️</div>
+          <h6>Beauty & Spa Services</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">🎉 Event Planning & Decorations</div>
+        <div class="category-card">
+          <div class="category-icon">🎉</div>
+          <h6>Event Planning & Decorations</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">🧹 Cleaning & Laundry Services</div>
+        <div class="category-card">
+          <div class="category-icon">🧹</div>
+          <h6>Cleaning & Laundry Services</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">🚚 Logistics & Errand Services</div>
+        <div class="category-card">
+          <div class="category-icon">🚚</div>
+          <h6>Logistics & Errand Services</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">📸 Photography & Videography</div>
+        <div class="category-card">
+          <div class="category-icon">📸</div>
+          <h6>Photography & Videography</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">🏋️ Wellness & Fitness</div>
+        <div class="category-card">
+          <div class="category-icon">🏋️</div>
+          <h6>Wellness & Fitness</h6>
+        </div>
       </div>
       <div class="col-md-4">
-        <div class="category-card">💼 Training & Consulting</div>
+        <div class="category-card">
+          <div class="category-icon">💼</div>
+          <h6>Training & Consulting</h6>
+        </div>
       </div>
     </div>
 
     <!-- Continue Button -->
     <div class="text-center mt-5">
-      <button id="continueBtn" class="btn btn-gold px-5 py-2">Continue</button>
+      <button id="continueBtn" class="btn btn-gold px-5 py-3">Continue to Business Details</button>
     </div>
 
     <!-- Why Join -->
-    <div class="mt-5 text-center">
-      <h5 class="text-gold fw-bold mb-3">Why Professionals Choose HospiPro</h5>
-      <div class="row justify-content-center">
+    <div class="mt-5">
+      <h4 class="step-title text-center mb-4">Why Professionals Choose HospiPro</h4>
+      <div class="row g-4">
         <div class="col-md-4">
-          <p><strong>1️⃣ Register for free</strong><br>Showcase your services and get seen by clients.</p>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <h5>Register for Free</h5>
+            <p class="mb-0">Showcase your services and get seen by clients without any upfront costs.</p>
+          </div>
         </div>
         <div class="col-md-4">
-          <p><strong>2️⃣ Get notified about new jobs</strong><br>We’ll alert you when new matching opportunities arise.</p>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-bell"></i>
+            </div>
+            <h5>Get Job Notifications</h5>
+            <p class="mb-0">We'll alert you when new matching opportunities arise in your area.</p>
+          </div>
         </div>
         <div class="col-md-4">
-          <p><strong>3️⃣ Get hired & keep 100%</strong><br>No commissions — everything you earn is yours.</p>
+          <div class="benefit-card">
+            <div class="benefit-icon">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h5>Keep 100% of Earnings</h5>
+            <p class="mb-0">No commissions — everything you earn is yours to keep.</p>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Stats -->
-    <div class="row text-center mt-5">
+    <div class="row g-4 mt-5">
       <div class="col-md-4">
-        <h3 class="fw-bold text-gold">₦84M+</h3>
-        <p>earned by HospiPro pros</p>
+        <div class="stats-card">
+          <div class="stats-number">₦84M+</div>
+          <p>earned by HospiPro professionals</p>
+        </div>
       </div>
       <div class="col-md-4">
-        <h3 class="fw-bold text-gold">2,200+</h3>
-        <p>customer requests in the past week</p>
+        <div class="stats-card">
+          <div class="stats-number">2,200+</div>
+          <p>customer requests in the past week</p>
+        </div>
       </div>
       <div class="col-md-4">
-        <h3 class="fw-bold text-gold">7,000+</h3>
-        <p>registered professionals</p>
+        <div class="stats-card">
+          <div class="stats-number">7,000+</div>
+          <p>registered professionals</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 HospiPro. All rights reserved.</p>
+    <div class="container">
+      <p>&copy; 2025 HospiTour. All rights reserved.</p>
+      <div class="mt-3">
+        <a href="#" class="text-gold me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-gold me-3"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-gold me-3"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-gold"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
   <script>
     // Highlight selected categories
     document.querySelectorAll('.category-card').forEach(card => {
@@ -200,14 +411,168 @@
       });
     });
 
-    // Continue button (redirect to step 2 later)
+    // Continue button functionality - FIXED
     document.getElementById('continueBtn').addEventListener('click', () => {
-      alert('Next: Fill in your business details (Step 2)');
-      // You can redirect to another step page e.g.:
-      // window.location.href = 'registration-step2.html';
+      const selectedCategories = document.querySelectorAll('.category-card.active');
+      if (selectedCategories.length === 0) {
+        alert('Please select at least one service category to continue.');
+        return;
+      }
+      
+      // Get selected categories
+      const categories = Array.from(selectedCategories).map(card => card.querySelector('h6').textContent);
+      
+      // Save selected categories to localStorage
+      localStorage.setItem('hospitour_selected_categories', JSON.stringify(categories));
+      
+      // Show loading state
+      const btn = document.getElementById('continueBtn');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+      btn.disabled = true;
+      
+      // Simulate processing and redirect to next step
+      setTimeout(() => {
+        // Create and redirect to the business details page
+        redirectToBusinessDetails();
+      }, 1000);
+    });
+
+    // Function to redirect to business details page
+    function redirectToBusinessDetails() {
+      // Check if we're already on a local file system
+      if (window.location.protocol === 'file:') {
+        // For local file system, create the next step dynamically
+        createBusinessDetailsStep();
+      } else {
+        // For web server, redirect to the next page
+        window.location.href = 'registration-step2.html';
+      }
+    }
+
+    // Function to create business details step dynamically
+    function createBusinessDetailsStep() {
+      // Hide current content
+      document.querySelector('.registration-container').style.display = 'none';
+      document.querySelector('.hero').style.display = 'none';
+      
+      // Create business details form
+      const businessDetailsHTML = `
+        <div class="registration-container">
+          <div class="step-indicator">
+            <div class="step completed">1</div>
+            <div class="step-line active"></div>
+            <div class="step active">2</div>
+            <div class="step-line"></div>
+            <div class="step">3</div>
+            <div class="step-line"></div>
+            <div class="step">4</div>
+            <div class="step-line"></div>
+            <div class="step">5</div>
+          </div>
+
+          <div class="text-center mb-4">
+            <h4 class="step-title d-inline-block">Business Details</h4>
+            <p>Step 2: Tell us more about your business</p>
+          </div>
+
+          <!-- Progress Bar -->
+          <div class="progress mb-5">
+            <div class="progress-bar" role="progressbar" style="width: 40%;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="card p-4">
+                <form id="businessDetailsForm">
+                  <div class="mb-4">
+                    <label for="businessName" class="form-label">Business Name *</label>
+                    <input type="text" class="form-control" id="businessName" placeholder="Enter your business name" required>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="businessType" class="form-label">Business Type *</label>
+                    <select class="form-select" id="businessType" required>
+                      <option value="" selected disabled>Select business type</option>
+                      <option value="sole-proprietor">Sole Proprietor</option>
+                      <option value="partnership">Partnership</option>
+                      <option value="llc">Limited Liability Company (LLC)</option>
+                      <option value="corporation">Corporation</option>
+                    </select>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="contactName" class="form-label">Contact Person Name *</label>
+                    <input type="text" class="form-control" id="contactName" placeholder="Full name of primary contact" required>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="phoneNumber" class="form-label">Phone Number *</label>
+                    <input type="tel" class="form-control" id="phoneNumber" placeholder="+1 (555) 123-4567" required>
+                  </div>
+                  
+                  <div class="mb-4">
+                    <label for="businessDescription" class="form-label">Business Description *</label>
+                    <textarea class="form-control" id="businessDescription" rows="4" placeholder="Describe your business, services, and what makes you unique..." required></textarea>
+                  </div>
+                  
+                  <div class="d-flex justify-content-between mt-4">
+                    <button type="button" id="backToServices" class="btn btn-outline-gold">
+                      <i class="fas fa-arrow-left me-2"></i> Back to Services
+                    </button>
+                    <button type="submit" class="btn btn-gold">
+                      Continue to Location <i class="fas fa-arrow-right ms-2"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      // Add the business details form to the page
+      const mainSection = document.querySelector('section');
+      const businessDetailsDiv = document.createElement('div');
+      businessDetailsDiv.innerHTML = businessDetailsHTML;
+      document.body.insertBefore(businessDetailsDiv, document.querySelector('footer'));
+      
+      // Add event listener for the back button
+      document.getElementById('backToServices').addEventListener('click', function() {
+        businessDetailsDiv.remove();
+        document.querySelector('.registration-container').style.display = 'block';
+        document.querySelector('.hero').style.display = 'flex';
+        
+        // Reset continue button
+        const continueBtn = document.getElementById('continueBtn');
+        continueBtn.innerHTML = 'Continue to Business Details';
+        continueBtn.disabled = false;
+      });
+      
+      // Add event listener for business details form submission
+      document.getElementById('businessDetailsForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Business details saved! Next step: Location Details');
+        // In a complete application, this would proceed to the next step
+      });
+    }
+
+    // Add animation to stats cards on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      const statsCards = document.querySelectorAll('.stats-card');
+      statsCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          card.style.transition = 'all 0.5s ease';
+          
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 100);
+        }, index * 200);
+      });
     });
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

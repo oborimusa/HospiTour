@@ -3,131 +3,498 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Showcase – HospiPro</title>
-  <meta name="description" content="Explore verified hospitality businesses on Hospiple — hotels, restaurants, event planners, and service providers across Africa." />
+  <title>Showcase – HospiTour</title>
+  <meta name="description" content="Explore verified hospitality businesses on HospiTour — hotels, restaurants, event planners, and service providers across Africa." />
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <!-- Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/style.css">
   <style>
+    :root {
+      --gold: #c9a44c;
+      --brown: #3b2f2f;
+      --light-brown: #5a4a4a;
+      --cream: #f7f5f1;
+      --light-cream: #fefdf9;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #faf6f0;
-      color: #3b2f2f;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background-color: var(--cream);
+      color: var(--brown);
     }
 
     /* Navbar */
-    /* .navbar {
+    .navbar {
       background-color: white;
-    } */
-     .navbar-brand span {
-      font-size: 22px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
-    /* .navbar-nav .nav-link {
-      color: rgb(100, 100, 100) !important;
+    
+    .navbar-brand span {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+    
+    .navbar-nav .nav-link {
+      color: var(--light-brown) !important;
       font-weight: 500;
       margin-right: 1rem;
-    } */
-    .navbar-nav .nav-link:hover {
-      color: #d4af37 !important;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: var(--gold) !important;
     }
 
     /* Hero */
     .hero {
-      background: linear-gradient(rgba(59, 47, 47, 0.7), rgba(59, 47, 47, 0.7)), url('img/hotel-lobby.jpg') center/cover;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
       color: white;
       text-align: center;
-      padding: 100px 20px;
-      border-bottom: 5px solid #d4af37;
+      padding: 120px 20px 80px;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: rgba(201, 164, 76, 0.1);
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+    }
+    
     .hero h1 {
       font-weight: 700;
-      color: #f1e3b1;
+      color: white;
+      margin-bottom: 20px;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
 
     /* Search Bar */
     .search-container {
-      margin-top: -30px;
+      margin-top: -40px;
       z-index: 10;
       position: relative;
     }
+    
     .search-bar {
-      border-radius: 30px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      border: 1px solid #d4af37;
+      border-radius: 50px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 2px solid var(--gold);
+      padding: 15px 25px;
+      font-size: 1.1rem;
+    }
+    
+    .search-bar:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+    }
+    
+    .btn-gold {
+      background-color: var(--gold);
+      color: var(--brown);
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 12px 30px;
+      border: none;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gold:hover {
+      background-color: #b8943a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(201, 164, 76, 0.3);
+      color: white;
     }
 
-    /* Showcase Grid */
+    /* Showcase Section */
     .showcase-section {
-      padding: 60px 0;
+      padding: 80px 0;
     }
+    
+    .section-title {
+      position: relative;
+      padding-bottom: 15px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* Cards */
     .card {
       border: none;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
       transition: all 0.3s ease;
       background-color: #fff;
+      overflow: hidden;
+      height: 100%;
     }
+    
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
-    .card img {
-      border-top-left-radius: 15px;
-      border-top-right-radius: 15px;
+    
+    .card-img-top {
       height: 200px;
       object-fit: cover;
+      border-bottom: 3px solid var(--gold);
     }
-    .btn-gold {
-      background-color: #d4af37;
-      color: #3b2f2f;
-      font-weight: 600;
+    
+    .card-body {
+      padding: 25px;
+    }
+    
+    .card-title {
+      font-weight: 700;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+    
+    .card-text {
+      color: var(--light-brown);
+      margin-bottom: 15px;
+    }
+    
+    .business-meta {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    
+    .business-meta i {
+      color: var(--gold);
+      margin-right: 8px;
+    }
+    
+    .rating {
+      color: var(--gold);
+      margin-bottom: 15px;
+    }
+    
+    .btn-outline-gold {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
       border-radius: 25px;
+      padding: 8px 20px;
+      font-weight: 500;
+      transition: all 0.3s ease;
     }
-    .btn-gold:hover {
-      background-color: #b9972f;
+    
+    .btn-outline-gold:hover {
+      background: var(--gold);
       color: white;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+      color: white;
+      padding: 60px 0;
+      text-align: center;
+    }
+    
+    .stats-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .stats-label {
+      font-size: 1rem;
+      opacity: 0.9;
     }
 
     /* Footer */
     footer {
-      background-color: #3b2f2f;
+      background-color: var(--brown);
       color: white;
       text-align: center;
-      padding: 25px 0;
-      margin-top: 60px;
+      padding: 40px 0;
+    }
+    
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+    
+    /* Filter Tabs */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+      padding: 10px 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .filter-tab:hover, .filter-tab.active {
+      background: var(--gold);
+      color: var(--brown);
+      border-color: var(--gold);
+    }
+    
+    /* Logo Placeholder */
+    .logo-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+    
+    /* Loading State */
+    .loading-spinner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    .spinner-gold {
+      color: var(--gold);
+      width: 3rem;
+      height: 3rem;
+    }
+    
+    /* Error and Demo States */
+    .demo-notice {
+      background: #e7f3ff;
+      border: 1px solid #b3d9ff;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    .firebase-help {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    /* Advanced Filters */
+    .advanced-filters {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    
+    .filter-group {
+      margin-bottom: 20px;
+    }
+    
+    .filter-group label {
+      font-weight: 600;
+      color: var(--brown);
+      margin-bottom: 8px;
+      display: block;
+    }
+    
+    .price-range {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .price-input {
+      flex: 1;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+    
+    /* Pagination */
+    .pagination {
+      justify-content: center;
+      margin-top: 40px;
+    }
+    
+    .page-link {
+      color: var(--brown);
+      border: 1px solid #ddd;
+      padding: 10px 18px;
+    }
+    
+    .page-link:hover {
+      background: var(--gold);
+      color: white;
+      border-color: var(--gold);
+    }
+    
+    .page-item.active .page-link {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: white;
+    }
+
+    /* Sort Dropdown */
+    .sort-dropdown {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+    
+    .sort-select {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 8px 15px;
+      background: white;
+      color: var(--brown);
+    }
+
+    /* Business Badges */
+    .business-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: var(--gold);
+      color: var(--brown);
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 2;
+    }
+    
+    .verified-badge {
+      background: #28a745;
+      color: white;
+    }
+    
+    .featured-badge {
+      background: #dc3545;
+      color: white;
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .action-btn {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: white;
+      color: var(--brown);
+      transition: all 0.3s ease;
+      font-size: 0.8rem;
+    }
+    
+    .action-btn:hover {
+      background: var(--gold);
+      color: white;
+      border-color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 100px 20px 60px;
+      }
+      
+      .search-container {
+        margin-top: -30px;
+      }
+      
+      .filter-tabs {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 10px;
+      }
+      
+      .sort-dropdown {
+        justify-content: flex-start;
+      }
+      
+      .quick-actions {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
- <nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg py-3 fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="img/logo1.png" alt="Hospiple logo" style="width: 40px; margin-right: 8px;">
-        <span class="fw-bold">HospiPro</span>
+        <img src="img/logo1.png" alt="HospiTour logo" style="width: 40px; margin-right: 10px;">
+        <span>HospiTour</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <i class="bi bi-list text-dark fs-2"></i>
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <i class="fas fa-bars text-dark fs-2"></i>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav text-left">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
+          <li class="nav-item"><a class="nav-link active" href="showcase.html">Showcase</a></li>
           <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link active text-warning" href="hire.html">Service Providers</a></li>
+          <li class="nav-item"><a class="nav-link" href="hire.html">Service Providers</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="login.html"><i class="fas fa-user-circle me-1"></i> Login</a></li>
         </ul>
       </div>
     </div>
@@ -135,84 +502,432 @@
 
   <!-- Hero -->
   <section class="hero">
-    <h1 class="mb-3">Showcase Your Hospitality Business</h1>
-    <p class="lead">Join HospiPro to promote your hotel, restaurant, or event service to clients across Africa.</p>
-    <a href="signup.html" class="btn btn-gold mt-3 px-4 py-2">Create Your Profile</a>
+    <div class="container">
+      <h1 class="mb-3">Showcase Your Hospitality Business</h1>
+      <p class="lead">Join HospiTour to promote your hotel, restaurant, or event service to clients across Africa.</p>
+      <a href="signup.html" class="btn btn-gold mt-3 px-4 py-3">
+        <i class="fas fa-plus-circle me-2"></i>Create Your Profile
+      </a>
+    </div>
   </section>
 
   <!-- Search Bar -->
-  <div class="search-container container mt-4">
+  <div class="search-container container">
     <div class="input-group">
-      <input type="text" id="searchInput" class="form-control search-bar" placeholder="Search by name, service, or city...">
-      <button class="btn btn-gold" id="searchBtn"><i class="bi bi-search"></i></button>
+      <span class="input-group-text bg-white border-0 ps-4">
+        <i class="fas fa-search text-gold"></i>
+      </span>
+      <input type="text" id="searchInput" class="form-control search-bar border-0" placeholder="Search by name, service, or city...">
+      <button class="btn btn-gold px-4" id="searchBtn">Search</button>
     </div>
   </div>
 
+  <!-- Stats Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">500+</div>
+          <div class="stats-label">Businesses</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">50+</div>
+          <div class="stats-label">Cities</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">4.8</div>
+          <div class="stats-label">Avg Rating</div>
+        </div>
+        <div class="col-md-3 col-6 mb-4">
+          <div class="stats-number">10K+</div>
+          <div class="stats-label">Monthly Visitors</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Showcase Section -->
   <section class="showcase-section container">
-    <div class="text-center mb-5">
-      <h2 class="fw-bold">Featured Hospitality Businesses</h2>
-      <p class="text-muted">Discover verified professionals and trusted brands across Africa.</p>
+    <h2 class="section-title fw-bold">Featured Hospitality Businesses</h2>
+    <p class="text-center text-muted mb-5">Discover verified professionals and trusted brands across Africa.</p>
+
+    <!-- Firebase Help Section -->
+    <div id="firebaseHelp" class="firebase-help d-none">
+      <div class="d-flex align-items-start">
+        <i class="fas fa-database text-warning me-3 mt-1 fa-lg"></i>
+        <div>
+          <h5 class="text-brown mb-2">Firebase Setup Required</h5>
+          <p class="mb-2">To display real business data, you need to configure Firebase Firestore permissions.</p>
+          <div class="mb-3">
+            <strong>Quick Fix:</strong> Go to Firebase Console → Firestore Database → Rules and update to:
+            <pre class="bg-light p-2 mt-2 small">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true; // For development only
+    }
+  }
+}</pre>
+          </div>
+          <p class="mb-0 small text-muted">For production, implement proper authentication rules.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Demo Notice -->
+    <div id="demoNotice" class="demo-notice d-none">
+      <i class="fas fa-info-circle text-primary me-2"></i>
+      <strong>Demo Mode:</strong> Showing sample businesses. Connect to Firebase to see real data.
+    </div>
+
+    <!-- Advanced Filters -->
+    <div class="advanced-filters">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label>Sort By</label>
+            <select class="sort-select w-100" id="sortSelect">
+              <option value="name">Name (A-Z)</option>
+              <option value="rating">Highest Rated</option>
+              <option value="reviews">Most Reviews</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label>Price Range</label>
+            <div class="price-range">
+              <input type="number" class="price-input" placeholder="Min" id="minPrice">
+              <span>-</span>
+              <input type="number" class="price-input" placeholder="Max" id="maxPrice">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label>Minimum Rating</label>
+            <select class="sort-select w-100" id="minRating">
+              <option value="0">Any Rating</option>
+              <option value="4">4+ Stars</option>
+              <option value="4.5">4.5+ Stars</option>
+              <option value="5">5 Stars Only</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label>Location</label>
+            <input type="text" class="form-control" id="locationFilter" placeholder="City or Country">
+          </div>
+        </div>
+      </div>
+      <div class="text-end mt-3">
+        <button class="btn btn-outline-secondary me-2" id="resetFilters">Reset Filters</button>
+        <button class="btn btn-gold" id="applyFilters">Apply Filters</button>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <div class="filter-tab active" data-filter="all">All Businesses</div>
+      <div class="filter-tab" data-filter="hotel">Hotels</div>
+      <div class="filter-tab" data-filter="restaurant">Restaurants</div>
+      <div class="filter-tab" data-filter="event">Event Planners</div>
+      <div class="filter-tab" data-filter="catering">Catering</div>
+      <div class="filter-tab" data-filter="venue">Venues</div>
+    </div>
+
+    <!-- Business Count -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <div id="businessCount" class="text-muted">Loading businesses...</div>
+      <div class="sort-dropdown">
+        <select class="sort-select" id="resultsSort">
+          <option value="name">Sort by Name</option>
+          <option value="rating">Sort by Rating</option>
+          <option value="reviews">Sort by Reviews</option>
+        </select>
+      </div>
     </div>
 
     <div class="row g-4" id="businessList">
       <!-- Dynamic business cards appear here -->
+      <div class="col-12">
+        <div class="loading-spinner">
+          <div class="spinner-border spinner-gold" role="status">
+            <span class="visually-hidden">Loading businesses...</span>
+          </div>
+        </div>
+      </div>
     </div>
 
+    <!-- Pagination -->
+    <nav aria-label="Business pagination">
+      <ul class="pagination" id="pagination">
+        <!-- Pagination will be generated here -->
+      </ul>
+    </nav>
+
     <div class="text-center mt-5">
-      <a href="signup.html" class="btn btn-gold px-4 py-2">List Your Business</a>
+      <a href="signup.html" class="btn btn-gold px-4 py-3 me-3">
+        <i class="fas fa-star me-2"></i>List Your Business
+      </a>
+      <a href="contact.html" class="btn btn-outline-gold px-4 py-3">
+        <i class="fas fa-question-circle me-2"></i>Need Help?
+      </a>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p class="mb-0">&copy; 2025 HospiPro. All rights reserved.</p>
+    <div class="container">
+      <p class="mb-3">&copy; 2025 HospiTour. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Help Center</a>
+      </div>
+    </div>
   </footer>
 
-  <!-- Firebase -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Enhanced Firebase with Advanced Features -->
   <script type="module">
     // Import Firebase SDKs
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-    // ✅ Your Firebase Config (replace with your Hospiple Firebase project)
+    // Firebase Config
     const firebaseConfig = {
-        apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok",
-        authDomain: "hospipro-86b8d.firebaseapp.com",
-        projectId: "hospipro-86b8d",
-        storageBucket: "hospipro-86b8d.firebasestorage.app",
-        messagingSenderId: "801856698977",
-        appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        measurementId: "G-440NC734BY",
-      };
+      apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+      authDomain: "hospitour-6a1da.firebaseapp.com",
+      projectId: "hospitour-6a1da",
+      storageBucket: "hospitour-6a1da.firebasestorage.app",
+      messagingSenderId: "73315471607",
+      appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+      measurementId: "G-V82ZQPV48F"
+    };
 
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
+    // Enhanced sample data with more details
+    const sampleBusinesses = [
+      {
+        id: 1,
+        name: "Grand Plaza Hotel",
+        serviceType: "Hotel",
+        city: "Lagos, Nigeria",
+        description: "Luxury 5-star hotel with premium amenities and exceptional service in the heart of Lagos.",
+        rating: 4.8,
+        reviewCount: 124,
+        priceRange: "$$$",
+        verified: true,
+        featured: true,
+        email: "info@grandplaza.com",
+        phone: "+234 800 123 4567"
+      },
+      {
+        id: 2,
+        name: "Savannah Restaurant",
+        serviceType: "Restaurant",
+        city: "Accra, Ghana",
+        description: "Fine dining experience with authentic African cuisine and international dishes.",
+        rating: 4.6,
+        reviewCount: 89,
+        priceRange: "$$",
+        verified: true,
+        featured: false,
+        email: "contact@savannah.com",
+        phone: "+233 123 456 789"
+      },
+      {
+        id: 3,
+        name: "Royal Events Planning",
+        serviceType: "Event Planners",
+        city: "Nairobi, Kenya",
+        description: "Professional event planning services for weddings, corporate events, and special occasions.",
+        rating: 4.9,
+        reviewCount: 67,
+        priceRange: "$$$",
+        verified: true,
+        featured: true,
+        email: "events@royal.com",
+        phone: "+254 712 345 678"
+      },
+      {
+        id: 4,
+        name: "Elite Catering Services",
+        serviceType: "Catering",
+        city: "Cairo, Egypt",
+        description: "Premium catering services for all types of events with customizable menus.",
+        rating: 4.7,
+        reviewCount: 156,
+        priceRange: "$$",
+        verified: true,
+        featured: false,
+        email: "catering@elite.com",
+        phone: "+20 100 123 4567"
+      },
+      {
+        id: 5,
+        name: "Ocean View Venue",
+        serviceType: "Venue",
+        city: "Cape Town, South Africa",
+        description: "Stunning oceanfront venue perfect for weddings, conferences, and special events.",
+        rating: 4.8,
+        reviewCount: 203,
+        priceRange: "$$$$",
+        verified: true,
+        featured: true,
+        email: "venue@oceanview.com",
+        phone: "+27 21 123 4567"
+      },
+      {
+        id: 6,
+        name: "City Center Hotel",
+        serviceType: "Hotel",
+        city: "Abuja, Nigeria",
+        description: "Modern hotel with state-of-the-art facilities and convenient city center location.",
+        rating: 4.5,
+        reviewCount: 98,
+        priceRange: "$$",
+        verified: false,
+        featured: false,
+        email: "stay@citycenter.com",
+        phone: "+234 900 987 6543"
+      }
+    ];
 
-    const db = getFirestore(app);
+    let usingDemoData = false;
+    let allBusinesses = [];
+    let currentPage = 1;
+    const businessesPerPage = 6;
 
-    // Load Business Data
-    async function loadBusinesses() {
+    // Initialize Firebase and Load Business Data
+    async function initializeAppAndLoadData() {
       const businessList = document.getElementById('businessList');
-      businessList.innerHTML = '<p class="text-center">Loading businesses...</p>';
+      const firebaseHelp = document.getElementById('firebaseHelp');
+      const demoNotice = document.getElementById('demoNotice');
+      
+      try {
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-      const q = query(collection(db, "businesses"), orderBy("name"));
-      const querySnapshot = await getDocs(q);
+        // Try to load from Firebase
+        const q = query(collection(db, "businesses"), orderBy("name"));
+        const querySnapshot = await getDocs(q);
+        
+        // Hide Firebase help if successful
+        firebaseHelp.classList.add('d-none');
+        
+        if (querySnapshot.empty) {
+          // No data in Firebase, use sample data
+          usingDemoData = true;
+          demoNotice.classList.remove('d-none');
+          allBusinesses = sampleBusinesses;
+        } else {
+          // Successfully loaded from Firebase
+          usingDemoData = false;
+          demoNotice.classList.add('d-none');
+          allBusinesses = [];
+          querySnapshot.forEach((doc) => {
+            allBusinesses.push({ id: doc.id, ...doc.data() });
+          });
+        }
+        
+        renderBusinesses();
+        setupPagination();
+        
+      } catch (error) {
+        console.error("Firebase Error:", error);
+        
+        // Show Firebase help and use demo data
+        firebaseHelp.classList.remove('d-none');
+        demoNotice.classList.remove('d-none');
+        usingDemoData = true;
+        allBusinesses = sampleBusinesses;
+        renderBusinesses();
+        setupPagination();
+      }
+    }
+
+    // Render businesses to the page with pagination
+    function renderBusinesses() {
+      const businessList = document.getElementById('businessList');
+      const businessCount = document.getElementById('businessCount');
+      
+      // Get current page businesses
+      const startIndex = (currentPage - 1) * businessesPerPage;
+      const endIndex = startIndex + businessesPerPage;
+      const currentBusinesses = allBusinesses.slice(startIndex, endIndex);
+      
       businessList.innerHTML = '';
+      businessCount.textContent = `Showing ${startIndex + 1}-${Math.min(endIndex, allBusinesses.length)} of ${allBusinesses.length} businesses`;
 
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
+      if (currentBusinesses.length === 0) {
+        businessList.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <i class="fas fa-building fa-3x text-muted mb-3"></i>
+            <h4 class="text-brown">No Businesses Found</h4>
+            <p class="text-muted">Try adjusting your search criteria or filters.</p>
+            <button class="btn btn-gold mt-2" onclick="resetAllFilters()">Reset Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      currentBusinesses.forEach((business) => {
+        const rating = business.rating || 4.5;
+        const reviewCount = business.reviewCount || 12;
+        const priceRange = business.priceRange || '$$';
+        
         const card = `
-          <div class="col-md-4">
+          <div class="col-lg-4 col-md-6" data-category="${business.serviceType?.toLowerCase() || 'all'}">
             <div class="card h-100">
-              <img src="${data.logo || 'img/default-logo.jpg'}" alt="${data.name}">
-              <div class="card-body">
-                <h5 class="card-title">${data.name}</h5>
-                <p class="card-text mb-1"><strong>Service:</strong> ${data.serviceType}</p>
-                <p class="card-text"><i class="bi bi-geo-alt"></i> ${data.city}</p>
-                <p class="text-muted small">${data.description || ''}</p>
-                <a href="#" class="btn btn-gold btn-sm">View Profile</a>
+              ${business.featured ? '<span class="business-badge featured-badge">Featured</span>' : ''}
+              ${business.verified ? '<span class="business-badge verified-badge">Verified</span>' : ''}
+              
+              ${business.logo ? 
+                `<img src="${business.logo}" class="card-img-top" alt="${business.name}">` : 
+                `<div class="logo-placeholder">
+                  <i class="fas fa-building"></i>
+                </div>`
+              }
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">${business.name}</h5>
+                <div class="business-meta">
+                  <i class="fas fa-tag"></i>
+                  <span>${business.serviceType || 'Hospitality Service'} • ${priceRange}</span>
+                </div>
+                <div class="business-meta">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>${business.city || 'Location not specified'}</span>
+                </div>
+                <div class="rating mb-3">
+                  ${generateStarRating(rating)}
+                  <span class="ms-1 text-muted">(${reviewCount} reviews)</span>
+                </div>
+                <p class="card-text flex-grow-1">${business.description || 'A premium hospitality service provider committed to excellence.'}</p>
+                
+                <div class="quick-actions">
+                  <button class="action-btn" onclick="contactBusiness('${business.email}')">
+                    <i class="fas fa-envelope me-1"></i>Email
+                  </button>
+                  <button class="action-btn" onclick="callBusiness('${business.phone}')">
+                    <i class="fas fa-phone me-1"></i>Call
+                  </button>
+                  <button class="action-btn" onclick="saveBusiness(${business.id})">
+                    <i class="fas fa-bookmark me-1"></i>Save
+                  </button>
+                </div>
+                
+                <div class="mt-auto pt-3">
+                  <a href="business-detail.html?id=${business.id}" class="btn btn-outline-gold w-100">
+                    <i class="fas fa-eye me-2"></i>View Profile
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -221,23 +936,162 @@
       });
     }
 
+    // Setup pagination
+    function setupPagination() {
+      const pagination = document.getElementById('pagination');
+      const pageCount = Math.ceil(allBusinesses.length / businessesPerPage);
+      
+      pagination.innerHTML = '';
+      
+      if (pageCount <= 1) return;
+      
+      // Previous button
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      prevLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage - 1})">Previous</a>`;
+      pagination.appendChild(prevLi);
+      
+      // Page numbers
+      for (let i = 1; i <= pageCount; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${currentPage === i ? 'active' : ''}`;
+        li.innerHTML = `<a class="page-link" href="#" onclick="changePage(${i})">${i}</a>`;
+        pagination.appendChild(li);
+      }
+      
+      // Next button
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === pageCount ? 'disabled' : ''}`;
+      nextLi.innerHTML = `<a class="page-link" href="#" onclick="changePage(${currentPage + 1})">Next</a>`;
+      pagination.appendChild(nextLi);
+    }
+
+    // Change page function
+    window.changePage = function(page) {
+      currentPage = page;
+      renderBusinesses();
+      setupPagination();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Helper function to generate star rating
+    function generateStarRating(rating) {
+      let stars = '';
+      const fullStars = Math.floor(rating);
+      const hasHalfStar = rating % 1 >= 0.5;
+      
+      for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+      }
+      
+      if (hasHalfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+      }
+      
+      return stars;
+    }
+
+    // Action functions
+    window.contactBusiness = function(email) {
+      if (email && email !== 'undefined') {
+        window.location.href = `mailto:${email}`;
+      } else {
+        alert('Email not available for this business.');
+      }
+    };
+
+    window.callBusiness = function(phone) {
+      if (phone && phone !== 'undefined') {
+        window.location.href = `tel:${phone}`;
+      } else {
+        alert('Phone number not available for this business.');
+      }
+    };
+
+    window.saveBusiness = function(businessId) {
+      // In a real app, this would save to user's favorites
+      alert(`Business ${businessId} saved to your favorites!`);
+    };
+
+    window.resetAllFilters = function() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('minPrice').value = '';
+      document.getElementById('maxPrice').value = '';
+      document.getElementById('minRating').value = '0';
+      document.getElementById('locationFilter').value = '';
+      document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+      document.querySelector('.filter-tab[data-filter="all"]').classList.add('active');
+      currentPage = 1;
+      renderBusinesses();
+      setupPagination();
+    };
+
     // Search functionality
     document.getElementById('searchBtn').addEventListener('click', filterBusinesses);
     document.getElementById('searchInput').addEventListener('keyup', filterBusinesses);
 
     function filterBusinesses() {
       const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-      const cards = document.querySelectorAll('#businessList .card');
+      const activeFilter = document.querySelector('.filter-tab.active').dataset.filter;
+      const cards = document.querySelectorAll('#businessList .col-lg-4');
+      
       cards.forEach(card => {
         const text = card.textContent.toLowerCase();
-        card.parentElement.style.display = text.includes(searchTerm) ? '' : 'none';
+        const category = card.dataset.category;
+        
+        const matchesSearch = text.includes(searchTerm);
+        const matchesFilter = activeFilter === 'all' || category.includes(activeFilter);
+        
+        card.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
       });
     }
 
-    loadBusinesses();
-  </script>
+    // Filter tabs functionality
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+        currentPage = 1;
+        renderBusinesses();
+        setupPagination();
+      });
+    });
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    // Apply advanced filters
+    document.getElementById('applyFilters').addEventListener('click', function() {
+      // In a real app, this would apply the advanced filters
+      alert('Advanced filters applied! (This would filter the business list in a real implementation)');
+    });
+
+    document.getElementById('resetFilters').addEventListener('click', resetAllFilters);
+
+    // Sort functionality
+    document.getElementById('resultsSort').addEventListener('change', function() {
+      const sortBy = this.value;
+      
+      switch(sortBy) {
+        case 'rating':
+          allBusinesses.sort((a, b) => (b.rating || 0) - (a.rating || 0));
+          break;
+        case 'reviews':
+          allBusinesses.sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+          break;
+        default:
+          allBusinesses.sort((a, b) => a.name.localeCompare(b.name));
+      }
+      
+      currentPage = 1;
+      renderBusinesses();
+      setupPagination();
+    });
+
+    // Initial load
+    initializeAppAndLoadData();
+  </script>
 </body>
 </html>

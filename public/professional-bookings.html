@@ -3,66 +3,544 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Booking Management | HospiPro</title>
+    <title>Client Management | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
-        .booking-card-pending{ border-left: 5px solid #ffc107; }
-        .booking-card-confirmed{ border-left: 5px solid #198754; }
+        :root{ 
+            --gold: #c9a44c; 
+            --brown: #3b2f2f; 
+            --light-brown: #4a3c3c;
+            --cream: #f7f5f1;
+            --light-cream: #fefdfb;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--cream);
+            color: var(--brown);
+        }
+        
+        .sidebar{ 
+            width: 250px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.7); 
+            padding: 12px 15px; 
+            display: block; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 0 30px 30px 0;
+            margin-right: 10px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: var(--light-brown); 
+            color: white; 
+            border-left: 3px solid var(--gold);
+            transform: translateX(5px);
+        }
+        
+        .main-content{ 
+            margin-left: 250px; 
+            padding: 30px;
+            min-height: 100vh;
+        }
+        
+        .text-gold{ color: var(--gold); }
+        .text-brown { color: var(--brown); }
+        .bg-gold { background-color: var(--gold); }
+        .bg-brown { background-color: var(--brown); }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background-color: #b8943a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+        }
+        
+        .btn-outline-gold {
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-gold:hover {
+            background-color: var(--gold);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .client-card {
+            background: var(--light-cream);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .client-rating {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+        
+        .client-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background-color: rgba(25, 135, 84, 0.1);
+            color: #0f5132;
+        }
+        
+        .status-inactive {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: #495057;
+        }
+        
+        .status-vip {
+            background-color: rgba(201, 164, 76, 0.1);
+            color: #8a6d3b;
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .stats-card {
+            background: var(--light-cream);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--gold);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            background-color: var(--gold);
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar .text-center h5, .sidebar .text-center small, .sidebar a span {
+                display: none;
+            }
+            
+            .sidebar a {
+                text-align: center;
+                padding: 15px 5px;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar .d-flex {
+                justify-content: space-between;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
     
     <div class="sidebar">
         <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
+            <h5 class="text-white">HospiTour</h5>
             <small class="text-gold">Service Professional</small>
         </div>
-        <a href="professional-dashboard.html">🏠 Dashboard</a>
-        <a href="professional-profile.html">👤 Profile & Portfolio</a>
-        <a href="professional-bookings.html" class="active">🗓️ Booking Management</a>
-        <a href="professional-clients.html">👥 Client Management</a>
-        <a href="professional-billing.html">💵 Billing & Payments</a>
-        <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> Dashboard</a>
+        <a href="professional-profile.html"><i class="fas fa-user me-2"></i> Profile & Portfolio</a>
+        <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> Booking Management</a>
+        <a href="professional-clients.html" class="active"><i class="fas fa-users me-2"></i> Client Management</a>
+        <a href="professional-billing.html"><i class="fas fa-money-bill-wave me-2"></i> Billing & Payments</a>
+        <hr class="text-white-50 my-4">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Log Out</a>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Booking Management</h1>
-
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#availabilityModal">Manage Availability</button>
-            <button class="btn btn-outline-danger" id="formCustomBtn">Form Customization (Pro+)</button>
+            <h1 class="text-brown mb-0">Client Management</h1>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <small class="text-muted">Current Plan</small>
+                    <div class="badge bg-light text-brown">Free</div>
+                </div>
+                <button class="btn btn-gold btn-sm">
+                    <i class="fas fa-crown me-1"></i> Upgrade Plan
+                </button>
+            </div>
         </div>
 
-        <h3 class="mb-3 text-brown">Booking Inbox (Incoming Requests)</h3>
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white rounded p-2 me-3">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">42</div>
+                            <small class="text-muted">Total Clients</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success text-white rounded p-2 me-3">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">4.8</div>
+                            <small class="text-muted">Avg. Rating</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-info text-white rounded p-2 me-3">
+                            <i class="fas fa-redo"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">68%</div>
+                            <small class="text-muted">Repeat Clients</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning text-white rounded p-2 me-3">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold">12</div>
+                            <small class="text-muted">New This Month</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex gap-2">
+                <button class="btn btn-gold">
+                    <i class="fas fa-user-plus me-2"></i> Add New Client
+                </button>
+                <button class="btn btn-outline-gold" id="importClientsBtn">
+                    <i class="fas fa-file-import me-2"></i> Import Clients (Pro+)
+                </button>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="input-group" style="width: 250px;">
+                    <input type="text" class="form-control" placeholder="Search clients...">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="btn btn-outline-secondary">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
+
+        <h3 class="section-title text-brown">Client Directory</h3>
         
         <div class="row g-4 mb-5">
-            
-            <div class="col-lg-6">
-                <div class="card p-3 booking-card-pending">
-                    <p class="mb-1 fw-bold">Request from: Jane Doe</p>
-                    <small class="text-muted">Service: Full Catering | Date: 2025-11-20</small>
-                    <div class="mt-2 d-flex gap-2">
-                        <button class="btn btn-sm btn-warning">View Details</button>
-                        <button class="btn btn-sm btn-success">Confirm Booking</button>
-                        <button class="btn btn-sm btn-outline-danger">Decline</button>
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-vip">VIP</span>
+                    <div class="client-avatar bg-primary">JD</div>
+                    <h6 class="fw-bold mb-1">Jane Doe</h6>
+                    <p class="small text-muted mb-2">Wedding Planning Client</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-1">5.0</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>3 bookings</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6">
-                <div class="card p-3 booking-card-confirmed">
-                    <p class="mb-1 fw-bold">Confirmed: Q4 Conference Planning</p>
-                    <small class="text-muted">Client: ABC Corp | Date: 2025-10-28</small>
-                    <div class="mt-2 d-flex gap-2">
-                        <button class="btn btn-sm btn-info">Send Reminder (Pro+)</button>
-                        <button class="btn btn-sm btn-outline-secondary">Complete Job</button>
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-active">Active</span>
+                    <div class="client-avatar bg-success">AC</div>
+                    <h6 class="fw-bold mb-1">ABC Corporation</h6>
+                    <p class="small text-muted mb-2">Corporate Events</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="text-muted ms-1">4.5</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>5 bookings</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-active">Active</span>
+                    <div class="client-avatar bg-info">MS</div>
+                    <h6 class="fw-bold mb-1">Michael Smith</h6>
+                    <p class="small text-muted mb-2">Private Parties</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-1">5.0</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>2 bookings</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-inactive">Inactive</span>
+                    <div class="client-avatar bg-secondary">RJ</div>
+                    <h6 class="fw-bold mb-1">Robert Johnson</h6>
+                    <p class="small text-muted mb-2">Conference Planning</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-1">5.0</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>Last booking: 6 months ago</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-active">Active</span>
+                    <div class="client-avatar bg-warning">UW</div>
+                    <h6 class="fw-bold mb-1">University Events</h6>
+                    <p class="small text-muted mb-2">Educational Institution</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-1">5.0</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>8 bookings</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="client-card position-relative">
+                    <span class="client-status status-vip">VIP</span>
+                    <div class="client-avatar bg-danger">SG</div>
+                    <h6 class="fw-bold mb-1">Sarah Green</h6>
+                    <p class="small text-muted mb-2">Luxury Events</p>
+                    <div class="mb-3">
+                        <div class="client-rating mb-1">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="text-muted ms-1">5.0</span>
+                        </div>
+                        <div class="d-flex small text-muted">
+                            <i class="fas fa-calendar me-2"></i>
+                            <span>6 bookings</span>
+                        </div>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary flex-fill">
+                            <i class="fas fa-eye me-1"></i> View
+                        </button>
+                        <button class="btn btn-sm btn-outline-gold flex-fill">
+                            <i class="fas fa-envelope me-1"></i> Message
+                        </button>
                     </div>
                 </div>
             </div>
@@ -70,69 +548,194 @@
         
         <hr class="my-5">
 
-        <h3 class="mb-3 text-brown">Advanced Booking Tools (Pro+)</h3>
+        <h3 class="section-title text-brown">Client Management Tools</h3>
         
         <div class="row g-4">
-             <div class="col-md-6">
-                <div class="card p-3 shadow-sm">
-                    <h5>Automated Notifications</h5>
-                    <p class="small text-muted">Set up automatic email or SMS reminders for clients.</p>
-                    <button class="btn btn-sm btn-outline-primary" id="notificationBtn" disabled>Configure Reminders (Pro+)</button>
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded p-2 me-3">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Marketing Campaigns</h5>
+                            <p class="small text-muted mb-0">Send targeted promotions to specific client segments.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100">
+                        <i class="fas fa-rocket me-2"></i> Create Campaign
+                    </button>
                 </div>
             </div>
+            
             <div class="col-md-6">
-                <div class="card p-3 shadow-sm">
-                    <h5>Booking Form Preview</h5>
-                    <p class="small text-muted">See how clients view your custom booking form.</p>
-                    <button class="btn btn-sm btn-outline-secondary">View Live Form</button>
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Pro+</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-success text-white rounded p-2 me-3">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Client Analytics</h5>
+                            <p class="small text-muted mb-0">Track client behavior and preferences over time.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-success w-100" id="analyticsBtn" disabled>
+                        <i class="fas fa-chart-bar me-2"></i> View Analytics (Pro+)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Pro+</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-info text-white rounded p-2 me-3">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Loyalty Programs</h5>
+                            <p class="small text-muted mb-0">Create and manage client loyalty rewards.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-info w-100" id="loyaltyBtn" disabled>
+                        <i class="fas fa-award me-2"></i> Manage Loyalty (Pro+)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Enterprise</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-warning text-white rounded p-2 me-3">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">CRM Integration</h5>
+                            <p class="small text-muted mb-0">Connect with external CRM systems.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-warning w-100" disabled>
+                        <i class="fas fa-plug me-2"></i> Connect CRM (Enterprise)
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <div class="modal fade" id="availabilityModal" tabindex="-1" aria-labelledby="availabilityModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="availabilityModalLabel">Manage Availability</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p class="small text-muted">Block out dates or mark yourself as fully booked.</p>
-                    <form>
-                        <div class="mb-3"><label class="form-label small">Date to Block</label><input type="date" class="form-control" required></div>
-                        <div class="mb-3"><label class="form-label small">Reason/Note</label><input type="text" class="form-control"></div>
-                        <button type="submit" class="btn btn-danger d-block w-100">Block Date</button>
-                    </form>
-                </div>
+
+        <div class="card p-4 mt-5">
+            <h5 class="mb-3">Client Feedback & Reviews</h5>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Client</th>
+                            <th>Service</th>
+                            <th>Rating</th>
+                            <th>Feedback</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Wedding Catering</td>
+                            <td>
+                                <span class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </td>
+                            <td>Exceptional service! Will definitely book again.</td>
+                            <td>Oct 15, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>ABC Corporation</td>
+                            <td>Conference Planning</td>
+                            <td>
+                                <span class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </span>
+                            </td>
+                            <td>Professional and reliable. Minor communication delays.</td>
+                            <td>Oct 10, 2025</td>
+                        </tr>
+                        <tr>
+                            <td>Sarah Green</td>
+                            <td>Anniversary Party</td>
+                            <td>
+                                <span class="client-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            </td>
+                            <td>Absolutely perfect in every way! Exceeded expectations.</td>
+                            <td>Sep 28, 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-outline-gold">
+                    <i class="fas fa-comments me-2"></i> View All Reviews
+                </button>
             </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
+    <!-- Firebase App (the core Firebase SDK) -->
     <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         
-        const auth = getAuth();
+        // Your web app's Firebase configuration
+        // Replace with your actual Firebase config
+             const firebaseConfig = {
+        apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+        authDomain: "hospitour-6a1da.firebaseapp.com",
+        projectId: "hospitour-6a1da",
+        storageBucket: "hospitour-6a1da.firebasestorage.app",
+        messagingSenderId: "73315471607",
+        appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+        measurementId: "G-V82ZQPV48F"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
         const logoutBtn = document.getElementById('logoutBtn');
-        const formCustomBtn = document.getElementById('formCustomBtn');
-        const notificationBtn = document.getElementById('notificationBtn');
+        const importClientsBtn = document.getElementById('importClientsBtn');
+        const analyticsBtn = document.getElementById('analyticsBtn');
+        const loyaltyBtn = document.getElementById('loyaltyBtn');
         
         // Simulate plan gating for Pro+ features
         const userPlan = 'free'; 
         
         if (userPlan !== 'pro' && userPlan !== 'enterprise') {
-            formCustomBtn.classList.remove('btn-outline-danger');
-            formCustomBtn.classList.add('btn-secondary');
-            formCustomBtn.disabled = true;
-            formCustomBtn.title = 'Upgrade to Pro Plan to customize your booking forms.';
+            importClientsBtn.classList.remove('btn-outline-gold');
+            importClientsBtn.classList.add('btn-secondary');
+            importClientsBtn.disabled = true;
+            importClientsBtn.title = 'Upgrade to Pro Plan to import clients.';
 
-            notificationBtn.disabled = true;
-            notificationBtn.textContent = 'Configure Reminders (Upgrade to Pro)';
+            analyticsBtn.disabled = true;
+            loyaltyBtn.disabled = true;
         }
         
-        // Logout functionality (Reused)
+        // Logout functionality
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
@@ -140,6 +743,32 @@
                 window.location.href = "login.html";
             } catch (error) {
                 console.error("Logout failed:", error);
+                alert("Logout failed. Please try again.");
+            }
+        });
+
+        // Add click handlers for feature buttons
+        importClientsBtn.addEventListener('click', () => {
+            if (!importClientsBtn.disabled) {
+                alert("Opening client import wizard...");
+            } else {
+                alert("Please upgrade to Pro+ plan to import clients.");
+            }
+        });
+
+        analyticsBtn.addEventListener('click', () => {
+            if (!analyticsBtn.disabled) {
+                alert("Opening client analytics dashboard...");
+            } else {
+                alert("Please upgrade to Pro+ plan to access client analytics.");
+            }
+        });
+
+        loyaltyBtn.addEventListener('click', () => {
+            if (!loyaltyBtn.disabled) {
+                alert("Opening loyalty program manager...");
+            } else {
+                alert("Please upgrade to Pro+ plan to manage loyalty programs.");
             }
         });
     </script>

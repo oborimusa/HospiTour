@@ -3,90 +3,591 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Settings & Billing | HospiPro</title>
+    <title>Settings & Billing | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
+        :root{ 
+            --gold: #c9a44c; 
+            --brown: #3b2f2f; 
+            --light-brown: #5a4a4a;
+            --cream: #f7f5f1;
+            --light-cream: #fefdf9;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--cream); 
+            color: var(--brown);
+        }
+        
+        .sidebar{ 
+            width: 250px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.7); 
+            padding: 12px 15px; 
+            display: block; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 4px;
+            margin: 0 8px 4px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: var(--light-brown); 
+            color: white; 
+            border-left: 3px solid var(--gold); 
+        }
+        
+        .main-content{ 
+            margin-left: 250px; 
+            padding: 25px; 
+            background: var(--light-cream);
+            min-height: 100vh;
+        }
+        
+        .text-brown {
+            color: var(--brown);
+        }
+        
+        .text-gold {
+            color: var(--gold);
+        }
+        
+        .bg-brown {
+            background-color: var(--brown);
+        }
+        
+        .bg-gold {
+            background-color: var(--gold);
+        }
+        
+        .card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 12px;
+            margin-bottom: 25px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 3px;
+        }
+        
+        .btn-gold {
+            background-color: var(--gold);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-gold:hover {
+            background-color: #b8943a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 164, 76, 0.3);
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--brown);
+            border: none;
+            padding: 12px 20px;
+            font-weight: 500;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .nav-tabs .nav-link.active {
+            background: white;
+            color: var(--brown);
+            border-bottom: 3px solid var(--gold);
+        }
+        
+        .nav-tabs .nav-link:hover {
+            border-color: transparent;
+            background: rgba(201, 164, 76, 0.1);
+        }
+        
+        .tab-content {
+            background: white;
+            border-radius: 0 12px 12px 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .plan-card {
+            border-left: 4px solid var(--gold);
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .plan-features {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0;
+        }
+        
+        .plan-features li {
+            padding: 5px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .plan-features i {
+            color: var(--gold);
+            margin-right: 10px;
+        }
+        
+        .user-role-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .role-admin {
+            background: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+        
+        .role-staff {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+        
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+        
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+        }
+        
+        .modal-header {
+            background: var(--brown);
+            color: white;
+            border-radius: 12px 12px 0 0;
+        }
+        
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+        
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--brown) 0%, var(--light-brown) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto;
+        }
+        
+        .oauth-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar a span {
+                display: none;
+            }
+            
+            .sidebar .text-center h5, .sidebar .text-center small {
+                display: none;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar a {
+                display: inline-block;
+                width: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
     </style>
 </head>
 <body>
     
     <div class="sidebar">
         <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
+            <h5 class="text-white">HospiTour</h5>
             <small class="text-gold">Business Operations</small>
         </div>
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="rooms.html">🛏️ Accommodation Mgmt</a>
-        <a href="restaurant.html">🍽️ Restaurant & F&B</a>
-        <a href="events.html">🗓️ Events & Planning</a>
-        <a href="settings.html" class="active">⚙️ Settings & Billing</a>
+        <a href="dashboard.html"><i class="fas fa-home me-2"></i><span>Dashboard</span></a>
+        <a href="rooms.html"><i class="fas fa-bed me-2"></i><span>Accommodation Mgmt</span></a>
+        <a href="restaurant.html"><i class="fas fa-utensils me-2"></i><span>Restaurant & F&B</span></a>
+        <a href="events.html"><i class="fas fa-calendar-alt me-2"></i><span>Events & Planning</span></a>
+        <a href="settings.html" class="active"><i class="fas fa-cog me-2"></i><span>Settings & Billing</span></a>
         <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i><span>Log Out</span></a>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Settings & Administration</h1>
+        <!-- OAuth Warning Banner (will be shown if needed) -->
+        <div id="oauthWarning" class="oauth-warning d-none">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-exclamation-triangle text-warning me-3 fa-lg"></i>
+                <div>
+                    <strong>OAuth Configuration Needed</strong>
+                    <p class="mb-0">To enable social login features, please add <code>127.0.0.1</code> to authorized domains in Firebase Console.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="mb-1 text-brown">Settings & Administration</h1>
+                <p class="text-muted">Manage your account, billing, and team access</p>
+            </div>
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-secondary">
+                    <i class="fas fa-download me-2"></i>Export Data
+                </button>
+            </div>
+        </div>
 
         <ul class="nav nav-tabs mb-4" id="settingsTab" role="tablist">
-            <li class="nav-item" role="presentation"><button class="nav-link active" id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" type="button" role="tab">Billing & Subscription</button></li>
-            <li class="nav-item" role="presentation"><button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">User/Staff Management</button></li>
-            <li class="nav-item" role="presentation"><button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">General Settings</button></li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="billing-tab" data-bs-toggle="tab" data-bs-target="#billing" type="button" role="tab">
+                    <i class="fas fa-credit-card me-2"></i>Billing & Subscription
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button" role="tab">
+                    <i class="fas fa-users me-2"></i>User/Staff Management
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab">
+                    <i class="fas fa-building me-2"></i>Business Profile
+                </button>
+            </li>
         </ul>
 
         <div class="tab-content">
             
             <div class="tab-pane fade show active" id="billing" role="tabpanel">
-                <h3 class="mb-3 text-brown">Subscription Status</h3>
-                <div class="card p-3 shadow-sm mb-4">
-                    <p class="mb-1">Current Plan: <strong class="text-primary">Pro Plan</strong> ($29/month)</p>
-                    <p class="mb-1 small">Renewal Date: November 1, 2025</p>
-                    <p class="small text-muted">Next payment will be charged to Visa ending in **** 4567.</p>
-                    <div class="mt-2">
-                        <button class="btn btn-sm btn-success me-2">Upgrade to Enterprise</button>
-                        <button class="btn btn-sm btn-outline-danger">Cancel Subscription</button>
+                <h3 class="section-title">Subscription Status</h3>
+                
+                <div class="row mb-5">
+                    <div class="col-md-8">
+                        <div class="plan-card">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div>
+                                    <h4 class="text-brown mb-1">Pro Plan</h4>
+                                    <p class="text-muted mb-0">$29/month per user</p>
+                                </div>
+                                <span class="badge bg-primary">Active</span>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <p class="mb-1"><strong>Renewal Date:</strong> November 1, 2025</p>
+                                <p class="mb-0 text-muted small">Next payment will be charged to Visa ending in **** 4567</p>
+                            </div>
+                            
+                            <div class="d-flex gap-2">
+                                <button class="btn btn-gold">
+                                    <i class="fas fa-rocket me-2"></i>Upgrade to Enterprise
+                                </button>
+                                <button class="btn btn-outline-danger">
+                                    <i class="fas fa-ban me-2"></i>Cancel Subscription
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="card p-3 text-center">
+                            <h5 class="text-brown">Usage Summary</h5>
+                            <div class="my-4">
+                                <div class="mb-3">
+                                    <p class="stats-number mb-0">85%</p>
+                                    <p class="stats-label">Storage Used</p>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="stats-number mb-0">3/5</p>
+                                    <p class="stats-label">Active Users</p>
+                                </div>
+                                <div>
+                                    <p class="stats-number mb-0">24/7</p>
+                                    <p class="stats-label">Support Included</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <h3 class="mb-3 text-brown">Billing History</h3>
-                <table class="table table-striped small">
-                    <thead><tr><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
-                    <tbody>
-                        <tr><td>Oct 1, 2025</td><td>Pro Plan Subscription</td><td>$29.00</td><td>Paid</td></tr>
-                        <tr><td>Sep 1, 2025</td><td>Pro Plan Subscription</td><td>$29.00</td><td>Paid</td></tr>
-                    </tbody>
-                </table>
+                <h3 class="section-title">Billing History</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Oct 1, 2025</td>
+                                <td>Pro Plan Subscription</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge status-active">Paid</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary">Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>Sep 1, 2025</td>
+                                <td>Pro Plan Subscription</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge status-active">Paid</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary">Download</button></td>
+                            </tr>
+                            <tr>
+                                <td>Aug 1, 2025</td>
+                                <td>Pro Plan Subscription</td>
+                                <td>$29.00</td>
+                                <td><span class="status-badge status-active">Paid</span></td>
+                                <td><button class="btn btn-sm btn-outline-secondary">Download</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="users" role="tabpanel">
-                <h3 class="mb-3 text-brown">Manage Team Access</h3>
-                <div class="d-flex justify-content-end mb-3">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#inviteUserModal">Invite New Staff</button>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="section-title mb-0">Manage Team Access</h3>
+                    <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#inviteUserModal">
+                        <i class="fas fa-user-plus me-2"></i>Invite New Staff
+                    </button>
                 </div>
                 
-                <table class="table table-striped">
-                    <thead><tr><th>Name</th><th>Role</th><th>Status</th><th>Actions</th></tr></thead>
-                    <tbody>
-                        <tr><td>David Lee</td><td>Admin/Manager</td><td>Active</td><td><button class="btn btn-sm btn-warning">Edit Role</button></td></tr>
-                        <tr><td>Maria Gomez</td><td>Housekeeping</td><td>Active</td><td><button class="btn btn-sm btn-warning">Edit Role</button></td></tr>
-                        <tr><td>Sam Chukwu</td><td>Restaurant Staff</td><td>Active</td><td><button class="btn btn-sm btn-danger">Deactivate</button></td></tr>
-                    </tbody>
-                </table>
-                <p class="small text-muted">User roles define access to Accommodation, Restaurant, and Events modules.</p>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fw-bold">David Lee</td>
+                                <td>david@hospitour.com</td>
+                                <td><span class="user-role-badge role-admin">Admin/Manager</span></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Today, 10:24 AM</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-warning me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Maria Gomez</td>
+                                <td>maria@hospitour.com</td>
+                                <td><span class="user-role-badge role-staff">Housekeeping</span></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Yesterday, 3:45 PM</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-warning me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-secondary">
+                                        <i class="fas fa-key"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="fw-bold">Sam Chukwu</td>
+                                <td>sam@hospitour.com</td>
+                                <td><span class="user-role-badge role-staff">Restaurant Staff</span></td>
+                                <td><span class="status-badge status-active">Active</span></td>
+                                <td>Oct 12, 2:30 PM</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-warning me-1">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-user-slash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="card p-3 mt-4">
+                    <h5 class="text-brown mb-3">Role Permissions</h5>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6>Admin/Manager</h6>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i>Full system access</li>
+                                <li><i class="fas fa-check"></i>User management</li>
+                                <li><i class="fas fa-check"></i>Billing & settings</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Housekeeping</h6>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i>Room status updates</li>
+                                <li><i class="fas fa-check"></i>Cleaning schedules</li>
+                                <li><i class="fas fa-times text-muted"></i>Financial data</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>Restaurant Staff</h6>
+                            <ul class="plan-features">
+                                <li><i class="fas fa-check"></i>Order management</li>
+                                <li><i class="fas fa-check"></i>Menu updates</li>
+                                <li><i class="fas fa-times text-muted"></i>User management</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="general" role="tabpanel">
-                <h3 class="mb-3 text-brown">Business Profile</h3>
-                <form>
-                    <div class="mb-3"><label class="form-label small">Business Name</label><input type="text" class="form-control" value="The Grand HospiPro Hotel"></div>
-                    <div class="mb-3"><label class="form-label small">Primary Location</label><input type="text" class="form-control" value="Lagos, Nigeria"></div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
+                <h3 class="section-title">Business Profile</h3>
+                <div class="row">
+                    <div class="col-md-8">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Business Name</label>
+                                <input type="text" class="form-control" value="The Grand HospiTour Hotel">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Primary Location</label>
+                                <input type="text" class="form-control" value="Lagos, Nigeria">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Business Email</label>
+                                <input type="email" class="form-control" value="info@grandhospitour.com">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Phone Number</label>
+                                <input type="tel" class="form-control" value="+234 800 123 4567">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Timezone</label>
+                                <select class="form-select">
+                                    <option>West Africa Time (UTC+1)</option>
+                                    <option>Eastern Time (UTC-5)</option>
+                                    <option>Pacific Time (UTC-8)</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-gold">
+                                <i class="fas fa-save me-2"></i>Save Changes
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card p-3">
+                            <h5 class="text-brown mb-3">Business Logo</h5>
+                            <div class="logo-placeholder mb-3">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-secondary">
+                                    <i class="fas fa-upload me-2"></i>Upload New Logo
+                                </button>
+                            </div>
+                            <p class="small text-muted mt-2">Recommended: 300x300px PNG or JPG</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -100,9 +601,27 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3"><input type="email" class="form-control" placeholder="Staff Email Address" required></div>
-                        <div class="mb-3"><select class="form-select" required><option value="">Select Role/Access Level</option><option>Admin/Manager</option><option>Housekeeping</option></select></div>
-                        <button type="submit" class="btn btn-success d-block w-100">Send Invitation</button>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Staff Email Address</label>
+                            <input type="email" class="form-control" placeholder="email@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Role/Access Level</label>
+                            <select class="form-select" required>
+                                <option value="">Select Role</option>
+                                <option>Admin/Manager</option>
+                                <option>Housekeeping</option>
+                                <option>Restaurant Staff</option>
+                                <option>Event Coordinator</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Custom Message (Optional)</label>
+                            <textarea class="form-control" rows="3" placeholder="Add a personal message to the invitation..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold d-block w-100">
+                            <i class="fas fa-paper-plane me-2"></i>Send Invitation
+                        </button>
                     </form>
                 </div>
             </div>
@@ -112,12 +631,53 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script type="module">
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+            authDomain: "hospitour-6a1da.firebaseapp.com",
+            projectId: "hospitour-6a1da",
+            storageBucket: "hospitour-6a1da.firebasestorage.app",
+            messagingSenderId: "73315471607",
+            appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+            measurementId: "G-V82ZQPV48F"
+        };
+
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            signOut,
+            onAuthStateChanged 
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Initialize Firebase FIRST
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
         
-        const auth = getAuth();
         const logoutBtn = document.getElementById('logoutBtn');
+        const oauthWarning = document.getElementById('oauthWarning');
         
-        // Logout functionality (Reused)
+        // Check if we're on an unauthorized domain
+        function checkOAuthDomain() {
+            const currentDomain = window.location.hostname;
+            // Show warning for 127.0.0.1 (common unauthorized domain)
+            if (currentDomain === '127.0.0.1') {
+                oauthWarning.classList.remove('d-none');
+            }
+        }
+        
+        // Check authentication state
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // User is not signed in, redirect to login
+                window.location.href = "login.html";
+            } else {
+                // User is signed in, check OAuth domain
+                checkOAuthDomain();
+            }
+        });
+        
+        // Logout functionality
         logoutBtn.addEventListener('click', async (e) => {
             e.preventDefault();
             try {
@@ -125,7 +685,35 @@
                 window.location.href = "login.html";
             } catch (error) {
                 console.error("Logout failed:", error);
+                alert("Logout failed. Please try again.");
             }
+        });
+        
+        // Add some interactive elements
+        document.querySelectorAll('.btn-outline-warning').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const userName = row.querySelector('.fw-bold').textContent;
+                alert(`Editing permissions for ${userName}`);
+            });
+        });
+        
+        document.querySelectorAll('.btn-outline-danger').forEach(button => {
+            button.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const userName = row.querySelector('.fw-bold').textContent;
+                if (confirm(`Are you sure you want to deactivate ${userName}?`)) {
+                    alert(`${userName} has been deactivated`);
+                }
+            });
+        });
+
+        // Handle form submissions
+        document.querySelectorAll('form').forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Settings saved successfully!');
+            });
         });
     </script>
 </body>

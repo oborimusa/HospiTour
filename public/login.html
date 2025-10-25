@@ -1,166 +1,411 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login | HospiPro</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .login-container { max-width: 400px; margin: 80px auto; padding: 40px; background: #fff; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
-        .btn-gold:hover{opacity:.95;}
-        .btn-google { background-color: #4285F4; color: white; border: none; }
-        .btn-google:hover { background-color: #357ae8; color: white; }
+        :root {
+            --gold: #c9a44c;
+            --brown: #3b2f2f;
+            --light-brown: #5a4a4a;
+            --cream: #f7f5f1;
+            --light-cream: #fefdf9;
+        }
+        
+        body {
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            background: var(--cream);
+            color: var(--brown);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .login-container {
+            max-width: 420px;
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 40px 35px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--brown) 0%, var(--gold) 100%);
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: var(--brown);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 28px;
+        }
+        
+        .brand-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 5px;
+        }
+        
+        .brand-tagline {
+            color: var(--light-brown);
+            font-size: 14px;
+            margin-bottom: 0;
+        }
+        
+        .form-control {
+            border-radius: 10px;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+        }
+        
+        .input-group-text {
+            background: white;
+            border-radius: 10px 0 0 10px;
+            border-right: none;
+            color: var(--gold);
+        }
+        
+        .form-control.with-icon {
+            border-left: none;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .btn-login {
+            background: var(--gold);
+            color: var(--brown);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-login:hover {
+            background: #b8943a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 164, 76, 0.3);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        
+        .divider-text {
+            padding: 0 15px;
+            color: var(--light-brown);
+            font-size: 14px;
+        }
+        
+        .btn-provider {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn-provider:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+        
+        .btn-google {
+            color: #DB4437;
+        }
+        
+        .btn-apple {
+            color: #000;
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--light-brown);
+        }
+        
+        .login-footer a {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-size: 14px;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.05;
+        }
+        
+        .shape-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--brown);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .shape-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--gold);
+            bottom: -100px;
+            left: -100px;
+        }
+        
+        @media (max-width: 576px) {
+            .login-container {
+                padding: 15px;
+            }
+            
+            .login-card {
+                padding: 30px 25px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    
     <div class="login-container">
-        <div class="text-center mb-4">
-            <img src="img/logo1.png" alt="HospiPro" style="width:50px;" class="mb-2">
-            <h4 class="text-brown">Welcome Back</h4>
-            <p class="small text-muted">New to HospiPro? <a href="signup.html" class="text-brown">Create an account</a></p>
-        </div>
-
-        <form id="loginForm">
-            <div class="mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Email address" required>
-            </div>
-            <div class="mb-3">
-                <input type="password" class="form-control" id="password" placeholder="Password" required>
+        <div class="login-card">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
+                <h1 class="brand-name">HospiTour</h1>
+                <p class="brand-tagline">Hospitality Management Platform</p>
             </div>
             
-            <div class="d-grid gap-2 mb-3">
-                <button type="submit" class="btn btn-gold btn-lg" id="loginBtn">Log In</button>
-            </div>
-            
-            <div class="text-center small text-muted mb-3">OR</div>
-
-            <div class="d-grid">
-                <button type="button" class="btn btn-google" id="googleLogin">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-google mb-1 me-2" viewBox="0 0 16 16"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.001c-1.264 1.25-2.92 1.956-4.665 1.956-4.527 0-8.204-3.674-8.204-8.2S3.208 1.459 7.735 1.459c2.346 0 3.963.975 4.963 1.938l-1.377 1.377c-.521-.51-1.41-1.04-2.586-1.04-2.378 0-4.316 1.94-4.316 4.314s1.938 4.314 4.316 4.314c1.656 0 2.894-.707 3.597-1.375.523-.497.868-1.144.966-1.843h-4.566v-2.13h6.39c.09.435.158.895.158 1.488z"/></svg>
-                    Sign In with Google
+            <form id="loginForm">
+                <div id="loginMessage" class="alert alert-danger d-none"></div>
+                
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" class="form-control with-icon" id="email" placeholder="Enter your email" required>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" class="form-control with-icon" id="password" placeholder="Enter your password" required>
+                    </div>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" class="text-decoration-none" style="color: var(--gold);">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-login mb-3" id="loginBtn">
+                    <i class="fas fa-sign-in-alt me-2"></i> Sign In
                 </button>
-            </div>
+                
+                <div class="divider">
+                    <span class="divider-text">Or continue with</span>
+                </div>
+                
+                <button type="button" class="btn btn-provider btn-google">
+                    <i class="fab fa-google"></i> Google
+                </button>
+                
+                <button type="button" class="btn btn-provider btn-apple">
+                    <i class="fab fa-apple"></i> Apple
+                </button>
+            </form>
             
-            <div class="text-center mt-3">
-                <a href="#" class="small text-muted">Forgot Password?</a>
+            <div class="login-footer">
+                Don't have an account? <a href="#" id="signupLink">Sign up here</a>
             </div>
-            <div id="message" class="mt-3 text-center small"></div>
-        </form>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script type="module">
-        // 1. IMPORTS
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import {
-            getAuth,
-            signInWithEmailAndPassword,
-            GoogleAuthProvider,
-            signInWithPopup,
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { 
-            getFirestore, 
-            doc, 
-            getDoc 
-        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+            getAuth, 
+            signInWithEmailAndPassword, 
+            GoogleAuthProvider, 
+            signInWithPopup,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-        // 2. CONFIG: Replace with your project's config
+        // Firebase configuration
         const firebaseConfig = {
-            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-            authDomain: "hospipro-86b8d.firebaseapp.com",
-            projectId: "hospipro-86b8d",
-            storageBucket: "hospipro-86b8d.firebasestorage.app",
-            messagingSenderId: "801856698977",
-            appId: "1:801856698977:web:05562aaf88584d2af0c820",
+            apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+            authDomain: "hospitour-6a1da.firebaseapp.com",
+            projectId: "hospitour-6a1da",
+            storageBucket: "hospitour-6a1da.firebasestorage.app",
+            messagingSenderId: "73315471607",
+            appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+            measurementId: "G-V82ZQPV48F"
         };
 
-        // 3. INIT
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app);
-        const provider = new GoogleAuthProvider();
+        const googleProvider = new GoogleAuthProvider();
 
-        // 4. UI Handlers
-        const loginForm = document.getElementById("loginForm");
-        const googleBtn = document.getElementById("googleLogin");
-        const messageEl = document.getElementById("message");
-        const loginBtn = document.getElementById("loginBtn");
+        // DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const loginMessage = document.getElementById('loginMessage');
+        const loginBtn = document.getElementById('loginBtn');
+        const googleLoginBtn = document.querySelector('.btn-google');
+        const signupLink = document.getElementById('signupLink');
 
-        // --- Core Redirection Logic (Checks Role in Firestore) ---
-        const getUserRoleAndRedirect = async (user) => {
-            const userRef = doc(db, 'users', user.uid);
-            const userSnap = await getDoc(userRef);
-
-            if (userSnap.exists()) {
-                const accountType = userSnap.data().accountType;
-                
-                // Show success message briefly before redirect
-                messageEl.innerHTML = `<div class="alert alert-success py-2">Login successful! Redirecting to ${accountType} dashboard...</div>`;
-                
-                setTimeout(() => {
-                    if (accountType === 'business') {
-                        window.location.href = "dashboard.html"; // Business Dashboard
-                    } else if (accountType === 'professional') {
-                        window.location.href = "professional-dashboard.html"; // Professional Dashboard
-                    } else {
-                        messageEl.innerHTML = `<div class="alert alert-danger py-2">Error: Account type not defined. Please contact support.</div>`;
-                    }
-                }, 1000);
-            } else {
-                // This scenario means the user signed up via Google but Firestore write failed, or they missed the role selection on the signup page.
-                messageEl.innerHTML = `<div class="alert alert-danger py-2">Error: Profile data not found. Please ensure you signed up correctly.</div>`;
-                // Optional: Force sign out here.
+        // Check if user is already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, redirect to dashboard
+                window.location.href = 'dashboard.html';
             }
-        }
+        });
 
-
-        // 5. Email/Password Login Handler
-        loginForm.addEventListener("submit", async (e) => {
+        // Email/password login
+        loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            messageEl.textContent = "";
-            loginBtn.textContent = "Logging In...";
-            loginBtn.disabled = true;
+            loginMessage.classList.add('d-none');
             
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            // Show loading state
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Signing In...';
+            loginBtn.disabled = true;
             
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                await getUserRoleAndRedirect(userCredential.user);
-                
+                // Login successful - redirect happens automatically due to onAuthStateChanged
             } catch (error) {
-                console.error("Login Error:", error);
+                console.error('Login error:', error);
+                loginMessage.textContent = getErrorMessage(error.code);
+                loginMessage.classList.remove('d-none');
                 
-                let msg = error.message.replace("Firebase: ", "");
-                if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found') {
-                    msg = "Invalid email or password. Please double-check your credentials.";
-                } 
-                
-                messageEl.innerHTML = `<div class="alert alert-danger py-2">Login failed: ${msg}</div>`;
-                loginBtn.textContent = "Log In";
+                // Reset button
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt me-2"></i> Sign In';
                 loginBtn.disabled = false;
             }
         });
 
-        // 6. Google Login Handler
-        googleBtn.addEventListener("click", async () => {
-            messageEl.textContent = "";
-            googleBtn.disabled = true;
-
+        // Google login
+        googleLoginBtn.addEventListener('click', async () => {
             try {
-                const result = await signInWithPopup(auth, provider);
-                await getUserRoleAndRedirect(result.user);
-                
+                await signInWithPopup(auth, googleProvider);
+                // Login successful - redirect happens automatically due to onAuthStateChanged
             } catch (error) {
-                console.error("Google Login Error:", error);
-                messageEl.innerHTML = `<div class="alert alert-danger py-2">Google login failed.</div>`;
-                googleBtn.disabled = false;
+                console.error('Google login error:', error);
+                loginMessage.textContent = getErrorMessage(error.code);
+                loginMessage.classList.remove('d-none');
             }
         });
+
+        // Sign up link
+        signupLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            // In a real app, this would redirect to a signup page
+            alert('Sign up functionality would be implemented here. For now, please use the login form.');
+        });
+
+        // Helper function to get user-friendly error messages
+        function getErrorMessage(errorCode) {
+            switch (errorCode) {
+                case 'auth/invalid-email':
+                    return 'Please enter a valid email address.';
+                case 'auth/user-disabled':
+                    return 'This account has been disabled.';
+                case 'auth/user-not-found':
+                    return 'No account found with this email.';
+                case 'auth/wrong-password':
+                    return 'Incorrect password. Please try again.';
+                case 'auth/too-many-requests':
+                    return 'Too many failed attempts. Please try again later.';
+                default:
+                    return 'Login failed. Please check your credentials and try again.';
+            }
+        }
     </script>
 </body>
 </html>

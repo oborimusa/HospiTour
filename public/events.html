@@ -5,83 +5,615 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Events & Planning | HospiPro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
-        .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
-        .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
-        .task-list-item{ border-left: 4px solid #0d6efd; padding-left: 10px; }
+        :root{ 
+            --gold: #c9a44c; 
+            --brown: #3b2f2f; 
+            --light-gold: #f5f0e4;
+            --light-brown: #f7f5f1;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background:#f7f5f1; 
+            margin: 0;
+            padding: 0;
+        }
+        
+        .sidebar{ 
+            width: 280px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.8); 
+            padding: 12px 20px; 
+            display: flex;
+            align-items: center;
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            margin-bottom: 5px;
+        }
+        
+        .sidebar a i {
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: rgba(255,255,255,0.1); 
+            color: white; 
+            border-left: 3px solid var(--gold); 
+        }
+        
+        .main-content{ 
+            margin-left: 280px; 
+            padding: 30px;
+            min-height: 100vh;
+        }
+        
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--light-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        .event-card {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .event-card-header {
+            padding: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .event-card-body {
+            padding: 20px;
+        }
+        
+        .event-type-badge {
+            background: var(--gold);
+            color: var(--brown);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .task-list-item {
+            border-left: 4px solid #0d6efd;
+            padding-left: 15px;
+            transition: all 0.2s ease;
+        }
+        
+        .task-list-item:hover {
+            background-color: rgba(13, 110, 253, 0.05);
+        }
+        
+        .task-completed {
+            border-left-color: #198754;
+            opacity: 0.8;
+        }
+        
+        .task-overdue {
+            border-left-color: #dc3545;
+        }
+        
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--brown);
+            margin-bottom: 5px;
+        }
+        
+        .stats-label {
+            color: var(--brown);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .btn-gold {
+            background: var(--gold);
+            color: var(--brown);
+            font-weight: 600;
+            border: none;
+        }
+        
+        .btn-gold:hover {
+            background: #b8943a;
+            color: white;
+        }
+        
+        .calendar-widget {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .calendar-day {
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .calendar-day:hover {
+            background: var(--light-gold);
+        }
+        
+        .calendar-day.event {
+            background: var(--gold);
+            color: var(--brown);
+            font-weight: 600;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .sidebar-footer {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar .nav-text {
+                display: none;
+            }
+            
+            .sidebar a i {
+                margin-right: 0;
+                font-size: 1.4rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+            
+            .brand-text {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar a {
+                display: inline-block;
+                width: auto;
+                margin: 5px;
+                border-left: none;
+                border-bottom: 3px solid transparent;
+            }
+            
+            .sidebar a:hover, .sidebar a.active {
+                border-left: none;
+                border-bottom: 3px solid var(--gold);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .sidebar-footer {
+                position: relative;
+                bottom: auto;
+                margin-top: 20px;
+            }
+            
+            .header-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
     </style>
 </head>
 <body>
     
     <div class="sidebar">
-        <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
-            <small class="text-gold">Business Operations</small>
+        <div class="text-center mb-4 px-3">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="user-avatar">
+                    <i class="bi bi-building"></i>
+                </div>
+                <div class="ms-2">
+                    <h5 class="text-white mb-0 brand-text">HospiPro</h5>
+                    <small class="text-gold brand-text">Business Operations</small>
+                </div>
+            </div>
         </div>
-        <a href="dashboard.html">🏠 Dashboard</a>
-        <a href="rooms.html">🛏️ Accommodation Mgmt</a>
-        <a href="restaurant.html">🍽️ Restaurant & F&B</a>
-        <a href="events.html" class="active">🗓️ Events & Planning</a>
-        <a href="settings.html">⚙️ Settings & Billing</a>
-        <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        
+        <a href="dashboard.html">
+            <i class="bi bi-speedometer2"></i>
+            <span class="nav-text">Dashboard</span>
+        </a>
+        <a href="rooms.html">
+            <i class="bi bi-house-door"></i>
+            <span class="nav-text">Accommodation Mgmt</span>
+        </a>
+        <a href="restaurant.html">
+            <i class="bi bi-cup-hot"></i>
+            <span class="nav-text">Restaurant & F&B</span>
+        </a>
+        <a href="events.html" class="active">
+            <i class="bi bi-calendar-event"></i>
+            <span class="nav-text">Events & Planning</span>
+        </a>
+        <a href="settings.html">
+            <i class="bi bi-gear"></i>
+            <span class="nav-text">Settings & Billing</span>
+        </a>
+        
+        <div class="sidebar-footer">
+            <hr class="text-white-50">
+            <a href="#" id="logoutBtn" class="d-flex align-items-center">
+                <i class="bi bi-box-arrow-right"></i>
+                <span class="nav-text">Log Out</span>
+            </a>
+        </div>
     </div>
 
     <div class="main-content">
-        <h1 class="mb-4 text-brown">Events & Planning Management</h1>
-
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newEventModal">Create New Event</button>
-            <div class="d-flex gap-2">
-                <button class="btn btn-outline-secondary">Vendor Management</button>
-                <button class="btn btn-outline-danger" id="ticketingBtn">Ticketing & Reg (Enterprise+)</button>
+        <div class="header-section">
+            <div>
+                <h1 class="mb-2 text-brown">Events & Planning Management</h1>
+                <p class="small text-muted mb-0">Manage your events, tasks, and schedules in one place</p>
+            </div>
+            
+            <div class="user-info">
+                <div class="user-avatar">
+                    <i class="bi bi-person-circle"></i>
+                </div>
+                <div>
+                    <p class="mb-0 fw-bold" id="userName">Business User</p>
+                    <p class="mb-0 small text-muted" id="userEmail">user@example.com</p>
+                </div>
             </div>
         </div>
 
-        <h3 class="mb-3 text-brown">Upcoming Events</h3>
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+            <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#newEventModal">
+                <i class="bi bi-plus-circle"></i> Create New Event
+            </button>
+            <div class="d-flex gap-2 flex-wrap">
+                <button class="btn btn-outline-secondary">
+                    <i class="bi bi-people"></i> Vendor Management
+                </button>
+                <button class="btn btn-outline-danger" id="ticketingBtn">
+                    <i class="bi bi-ticket-perforated"></i> Ticketing & Registration
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Overview -->
         <div class="row g-4 mb-5">
-            
-            <div class="col-md-6 col-lg-4">
-                <div class="card p-3 shadow-sm">
-                    <h5 class="text-primary mb-1">Q4 Sales Conference</h5>
-                    <p class="small text-muted mb-2">October 28, 2025 | Grand Ballroom</p>
-                    <span class="badge bg-secondary mb-2">Catering: External</span>
-                    <a href="#" class="small fw-bold">View Planning Checklist →</a>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <div class="stats-number">5</div>
+                    <div class="stats-label">Upcoming Events</div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-4">
-                <div class="card p-3 shadow-sm">
-                    <h5 class="text-success mb-1">The Smiths' Wedding</h5>
-                    <p class="small text-muted mb-2">November 15, 2025 | Garden Terrace</p>
-                    <span class="badge bg-warning mb-2">Catering: In-House</span>
-                    <a href="#" class="small fw-bold">Manage Client Details →</a>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <div class="stats-number">12</div>
+                    <div class="stats-label">Pending Tasks</div>
                 </div>
             </div>
-            
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <div class="stats-number">3</div>
+                    <div class="stats-label">This Week</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stats-card">
+                    <div class="stats-number">2</div>
+                    <div class="stats-label">Require Attention</div>
+                </div>
+            </div>
         </div>
-        
-        <hr class="my-5">
 
-        <h3 class="mb-3 text-brown">Planning Tasks (Q4 Conference)</h3>
-        <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
-                <span class="small">Finalize seating chart with client</span>
-                <span class="badge bg-warning">Due: Oct 20</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <span class="small text-success">Catering menu approved</span>
-                <span class="badge bg-success">Complete</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
-                <span class="small">Send final invoice reminder</span>
-                <span class="badge bg-danger">Overdue</span>
-            </li>
-        </ul>
+        <div class="row g-4">
+            <div class="col-lg-8">
+                <h3 class="mb-3 text-brown">Upcoming Events</h3>
+                <div class="row g-4 mb-5">
+                    
+                    <div class="col-md-6">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="text-primary mb-1">Q4 Sales Conference</h5>
+                                    <span class="event-type-badge">Conference</span>
+                                </div>
+                                <p class="small text-muted mb-2">
+                                    <i class="bi bi-calendar"></i> October 28, 2025<br>
+                                    <i class="bi bi-geo-alt"></i> Grand Ballroom
+                                </p>
+                            </div>
+                            <div class="event-card-body">
+                                <span class="badge bg-secondary mb-2">Catering: External</span>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="#" class="small fw-bold text-decoration-none">
+                                        <i class="bi bi-list-check"></i> View Planning Checklist
+                                    </a>
+                                    <div class="text-warning">
+                                        <i class="bi bi-exclamation-triangle"></i> 3 pending
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="text-success mb-1">The Smiths' Wedding</h5>
+                                    <span class="event-type-badge">Wedding</span>
+                                </div>
+                                <p class="small text-muted mb-2">
+                                    <i class="bi bi-calendar"></i> November 15, 2025<br>
+                                    <i class="bi bi-geo-alt"></i> Garden Terrace
+                                </p>
+                            </div>
+                            <div class="event-card-body">
+                                <span class="badge bg-warning mb-2">Catering: In-House</span>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="#" class="small fw-bold text-decoration-none">
+                                        <i class="bi bi-person"></i> Manage Client Details
+                                    </a>
+                                    <div class="text-success">
+                                        <i class="bi bi-check-circle"></i> On track
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="text-info mb-1">Corporate Gala Dinner</h5>
+                                    <span class="event-type-badge">Gala</span>
+                                </div>
+                                <p class="small text-muted mb-2">
+                                    <i class="bi bi-calendar"></i> December 5, 2025<br>
+                                    <i class="bi bi-geo-alt"></i> Main Dining Hall
+                                </p>
+                            </div>
+                            <div class="event-card-body">
+                                <span class="badge bg-info mb-2">Catering: In-House</span>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="#" class="small fw-bold text-decoration-none">
+                                        <i class="bi bi-list-check"></i> View Details
+                                    </a>
+                                    <div class="text-primary">
+                                        <i class="bi bi-clock"></i> Planning
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="event-card">
+                            <div class="event-card-header">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="text-warning mb-1">Product Launch Event</h5>
+                                    <span class="event-type-badge">Launch</span>
+                                </div>
+                                <p class="small text-muted mb-2">
+                                    <i class="bi bi-calendar"></i> January 12, 2026<br>
+                                    <i class="bi bi-geo-alt"></i> Conference Center
+                                </p>
+                            </div>
+                            <div class="event-card-body">
+                                <span class="badge bg-secondary mb-2">Catering: External</span>
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <a href="#" class="small fw-bold text-decoration-none">
+                                        <i class="bi bi-list-check"></i> View Planning Checklist
+                                    </a>
+                                    <div class="text-secondary">
+                                        <i class="bi bi-dash-circle"></i> Not started
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="mb-3 text-brown">Planning Tasks (Q4 Conference)</h3>
+                <div class="card p-4 mb-5">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-circle me-2 text-primary"></i>
+                                <span class="small">Finalize seating chart with client</span>
+                            </div>
+                            <span class="badge bg-warning">Due: Oct 20</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item task-completed">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-check-circle me-2 text-success"></i>
+                                <span class="small text-muted text-decoration-line-through">Catering menu approved</span>
+                            </div>
+                            <span class="badge bg-success">Complete</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item task-overdue">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-exclamation-circle me-2 text-danger"></i>
+                                <span class="small">Send final invoice reminder</span>
+                            </div>
+                            <span class="badge bg-danger">Overdue</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-circle me-2 text-primary"></i>
+                                <span class="small">Confirm AV equipment setup</span>
+                            </div>
+                            <span class="badge bg-info">Due: Oct 25</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
+                            <div class="d-flex align-items-center">
+                                <i class="bi bi-circle me-2 text-primary"></i>
+                                <span class="small">Arrange transportation for speakers</span>
+                            </div>
+                            <span class="badge bg-secondary">Due: Oct 26</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="calendar-widget mb-4">
+                    <div class="calendar-header">
+                        <h5 class="text-brown mb-0">October 2025</h5>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-chevron-left"></i></button>
+                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-chevron-right"></i></button>
+                        </div>
+                    </div>
+                    <div class="row text-center fw-bold small mb-2">
+                        <div class="col p-1">S</div>
+                        <div class="col p-1">M</div>
+                        <div class="col p-1">T</div>
+                        <div class="col p-1">W</div>
+                        <div class="col p-1">T</div>
+                        <div class="col p-1">F</div>
+                        <div class="col p-1">S</div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-1"><div class="calendar-day text-muted">29</div></div>
+                        <div class="col p-1"><div class="calendar-day text-muted">30</div></div>
+                        <div class="col p-1"><div class="calendar-day">1</div></div>
+                        <div class="col p-1"><div class="calendar-day">2</div></div>
+                        <div class="col p-1"><div class="calendar-day">3</div></div>
+                        <div class="col p-1"><div class="calendar-day">4</div></div>
+                        <div class="col p-1"><div class="calendar-day">5</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-1"><div class="calendar-day">6</div></div>
+                        <div class="col p-1"><div class="calendar-day">7</div></div>
+                        <div class="col p-1"><div class="calendar-day">8</div></div>
+                        <div class="col p-1"><div class="calendar-day">9</div></div>
+                        <div class="col p-1"><div class="calendar-day">10</div></div>
+                        <div class="col p-1"><div class="calendar-day">11</div></div>
+                        <div class="col p-1"><div class="calendar-day">12</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-1"><div class="calendar-day">13</div></div>
+                        <div class="col p-1"><div class="calendar-day">14</div></div>
+                        <div class="col p-1"><div class="calendar-day">15</div></div>
+                        <div class="col p-1"><div class="calendar-day">16</div></div>
+                        <div class="col p-1"><div class="calendar-day">17</div></div>
+                        <div class="col p-1"><div class="calendar-day">18</div></div>
+                        <div class="col p-1"><div class="calendar-day">19</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-1"><div class="calendar-day">20</div></div>
+                        <div class="col p-1"><div class="calendar-day">21</div></div>
+                        <div class="col p-1"><div class="calendar-day">22</div></div>
+                        <div class="col p-1"><div class="calendar-day">23</div></div>
+                        <div class="col p-1"><div class="calendar-day">24</div></div>
+                        <div class="col p-1"><div class="calendar-day">25</div></div>
+                        <div class="col p-1"><div class="calendar-day">26</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col p-1"><div class="calendar-day">27</div></div>
+                        <div class="col p-1"><div class="calendar-day event">28</div></div>
+                        <div class="col p-1"><div class="calendar-day">29</div></div>
+                        <div class="col p-1"><div class="calendar-day">30</div></div>
+                        <div class="col p-1"><div class="calendar-day">31</div></div>
+                        <div class="col p-1"><div class="calendar-day text-muted">1</div></div>
+                        <div class="col p-1"><div class="calendar-day text-muted">2</div></div>
+                    </div>
+                </div>
+                
+                <div class="card p-4">
+                    <h5 class="text-brown mb-3">Quick Actions</h5>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary text-start">
+                            <i class="bi bi-file-earmark-text"></i> Generate Event Report
+                        </button>
+                        <button class="btn btn-outline-primary text-start">
+                            <i class="bi bi-envelope"></i> Send Client Updates
+                        </button>
+                        <button class="btn btn-outline-primary text-start">
+                            <i class="bi bi-printer"></i> Print Event Schedule
+                        </button>
+                        <button class="btn btn-outline-primary text-start">
+                            <i class="bi bi-share"></i> Share with Team
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="modal fade" id="newEventModal" tabindex="-1" aria-labelledby="newEventModalLabel" aria-hidden="true">
@@ -93,11 +625,35 @@
                 </div>
                 <div class="modal-body">
                     <form>
-                        <div class="mb-3"><input type="text" class="form-control" placeholder="Event Name" required></div>
-                        <div class="mb-3"><select class="form-select" required><option value="">Select Event Type (Wedding, Conference, etc.)</option></select></div>
-                        <div class="mb-3"><input type="date" class="form-control" placeholder="Event Date" required></div>
-                        <div class="mb-3"><textarea class="form-control" placeholder="Description and Notes"></textarea></div>
-                        <button type="submit" class="btn btn-primary d-block w-100">Save Event</button>
+                        <div class="mb-3">
+                            <label class="form-label">Event Name</label>
+                            <input type="text" class="form-control" placeholder="Enter event name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Event Type</label>
+                            <select class="form-select" required>
+                                <option value="">Select Event Type</option>
+                                <option value="wedding">Wedding</option>
+                                <option value="conference">Conference</option>
+                                <option value="gala">Gala Dinner</option>
+                                <option value="meeting">Business Meeting</option>
+                                <option value="birthday">Birthday Party</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Event Date</label>
+                            <input type="date" class="form-control" placeholder="Event Date" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input type="text" class="form-control" placeholder="Event location">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description and Notes</label>
+                            <textarea class="form-control" rows="3" placeholder="Event details and special requirements"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-gold d-block w-100">Save Event</button>
                     </form>
                 </div>
             </div>
@@ -106,33 +662,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <script type="module">
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        
-        const auth = getAuth();
-        const logoutBtn = document.getElementById('logoutBtn');
-        const ticketingBtn = document.getElementById('ticketingBtn');
-        
-        // Simple check for plan gating
-        const userPlan = 'pro'; // Simulate 'pro' user for demonstration
-        
-        if (userPlan !== 'enterprise') {
-            ticketingBtn.classList.remove('btn-outline-danger');
-            ticketingBtn.classList.add('btn-secondary');
-            ticketingBtn.disabled = true;
-            ticketingBtn.title = 'Upgrade to the Enterprise Plan to access Ticketing and Registration.';
-        }
-        
-        // Logout functionality (Reused)
-        logoutBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            try {
-                await signOut(auth);
-                window.location.href = "login.html";
-            } catch (error) {
-                console.error("Logout failed:", error);
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (!currentUser) {
+                window.location.href = 'login.html';
+                return;
             }
+
+            // Update user info
+            if (currentUser.name) {
+                document.getElementById('userName').textContent = currentUser.name;
+            }
+            if (currentUser.email) {
+                document.getElementById('userEmail').textContent = currentUser.email;
+            }
+
+            // Plan gating for features
+            const userPlan = currentUser.plan || 'free';
+            const ticketingBtn = document.getElementById('ticketingBtn');
+            
+            if (userPlan !== 'enterprise') {
+                ticketingBtn.classList.remove('btn-outline-danger');
+                ticketingBtn.classList.add('btn-secondary');
+                ticketingBtn.disabled = true;
+                ticketingBtn.title = 'Upgrade to the Enterprise Plan to access Ticketing and Registration.';
+            }
+
+            // Logout functionality
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                logoutUser();
+            });
         });
+
+        // Logout user
+        function logoutUser() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'login.html';
+        }
     </script>
 </body>
 </html>

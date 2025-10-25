@@ -3,37 +3,322 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Pricing & Plans | HospiPro</title>
+    <title>Pricing & Plans | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root{
             --gold: #c9a44c;
             --brown: #3b2f2f;
+            --light-gold: #f5f0e4;
+            --light-brown: #f7f5f1;
         }
-        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
-        .navbar-custom{background:var(--brown);}
-        .pricing-section{padding: 60px 0;}
+        
+        body{
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background:#f7f5f1; 
+            color:#222;
+        }
+        
+        .navbar-custom{
+            background:var(--brown);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold) !important;
+        }
+        
+        .pricing-hero {
+            background: linear-gradient(135deg, #ffffff 0%, var(--light-brown) 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f5f0e4" opacity="0.3"/></svg>');
+            background-size: cover;
+        }
+        
+        .pricing-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gold);
+        }
+        
+        .pricing-section{
+            padding: 80px 0;
+        }
+        
         .price-card{
             background: #fff;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             border: 3px solid transparent;
             height: 100%;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
         .price-card.featured{
             border-color: var(--gold);
             box-shadow: 0 6px 15px rgba(201, 164, 76, 0.3);
+            transform: scale(1.05);
         }
-        .price-card h3{color: var(--brown);}
-        .price-tag{font-size: 2.5rem; font-weight: 700; color: var(--gold);}
-        .btn-gold{background:var(--gold); color:var(--brown); border:none;}
-        .btn-gold:hover{opacity:.95;}
-        .feature-list{list-style: none; padding-left: 0;}
-        .feature-list li{margin-bottom: 8px; font-size: 0.95rem;}
-        .feature-list li::before{content: '✓'; color: green; font-weight: bold; display: inline-block; width: 1em; margin-left: -1em;}
-        .feature-list li.limited::before{content: '–'; color: orange; font-weight: bold;}
-        .feature-list li.exclude::before{content: '✗'; color: red; font-weight: bold;}
+        
+        .price-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--gold);
+            color: var(--brown);
+            padding: 8px 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: rotate(45deg);
+        }
+        
+        .plan-header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-gold);
+        }
+        
+        .plan-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--light-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .plan-icon i {
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+        
+        .price-card h3{
+            color: var(--brown);
+            margin-bottom: 10px;
+        }
+        
+        .plan-description {
+            color: #6c757d;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        
+        .price-tag{
+            font-size: 3rem; 
+            font-weight: 700; 
+            color: var(--gold);
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .price-period {
+            color: #6c757d;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+        
+        .btn-gold{
+            background:var(--gold); 
+            color:var(--brown); 
+            border:none;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-gold:hover{
+            background: #b8943a;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        }
+        
+        .btn-outline-gold {
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: var(--brown);
+        }
+        
+        .feature-list{
+            list-style: none; 
+            padding-left: 0;
+            margin-top: 30px;
+        }
+        
+        .feature-list li{
+            margin-bottom: 12px; 
+            font-size: 0.95rem;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .feature-list li::before{
+            content: '✓'; 
+            color: #28a745; 
+            font-weight: bold; 
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        .feature-list li.limited::before{
+            content: '–'; 
+            color: var(--gold);
+        }
+        
+        .feature-list li.exclude::before{
+            content: '✗'; 
+            color: #dc3545;
+        }
+        
+        .feature-highlight {
+            background: var(--light-gold);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 3px 0;
+            font-weight: 500;
+        }
+        
+        .plan-badge {
+            background: var(--gold);
+            color: var(--brown);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+        
+        .comparison-section {
+            background: white;
+            padding: 80px 0;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+        
+        .faq-section {
+            padding: 80px 0;
+            background: var(--light-brown);
+        }
+        
+        .faq-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        footer {
+            background: var(--brown);
+            color: #fff;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        @media (max-width: 992px) {
+            .price-card.featured {
+                transform: scale(1);
+            }
+            
+            .price-card.featured::before {
+                top: 15px;
+                right: -35px;
+                font-size: 0.7rem;
+                padding: 6px 35px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .pricing-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .pricing-section {
+                padding: 60px 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -41,10 +326,12 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
-                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
-                <strong class="text-white">HospiPro</strong>
+                <div class="plan-icon" style="width: 35px; height: 35px;">
+                    <i class="bi bi-building"></i>
+                </div>
+                <strong class="text-white">HospiTour</strong>
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -53,7 +340,7 @@
                         <a class="nav-link text-white" href="index.html#features">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="services.html">Services Marketplace</a>
+                        <a class="nav-link text-white" href="services.html">Marketplace</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white active" aria-current="page" href="pricing.html">Pricing</a>
@@ -69,74 +356,110 @@
         </div>
     </nav>
 
+    <section class="pricing-hero">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-brown mb-3">Simple Pricing for Every Role</h1>
+            <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
+                Choose the plan that fits your business or professional needs. All plans include core features with no hidden fees.
+            </p>
+            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="billingOption" id="monthly" checked>
+                    <label class="form-check-label" for="monthly">Monthly Billing</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="billingOption" id="yearly">
+                    <label class="form-check-label" for="yearly">Yearly Billing <span class="plan-badge">Save 20%</span></label>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="pricing-section">
         <div class="container">
-            <h1 class="text-center display-5 fw-bold mb-3 text-brown">Simple Pricing for Every Role</h1>
-            <p class="text-center lead text-muted mb-5">Choose the plan that fits your business or professional needs.</p>
-
             <div class="row g-4 justify-content-center">
 
                 <div class="col-lg-4 col-md-6">
                     <div class="price-card">
-                        <h3 class="mb-3">Free Plan 🆓</h3>
-                        <div class="price-tag mb-3">
-                            $0<span class="small text-muted fw-normal"> / month</span>
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="bi bi-emoji-smile"></i>
+                            </div>
+                            <h3>Free Plan</h3>
+                            <p class="plan-description">Essential tools to get started and manage basic operations.</p>
+                            <div class="price-tag">
+                                $0
+                            </div>
+                            <div class="price-period">Forever free</div>
+                            <a href="signup.html" class="btn btn-outline-gold">Start for Free</a>
                         </div>
-                        <p class="text-muted small">Essential tools to get started and manage basic operations.</p>
-                        
-                        <a href="signup.html" class="btn btn-outline-secondary d-grid mb-4">Start for Free</a>
 
-                        <h5 class="small fw-bold text-brown">Core Features:</h5>
+                        <h5 class="small fw-bold text-brown mb-3">Core Features:</h5>
                         <ul class="feature-list small">
                             <li class="limited">Limited Dashboard Access</li>
                             <li class="limited">Basic Customer Support</li>
-                            <li>Basic Professional Profile (Service Listings)</li>
-                            <li>Basic Booking System (Scheduling)</li>
+                            <li>Basic Professional Profile</li>
+                            <li>Basic Booking System</li>
                             <li>Basic Accommodation / Menu Management</li>
+                            <li class="exclude">Payment Gateway Integration</li>
+                            <li class="exclude">Advanced Analytics</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-6">
                     <div class="price-card featured">
-                        <h3 class="mb-3">Pro Plan ⭐</h3>
-                        <div class="price-tag mb-3">
-                            $29<span class="small text-muted fw-normal"> / month</span>
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="bi bi-star"></i>
+                            </div>
+                            <h3>Pro Plan</h3>
+                            <p class="plan-description">Unlock full operational efficiency and client engagement tools.</p>
+                            <div class="price-tag">
+                                $29
+                            </div>
+                            <div class="price-period">per month</div>
+                            <a href="signup.html" class="btn btn-gold">Start 14-Day Free Trial</a>
                         </div>
-                        <p class="text-muted small">Unlock full operational efficiency and client engagement tools.</p>
-                        
-                        <a href="signup.html" class="btn btn-gold d-grid mb-4">Start 14-Day Free Trial</a>
 
-                        <h5 class="small fw-bold text-brown">All Free Features, PLUS:</h5>
+                        <h5 class="small fw-bold text-brown mb-3">All Free Features, PLUS:</h5>
                         <ul class="feature-list small">
                             <li>Advanced Dashboard & Analytics</li>
                             <li>Priority Customer Support</li>
-                            <li>**Integration with Payment Gateway** 🔒</li>
+                            <li><span class="feature-highlight">Payment Gateway Integration</span></li>
                             <li>Advanced Booking Forms & Reminders</li>
                             <li>Order Management (POS) / Housekeeping Status</li>
                             <li>Basic Client Management</li>
+                            <li>Email & SMS Notifications</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-md-8">
                     <div class="price-card">
-                        <h3 class="mb-3">Enterprise Plan 🏢</h3>
-                        <div class="price-tag mb-3">
-                            Custom Pricing
+                        <div class="plan-header">
+                            <div class="plan-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <h3>Enterprise Plan</h3>
+                            <p class="plan-description">The full-suite solution for large enterprises requiring custom scale.</p>
+                            <div class="price-tag">
+                                Custom
+                            </div>
+                            <div class="price-period">tailored pricing</div>
+                            <a href="contact.html" class="btn btn-outline-gold">Contact Sales</a>
                         </div>
-                        <p class="text-muted small">The full-suite solution for large enterprises requiring custom scale and integration.</p>
-                        
-                        <a href="#" class="btn btn-outline-primary d-grid mb-4">Contact Sales</a>
 
-                        <h5 class="small fw-bold text-brown">All Pro Features, PLUS:</h5>
+                        <h5 class="small fw-bold text-brown mb-3">All Pro Features, PLUS:</h5>
                         <ul class="feature-list small">
                             <li>Custom Dashboard & Advanced Reporting</li>
                             <li>Dedicated Customer Support</li>
-                            <li>**Advanced API Access** for custom systems</li>
+                            <li><span class="feature-highlight">Advanced API Access</span></li>
                             <li>Full Inventory & Transportation Management</li>
                             <li>Advanced Client and Guest Management</li>
                             <li>Event Ticketing & Registration</li>
+                            <li>White-label Solutions</li>
+                            <li>Custom Integrations</li>
                         </ul>
                     </div>
                 </div>
@@ -145,15 +468,192 @@
         </div>
     </section>
 
-    <footer class="bg-light py-4 mt-5 border-top">
-        <div class="container text-center small text-muted">
-            &copy; <span id="year"></span> HospiPro. All rights reserved. | <a href="pricing.html" class="text-muted">Pricing</a> | <a href="#" class="text-muted">Terms</a>
+    <section class="comparison-section">
+        <div class="container">
+            <h2 class="section-title text-center">Plan Comparison</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 700px;">
+                Compare features across all plans to find the perfect fit for your hospitality business
+            </p>
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col" style="width: 30%">Feature</th>
+                            <th scope="col" class="text-center">Free</th>
+                            <th scope="col" class="text-center">Pro</th>
+                            <th scope="col" class="text-center">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>User Accounts</td>
+                            <td class="text-center">1</td>
+                            <td class="text-center">5</td>
+                            <td class="text-center">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Storage Space</td>
+                            <td class="text-center">1GB</td>
+                            <td class="text-center">10GB</td>
+                            <td class="text-center">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>Customer Support</td>
+                            <td class="text-center">Basic</td>
+                            <td class="text-center">Priority</td>
+                            <td class="text-center">Dedicated</td>
+                        </tr>
+                        <tr>
+                            <td>Payment Processing</td>
+                            <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                            <td class="text-center"><i class="bi bi-check text-success"></i></td>
+                            <td class="text-center"><i class="bi bi-check text-success"></i></td>
+                        </tr>
+                        <tr>
+                            <td>API Access</td>
+                            <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                            <td class="text-center">Limited</td>
+                            <td class="text-center">Full Access</td>
+                        </tr>
+                        <tr>
+                            <td>Custom Reporting</td>
+                            <td class="text-center"><i class="bi bi-x text-danger"></i></td>
+                            <td class="text-center">Basic</td>
+                            <td class="text-center">Advanced</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title text-center">Frequently Asked Questions</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 700px;">
+                Get answers to common questions about our pricing and plans
+            </p>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-card">
+                        <h5 class="text-brown">Can I change plans later?</h5>
+                        <p class="text-muted mb-0">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate any differences in billing.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="text-brown">Is there a contract or long-term commitment?</h5>
+                        <p class="text-muted mb-0">No, all plans are month-to-month with no long-term contracts. You can cancel anytime without any cancellation fees.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="text-brown">What payment methods do you accept?</h5>
+                        <p class="text-muted mb-0">We accept all major credit cards, PayPal, and bank transfers for Enterprise plans. All payments are processed securely.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="text-brown">Do you offer discounts for non-profits?</h5>
+                        <p class="text-muted mb-0">Yes, we offer special pricing for registered non-profit organizations. Please contact our sales team for more information.</p>
+                    </div>
+                    
+                    <div class="faq-card">
+                        <h5 class="text-brown">What happens if I exceed my plan limits?</h5>
+                        <p class="text-muted mb-0">We'll notify you before you reach your limits and provide options to upgrade. For storage limits, you'll need to upgrade to continue adding content.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <p class="text-muted">Still have questions?</p>
+                <a href="contact.html" class="btn btn-gold">Contact Our Team</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="plan-icon" style="width: 40px; height: 40px; margin-right: 10px;">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <h4 class="text-white mb-0">HospiTour</h4>
+                    </div>
+                    <p class="text-light mb-0">The complete ecosystem for hospitality excellence across Africa.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-gold mb-3">Product</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="marketplace.html">Marketplace</a></li>
+                        <li><a href="signup.html">Sign Up</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-gold mb-3">Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="legal.html">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3">
+                    <h5 class="text-gold mb-3">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="jobs.html">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="contact.html">Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; <span id="year"></span> HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Billing toggle functionality
+        const monthlyRadio = document.getElementById('monthly');
+        const yearlyRadio = document.getElementById('yearly');
+        const proPrice = document.querySelector('.price-card.featured .price-tag');
+        const proPeriod = document.querySelector('.price-card.featured .price-period');
+        
+        yearlyRadio.addEventListener('change', function() {
+            if (this.checked) {
+                proPrice.textContent = '$23';
+                proPeriod.textContent = 'per month, billed annually';
+            }
+        });
+        
+        monthlyRadio.addEventListener('change', function() {
+            if (this.checked) {
+                proPrice.textContent = '$29';
+                proPeriod.textContent = 'per month';
+            }
+        });
     </script>
 </body>
 </html>

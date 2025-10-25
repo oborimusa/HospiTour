@@ -1,139 +1,607 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Sign Up | HospiPro</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Service Setup | HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root{ --gold: #c9a44c; --brown: #3b2f2f; }
-        body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .signup-container{ max-width: 500px; margin: 80px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
-        .btn-gold{ background:var(--gold); color:var(--brown); border:none; }
-        .btn-gold:hover{ opacity:.95; }
-        .role-selector{ cursor: pointer; border: 2px solid #ccc; transition: all 0.2s; }
-        .role-selector:hover{ border-color: var(--gold); background-color: #fcf8ee; }
-        .role-selector.selected{ border-color: var(--gold); background-color: #fcf8ee; box-shadow: 0 0 0 3px rgba(201, 164, 76, 0.3); }
+      :root {
+        --gold: #c9a44c;
+        --brown: #3b2f2f;
+        --light-brown: #4a3c3c;
+        --cream: #f7f5f1;
+        --light-cream: #fefdfb;
+      }
+      
+      body {
+        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: var(--cream);
+        color: var(--brown);
+      }
+      
+      .sidebar {
+        width: 250px;
+        background: var(--brown);
+        height: 100vh;
+        position: fixed;
+        padding-top: 20px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        z-index: 100;
+      }
+      
+      .sidebar a {
+        color: rgba(255, 255, 255, 0.7);
+        padding: 12px 15px;
+        display: block;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-radius: 0 30px 30px 0;
+        margin-right: 10px;
+      }
+      
+      .sidebar a:hover, .sidebar a.active {
+        background: var(--light-brown);
+        color: white;
+        border-left: 3px solid var(--gold);
+        transform: translateX(5px);
+      }
+      
+      .main-content {
+        margin-left: 250px;
+        padding: 30px;
+        min-height: 100vh;
+      }
+      
+      .text-gold { color: var(--gold); }
+      .text-brown { color: var(--brown); }
+      .bg-gold { background-color: var(--gold); }
+      .bg-brown { background-color: var(--brown); }
+      
+      .card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+      }
+      
+      .card:hover {
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      }
+      
+      .btn-gold {
+        background-color: var(--gold);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-gold:hover {
+        background-color: #b8943a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+      }
+      
+      .btn-outline-gold {
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        border-radius: 6px;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-outline-gold:hover {
+        background-color: var(--gold);
+        color: white;
+        transform: translateY(-2px);
+      }
+      
+      .service-card {
+        background: var(--light-cream);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border-top: 4px solid var(--gold);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      }
+      
+      .service-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+      }
+      
+      .service-icon.primary {
+        background-color: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+      }
+      
+      .service-icon.success {
+        background-color: rgba(25, 135, 84, 0.1);
+        color: #198754;
+      }
+      
+      .service-icon.warning {
+        background-color: rgba(255, 193, 7, 0.1);
+        color: #ffc107;
+      }
+      
+      .service-icon.info {
+        background-color: rgba(13, 202, 240, 0.1);
+        color: #0dcaf0;
+      }
+      
+      .plan-badge {
+        position: absolute;
+        top: -10px;
+        right: 15px;
+        background: var(--gold);
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      
+      .section-title {
+        position: relative;
+        padding-bottom: 10px;
+        margin-bottom: 25px;
+      }
+      
+      .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--gold);
+      }
+      
+      .stats-card {
+        background: var(--light-cream);
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        border-top: 4px solid var(--gold);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+      }
+      
+      .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      }
+      
+      .progress {
+        height: 8px;
+        border-radius: 10px;
+        margin-top: 10px;
+      }
+      
+      .progress-bar {
+        background-color: var(--gold);
+        border-radius: 10px;
+      }
+      
+      @media (max-width: 992px) {
+        .sidebar {
+          width: 70px;
+          overflow: hidden;
+        }
+        
+        .sidebar .text-center h5, .sidebar .text-center small, .sidebar a span {
+          display: none;
+        }
+        
+        .sidebar a {
+          text-align: center;
+          padding: 15px 5px;
+          font-size: 1.2rem;
+        }
+        
+        .main-content {
+          margin-left: 70px;
+        }
+      }
+      
+      @media (max-width: 576px) {
+        .sidebar {
+          width: 100%;
+          height: auto;
+          position: relative;
+        }
+        
+        .sidebar .d-flex {
+          justify-content: space-between;
+        }
+        
+        .main-content {
+          margin-left: 0;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    
+    <div class="sidebar">
+      <div class="text-center mb-4">
+        <h5 class="text-white">HospiTour</h5>
+        <small class="text-gold">Service Professional</small>
+      </div>
+      <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> Dashboard</a>
+      <a href="professional-profile.html"><i class="fas fa-user me-2"></i> Profile & Portfolio</a>
+      <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> Booking Management</a>
+      <a href="professional-clients.html"><i class="fas fa-users me-2"></i> Client Management</a>
+      <a href="professional-billing.html"><i class="fas fa-money-bill-wave me-2"></i> Billing & Payments</a>
+      <a href="professional-service-setup.html" class="active"><i class="fas fa-cog me-2"></i> Service Setup</a>
+      <hr class="text-white-50 my-4">
+      <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Log Out</a>
+    </div>
 
-    <div class="signup-container">
-        <h2 class="text-brown text-center mb-4">Create Your HospiPro Account</h2>
-        <p class="text-muted text-center small mb-4">Choose your account type to access the right dashboard.</p>
+    <div class="main-content">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-brown mb-0">Service Setup & Configuration</h1>
+        <div class="d-flex align-items-center">
+          <div class="me-3">
+            <small class="text-muted">Current Plan</small>
+            <div class="badge bg-light text-brown">Free</div>
+          </div>
+          <button class="btn btn-gold btn-sm">
+            <i class="fas fa-crown me-1"></i> Upgrade Plan
+          </button>
+        </div>
+      </div>
 
-        <form id="signupForm">
-            <div class="mb-4">
-                <label class="form-label fw-bold small">I am a:</label>
-                <div class="row g-3">
-                    <div class="col-6">
-                        <div class="card p-3 role-selector selected" data-role="business" id="roleBusiness">
-                            <h6 class="mb-1 text-brown">🏢 Business/Employer</h6>
-                            <p class="small text-muted mb-0">Manage property, staff, and operations.</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="card p-3 role-selector" data-role="professional" id="roleProfessional">
-                            <h6 class="mb-1 text-brown">👤 Service Professional</h6>
-                            <p class="small text-muted mb-0">Manage clients, bookings, and profile.</p>
-                        </div>
-                    </div>
-                </div>
-                <input type="hidden" name="accountType" id="accountType" value="business">
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="stats-card">
+            <div class="d-flex align-items-center">
+              <div class="bg-primary text-white rounded p-2 me-3">
+                <i class="fas fa-concierge-bell"></i>
+              </div>
+              <div>
+                <div class="fw-bold">5</div>
+                <small class="text-muted">Active Services</small>
+              </div>
             </div>
-            
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stats-card">
+            <div class="d-flex align-items-center">
+              <div class="bg-success text-white rounded p-2 me-3">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div>
+                <div class="fw-bold">12</div>
+                <small class="text-muted">Completed Setups</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stats-card">
+            <div class="d-flex align-items-center">
+              <div class="bg-info text-white rounded p-2 me-3">
+                <i class="fas fa-star"></i>
+              </div>
+              <div>
+                <div class="fw-bold">4.8</div>
+                <small class="text-muted">Avg. Service Rating</small>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="stats-card">
+            <div class="d-flex align-items-center">
+              <div class="bg-warning text-white rounded p-2 me-3">
+                <i class="fas fa-clock"></i>
+              </div>
+              <div>
+                <div class="fw-bold">3</div>
+                <small class="text-muted">Pending Configurations</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-title text-brown">Service Configuration</h3>
+      
+      <div class="row g-4 mb-5">
+        <div class="col-lg-6">
+          <div class="service-card">
+            <div class="service-icon primary">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h5 class="mb-3">Booking Settings</h5>
+            <p class="small text-muted mb-3">Configure your availability, booking lead times, and scheduling preferences.</p>
             <div class="mb-3">
-                <input type="email" class="form-control" id="email" placeholder="Email Address" required>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="instantBooking" checked>
+                <label class="form-check-label small" for="instantBooking">Enable Instant Booking</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="advanceBooking" checked>
+                <label class="form-check-label small" for="advanceBooking">Allow Advance Bookings (90 days)</label>
+              </div>
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="bufferTime">
+                <label class="form-check-label small" for="bufferTime">Add Buffer Time Between Appointments</label>
+              </div>
             </div>
-            <div class="mb-4">
-                <input type="password" class="form-control" id="password" placeholder="Password (min. 6 characters)" required>
-            </div>
-            
-            <button type="submit" class="btn btn-gold btn-lg d-block w-100">Sign Up</button>
-            
-            <p id="errorMsg" class="text-danger small mt-3 text-center" style="display:none;"></p>
+            <button class="btn btn-outline-primary w-100">
+              <i class="fas fa-cog me-2"></i> Configure Booking
+            </button>
+          </div>
+        </div>
 
-            <p class="text-center small mt-4">
-                Already have an account? <a href="login.html" class="text-brown">Log In here</a>
-            </p>
-        </form>
+        <div class="col-lg-6">
+          <div class="service-card">
+            <div class="service-icon success">
+              <i class="fas fa-money-bill-wave"></i>
+            </div>
+            <h5 class="mb-3">Pricing & Packages</h5>
+            <p class="small text-muted mb-3">Set up your service rates, packages, and payment options.</p>
+            <div class="mb-3">
+              <div class="d-flex justify-content-between small mb-2">
+                <span>Base Service Rate</span>
+                <span class="fw-bold">$150/hour</span>
+              </div>
+              <div class="d-flex justify-content-between small mb-2">
+                <span>Package Discounts</span>
+                <span class="fw-bold">10-20%</span>
+              </div>
+              <div class="d-flex justify-content-between small">
+                <span>Accepted Payments</span>
+                <span class="fw-bold">Credit, Bank Transfer</span>
+              </div>
+            </div>
+            <button class="btn btn-outline-success w-100">
+              <i class="fas fa-edit me-2"></i> Manage Pricing
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="service-card">
+            <div class="service-icon warning">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h5 class="mb-3">Service Areas</h5>
+            <p class="small text-muted mb-3">Define where you provide services and travel fees.</p>
+            <div class="mb-3">
+              <div class="d-flex align-items-center text-muted small mb-2">
+                <i class="fas fa-check text-success me-2"></i>
+                <span>New York Metro Area</span>
+              </div>
+              <div class="d-flex align-items-center text-muted small mb-2">
+                <i class="fas fa-check text-success me-2"></i>
+                <span>Northern New Jersey</span>
+              </div>
+              <div class="d-flex align-items-center text-muted small">
+                <i class="fas fa-times text-danger me-2"></i>
+                <span>Outside 50-mile radius (+$75 fee)</span>
+              </div>
+            </div>
+            <button class="btn btn-outline-warning w-100">
+              <i class="fas fa-map-pin me-2"></i> Set Service Areas
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-lg-6">
+          <div class="service-card">
+            <div class="service-icon info">
+              <i class="fas fa-tools"></i>
+            </div>
+            <h5 class="mb-3">Equipment & Requirements</h5>
+            <p class="small text-muted mb-3">List equipment you provide and client requirements.</p>
+            <div class="mb-3">
+              <div class="d-flex align-items-center text-muted small mb-2">
+                <i class="fas fa-check text-success me-2"></i>
+                <span>Basic Sound System</span>
+              </div>
+              <div class="d-flex align-items-center text-muted small mb-2">
+                <i class="fas fa-check text-success me-2"></i>
+                <span>Lighting Equipment</span>
+              </div>
+              <div class="d-flex align-items-center text-muted small">
+                <i class="fas fa-info-circle text-primary me-2"></i>
+                <span>Client must provide venue access</span>
+              </div>
+            </div>
+            <button class="btn btn-outline-info w-100">
+              <i class="fas fa-list me-2"></i> Manage Equipment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="my-5">
+
+      <h3 class="section-title text-brown">Advanced Service Features</h3>
+      
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="card p-4 position-relative">
+            <span class="plan-badge">Pro+</span>
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-primary text-white rounded p-2 me-3">
+                <i class="fas fa-robot"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">Automated Scheduling</h5>
+                <p class="small text-muted mb-0">Set up smart scheduling rules and automated appointment management.</p>
+              </div>
+            </div>
+            <button class="btn btn-outline-primary w-100" id="autoSchedulingBtn" disabled>
+              <i class="fas fa-cog me-2"></i> Configure Automation (Pro+)
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card p-4 position-relative">
+            <span class="plan-badge">Pro+</span>
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-success text-white rounded p-2 me-3">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">Dynamic Pricing</h5>
+                <p class="small text-muted mb-0">Automatically adjust prices based on demand, season, and availability.</p>
+              </div>
+            </div>
+            <button class="btn btn-outline-success w-100" id="dynamicPricingBtn" disabled>
+              <i class="fas fa-chart-bar me-2"></i> Set Up Pricing (Pro+)
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card p-4 position-relative">
+            <span class="plan-badge">Enterprise</span>
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-warning text-white rounded p-2 me-3">
+                <i class="fas fa-users-cog"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">Team Management</h5>
+                <p class="small text-muted mb-0">Add team members and assign roles and permissions.</p>
+              </div>
+            </div>
+            <button class="btn btn-outline-warning w-100" disabled>
+              <i class="fas fa-user-plus me-2"></i> Manage Team (Enterprise)
+            </button>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card p-4 position-relative">
+            <span class="plan-badge">Enterprise</span>
+            <div class="d-flex align-items-start mb-3">
+              <div class="bg-info text-white rounded p-2 me-3">
+                <i class="fas fa-plug"></i>
+              </div>
+              <div>
+                <h5 class="mb-1">API Integration</h5>
+                <p class="small text-muted mb-0">Connect with external systems and automate workflows.</p>
+              </div>
+            </div>
+            <button class="btn btn-outline-info w-100" disabled>
+              <i class="fas fa-code me-2"></i> API Settings (Enterprise)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-4 mt-5">
+        <h5 class="mb-3">Service Setup Progress</h5>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="small">Profile Completion</span>
+            <span class="small fw-bold">85%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="small">Service Configuration</span>
+            <span class="small fw-bold">70%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 70%"></div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="d-flex justify-content-between mb-1">
+            <span class="small">Payment Setup</span>
+            <span class="small fw-bold">45%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 45%"></div>
+          </div>
+        </div>
+        <button class="btn btn-gold w-100 mt-3">
+          <i class="fas fa-rocket me-2"></i> Launch Service
+        </button>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    
+    <script>
+      // Simple JavaScript without Firebase dependencies
+      const logoutBtn = document.getElementById('logoutBtn');
+      const autoSchedulingBtn = document.getElementById('autoSchedulingBtn');
+      const dynamicPricingBtn = document.getElementById('dynamicPricingBtn');
+      
+      // Simulate plan gating for Pro+ features
+      const userPlan = 'free'; 
+      
+      if (userPlan !== 'pro' && userPlan !== 'enterprise') {
+        autoSchedulingBtn.disabled = true;
+        dynamicPricingBtn.disabled = true;
+      }
+      
+      // Logout functionality (simplified)
+      logoutBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (confirm('Are you sure you want to log out?')) {
+          alert('Redirecting to login page...');
+          // In a real app, this would redirect to login page
+          // window.location.href = "login.html";
+        }
+      });
 
-        // CONFIG: Use your actual project config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-            authDomain: "hospipro-86b8d.firebaseapp.com",
-            projectId: "hospipro-86b8d",
-            storageBucket: "hospipro-86b8d.firebasestorage.app",
-            messagingSenderId: "801856698977",
-            appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        };
+      // Add click handlers for feature buttons
+      autoSchedulingBtn.addEventListener('click', () => {
+        if (!autoSchedulingBtn.disabled) {
+          alert("Opening automated scheduling configuration...");
+        } else {
+          alert("Please upgrade to Pro+ plan to access automated scheduling.");
+        }
+      });
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        
-        const signupForm = document.getElementById('signupForm');
-        const errorMsg = document.getElementById('errorMsg');
-        const accountTypeInput = document.getElementById('accountType');
-        const roleBusiness = document.getElementById('roleBusiness');
-        const roleProfessional = document.getElementById('roleProfessional');
+      dynamicPricingBtn.addEventListener('click', () => {
+        if (!dynamicPricingBtn.disabled) {
+          alert("Opening dynamic pricing configuration...");
+        } else {
+          alert("Please upgrade to Pro+ plan to access dynamic pricing.");
+        }
+      });
 
-        // Role Selection Logic
-        [roleBusiness, roleProfessional].forEach(selector => {
-            selector.addEventListener('click', () => {
-                // Remove 'selected' from all
-                roleBusiness.classList.remove('selected');
-                roleProfessional.classList.remove('selected');
-                // Add 'selected' to clicked element
-                selector.classList.add('selected');
-                // Update hidden input field
-                accountTypeInput.value = selector.getAttribute('data-role');
-            });
+      // Animate progress bars on page load
+      document.addEventListener('DOMContentLoaded', function() {
+        const progressBars = document.querySelectorAll('.progress-bar');
+        progressBars.forEach(bar => {
+          const width = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => {
+            bar.style.width = width;
+          }, 500);
         });
-
-        // Form Submission Handler
-        signupForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            errorMsg.style.display = 'none';
-
-            const email = signupForm.email.value;
-            const password = signupForm.password.value;
-            const accountType = accountTypeInput.value;
-
-            try {
-                // 1. Create user with Email and Password
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                // 2. Write custom user data (role) to Firestore
-                await setDoc(doc(db, "users", user.uid), {
-                    email: email,
-                    accountType: accountType,
-                    plan: 'free', // Set default plan
-                    createdAt: new Date()
-                });
-
-                // 3. Redirect user based on their chosen role
-                if (accountType === 'business') {
-                    window.location.href = "dashboard.html"; 
-                } else if (accountType === 'professional') {
-                    window.location.href = "professional-dashboard.html";
-                }
-
-            } catch (error) {
-                console.error("Signup Failed:", error);
-                errorMsg.textContent = "Registration failed: " + error.message.replace("Firebase: ", "");
-                errorMsg.style.display = 'block';
-            }
-        });
+      });
     </script>
-</body>
+  </body>
 </html>

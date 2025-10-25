@@ -1,26 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Professional Dashboard | HospiPro</title>
+    <title>Professional Dashboard | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root{ --gold: #c9a44c; --brown: #3b2f2f; }
         body{ font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; }
-        .sidebar{ width: 250px; background: var(--brown); height: 100vh; position: fixed; padding-top: 20px; }
+        .text-brown{ color: var(--brown) !important; }
+        .text-gold{ color: var(--gold) !important; }
+
+        /* --- DESKTOP/TABLET (md breakpoint and up) --- */
+        /* d-md-block means display:block on medium screens and larger */
+        .sidebar { 
+            width: 250px; 
+            background: var(--brown); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            /* Hide on xs/sm, Show on md+ */
+            display: none; 
+        }
+
+        /* Show the sidebar block only on medium screens and up */
+        @media (min-width: 768px) {
+            .sidebar {
+                display: block;
+            }
+        }
+
         .sidebar a{ color: rgba(255, 255, 255, 0.7); padding: 10px 15px; display: block; text-decoration: none; }
         .sidebar a:hover, .sidebar a.active{ background: #4a3c3c; color: white; border-left: 3px solid var(--gold); }
-        .main-content{ margin-left: 250px; padding: 20px; }
+        
+        /* --- MAIN CONTENT ADJUSTMENT --- */
+        /* No margin-left on small screens. Add it only on medium screens and up */
+        .main-content{ 
+            padding: 20px; 
+            padding-top: 70px; /* Add space for fixed top navbar on mobile */
+        }
+        @media (min-width: 768px) {
+            .main-content {
+                margin-left: 250px; /* Shift content right when sidebar is visible */
+                padding-top: 20px; /* Remove mobile padding adjustment */
+            }
+        }
+
         .card-metric{ border-left: 5px solid var(--gold); }
-        .text-gold{ color: var(--gold); }
     </style>
 </head>
 <body>
 
-    <div class="sidebar">
+    <nav class="navbar navbar-dark bg-dark fixed-top d-md-none">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo1.png" alt="logo" style="width: 30px;" class="me-2">
+                HospiPro Dashboard
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileSidebar" aria-controls="mobileSidebar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
+
+    <div class="offcanvas offcanvas-start bg-brown" tabindex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div class="offcanvas-header text-white border-bottom border-white-50">
+            <h5 class="offcanvas-title" id="mobileSidebarLabel">Navigation</h5>
+            <button type="button" class="btn-close text-reset btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body p-0">
+            <a href="professional-dashboard.html" class="active">🏠 Dashboard</a>
+            <a href="professional-profile.html">👤 Profile & Portfolio</a>
+            <a href="professional-bookings.html">🗓️ Booking Management</a>
+            <a href="professional-clients.html">👥 Client Management</a>
+            <a href="professional-billing.html">💵 Billing & Payments</a>
+            <hr class="text-white-50">
+            <a href="#" id="logoutBtnMobile">➡️ Log Out</a>
+        </div>
+    </div>
+
+    <div class="sidebar d-none d-md-block">
         <div class="text-center mb-4">
-            <h5 class="text-white">HospiPro</h5>
+            <a href="index.html" class="text-decoration-none">
+                <img src="img/logo1.png" alt="logo" style="width: 40px;">
+                <h5 class="text-white">HospiTour</h5>
+            </a>
             <small class="text-gold">Service Professional</small>
         </div>
         <a href="professional-dashboard.html" class="active">🏠 Dashboard</a>
@@ -29,7 +93,7 @@
         <a href="professional-clients.html">👥 Client Management</a>
         <a href="professional-billing.html">💵 Billing & Payments</a>
         <hr class="text-white-50">
-        <a href="#" id="logoutBtn">➡️ Log Out</a>
+        <a href="#" id="logoutBtnDesktop">➡️ Log Out</a>
     </div>
 
     <div class="main-content">
@@ -38,21 +102,23 @@
         
         <h3 class="mb-3 text-brown">Performance Snapshot</h3>
         <div class="row g-4 mb-5">
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card p-3 card-metric">
                     <div class="small text-muted">Upcoming Bookings (7 Days)</div>
                     <h2 class="fw-bold text-brown" id="metricBookings">3</h2>
                     <p class="small mb-0 text-success">View all pending requests.</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card p-3 card-metric">
                     <div class="small text-muted">Estimated Earnings (This Month)</div>
                     <h2 class="fw-bold text-brown" id="metricEarnings">$1,450</h2>
                     <p class="small mb-0 text-info" id="earningsHint">Excludes pending payments (Pro+ required).</p>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-6">
+            
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card p-3 card-metric">
                     <div class="small text-muted">Profile Rating</div>
                     <h2 class="fw-bold text-brown" id="metricRating">4.8 <span class="small">/ 5</span></h2>
@@ -63,19 +129,19 @@
 
         <h3 class="mb-3 text-brown">Quick Actions</h3>
         <div class="row g-3">
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-12">
                 <a href="professional-profile.html" class="card text-decoration-none p-3 shadow-sm h-100">
                     <h5 class="text-brown">Update Profile</h5>
                     <p class="small text-muted mb-0">Showcase new portfolio work.</p>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-12">
                 <a href="professional-bookings.html" class="card text-decoration-none p-3 shadow-sm h-100">
                     <h5 class="text-brown">Manage Availability</h5>
                     <p class="small text-muted mb-0">Block dates or update your calendar.</p>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-sm-12">
                 <a href="professional-clients.html" class="card text-decoration-none p-3 shadow-sm h-100">
                     <h5 class="text-brown">Contact Client</h5>
                     <p class="small text-muted mb-0">Review client history and contact details.</p>
@@ -92,20 +158,26 @@
         import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         // CONFIG: Use your actual project config
-        const firebaseConfig = {
-            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-            authDomain: "hospipro-86b8d.firebaseapp.com",
-            projectId: "hospipro-86b8d",
-            storageBucket: "hospipro-86b8d.firebasestorage.app",
-            messagingSenderId: "801856698977",
-            appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        };
+       const firebaseConfig = {
+  apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+  authDomain: "hospitour-6a1da.firebaseapp.com",
+  projectId: "hospitour-6a1da",
+  storageBucket: "hospitour-6a1da.firebasestorage.app",
+  messagingSenderId: "73315471607",
+  appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+  measurementId: "G-V82ZQPV48F"
+};
 
+// Initialize Firebase
+
+const analytics = getAnalytics(app);
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
         
-        const logoutBtn = document.getElementById('logoutBtn');
+        // Updated DOM references for the new structure
+        const logoutBtnDesktop = document.getElementById('logoutBtnDesktop');
+        const logoutBtnMobile = document.getElementById('logoutBtnMobile');
         const planLevelEl = document.getElementById('planLevel');
         const userNameEl = document.getElementById('userName');
 
@@ -130,29 +202,24 @@
         // Authentication and Role Check
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // Check user's role and plan from Firestore
-                const userRef = doc(db, 'users', user.uid); // Assumes role/plan is stored here
+                const userRef = doc(db, 'users', user.uid);
                 const userSnap = await getDoc(userRef);
 
                 if (userSnap.exists() && userSnap.data().accountType === 'professional') {
-                    // User is logged in AND is a professional. Proceed.
                     const userPlan = userSnap.data().plan || 'free'; 
-                    // Use email start as a temporary name placeholder
                     userNameEl.textContent = user.email.split('@')[0]; 
                     updateMetrics(userPlan);
                 } else {
-                    // Logged in but wrong role (or role not set)
                     alert("Access Denied. You must be logged in as a Service Professional.");
                     window.location.href = "login.html";
                 }
             } else {
-                // Not logged in
                 window.location.href = "login.html";
             }
         });
 
         // Logout functionality
-        logoutBtn.addEventListener('click', async (e) => {
+        const handleLogout = async (e) => {
             e.preventDefault();
             try {
                 await signOut(auth);
@@ -160,7 +227,11 @@
             } catch (error) {
                 console.error("Logout failed:", error);
             }
-        });
+        };
+
+        // Attach logout listeners to both desktop and mobile buttons
+        if (logoutBtnDesktop) logoutBtnDesktop.addEventListener('click', handleLogout);
+        if (logoutBtnMobile) logoutBtnMobile.addEventListener('click', handleLogout);
     </script>
 </body>
 </html>

@@ -3,34 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hire Talent – HospiPro</title>
-  <meta name="description" content="Hire experienced hospitality professionals through Hospiple. Connect with chefs, waiters, housekeepers, and more." />
+  <title>Hire Talent – HospiTour</title>
+  <meta name="description" content="Hire experienced hospitality professionals through HospiTour. Connect with chefs, waiters, housekeepers, and more." />
   
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <style>
+    :root {
+      --gold: #c9a44c;
+      --brown: #3b2f2f;
+      --light-gold: #f5f0e4;
+      --light-brown: #f7f5f1;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #fff8f0;
-      color: #4a2c2a;
+      font-family: 'Inter', sans-serif;
+      background-color: #f7f5f1;
+      color: #3b2f2f;
       margin: 0;
       padding: 0;
     }
 
-    /* ✅ Navbar */
+    /* Navbar */
     .navbar {
-      background-color: #fff;
+      background: var(--brown);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    .navbar-brand span {
-      font-size: 22px;
+    .navbar-brand {
+      font-weight: 700;
     }
 
-    /* ✅ Hero Section */
+    .nav-link {
+      color: rgba(255,255,255,0.8) !important;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--gold) !important;
+    }
+
+    /* Hero Section */
     .hero {
-      background: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      background: linear-gradient(rgba(59, 47, 47, 0.8), rgba(59, 47, 47, 0.8)),
+                  url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
       min-height: 70vh;
       display: flex;
       align-items: center;
@@ -38,112 +56,307 @@
       color: white;
       text-align: center;
       position: relative;
-      margin-top: 80px; /* space for fixed navbar */
+      margin-top: 76px;
       padding: 0 1rem;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.5);
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 700px;
+      max-width: 800px;
       margin: auto;
     }
 
     .hero h1 {
       font-weight: 700;
-      font-size: 2.2rem;
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
     }
 
     .hero p {
-      font-size: 1rem;
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .search-input {
+      border-radius: 50px;
+      border: 2px solid transparent;
+      padding: 12px 20px;
+      transition: all 0.3s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
     }
 
     .btn-gold {
-      background-color: #b8860b;
-      color: #fff;
+      background: var(--gold);
+      color: var(--brown);
       border: none;
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
     }
 
     .btn-gold:hover {
-      background-color: #a0750a;
+      background: #b8943a;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
     }
 
-    footer {
-      background-color: #4a2c2a;
-      color: #fff8f0;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 50px;
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 3rem;
     }
 
-    /* ✅ Cards */
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+    }
+
+    /* Service Cards */
     .service-card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
     }
 
     .service-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.1);
     }
 
-    /* ✅ Responsive Adjustments */
+    .service-image {
+      height: 200px;
+      background: var(--light-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 3rem;
+    }
+
+    .service-content {
+      padding: 25px;
+    }
+
+    .service-rating {
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .service-location {
+      color: #6c757d;
+      margin-bottom: 15px;
+    }
+
+    .service-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .service-features li {
+      padding: 5px 0;
+      color: #6c757d;
+    }
+
+    .service-features li i {
+      color: var(--gold);
+      margin-right: 8px;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      background: var(--light-brown);
+      padding: 80px 0;
+    }
+
+    .step-card {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .step-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--light-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .step-icon i {
+      font-size: 2rem;
+      color: var(--gold);
+    }
+
+    .step-number {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--brown);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      margin: 0 auto 15px;
+    }
+
+    /* Categories */
+    .categories-section {
+      padding: 80px 0;
+    }
+
+    .category-card {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      border-top: 4px solid var(--gold);
+    }
+
+    .category-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: var(--light-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+
+    .category-icon i {
+      font-size: 1.8rem;
+      color: var(--gold);
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--brown) 0%, #2a1f1f 100%);
+      color: white;
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    /* Results Section */
+    .results-section {
+      padding: 80px 0;
+      background: var(--light-brown);
+    }
+
+    .provider-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      height: 100%;
+    }
+
+    .provider-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .provider-badge {
+      background: var(--gold);
+      color: var(--brown);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    footer {
+      background: var(--brown);
+      color: #fff;
+      padding: 40px 0 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
     @media (max-width: 768px) {
       .hero {
         min-height: 60vh;
-        margin-top: 60px;
+        margin-top: 66px;
       }
 
       .hero h1 {
-        font-size: 1.8rem;
+        font-size: 2.2rem;
       }
 
       .hero p {
-        font-size: 0.95rem;
+        font-size: 1rem;
       }
 
-      .navbar-brand span {
-        font-size: 24px;
-      }
-
-      #searchInput {
-        width: 100% !important;
-      }
-
-      .btn-gold {
-        width: 100%;
-      }
-
-      .col-md-4 {
-        flex: 0 0 100%;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .hero {
-        min-height: 50vh;
+      .section-title {
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- ✅ Navbar -->
-  <nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg py-3 fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="img/logo1.png" alt="Hospiple logo" style="width: 40px; margin-right: 8px;">
-        <span class="fw-bold">HospiPro</span>
+        <div class="category-icon" style="width: 40px; height: 40px; margin-right: 10px;">
+          <i class="bi bi-building"></i>
+        </div>
+        <span style="font-size: 25px; font-weight: bold;">HospiTour</span>
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <i class="bi bi-list text-dark fs-2"></i>
+      <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="nav">
         <ul class="navbar-nav text-left">
@@ -153,7 +366,7 @@
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link active text-warning" href="hire.html">Service Providers</a></li>
+          <li class="nav-item"><a class="nav-link active" href="hire.html">Service Providers</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
           <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
         </ul>
@@ -161,191 +374,422 @@
     </div>
   </nav>
 
-  <!-- ✅ Hero -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content container">
-      <h1 style="margin-top: 80px;">Showcase & Hire the Best in Hospitality</h1>
-      <p class="lead mt-3 mb-4">
-        Empowering hospitality professionals and businesses to grow, connect, and shine.
+      <h1>Showcase & Hire the Best in Hospitality</h1>
+      <p class="lead">
+        Empowering hospitality professionals and businesses to grow, connect, and shine across Africa.
       </p>
-      <div class="d-flex flex-column flex-md-row justify-content-center gap-2">
-        <input id="searchInput" type="text" class="form-control w-100 w-md-50" placeholder="Search for services (e.g. catering, décor, hotel)">
-        <button id="searchBtn" class="btn btn-gold px-4">Search</button>
+      <div class="search-container">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control search-input" placeholder="Search for services (e.g. catering, décor, hotel management)" id="searchInput">
+          <button class="btn btn-gold" type="button" id="searchBtn">
+            <i class="bi bi-search"></i> Search
+          </button>
+        </div>
       </div>
       <p class="mt-4">
-        <a href="signup.html" class="text-warning fw-bold">
-          Are you a hospitality provider? Create your free profile →
+        <a href="signup.html" class="text-warning fw-bold text-decoration-none">
+          Are you a hospitality provider? Create your free profile <i class="bi bi-arrow-right"></i>
         </a>
       </p>
     </div>
   </section>
 
-  <!-- ✅ Search Results -->
-  <section class="container my-5" id="resultsSection" style="display:none;">
-    <h2 class="section-title mb-4">Search Results</h2>
-    <div class="row g-4" id="resultsContainer"></div>
-  </section>
-
-  <!-- ✅ Featured Services -->
-  <section class="py-5">
+  <!-- Service Categories -->
+  <section class="categories-section">
     <div class="container">
-      <h2 class="fw-bold text-center mb-4 text-brown">Top Hospitality Services</h2>
+      <h2 class="section-title text-center">Browse by Category</h2>
+      <p class="text-center text-muted mb-5">Find the perfect service for your hospitality needs</p>
+      
       <div class="row g-4">
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <img src="img/chef.jpg" class="card-img-top" alt="Catering Service" />
-            <div class="card-body">
-              <h5 class="fw-bold">Royal Taste Catering</h5>
-              <p class="text-muted"><i class="bi bi-geo-alt"></i> Lagos, Nigeria</p>
-              <p>Exquisite catering for weddings, corporate events, and private dining.</p>
-              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+        <div class="col-md-3 col-sm-6">
+          <div class="category-card">
+            <div class="category-icon">
+              <i class="bi bi-cup-hot"></i>
             </div>
+            <h5>Catering & Food</h5>
+            <p class="text-muted small">Chefs, catering services, and food vendors</p>
           </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <img src="img/event.jpg" class="card-img-top" alt="Event Planning" />
-            <div class="card-body">
-              <h5 class="fw-bold">Prestige Events & Décor</h5>
-              <p class="text-muted"><i class="bi bi-geo-alt"></i> Abuja, Nigeria</p>
-              <p>Bringing your events to life with creativity, elegance, and excellence.</p>
-              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="category-card">
+            <div class="category-icon">
+              <i class="bi bi-calendar-event"></i>
             </div>
+            <h5>Event Planning</h5>
+            <p class="text-muted small">Event coordinators and wedding planners</p>
           </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="card service-card h-100">
-            <img src="img/cleaning.jpg" class="card-img-top" alt="Cleaning Service" />
-            <div class="card-body">
-              <h5 class="fw-bold">PureSparkle Cleaners</h5>
-              <p class="text-muted"><i class="bi bi-geo-alt"></i> Port Harcourt, Nigeria</p>
-              <p>Top-notch hotel and event hall cleaning services with eco-friendly methods.</p>
-              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="category-card">
+            <div class="category-icon">
+              <i class="bi bi-house"></i>
             </div>
+            <h5>Accommodation</h5>
+            <p class="text-muted small">Hotel management and staff services</p>
+          </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="category-card">
+            <div class="category-icon">
+              <i class="bi bi-flower1"></i>
+            </div>
+            <h5>Decoration</h5>
+            <p class="text-muted small">Florists and venue decor specialists</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ✅ How It Works -->
+  <!-- Featured Services -->
   <section class="py-5 bg-light">
-    <div class="container text-center">
-      <h2 class="fw-bold mb-4">How It Works</h2>
+    <div class="container">
+      <h2 class="section-title text-center">Featured Service Providers</h2>
+      <p class="text-center text-muted mb-5">Top-rated professionals ready to serve your business</p>
+      
       <div class="row g-4">
-        <div class="col-md-4">
-          <i class="bi bi-pencil-square fs-1"></i>
-          <h5 class="mt-3">1. Create or Find Services</h5>
-          <p>Showcase your business or find verified providers in your area.</p>
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card">
+            <div class="service-image">
+              <i class="bi bi-egg-fried"></i>
+            </div>
+            <div class="service-content">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold">Royal Taste Catering</h5>
+                <span class="provider-badge">Premium</span>
+              </div>
+              <div class="service-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+                <span class="text-muted ms-1">(4.5)</span>
+              </div>
+              <p class="service-location">
+                <i class="bi bi-geo-alt"></i> Lagos, Nigeria
+              </p>
+              <p>Exquisite catering for weddings, corporate events, and private dining with customized menus.</p>
+              <ul class="service-features">
+                <li><i class="bi bi-check"></i> Custom menu planning</li>
+                <li><i class="bi bi-check"></i> Staffing services included</li>
+                <li><i class="bi bi-check"></i> Equipment rental available</li>
+              </ul>
+              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <i class="bi bi-chat-dots fs-1"></i>
-          <h5 class="mt-3">2. Connect & Negotiate</h5>
-          <p>Chat with professionals directly and compare options easily.</p>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card">
+            <div class="service-image">
+              <i class="bi bi-balloon"></i>
+            </div>
+            <div class="service-content">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold">Prestige Events & Décor</h5>
+                <span class="provider-badge">Featured</span>
+              </div>
+              <div class="service-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <span class="text-muted ms-1">(5.0)</span>
+              </div>
+              <p class="service-location">
+                <i class="bi bi-geo-alt"></i> Abuja, Nigeria
+              </p>
+              <p>Bringing your events to life with creativity, elegance, and excellence in execution.</p>
+              <ul class="service-features">
+                <li><i class="bi bi-check"></i> Full event coordination</li>
+                <li><i class="bi bi-check"></i> Theme development</li>
+                <li><i class="bi bi-check"></i> Vendor management</li>
+              </ul>
+              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+            </div>
+          </div>
         </div>
-        <div class="col-md-4">
-          <i class="bi bi-hand-thumbs-up fs-1"></i>
-          <h5 class="mt-3">3. Hire & Grow</h5>
-          <p>Get premium service, build relationships, and expand your brand.</p>
+
+        <div class="col-lg-4 col-md-6">
+          <div class="service-card">
+            <div class="service-image">
+              <i class="bi bi-bucket"></i>
+            </div>
+            <div class="service-content">
+              <div class="d-flex justify-content-between align-items-start mb-2">
+                <h5 class="fw-bold">PureSparkle Cleaners</h5>
+                <span class="provider-badge">Eco-Friendly</span>
+              </div>
+              <div class="service-rating">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star"></i>
+                <span class="text-muted ms-1">(4.0)</span>
+              </div>
+              <p class="service-location">
+                <i class="bi bi-geo-alt"></i> Port Harcourt, Nigeria
+              </p>
+              <p>Top-notch hotel and event hall cleaning services with eco-friendly methods and products.</p>
+              <ul class="service-features">
+                <li><i class="bi bi-check"></i> Eco-friendly products</li>
+                <li><i class="bi bi-check"></i> 24/7 emergency service</li>
+                <li><i class="bi bi-check"></i> Commercial & residential</li>
+              </ul>
+              <a href="contact.html" class="btn btn-gold w-100">Request a Quote</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ✅ Call to Action -->
-  <section class="py-5 text-center" style="background-color: #b8860b; color: #fff;">
-    <div class="container">
-      <h2 class="fw-bold mb-3">Grow with Hospiple</h2>
-      <p class="mb-4">Join Africa’s hospitality hub — where opportunities meet excellence.</p>
-      <a href="signup.html" class="btn btn-light btn-lg">Get Started</a>
+  <!-- How It Works -->
+  <section class="how-it-works">
+    <div class="container text-center">
+      <h2 class="section-title">How It Works</h2>
+      <p class="text-muted mb-5 mx-auto" style="max-width: 600px;">
+        Simple steps to find and hire the best hospitality professionals for your needs
+      </p>
+      
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-number">1</div>
+            <div class="step-icon">
+              <i class="bi bi-search"></i>
+            </div>
+            <h5>Search & Discover</h5>
+            <p>Browse verified providers, read reviews, and compare services in your area.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-number">2</div>
+            <div class="step-icon">
+              <i class="bi bi-chat-dots"></i>
+            </div>
+            <h5>Connect & Discuss</h5>
+            <p>Chat with professionals directly, share requirements, and get customized quotes.</p>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="step-card">
+            <div class="step-number">3</div>
+            <div class="step-icon">
+              <i class="bi bi-handshake"></i>
+            </div>
+            <h5>Hire & Collaborate</h5>
+            <p>Finalize agreements, manage projects, and build lasting business relationships.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ✅ Footer -->
-  <footer class="py-4 text-center">
-    <p class="mb-0">
-      &copy; 2025 <strong>HospiPro</strong>. All Rights Reserved. |
-      <a href="about.html">About</a> |
-      <a href="contact.html">Contact</a>
-    </p>
+  <!-- Search Results -->
+  <section class="results-section" id="resultsSection" style="display:none;">
+    <div class="container">
+      <h2 class="section-title text-center mb-4">Search Results</h2>
+      <div class="row g-4" id="resultsContainer">
+        <!-- Results will be populated here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2 class="text-white mb-4">Ready to Grow Your Hospitality Business?</h2>
+      <p class="text-light mb-4 mx-auto" style="max-width: 600px;">
+        Join thousands of hospitality professionals and businesses connecting through HospiTour
+      </p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <a href="signup.html" class="btn btn-gold btn-lg">Join as Provider</a>
+        <a href="contact.html" class="btn btn-outline-light btn-lg">Hire Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="d-flex align-items-center mb-3">
+            <div class="category-icon" style="width: 40px; height: 40px; margin-right: 10px;">
+              <i class="bi bi-building"></i>
+            </div>
+            <h4 class="text-white mb-0">HospiTour</h4>
+          </div>
+          <p class="text-light mb-0">Connecting hospitality excellence across Africa.</p>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-gold mb-3">For Businesses</h5>
+          <ul class="footer-links">
+            <li><a href="hire.html">Hire Services</a></li>
+            <li><a href="jobs.html">Post Jobs</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="showcase.html">Showcase</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-gold mb-3">For Providers</h5>
+          <ul class="footer-links">
+            <li><a href="signup.html">Create Profile</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="pricing.html">Plans</a></li>
+            <li><a href="contact.html">Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3">
+          <h5 class="text-gold mb-3">Company</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+      
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+        </div>
+      </div>
+    </div>
   </footer>
 
-  <!-- ✅ Scripts -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ✅ Firebase -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore.js";
-
-   const firebaseConfig = {
-        apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok",
-        authDomain: "hospipro-86b8d.firebaseapp.com",
-        projectId: "hospipro-86b8d",
-        storageBucket: "hospipro-86b8d.firebasestorage.app",
-        messagingSenderId: "801856698977",
-        appId: "1:801856698977:web:05562aaf88584d2af0c820",
-        measurementId: "G-440NC734BY",
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-
-
+  <script>
+    // Search functionality
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
     const resultsContainer = document.getElementById('resultsContainer');
     const resultsSection = document.getElementById('resultsSection');
 
-    async function searchBusinesses() {
+    // Sample data for demonstration
+    const serviceProviders = [
+      {
+        name: "Elite Wedding Planners",
+        category: "Event Planning",
+        location: "Nairobi, Kenya",
+        rating: 4.8,
+        description: "Comprehensive wedding planning services with attention to every detail.",
+        features: ["Full coordination", "Vendor management", "Budget planning"]
+      },
+      {
+        name: "Gourmet Chefs Collective",
+        category: "Catering",
+        location: "Accra, Ghana",
+        rating: 4.9,
+        description: "Award-winning chefs providing exceptional culinary experiences.",
+        features: ["Custom menus", "International cuisine", "Dietary accommodations"]
+      },
+      {
+        name: "Luxury Hotel Staffing",
+        category: "Staffing",
+        location: "Cape Town, South Africa",
+        rating: 4.7,
+        description: "Professional staffing solutions for luxury hotels and resorts.",
+        features: ["Trained professionals", "Background checked", "Flexible staffing"]
+      }
+    ];
+
+    function searchServices() {
       const queryText = searchInput.value.trim().toLowerCase();
       resultsContainer.innerHTML = '';
-      if (!queryText) return;
+      
+      if (!queryText) {
+        resultsSection.style.display = 'none';
+        return;
+      }
 
-      const snapshot = await getDocs(collection(db, 'businesses'));
-      const businesses = [];
-      snapshot.forEach(doc => businesses.push({ id: doc.id, ...doc.data() }));
-
-      const filtered = businesses.filter(biz => {
+      const filtered = serviceProviders.filter(provider => {
         return (
-          biz.name?.toLowerCase().includes(queryText) ||
-          biz.category?.toLowerCase().includes(queryText) ||
-          biz.description?.toLowerCase().includes(queryText)
+          provider.name.toLowerCase().includes(queryText) ||
+          provider.category.toLowerCase().includes(queryText) ||
+          provider.description.toLowerCase().includes(queryText)
         );
       });
 
       if (filtered.length === 0) {
-        resultsContainer.innerHTML = '<p class="text-center text-muted">No businesses found.</p>';
+        resultsContainer.innerHTML = `
+          <div class="col-12 text-center">
+            <div class="card p-5 border-0">
+              <i class="bi bi-search display-1 text-muted mb-3"></i>
+              <h4 class="text-muted">No services found</h4>
+              <p class="text-muted">Try different keywords or browse our categories</p>
+            </div>
+          </div>
+        `;
       } else {
-        filtered.forEach(biz => {
+        filtered.forEach(provider => {
+          const stars = Array.from({length: 5}, (_, i) => 
+            i < Math.floor(provider.rating) ? 'bi-star-fill' : 
+            i < provider.rating ? 'bi-star-half' : 'bi-star'
+          ).map(starClass => `<i class="bi ${starClass}"></i>`).join('');
+          
           const card = document.createElement('div');
-          card.className = 'col-md-4';
+          card.className = 'col-lg-4 col-md-6';
           card.innerHTML = `
-            <div class="card h-100">
-              <img src="${biz.imageUrl || 'https://via.placeholder.com/400x250?text=Hospitality+Business'}" class="card-img-top" alt="${biz.name}">
-              <div class="card-body">
-                <h5 class="card-title">${biz.name}</h5>
-                <p class="text-muted">${biz.category || ''}</p>
-                <p>${biz.description || ''}</p>
+            <div class="provider-card">
+              <div class="service-image">
+                <i class="bi bi-building"></i>
               </div>
-              <div class="card-footer bg-transparent border-0">
-                ${biz.website ? `<a href="${biz.website}" target="_blank" class="btn btn-gold w-100">Visit Website</a>` : ''}
+              <div class="service-content">
+                <h5 class="fw-bold">${provider.name}</h5>
+                <div class="service-rating mb-2">
+                  ${stars} <span class="text-muted ms-1">(${provider.rating})</span>
+                </div>
+                <p class="service-location">
+                  <i class="bi bi-geo-alt"></i> ${provider.location}
+                </p>
+                <p class="text-muted">${provider.description}</p>
+                <ul class="service-features">
+                  ${provider.features.map(feature => `<li><i class="bi bi-check"></i> ${feature}</li>`).join('')}
+                </ul>
+                <a href="contact.html" class="btn btn-gold w-100">Contact Provider</a>
               </div>
             </div>
           `;
           resultsContainer.appendChild(card);
         });
       }
+      
       resultsSection.style.display = 'block';
+      resultsSection.scrollIntoView({ behavior: 'smooth' });
     }
 
-    searchBtn.addEventListener('click', searchBusinesses);
+    searchBtn.addEventListener('click', searchServices);
     searchInput.addEventListener('keypress', e => {
-      if (e.key === 'Enter') searchBusinesses();
+      if (e.key === 'Enter') searchServices();
     });
   </script>
 </body>
-</html>
+</html> 

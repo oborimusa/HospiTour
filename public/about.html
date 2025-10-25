@@ -6,212 +6,711 @@
     <title>About Us | HospiPro</title>
     <meta
       name="description"
-      content="Learn more about Drecot Hospitality Hub — our mission, vision, and commitment to transforming Africa’s hospitality industry."
+      content="Learn more about HospiPro — our mission, vision, and commitment to transforming Africa's hospitality industry."
     />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
+      :root {
+        --gold: #d4af37;
+        --brown: #3b2f2f;
+        --light-gold: #f8f4e6;
+        --light-brown: #f6f2e8;
+      }
+      
       body {
         font-family: "Open Sans", sans-serif;
         background: #fffdf9;
         color: #3b2f2f;
         scroll-behavior: smooth;
       }
+      
       .navbar {
         background: #3b2f2f;
       }
+      
       .navbar-brand {
         font-family: "Playfair Display", serif;
         color: white !important;
         font-size: 1.6rem;
       }
+      
       .nav-link {
         color: #fff !important;
         font-weight: 500;
         transition: 0.3s;
       }
+      
       .nav-link:hover {
         color: #d4af37 !important;
       }
+      
       .navbar-toggler {
         border: none;
         background: #d4af37;
       }
 
       .hero {
-        background: linear-gradient(
-            rgba(59, 47, 47, 0.7),
-            rgba(59, 47, 47, 0.7)
-          ),
-          url("img/hospitality-bg.jpg") center/cover no-repeat;
+        background: linear-gradient(rgba(59, 47, 47, 0.85), rgba(59, 47, 47, 0.85)),
+          url("img/about-hero.jpg") center/cover no-repeat;
         color: #fff;
         text-align: center;
-        padding: 120px 15px;
+        padding: 140px 15px 100px;
+        margin-top: 76px;
       }
+      
       .hero h1 {
         font-family: "Playfair Display", serif;
         color: #d4af37;
-        font-size: 2.8rem;
+        font-size: 3rem;
+        margin-bottom: 1rem;
       }
+      
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+      }
+      
       .btn-gold {
         background: #d4af37;
         color: #3b2f2f;
         font-weight: 600;
         border-radius: 6px;
+        border: none;
+        transition: all 0.3s ease;
       }
+      
       .btn-gold:hover {
         background: #c19b2d;
         color: #fff;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
       }
 
-      .stats {
-        background: #f6f2e8;
-        padding: 60px 15px;
-        text-align: center;
+      .about-section {
+        padding: 80px 0;
       }
-      .stat-number {
-        color: #d4af37;
-        font-size: 2.2rem;
-        font-weight: 700;
-      }
-
+      
       .section-title {
         font-family: "Playfair Display", serif;
-        font-size: 2rem;
+        font-size: 2.2rem;
         color: #3b2f2f;
         margin-bottom: 35px;
         text-align: center;
+        position: relative;
       }
-      .service-card,
-      .biz-card {
+      
+      .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: var(--gold);
+      }
+      
+      .mission-vision-card {
         background: #fff;
-        border: 1px solid #eee;
         border-radius: 12px;
-        text-align: center;
-        padding: 30px 20px;
-        transition: 0.3s;
+        padding: 40px 30px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
         height: 100%;
+        text-align: center;
+        border-top: 4px solid var(--gold);
       }
-      .service-card:hover,
-      .biz-card:hover {
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      
+      .mission-vision-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
       }
-      .biz-logo {
+      
+      .mission-icon {
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 15px;
+        background: var(--light-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
       }
-      .cta {
-        background: #f6f2e8;
-        padding: 70px 15px;
+      
+      .mission-icon i {
+        font-size: 2rem;
+        color: var(--gold);
+      }
+      
+      .story-section {
+        background: var(--light-brown);
+        padding: 80px 0;
+      }
+      
+      .story-timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .story-timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 3px;
+        background: var(--gold);
+      }
+      
+      .timeline-item {
+        display: flex;
+        margin-bottom: 40px;
+        position: relative;
+      }
+      
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+      
+      .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+      
+      .timeline-content {
+        background: #fff;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        width: 45%;
+        position: relative;
+      }
+      
+      .timeline-content::after {
+        content: '';
+        position: absolute;
+        top: 20px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        transform: rotate(45deg);
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::after {
+        right: -10px;
+      }
+      
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -10px;
+      }
+      
+      .timeline-year {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: var(--gold);
+        color: var(--brown);
+        font-weight: 700;
+        padding: 10px 15px;
+        border-radius: 30px;
+        z-index: 1;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-year {
+        right: -70px;
+      }
+      
+      .timeline-item:nth-child(even) .timeline-year {
+        left: -70px;
+      }
+      
+      .values-section {
+        padding: 80px 0;
+      }
+      
+      .value-card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        text-align: center;
+        height: 100%;
+      }
+      
+      .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+      }
+      
+      .value-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: var(--light-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+      }
+      
+      .value-icon i {
+        font-size: 1.8rem;
+        color: var(--gold);
+      }
+      
+      .team-section {
+        background: var(--light-brown);
+        padding: 80px 0;
+      }
+      
+      .team-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
         text-align: center;
       }
+      
+      .team-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+      }
+      
+      .team-img {
+        height: 200px;
+        background: var(--light-gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .team-img i {
+        font-size: 4rem;
+        color: var(--gold);
+      }
+      
+      .team-info {
+        padding: 25px 20px;
+      }
+      
+      .stats-section {
+        padding: 80px 0;
+      }
+      
+      .stat-card {
+        text-align: center;
+        padding: 30px 20px;
+      }
+      
+      .stat-number {
+        color: var(--gold);
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      
+      .stat-text {
+        color: var(--brown);
+        font-weight: 600;
+      }
+      
+      .cta-section {
+        background: linear-gradient(rgba(59, 47, 47, 0.9), rgba(59, 47, 47, 0.9)),
+          url("img/cta-bg.jpg") center/cover no-repeat;
+        color: #fff;
+        padding: 80px 0;
+        text-align: center;
+      }
+      
       footer {
         background: #3b2f2f;
         color: #fff;
-        padding: 45px 0;
-        text-align: center;
+        padding: 45px 0 25px;
       }
+      
       footer a {
         color: #d4af37;
         text-decoration: none;
+        transition: 0.3s;
       }
+      
       footer a:hover {
+        color: #fff;
         text-decoration: underline;
       }
-
-      #searchBar input,
-      #searchBar select {
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        padding: 10px 12px;
+      
+      .footer-links {
+        list-style: none;
+        padding: 0;
+      }
+      
+      .footer-links li {
+        margin-bottom: 10px;
       }
 
       @media (max-width: 768px) {
         .hero h1 {
           font-size: 2.2rem;
         }
+        
         .hero p {
           font-size: 1rem;
         }
-        .stats .col-md-4 {
+        
+        .timeline-item {
+          flex-direction: column !important;
+          align-items: center;
+        }
+        
+        .timeline-content {
+          width: 90%;
           margin-bottom: 20px;
+        }
+        
+        .timeline-year {
+          position: relative;
+          left: auto !important;
+          right: auto !important;
+          margin-bottom: 10px;
+        }
+        
+        .story-timeline::before {
+          display: none;
+        }
+        
+        .timeline-content::after {
+          display: none;
         }
       }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
-    <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="img/logo1.png" alt="Hospiple logo" style="width: 40px; margin-right: 8px;">
-        <span style="font-size: 30px; font-weight: bold;">HospiPro</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-        <i class="bi bi-list text-dark fs-2"></i>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="nav">
-        <ul class="navbar-nav text-left">
-          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
-          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
-          <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-          <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link active text-warning" href="hire.html">Service Providers</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-          <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-    <section class="container my-5">
-      <div class="text-center mb-4">
-        <h1 class="fw-bold" style="margin-top: 150px">
-          About HospiPro
-        </h1>
-        <p class="text-muted">
-          Empowering Africa’s hospitality ecosystem with innovation and
-          technology.
-        </p>
-      </div>
-
-      <div class="row align-items-center">
-        <div class="col-md-6">
-          <p>
-            HospiPro is a revolutionary online platform designed
-            to empower hospitality businesses in Africa and beyond. Our mission
-            is to provide a one-stop solution for hotels, restaurants, bars,
-            event planners, and catering services to streamline operations,
-            enhance customer relationships, and drive growth.
-          </p>
-          <p>
-            Founded in 2025, we aim to bridge the gap between tradition and
-            technology in Africa’s booming hospitality sector.
-          </p>
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+          <div class="mission-icon" style="width: 40px; height: 40px; margin-right: 10px;">
+            <i class="bi bi-building"></i>
+          </div>
+          <span style="font-size: 30px; font-weight: bold;">HospiTour</span>
+        </a>
+        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+          <i class="bi bi-list text-dark fs-2"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="nav">
+          <ul class="navbar-nav text-left">
+            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
+            <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+            <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
+            <li class="nav-item"><a class="nav-link" href="hire.html">Service Providers</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
+          </ul>
         </div>
-        <div class="col-md-6">
-          <img
-            src="img/about-team.jpg"
-            class="img-fluid rounded shadow"
-            alt="Drecot Team"
-          />
+      </div>
+    </nav>
+
+    <section class="hero">
+      <div class="container">
+        <h1>Our Story: Transforming Hospitality in Africa</h1>
+        <p>Discover how HospiPro is bridging the gap between tradition and technology in Africa's booming hospitality sector.</p>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="container">
+        <div class="row align-items-center mb-5">
+          <div class="col-lg-6">
+            <h2 class="section-title text-start">Welcome to HospiTour</h2>
+            <p class="lead">
+              HospiTour is a revolutionary online platform designed to empower hospitality businesses in Africa and beyond. Our mission is to provide a one-stop solution for hotels, restaurants, bars, event planners, and catering services to streamline operations, enhance customer relationships, and drive growth.
+            </p>
+            <p>
+              Founded in 2025, we aim to bridge the gap between tradition and technology in Africa's booming hospitality sector. We believe that by combining local expertise with cutting-edge technology, we can create sustainable growth opportunities for businesses across the continent.
+            </p>
+            <p>
+              Our team brings together decades of experience in hospitality management, technology development, and African market expertise to deliver solutions that truly understand and address the unique challenges faced by the industry.
+            </p>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="img/about-team.jpg"
+              class="img-fluid rounded shadow"
+              alt="HospiPro Team"
+            />
+          </div>
+        </div>
+        
+        <div class="row mt-5">
+          <div class="col-md-6 mb-4">
+            <div class="mission-vision-card">
+              <div class="mission-icon">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <h3>Our Mission</h3>
+              <p>To empower African hospitality businesses with innovative technology solutions that streamline operations, enhance guest experiences, and drive sustainable growth across the continent.</p>
+            </div>
+          </div>
+          <div class="col-md-6 mb-4">
+            <div class="mission-vision-card">
+              <div class="mission-icon">
+                <i class="bi bi-eye"></i>
+              </div>
+              <h3>Our Vision</h3>
+              <p>To become Africa's leading hospitality technology ecosystem, connecting businesses, professionals, and guests in a seamless digital environment that celebrates African hospitality excellence.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
+    <section class="story-section">
+      <div class="container">
+        <h2 class="section-title">Our Journey</h2>
+        <p class="text-center text-muted mb-5">From idea to impact - the story of HospiTour</p>
+        
+        <div class="story-timeline">
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>The Beginning</h4>
+              <p>Founded by hospitality veterans who saw the need for digital transformation in Africa's growing hospitality sector. Initial concept development and market research.</p>
+            </div>
+            <div class="timeline-year">2023</div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>Platform Development</h4>
+              <p>Assembled a world-class tech team and began developing the core HospiPro platform with input from early adopter hotels and restaurants.</p>
+            </div>
+            <div class="timeline-year">2024</div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>Official Launch</h4>
+              <p>Launched HospiTour with 50 founding business partners across Kenya, Nigeria, and South Africa. Received positive industry feedback and early traction.</p>
+            </div>
+            <div class="timeline-year">2025</div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="timeline-content">
+              <h4>Expansion & Growth</h4>
+              <p>Expanded to 10 African countries with over 500 business partners. Introduced new features including marketplace and professional networking.</p>
+            </div>
+            <div class="timeline-year">2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="values-section">
+      <div class="container">
+        <h2 class="section-title">Our Values</h2>
+        <p class="text-center text-muted mb-5">The principles that guide everything we do</p>
+        
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="bi bi-heart"></i>
+              </div>
+              <h4>Excellence</h4>
+              <p>We strive for excellence in every aspect of our platform and services, delivering quality that exceeds expectations.</p>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="bi bi-people"></i>
+              </div>
+              <h4>Collaboration</h4>
+              <p>We believe in the power of partnership and work closely with our clients to understand and address their unique needs.</p>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="value-card">
+              <div class="value-icon">
+                <i class="bi bi-lightbulb"></i>
+              </div>
+              <h4>Innovation</h4>
+              <p>We continuously innovate to stay ahead of industry trends and provide cutting-edge solutions to our clients.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="container">
+        <h2 class="section-title">By The Numbers</h2>
+        <p class="text-center text-muted mb-5">Our impact across Africa's hospitality sector</p>
+        
+        <div class="row text-center">
+          <div class="col-md-3 col-6 mb-4">
+            <div class="stat-card">
+              <div class="stat-number">500+</div>
+              <div class="stat-text">Business Partners</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="stat-card">
+              <div class="stat-number">15+</div>
+              <div class="stat-text">African Countries</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="stat-card">
+              <div class="stat-number">10K+</div>
+              <div class="stat-text">Professionals</div>
+            </div>
+          </div>
+          <div class="col-md-3 col-6 mb-4">
+            <div class="stat-card">
+              <div class="stat-number">98%</div>
+              <div class="stat-text">Satisfaction Rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="team-section">
+      <div class="container">
+        <h2 class="section-title">Meet Our Leadership</h2>
+        <p class="text-center text-muted mb-5">The passionate team driving HospiTour forward</p>
+        
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="team-card">
+              <div class="team-img">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="team-info">
+                <h4>Dahiru Obori</h4>
+                <p class="text-gold">CEO & Founder</p>
+                <p class="text-muted small">With 30+ years in hospitality management, Sarah founded HospiPro to solve industry challenges she experienced firsthand.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="team-card">
+              <div class="team-img">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="team-info">
+                <h4>Michael Chen</h4>
+                <p class="text-gold">CTO</p>
+                <p class="text-muted small">Michael leads our technology team with expertise in scalable cloud solutions and AI integration for the hospitality sector.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="team-card">
+              <div class="team-img">
+                <i class="bi bi-person-circle"></i>
+              </div>
+              <div class="team-info">
+                <h4>Amara Okonjo</h4>
+                <p class="text-gold">Head of Customer Success</p>
+                <p class="text-muted small">Amara ensures our clients achieve their business goals through effective use of our platform and dedicated support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="text-white mb-4">Ready to Transform Your Hospitality Business?</h2>
+        <p class="text-light mb-4">Join hundreds of businesses already using HospiTour to streamline operations and drive growth.</p>
+        <a href="signup.html" class="btn btn-gold btn-lg px-5">Get Started Today</a>
+      </div>
+    </section>
+
     <footer>
-      <p class="mb-0">
-        &copy; 2025 HospiPro. All rights reserved.
-      </p>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <div class="d-flex align-items-center mb-3">
+              <div class="mission-icon" style="width: 40px; height: 40px; margin-right: 10px;">
+                <i class="bi bi-building"></i>
+              </div>
+              <h4 class="text-white mb-0">HospiTour</h4>
+            </div>
+            <p class="text-light">Transforming hospitality management across Africa with innovative technology solutions.</p>
+          </div>
+          
+          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-gold mb-3">Quick Links</h5>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="pricing.html">Pricing</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+            <h5 class="text-gold mb-3">Resources</h5>
+            <ul class="footer-links">
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Community</a></li>
+              <li><a href="#">Partners</a></li>
+            </ul>
+          </div>
+          
+          <div class="col-lg-3">
+            <h5 class="text-gold mb-3">Contact Info</h5>
+            <ul class="footer-links">
+              <li class="d-flex align-items-center mb-2">
+                <i class="bi bi-geo-alt me-2 text-gold"></i>
+                <span>123 Hospitality Ave, Nairobi, Kenya</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <i class="bi bi-telephone me-2 text-gold"></i>
+                <span>+234 803 966 1354</span>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-envelope me-2 text-gold"></i>
+                <span>info@hospipro.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+        
+        <div class="row align-items-center">
+          <div class="col-md-6 text-center text-md-start">
+            <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-center text-md-end">
+            <a href="#" class="text-light me-3">Privacy Policy</a>
+            <a href="#" class="text-light me-3">Terms of Service</a>
+            <a href="#" class="text-light">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

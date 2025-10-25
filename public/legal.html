@@ -3,17 +3,258 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title id="pageTitle">Legal Documents | HospiPro</title>
+    <title>Legal Documents | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root{
             --gold: #c9a44c;
             --brown: #3b2f2f;
+            --light-gold: #f5f0e4;
+            --light-brown: #f7f5f1;
         }
-        body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
-        .navbar-custom{background:var(--brown);}
-        .legal-container{max-width: 900px; margin: 40px auto; padding: 20px;}
-        .accordion-button:not(.collapsed){color: var(--brown); background-color: #fcefd8;}
+        
+        body{
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background:#f7f5f1; 
+            color:#222;
+        }
+        
+        .navbar-custom{
+            background:var(--brown);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold) !important;
+        }
+        
+        .legal-hero {
+            background: linear-gradient(135deg, var(--light-brown) 0%, #ffffff 100%);
+            padding: 100px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .legal-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f5f0e4" opacity="0.3"/></svg>');
+            background-size: cover;
+        }
+        
+        .legal-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .legal-container{
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 60px 20px;
+        }
+        
+        .legal-nav {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+            position: sticky;
+            top: 20px;
+        }
+        
+        .legal-nav-title {
+            color: var(--brown);
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-gold);
+        }
+        
+        .legal-nav-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--brown);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .legal-nav-item:hover, .legal-nav-item.active {
+            background: var(--light-gold);
+            color: var(--brown);
+            border-left: 3px solid var(--gold);
+        }
+        
+        .legal-nav-item i {
+            margin-right: 10px;
+            color: var(--gold);
+            width: 20px;
+            text-align: center;
+        }
+        
+        .document-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid var(--light-gold);
+        }
+        
+        .document-badge {
+            background: var(--gold);
+            color: var(--brown);
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+        
+        .accordion-item {
+            border: none;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .accordion-button {
+            background: white;
+            color: var(--brown);
+            font-weight: 600;
+            padding: 20px 25px;
+            border: none;
+            box-shadow: none;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: var(--light-gold);
+            color: var(--brown);
+            border-bottom: 1px solid var(--light-gold);
+        }
+        
+        .accordion-button::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%233b2f2f'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        
+        .accordion-button:not(.collapsed)::after {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%233b2f2f'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+        }
+        
+        .accordion-body {
+            padding: 25px;
+            background: white;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .relevance-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--light-gold);
+            color: var(--brown);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+        
+        .relevance-tag i {
+            margin-right: 5px;
+        }
+        
+        .document-actions {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            background: var(--light-gold);
+            color: var(--brown);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .action-btn:hover {
+            background: var(--gold);
+            color: var(--brown);
+            transform: translateY(-2px);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            background: var(--brown);
+            color: #fff;
+            padding: 40px 0 20px;
+            margin-top: 80px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+        
+        @media (max-width: 768px) {
+            .legal-hero {
+                padding: 80px 0 40px;
+            }
+            
+            .legal-container {
+                padding: 40px 15px;
+            }
+            
+            .action-btn {
+                display: block;
+                margin: 10px 0;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -21,9 +262,14 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="container">
             <a class="navbar-brand text-white d-flex align-items-center gap-2" href="index.html">
-                <img src="img/logo1.png" alt="HospiPro" style="width:30px;">
-                <strong class="text-white">HospiPro</strong>
+                <div style="width: 35px; height: 35px; background: var(--light-gold); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <i class="bi bi-building" style="color: var(--gold);"></i>
+                </div>
+                <strong class="text-white">HospiTour</strong>
             </a>
+            <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
@@ -32,77 +278,291 @@
                     <li class="nav-item">
                         <a class="nav-link text-white" href="contact.html">Contact</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white active" href="legal.html">Legal</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
+    <section class="legal-hero">
+        <div class="container">
+            <h1 class="display-5 fw-bold text-brown mb-3">Legal Documents</h1>
+            <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                Understanding our terms, policies, and your rights as a HospiTour user
+            </p>
+        </div>
+    </section>
+
     <div class="legal-container">
-        <h1 class="text-brown mb-2">Terms of Service</h1>
-        <p class="text-muted small mb-4">Last Updated: October 14, 2025</p>
-
-        <div class="accordion" id="legalAccordion">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="legal-nav">
+                    <h5 class="legal-nav-title">Legal Documents</h5>
+                    <a href="#terms" class="legal-nav-item active">
+                        <i class="bi bi-file-text"></i>
+                        <span>Terms of Service</span>
+                    </a>
+                    <a href="#privacy" class="legal-nav-item">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Privacy Policy</span>
+                    </a>
+                    <a href="#cookies" class="legal-nav-item">
+                        <i class="bi bi-cookie"></i>
+                        <span>Cookie Policy</span>
+                    </a>
+                    <a href="#acceptable-use" class="legal-nav-item">
+                        <i class="bi bi-check-circle"></i>
+                        <span>Acceptable Use</span>
+                    </a>
+                    <a href="#data-processing" class="legal-nav-item">
+                        <i class="bi bi-database"></i>
+                        <span>Data Processing</span>
+                    </a>
+                    <a href="#service-level" class="legal-nav-item">
+                        <i class="bi bi-graph-up"></i>
+                        <span>Service Level Agreement</span>
+                    </a>
+                </div>
+            </div>
             
-            <div class="accordion-item">
-                <h2 class="accordion-header"><button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                    1. Acceptance of Terms
-                </button></h2>
-                <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#legalAccordion">
-                    <div class="accordion-body">
-                        <p>Welcome to HospiPro. By accessing or using our services, you agree to be bound by these Terms of Service (the "Terms"). These Terms govern your access and use of the HospiPro website, application, and services (collectively, the "Service").</p>
-                        <p class="small text-muted">Specifically relevant to: All Users.</p>
+            <div class="col-lg-9">
+                <div class="document-header">
+                    <h1 class="text-brown mb-2">Terms of Service</h1>
+                    <p class="text-muted mb-2">Last Updated: October 14, 2025</p>
+                    <span class="document-badge">Version 2.1</span>
+                </div>
+
+                <div class="alert alert-warning d-flex align-items-center" role="alert">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    <div>
+                        <strong>Important:</strong> By using HospiTour, you agree to these terms. Please read them carefully.
                     </div>
                 </div>
-            </div>
 
-            <div class="accordion-item">
-                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                    2. User Obligations and Conduct
-                </button></h2>
-                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
-                    <div class="accordion-body">
-                        <p>You agree to use the Service only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service. Prohibited behavior includes harassing or causing distress or inconvenience to any user, transmitting obscene or offensive content, or disrupting the normal flow of dialogue within the Service.</p>
-                        <p class="small text-muted">Specifically relevant to: Marketplace interactions and communication.</p>
+                <div class="accordion" id="legalAccordion">
+                    
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <i class="bi bi-check-circle me-2 text-success"></i>
+                                1. Acceptance of Terms
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>Welcome to HospiTour. By accessing or using our services, you agree to be bound by these Terms of Service (the "Terms"). These Terms govern your access and use of the HospiTour website, application, and services (collectively, the "Service").</p>
+                                <p>If you are entering into these Terms on behalf of a company or other legal entity, you represent that you have the authority to bind such entity to these Terms. If you do not have such authority, or if you do not agree with these Terms, you must not accept these Terms and may not use the Service.</p>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-people"></i> Specifically relevant to: All Users
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                                <i class="bi bi-person-check me-2 text-primary"></i>
+                                2. User Obligations and Conduct
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>You agree to use the Service only for lawful purposes and in a manner that does not infringe the rights of, restrict, or inhibit anyone else's use and enjoyment of the Service. Prohibited behavior includes:</p>
+                                <ul>
+                                    <li>Harassing or causing distress or inconvenience to any user</li>
+                                    <li>Transmitting obscene or offensive content</li>
+                                    <li>Disrupting the normal flow of dialogue within the Service</li>
+                                    <li>Impersonating another person or entity</li>
+                                    <li>Violating any applicable laws or regulations</li>
+                                </ul>
+                                <p>You are responsible for maintaining the confidentiality of your account and password and for restricting access to your computer or device. You agree to accept responsibility for all activities that occur under your account or password.</p>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-chat-dots"></i> Specifically relevant to: Marketplace interactions and communication
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                                <i class="bi bi-credit-card me-2 text-info"></i>
+                                3. Payments, Fees, and Subscription Terms
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>Access to certain features of the Service requires a paid subscription (Pro or Enterprise Plan). All fees are non-refundable. Subscriptions will auto-renew unless canceled at least 24 hours before the end of the current billing period.</p>
+                                <p>HospiTour reserves the right to change fees upon 30 days notice. Such notice may be provided at any time by posting the changes to the HospiTour website or through the Service interface.</p>
+                                <p>You shall be responsible for all taxes associated with the Service other than taxes based on HospiTour's net income. All fees are exclusive of all taxes, levies, or duties imposed by taxing authorities.</p>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-gem"></i> Specifically relevant to: Pro/Enterprise Users (Businesses and Professionals)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                                <i class="bi bi-shield-exclamation me-2 text-warning"></i>
+                                4. Limitation of Liability and Disclaimer
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>The Service is provided "as is," without any representation or endorsement made and without warranty of any kind. HospiTour is a platform only and is not responsible for the quality, safety, or legality of services provided by Service Professionals or the actions of Business/Employer users.</p>
+                                <p>To the maximum extent permitted by applicable law, HospiTour shall not be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, or any loss of data, use, goodwill, or other intangible losses resulting from:</p>
+                                <ul>
+                                    <li>Your access to or use of or inability to access or use the Service</li>
+                                    <li>Any conduct or content of any third party on the Service</li>
+                                    <li>Any content obtained from the Service</li>
+                                    <li>Unauthorized access, use or alteration of your transmissions or content</li>
+                                </ul>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-handshake"></i> Specifically relevant to: Disputes between Business Users and Service Professionals
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
+                                <i class="bi bi-file-earmark-text me-2 text-secondary"></i>
+                                5. Intellectual Property Rights
+                            </button>
+                        </h2>
+                        <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>The Service and its original content, features, and functionality are and will remain the exclusive property of HospiTour and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
+                                <p>Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of HospiTour. Nothing in these Terms should be construed as granting any license or right to use any trademark of HospiTour or any third party.</p>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-lightbulb"></i> Specifically relevant to: Content creators and business owners
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix">
+                                <i class="bi bi-gear me-2 text-dark"></i>
+                                6. Termination and Account Cancellation
+                            </button>
+                        </h2>
+                        <div id="collapseSix" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
+                            <div class="accordion-body">
+                                <p>You may cancel your account and terminate these Terms at any time by contacting customer service. HospiTour may suspend or terminate your access to the Service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                                <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply discontinue using the Service. All provisions of the Terms which by their nature should survive termination shall survive termination.</p>
+                                <div class="relevance-tag">
+                                    <i class="bi bi-door-open"></i> Specifically relevant to: All account holders
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="accordion-item">
-                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
-                    3. Payments, Fees, and Subscription Terms
-                </button></h2>
-                <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
-                    <div class="accordion-body">
-                        <p>Access to certain features of the Service requires a paid subscription (Pro or Enterprise Plan). All fees are non-refundable. Subscriptions will auto-renew unless canceled at least 24 hours before the end of the current billing period. HospiPro reserves the right to change fees upon 30 days notice.</p>
-                        <p class="small text-muted">Specifically relevant to: Pro/Enterprise Users (Businesses and Professionals).</p>
-                    </div>
+                <div class="document-actions">
+                    <h5 class="text-brown mb-4">Need More Information?</h5>
+                    <a href="#" class="action-btn">
+                        <i class="bi bi-download"></i> Download PDF Version
+                    </a>
+                    <a href="contact.html" class="action-btn">
+                        <i class="bi bi-question-circle"></i> Contact Legal Team
+                    </a>
+                    <a href="help-center.html" class="action-btn">
+                        <i class="bi bi-chat-left-text"></i> Visit Help Center
+                    </a>
                 </div>
             </div>
-
-             <div class="accordion-item">
-                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
-                    4. Limitation of Liability and Disclaimer
-                </button></h2>
-                <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#legalAccordion">
-                    <div class="accordion-body">
-                        <p>The Service is provided "as is," without any representation or endorsement made and without warranty of any kind. HospiPro is a platform only and is not responsible for the quality, safety, or legality of services provided by Service Professionals or the actions of Business/Employer users.</p>
-                        <p class="small text-muted">Specifically relevant to: Disputes between Business Users and Service Professionals.</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5 border-top">
-        <div class="container text-center small text-muted">
-            &copy; <span id="year"></span> HospiPro. All rights reserved. | <a href="#" class="text-muted">Privacy Policy</a>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <div class="d-flex align-items-center mb-3">
+                        <div style="width: 40px; height: 40px; background: var(--light-gold); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+                            <i class="bi bi-building" style="color: var(--gold);"></i>
+                        </div>
+                        <h4 class="text-white mb-0">HospiTour</h4>
+                    </div>
+                    <p class="text-light mb-0">The complete ecosystem for hospitality excellence across Africa.</p>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-gold mb-3">Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="legal.html">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                        <li><a href="#">GDPR</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-gold mb-3">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Report Abuse</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3">
+                    <h5 class="text-gold mb-3">Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="jobs.html">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; <span id="year"></span> HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="#" class="text-light me-3"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-twitter"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-linkedin"></i></a>
+                    <a href="#" class="text-light"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.legal-nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all items
+                document.querySelectorAll('.legal-nav-item').forEach(navItem => {
+                    navItem.classList.remove('active');
+                });
+                
+                // Add active class to clicked item
+                this.classList.add('active');
+                
+                // In a real implementation, you would load the appropriate document content here
+                alert('In a full implementation, this would load the ' + this.textContent.trim() + ' content');
+            });
+        });
     </script>
 </body>
 </html>

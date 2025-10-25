@@ -3,94 +3,299 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Service Provider Dashboard | HospiPro</title>
+  <title>Service Provider Dashboard | HospiTour</title>
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root{
       --gold: #c9a44c;
       --brown: #3b2f2f;
+      --light-brown: #5a4a4a;
+      --cream: #f7f5f1;
+      --light-cream: #fefdf9;
       --muted: #6b7280;
     }
-    body{font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background:#f7f5f1; color:#222;}
-    .topbar{background:var(--brown); color:#fff;}
-    .btn-gold{background:var(--gold); color:var(--brown); border:none;}
-    .btn-gold:hover{opacity:.95;}
-    .card{border-radius:12px;}
-    .logo-preview{width:80px;height:80px;object-fit:cover;border-radius:10px;border:1px solid #eee;}
-    .service-img{width:100%; height:160px; object-fit:cover; border-radius:8px;}
-    .small-muted{color:var(--muted);}
+    
+    body{
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+      background: var(--cream); 
+      color: var(--brown);
+    }
+    
+    .topbar{
+      background: var(--brown); 
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn-gold{
+      background: var(--gold); 
+      color: var(--brown); 
+      border: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-gold:hover{
+      background: #b8943a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(201, 164, 76, 0.3);
+    }
+    
+    .btn-outline-gold {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+    
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: white;
+    }
+    
+    .text-brown {
+      color: var(--brown);
+    }
+    
+    .text-gold {
+      color: var(--gold);
+    }
+    
+    .bg-brown {
+      background-color: var(--brown);
+    }
+    
+    .bg-gold {
+      background-color: var(--gold);
+    }
+    
+    .card {
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .logo-preview{
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid rgba(201, 164, 76, 0.2);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .service-img{
+      width: 100%; 
+      height: 160px; 
+      object-fit: cover; 
+      border-radius: 8px;
+    }
+    
+    .small-muted{
+      color: var(--muted);
+    }
+    
+    .stats-card {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    
+    .stats-number {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0;
+      color: var(--brown);
+    }
+    
+    .stats-label {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    
+    .section-title {
+      position: relative;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 3px;
+    }
+    
+    .service-card {
+      border-radius: 10px;
+      padding: 20px;
+      height: 100%;
+      border-left: 4px solid var(--gold);
+      transition: all 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .action-btn {
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+    
+    .form-control, .form-select {
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      padding: 10px 12px;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+    }
+    
+    .modal-header {
+      background: var(--brown);
+      color: white;
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .modal-header .btn-close {
+      filter: invert(1);
+    }
+    
     @media(max-width:576px){
       .hero-title{font-size:1.25rem;}
+      .logo-preview {
+        width: 80px;
+        height: 80px;
+      }
     }
   </style>
 </head>
 <body>
   <!-- Topbar -->
-  <nav class="topbar py-2">
+  <nav class="topbar py-3">
     <div class="container d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center gap-2">
-        <img src="img/logo1.png" alt="HospiPro" style="width:40px;">
-        <strong>HospiPro — Provider Dashboard</strong>
+      <div class="d-flex align-items-center gap-3">
+        <img src="img/logo1.png" alt="HospiTour" style="width:40px;">
+        <div>
+          <strong class="d-block">HospiTour</strong>
+          <small class="text-gold">Provider Dashboard</small>
+        </div>
       </div>
-      <div class="d-flex align-items-center gap-2">
-        <span id="providerName" class="small-muted"></span>
-        <button class="btn btn-outline-light btn-sm" id="logoutBtn">Logout</button>
+      <div class="d-flex align-items-center gap-3">
+        <div class="text-end d-none d-sm-block">
+          <span id="providerName" class="d-block small fw-bold"></span>
+          <small class="text-white-50">Service Provider</small>
+        </div>
+        <button class="btn btn-outline-light btn-sm d-flex align-items-center gap-1" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
       </div>
     </div>
   </nav>
 
   <main class="container py-4">
-    <div class="row g-4">
+    <!-- Stats Overview -->
+    <div class="row mb-5">
+      <div class="col-md-3 mb-3">
+        <div class="stats-card">
+          <p class="stats-number" id="servicesCount">0</p>
+          <p class="stats-label">Active Services</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="stats-card">
+          <p class="stats-number" id="bookingsCount">0</p>
+          <p class="stats-label">Total Bookings</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="stats-card">
+          <p class="stats-number" id="ratingValue">5.0</p>
+          <p class="stats-label">Average Rating</p>
+        </div>
+      </div>
+      <div class="col-md-3 mb-3">
+        <div class="stats-card">
+          <p class="stats-number" id="responseRate">98%</p>
+          <p class="stats-label">Response Rate</p>
+        </div>
+      </div>
+    </div>
 
+    <div class="row g-4">
       <!-- Left column: profile & add service -->
       <div class="col-lg-4">
-        <div class="card p-3 shadow-sm">
-          <h5 class="mb-3">Your Profile</h5>
+        <div class="card p-4 shadow-sm">
+          <h5 class="section-title">Your Profile</h5>
 
-          <div class="d-flex align-items-center gap-3 mb-3">
+          <div class="d-flex align-items-center gap-3 mb-4">
             <img id="logoPreview" src="img/default-logo.png" alt="logo" class="logo-preview">
             <div>
-              <div id="displayName" class="fw-bold">—</div>
+              <div id="displayName" class="fw-bold text-brown">—</div>
               <div id="displayCity" class="small-muted">—</div>
+              <span class="badge bg-gold text-brown mt-1">Verified</span>
             </div>
           </div>
 
           <form id="profileForm">
-            <div class="mb-2">
-              <label class="form-label small">Business Name</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Business Name</label>
               <input id="nameInput" class="form-control" required />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">City</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">City</label>
               <input id="cityInput" class="form-control" />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Phone</label>
-              <input id="phoneInput" class="form-control" />
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Phone</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-phone text-gold"></i></span>
+                <input id="phoneInput" class="form-control" />
+              </div>
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Logo (optional)</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Logo (optional)</label>
               <input id="logoFile" type="file" accept="image/*" class="form-control form-control-sm" />
             </div>
-            <div class="d-grid mt-2">
-              <button class="btn btn-gold" id="saveProfileBtn" type="submit">Save Profile</button>
+            <div class="d-grid mt-3">
+              <button class="btn btn-gold d-flex align-items-center justify-content-center gap-2" id="saveProfileBtn" type="submit">
+                <i class="fas fa-save"></i> Save Profile
+              </button>
             </div>
-            <div id="profileMsg" class="mt-2"></div>
+            <div id="profileMsg" class="mt-3"></div>
           </form>
         </div>
 
-        <div class="card mt-4 p-3 shadow-sm">
-          <h5 class="mb-3">Add New Service</h5>
+        <div class="card mt-4 p-4 shadow-sm">
+          <h5 class="section-title">Add New Service</h5>
           <form id="serviceForm">
-            <div class="mb-2">
-              <label class="form-label small">Service Title</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Service Title</label>
               <input id="serviceTitle" class="form-control" required />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Category</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Category</label>
               <select id="serviceCategory" class="form-select">
                 <option>Catering</option>
                 <option>Event Planning</option>
@@ -100,23 +305,28 @@
                 <option>Other</option>
               </select>
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Price (optional)</label>
-              <input id="servicePrice" class="form-control" placeholder="e.g. NGN 25,000" />
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Price (optional)</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-tag text-gold"></i></span>
+                <input id="servicePrice" class="form-control" placeholder="e.g. NGN 25,000" />
+              </div>
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Short Description</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Short Description</label>
               <textarea id="serviceDesc" rows="3" class="form-control"></textarea>
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Image (optional)</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Image (optional)</label>
               <input id="serviceImage" type="file" accept="image/*" class="form-control form-control-sm" />
             </div>
 
-            <div class="d-grid mt-2">
-              <button class="btn btn-primary" id="addServiceBtn" type="submit">Add Service</button>
+            <div class="d-grid mt-3">
+              <button class="btn btn-primary d-flex align-items-center justify-content-center gap-2" id="addServiceBtn" type="submit">
+                <i class="fas fa-plus-circle"></i> Add Service
+              </button>
             </div>
-            <div id="serviceMsg" class="mt-2"></div>
+            <div id="serviceMsg" class="mt-3"></div>
           </form>
         </div>
 
@@ -124,12 +334,12 @@
 
       <!-- Right column: list of services -->
       <div class="col-lg-8">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-          <h4 class="hero-title mb-0">Your Services</h4>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+          <h4 class="section-title mb-0">Your Services</h4>
           <small class="small-muted">Manage, edit or remove services</small>
         </div>
 
-        <div id="servicesGrid" class="row g-3">
+        <div id="servicesGrid" class="row g-4">
           <!-- services inserted here -->
         </div>
 
@@ -148,27 +358,27 @@
           </div>
           <div class="modal-body">
             <input id="editServiceId" type="hidden" />
-            <div class="mb-2">
-              <label class="form-label small">Title</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Title</label>
               <input id="editTitle" class="form-control" required />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Category</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Category</label>
               <input id="editCategory" class="form-control" />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Price</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Price</label>
               <input id="editPrice" class="form-control" />
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Description</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Description</label>
               <textarea id="editDesc" rows="3" class="form-control"></textarea>
             </div>
-            <div class="mb-2">
-              <label class="form-label small">Replace Image (optional)</label>
+            <div class="mb-3">
+              <label class="form-label small fw-bold">Replace Image (optional)</label>
               <input id="editImage" type="file" accept="image/*" class="form-control form-control-sm" />
             </div>
-            <div id="editMsg" class="mt-1"></div>
+            <div id="editMsg" class="mt-2"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -185,356 +395,367 @@
   <!-- Firebase (modular) -->
   <script type="module">
     // --- IMPORTS ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import {
-  getAuth, onAuthStateChanged, signOut
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-import {
-  getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, orderBy, getDoc // <-- ADDED getDoc
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
-import {
-  getStorage, ref as storageRef, uploadBytes, getDownloadURL
-} from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import {
+      getAuth, onAuthStateChanged, signOut
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+    import {
+      getFirestore, collection, addDoc, getDocs, query, where, doc, updateDoc, deleteDoc, orderBy, getDoc
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+    import {
+      getStorage, ref as storageRef, uploadBytes, getDownloadURL
+    } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-storage.js";
 
-// --- CONFIG: replace with your project's config ---
-  const firebaseConfig = {
-    apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-    authDomain: "hospipro-86b8d.firebaseapp.com",
-    projectId: "hospipro-86b8d",
-    storageBucket: "hospipro-86b8d.firebasestorage.app",
-    messagingSenderId: "801856698977",
-    appId: "1:801856698977:web:05562aaf88584d2af0c820",
-};
-
-// --- INIT ---
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const storage = getStorage(app);
-
-// UI elements
-const providerNameEl = document.getElementById('providerName');
-const displayNameEl = document.getElementById('displayName');
-const displayCityEl = document.getElementById('displayCity');
-const logoPreview = document.getElementById('logoPreview');
-const profileForm = document.getElementById('profileForm');
-const nameInput = document.getElementById('nameInput');
-const cityInput = document.getElementById('cityInput');
-const phoneInput = document.getElementById('phoneInput');
-const logoFile = document.getElementById('logoFile');
-const profileMsg = document.getElementById('profileMsg');
-
-const serviceForm = document.getElementById('serviceForm');
-const serviceTitle = document.getElementById('serviceTitle');
-const serviceCategory = document.getElementById('serviceCategory');
-const servicePrice = document.getElementById('servicePrice');
-const serviceDesc = document.getElementById('serviceDesc');
-const serviceImage = document.getElementById('serviceImage');
-const serviceMsg = document.getElementById('serviceMsg');
-
-const servicesGrid = document.getElementById('servicesGrid');
-
-const logoutBtn = document.getElementById('logoutBtn');
-
-const editModalEl = document.getElementById('editModal');
-const editServiceForm = document.getElementById('editServiceForm');
-const editServiceId = document.getElementById('editServiceId');
-const editTitle = document.getElementById('editTitle');
-const editCategory = document.getElementById('editCategory');
-const editPrice = document.getElementById('editPrice');
-const editDesc = document.getElementById('editDesc');
-const editImage = document.getElementById('editImage');
-const editMsg = document.getElementById('editMsg');
-
-// For bootstrap modal usage
-let bsEditModal;
-
-// Track signed-in user id
-let currentUid = null;
-
-// --- AUTH CHECK ---
-onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    // not signed in => redirect to login
-    window.location.href = "login.html";
-    return;
-  }
-
-  currentUid = user.uid;
-  providerNameEl.textContent = user.displayName || user.email;
-  // Initialize the modal here, after user check
-  bsEditModal = new bootstrap.Modal(editModalEl); 
-  
-  await loadProviderProfile();  // load profile data from Firestore
-  await loadServices();         // load services for this provider
-});
-
-// --- LOGOUT ---
-logoutBtn.addEventListener('click', async () => {
-  await signOut(auth);
-  window.location.href = "login.html";
-});
-
-// --- PROFILE: load from Firestore ---
-async function loadProviderProfile(){
-  try {
-    const usersRef = collection(db, 'providers'); // collection 'providers'
-    // Query for doc where uid == currentUid
-    const q = query(usersRef, where('uid','==', currentUid));
-    const snapshot = await getDocs(q);
-    
-    if (!snapshot.empty) {
-      const docSnap = snapshot.docs[0];
-      const data = docSnap.data();
-      
-      // show
-      displayNameEl.textContent = data.name || data.businessName || '—';
-      displayCityEl.textContent = data.city || 'N/A';
-      logoPreview.src = data.logoUrl || 'img/default-logo.png';
-      
-      // populate form
-      nameInput.value = data.name || data.businessName || '';
-      cityInput.value = data.city || '';
-      phoneInput.value = data.phone || '';
-      
-      // store doc id for updates
-      profileForm.dataset.docId = docSnap.id;
-    } else {
-      // No provider doc yet — prefill from auth
-      displayNameEl.textContent = auth.currentUser.displayName || auth.currentUser.email;
-      displayCityEl.textContent = 'Setup Profile';
-      logoPreview.src = 'img/default-logo.png';
-      profileForm.dataset.docId = ''; // empty -> will create on save
-    }
-  } catch (err) {
-    console.error('Load profile error', err);
-  }
-}
-
-// --- PROFILE: save/update ---
-profileForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  profileMsg.textContent = '';
-  const name = nameInput.value.trim();
-  const city = cityInput.value.trim();
-  const phone = phoneInput.value.trim();
-  const file = logoFile.files[0];
-
-  try {
-    let logoUrl = logoPreview.src.startsWith('http') ? logoPreview.src : '';
-    
-    if (file) {
-      // upload file
-      const fileRef = storageRef(storage, `providers/${currentUid}/logo_${Date.now()}`);
-      const snap = await uploadBytes(fileRef, file);
-      logoUrl = await getDownloadURL(snap.ref);
-    }
-
-    const profileData = {
-      uid: currentUid,
-      name,
-      city,
-      phone,
-      logoUrl,
+    // --- CONFIG: replace with your project's config ---
+    const firebaseConfig = {
+      apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
+      authDomain: "hospitour-6a1da.firebaseapp.com",
+      projectId: "hospitour-6a1da",
+      storageBucket: "hospitour-6a1da.firebasestorage.app",
+      messagingSenderId: "73315471607",
+      appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
+      measurementId: "G-V82ZQPV48F"
     };
-    
-    // save into providers collection (one doc per provider)
-    if (profileForm.dataset.docId) {
-      // Update existing document
-      const pDocRef = doc(db, 'providers', profileForm.dataset.docId);
-      await updateDoc(pDocRef, {
-        ...profileData,
-        updatedAt: new Date()
-      });
-    } else {
-      // Create new document
-      const newRef = await addDoc(collection(db, 'providers'), {
-        ...profileData,
-        createdAt: new Date()
-      });
-      profileForm.dataset.docId = newRef.id;
-    }
 
-    profileMsg.innerHTML = `<div class="alert alert-success py-1">Profile saved ✅</div>`;
-    await loadProviderProfile();
-    // Clear file input after upload/save
-    logoFile.value = ''; 
-  } catch (err) {
-    console.error(err);
-    profileMsg.innerHTML = `<div class="alert alert-danger py-1">Error saving profile</div>`;
-  }
-});
+    // --- INIT ---
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-// --- ADD SERVICE ---
-serviceForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  serviceMsg.textContent = '';
-  const title = serviceTitle.value.trim();
-  const category = serviceCategory.value;
-  const price = servicePrice.value.trim();
-  const description = serviceDesc.value.trim();
-  const imageFile = serviceImage.files[0];
+    // UI elements
+    const providerNameEl = document.getElementById('providerName');
+    const displayNameEl = document.getElementById('displayName');
+    const displayCityEl = document.getElementById('displayCity');
+    const logoPreview = document.getElementById('logoPreview');
+    const profileForm = document.getElementById('profileForm');
+    const nameInput = document.getElementById('nameInput');
+    const cityInput = document.getElementById('cityInput');
+    const phoneInput = document.getElementById('phoneInput');
+    const logoFile = document.getElementById('logoFile');
+    const profileMsg = document.getElementById('profileMsg');
 
-  if (!title) {
-    serviceMsg.innerHTML = `<div class="alert alert-warning py-1">Please enter a service title</div>`;
-    return;
-  }
+    const serviceForm = document.getElementById('serviceForm');
+    const serviceTitle = document.getElementById('serviceTitle');
+    const serviceCategory = document.getElementById('serviceCategory');
+    const servicePrice = document.getElementById('servicePrice');
+    const serviceDesc = document.getElementById('serviceDesc');
+    const serviceImage = document.getElementById('serviceImage');
+    const serviceMsg = document.getElementById('serviceMsg');
 
-  try {
-    let imageUrl = '';
-    if (imageFile) {
-      const iRef = storageRef(storage, `providers/${currentUid}/services/${Date.now()}_${imageFile.name}`);
-      const snap = await uploadBytes(iRef, imageFile);
-      imageUrl = await getDownloadURL(snap.ref);
-    }
+    const servicesGrid = document.getElementById('servicesGrid');
+    const servicesCount = document.getElementById('servicesCount');
 
-    await addDoc(collection(db, 'services'), {
-      providerUid: currentUid,
-      title,
-      category,
-      price,
-      description,
-      imageUrl,
-      createdAt: new Date()
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    const editModalEl = document.getElementById('editModal');
+    const editServiceForm = document.getElementById('editServiceForm');
+    const editServiceId = document.getElementById('editServiceId');
+    const editTitle = document.getElementById('editTitle');
+    const editCategory = document.getElementById('editCategory');
+    const editPrice = document.getElementById('editPrice');
+    const editDesc = document.getElementById('editDesc');
+    const editImage = document.getElementById('editImage');
+    const editMsg = document.getElementById('editMsg');
+
+    // For bootstrap modal usage
+    let bsEditModal;
+
+    // Track signed-in user id
+    let currentUid = null;
+
+    // --- AUTH CHECK ---
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        // not signed in => redirect to login
+        window.location.href = "login.html";
+        return;
+      }
+
+      currentUid = user.uid;
+      providerNameEl.textContent = user.displayName || user.email;
+      // Initialize the modal here, after user check
+      bsEditModal = new bootstrap.Modal(editModalEl); 
+      
+      await loadProviderProfile();  // load profile data from Firestore
+      await loadServices();         // load services for this provider
     });
 
-    serviceMsg.innerHTML = `<div class="alert alert-success py-1">Service added ✅</div>`;
-    serviceForm.reset();
-    await loadServices();
-  } catch (err) {
-    console.error('Add service error', err);
-    serviceMsg.innerHTML = `<div class="alert alert-danger py-1">Error adding service</div>`;
-  }
-});
-
-// --- LOAD SERVICES ---
-async function loadServices(){
-  servicesGrid.innerHTML = `<div class="col-12 text-center small-muted">Loading services…</div>`;
-
-  try {
-    const q = query(collection(db, 'services'), where('providerUid','==', currentUid), orderBy('createdAt','desc'));
-    const snap = await getDocs(q);
-    servicesGrid.innerHTML = '';
-    
-    if (snap.empty) {
-      servicesGrid.innerHTML = `<div class="col-12"><div class="card p-3 text-center small-muted">No services yet — add one on the left.</div></div>`;
-      return;
-    }
-
-    snap.forEach(docSnap => {
-      const s = docSnap.data();
-      const id = docSnap.id;
-      const col = document.createElement('div');
-      col.className = 'col-md-6';
-      col.innerHTML = `
-        <div class="card p-3 h-100">
-          ${s.imageUrl ? `<img src="${s.imageUrl}" alt="${s.title}" class="service-img mb-2">` : ''}
-          <h6 class="mb-1">${s.title}</h6>
-          <div class="small-muted mb-2">${s.category} • ${s.price || ''}</div>
-          <p class="small text-muted mb-2">${s.description || ''}</p>
-          <div class="d-flex gap-2">
-            <button class="btn btn-sm btn-outline-secondary btn-edit" data-id="${id}">Edit</button>
-            <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${id}">Delete</button>
-          </div>
-        </div>
-      `;
-      servicesGrid.appendChild(col);
+    // --- LOGOUT ---
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      window.location.href = "login.html";
     });
 
-    // attach delete handlers
-    document.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', async (ev) => {
-        const id = ev.currentTarget.dataset.id;
-        if (!confirm('Delete service?')) return;
-        try {
-          await deleteDoc(doc(db, 'services', id));
-          await loadServices();
-        } catch(err){
-          console.error('Delete error', err);
-          alert('Could not delete service');
-        }
-      });
-    });
-
-    // attach edit handlers
-    document.querySelectorAll('.btn-edit').forEach(btn => {
-      btn.addEventListener('click', async (ev) => {
-        const id = ev.currentTarget.dataset.id;
+    // --- PROFILE: load from Firestore ---
+    async function loadProviderProfile(){
+      try {
+        const usersRef = collection(db, 'providers'); // collection 'providers'
+        // Query for doc where uid == currentUid
+        const q = query(usersRef, where('uid','==', currentUid));
+        const snapshot = await getDocs(q);
         
-        try {
-          // Fetch the single document directly using getDoc
-          const docRef = doc(db, 'services', id);
-          const docSnap = await getDoc(docRef);
+        if (!snapshot.empty) {
+          const docSnap = snapshot.docs[0];
+          const data = docSnap.data();
           
-          if (!docSnap.exists()) { alert('Service not found'); return; }
-
-          const found = { id: docSnap.id, data: docSnap.data() };
-
-          // fill modal
-          editServiceId.value = found.id;
-          editTitle.value = found.data.title || '';
-          // Ensure the select element gets the correct value
-          editCategory.value = found.data.category || ''; 
-          editPrice.value = found.data.price || '';
-          editDesc.value = found.data.description || '';
-          editMsg.innerHTML = '';
-          editImage.value = ''; // Clear file input
-          bsEditModal.show();
-        } catch (err) {
-          console.error('Edit fetch error', err);
-          alert('Error loading service data.');
+          // show
+          displayNameEl.textContent = data.name || data.businessName || '—';
+          displayCityEl.textContent = data.city || 'N/A';
+          logoPreview.src = data.logoUrl || 'img/default-logo.png';
+          
+          // populate form
+          nameInput.value = data.name || data.businessName || '';
+          cityInput.value = data.city || '';
+          phoneInput.value = data.phone || '';
+          
+          // store doc id for updates
+          profileForm.dataset.docId = docSnap.id;
+        } else {
+          // No provider doc yet — prefill from auth
+          displayNameEl.textContent = auth.currentUser.displayName || auth.currentUser.email;
+          displayCityEl.textContent = 'Setup Profile';
+          logoPreview.src = 'img/default-logo.png';
+          profileForm.dataset.docId = ''; // empty -> will create on save
         }
-      });
-    });
-
-  } catch (err) {
-    console.error('Load services error', err);
-    servicesGrid.innerHTML = `<div class="col-12"><div class="card p-3 text-danger">Unable to load services.</div></div>`;
-  }
-}
-
-// --- EDIT SERVICE SUBMIT ---
-editServiceForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const id = editServiceId.value;
-  if (!id) return;
-  editMsg.innerHTML = '';
-  try {
-    const docRef = doc(db, 'services', id);
-    const updated = {
-      title: editTitle.value.trim(),
-      category: editCategory.value.trim(),
-      price: editPrice.value.trim(),
-      description: editDesc.value.trim(),
-      updatedAt: new Date()
-    };
-
-    const newImage = editImage.files[0];
-    if (newImage) {
-      // Upload new image
-      const iRef = storageRef(storage, `providers/${currentUid}/services/${Date.now()}_${newImage.name}`);
-      const snap = await uploadBytes(iRef, newImage);
-      const url = await getDownloadURL(snap.ref);
-      updated.imageUrl = url;
+      } catch (err) {
+        console.error('Load profile error', err);
+      }
     }
 
-    await updateDoc(docRef, updated);
-    editMsg.innerHTML = `<div class="alert alert-success py-1">Saved ✅</div>`;
-    bsEditModal.hide();
-    await loadServices();
-  } catch (err) {
-    console.error('Edit save error', err);
-    editMsg.innerHTML = `<div class="alert alert-danger py-1">Could not save changes</div>`;
-  }
-});
+    // --- PROFILE: save/update ---
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      profileMsg.textContent = '';
+      const name = nameInput.value.trim();
+      const city = cityInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const file = logoFile.files[0];
 
-// --- Utility: when user selects local logo preview it instantly shows ---
-logoFile.addEventListener('change', (e) => {
-  const f = e.target.files[0];
-  if (!f) return;
-  const url = URL.createObjectURL(f);
-  logoPreview.src = url;
-});
+      try {
+        let logoUrl = logoPreview.src.startsWith('http') ? logoPreview.src : '';
+        
+        if (file) {
+          // upload file
+          const fileRef = storageRef(storage, `providers/${currentUid}/logo_${Date.now()}`);
+          const snap = await uploadBytes(fileRef, file);
+          logoUrl = await getDownloadURL(snap.ref);
+        }
+
+        const profileData = {
+          uid: currentUid,
+          name,
+          city,
+          phone,
+          logoUrl,
+        };
+        
+        // save into providers collection (one doc per provider)
+        if (profileForm.dataset.docId) {
+          // Update existing document
+          const pDocRef = doc(db, 'providers', profileForm.dataset.docId);
+          await updateDoc(pDocRef, {
+            ...profileData,
+            updatedAt: new Date()
+          });
+        } else {
+          // Create new document
+          const newRef = await addDoc(collection(db, 'providers'), {
+            ...profileData,
+            createdAt: new Date()
+          });
+          profileForm.dataset.docId = newRef.id;
+        }
+
+        profileMsg.innerHTML = `<div class="alert alert-success py-2">Profile saved successfully ✅</div>`;
+        await loadProviderProfile();
+        // Clear file input after upload/save
+        logoFile.value = ''; 
+      } catch (err) {
+        console.error(err);
+        profileMsg.innerHTML = `<div class="alert alert-danger py-2">Error saving profile</div>`;
+      }
+    });
+
+    // --- ADD SERVICE ---
+    serviceForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      serviceMsg.textContent = '';
+      const title = serviceTitle.value.trim();
+      const category = serviceCategory.value;
+      const price = servicePrice.value.trim();
+      const description = serviceDesc.value.trim();
+      const imageFile = serviceImage.files[0];
+
+      if (!title) {
+        serviceMsg.innerHTML = `<div class="alert alert-warning py-2">Please enter a service title</div>`;
+        return;
+      }
+
+      try {
+        let imageUrl = '';
+        if (imageFile) {
+          const iRef = storageRef(storage, `providers/${currentUid}/services/${Date.now()}_${imageFile.name}`);
+          const snap = await uploadBytes(iRef, imageFile);
+          imageUrl = await getDownloadURL(snap.ref);
+        }
+
+        await addDoc(collection(db, 'services'), {
+          providerUid: currentUid,
+          title,
+          category,
+          price,
+          description,
+          imageUrl,
+          createdAt: new Date()
+        });
+
+        serviceMsg.innerHTML = `<div class="alert alert-success py-2">Service added successfully ✅</div>`;
+        serviceForm.reset();
+        await loadServices();
+      } catch (err) {
+        console.error('Add service error', err);
+        serviceMsg.innerHTML = `<div class="alert alert-danger py-2">Error adding service</div>`;
+      }
+    });
+
+    // --- LOAD SERVICES ---
+    async function loadServices(){
+      servicesGrid.innerHTML = `<div class="col-12 text-center small-muted">Loading services…</div>`;
+
+      try {
+        const q = query(collection(db, 'services'), where('providerUid','==', currentUid), orderBy('createdAt','desc'));
+        const snap = await getDocs(q);
+        servicesGrid.innerHTML = '';
+        
+        if (snap.empty) {
+          servicesGrid.innerHTML = `<div class="col-12"><div class="card p-4 text-center small-muted">No services yet — add one on the left.</div></div>`;
+          servicesCount.textContent = '0';
+          return;
+        }
+
+        servicesCount.textContent = snap.size.toString();
+        
+        snap.forEach(docSnap => {
+          const s = docSnap.data();
+          const id = docSnap.id;
+          const col = document.createElement('div');
+          col.className = 'col-md-6';
+          col.innerHTML = `
+            <div class="service-card">
+              ${s.imageUrl ? `<img src="${s.imageUrl}" alt="${s.title}" class="service-img mb-3">` : '<div class="service-img bg-light d-flex align-items-center justify-content-center mb-3"><i class="fas fa-image text-muted fa-2x"></i></div>'}
+              <h6 class="mb-1 fw-bold text-brown">${s.title}</h6>
+              <div class="small-muted mb-2">${s.category} • ${s.price || 'Price on request'}</div>
+              <p class="small text-muted mb-3">${s.description || 'No description provided.'}</p>
+              <div class="d-flex gap-2">
+                <button class="btn btn-sm btn-outline-secondary action-btn btn-edit" data-id="${id}">
+                  <i class="fas fa-edit me-1"></i>Edit
+                </button>
+                <button class="btn btn-sm btn-outline-danger action-btn btn-delete" data-id="${id}">
+                  <i class="fas fa-trash me-1"></i>Delete
+                </button>
+              </div>
+            </div>
+          `;
+          servicesGrid.appendChild(col);
+        });
+
+        // attach delete handlers
+        document.querySelectorAll('.btn-delete').forEach(btn => {
+          btn.addEventListener('click', async (ev) => {
+            const id = ev.currentTarget.dataset.id;
+            if (!confirm('Are you sure you want to delete this service?')) return;
+            try {
+              await deleteDoc(doc(db, 'services', id));
+              await loadServices();
+            } catch(err){
+              console.error('Delete error', err);
+              alert('Could not delete service');
+            }
+          });
+        });
+
+        // attach edit handlers
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.addEventListener('click', async (ev) => {
+            const id = ev.currentTarget.dataset.id;
+            
+            try {
+              // Fetch the single document directly using getDoc
+              const docRef = doc(db, 'services', id);
+              const docSnap = await getDoc(docRef);
+              
+              if (!docSnap.exists()) { alert('Service not found'); return; }
+
+              const found = { id: docSnap.id, data: docSnap.data() };
+
+              // fill modal
+              editServiceId.value = found.id;
+              editTitle.value = found.data.title || '';
+              // Ensure the select element gets the correct value
+              editCategory.value = found.data.category || ''; 
+              editPrice.value = found.data.price || '';
+              editDesc.value = found.data.description || '';
+              editMsg.innerHTML = '';
+              editImage.value = ''; // Clear file input
+              bsEditModal.show();
+            } catch (err) {
+              console.error('Edit fetch error', err);
+              alert('Error loading service data.');
+            }
+          });
+        });
+
+      } catch (err) {
+        console.error('Load services error', err);
+        servicesGrid.innerHTML = `<div class="col-12"><div class="card p-3 text-danger">Unable to load services.</div></div>`;
+      }
+    }
+
+    // --- EDIT SERVICE SUBMIT ---
+    editServiceForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = editServiceId.value;
+      if (!id) return;
+      editMsg.innerHTML = '';
+      try {
+        const docRef = doc(db, 'services', id);
+        const updated = {
+          title: editTitle.value.trim(),
+          category: editCategory.value.trim(),
+          price: editPrice.value.trim(),
+          description: editDesc.value.trim(),
+          updatedAt: new Date()
+        };
+
+        const newImage = editImage.files[0];
+        if (newImage) {
+          // Upload new image
+          const iRef = storageRef(storage, `providers/${currentUid}/services/${Date.now()}_${newImage.name}`);
+          const snap = await uploadBytes(iRef, newImage);
+          const url = await getDownloadURL(snap.ref);
+          updated.imageUrl = url;
+        }
+
+        await updateDoc(docRef, updated);
+        editMsg.innerHTML = `<div class="alert alert-success py-2">Service updated successfully ✅</div>`;
+        setTimeout(() => {
+          bsEditModal.hide();
+        }, 1000);
+        await loadServices();
+      } catch (err) {
+        console.error('Edit save error', err);
+        editMsg.innerHTML = `<div class="alert alert-danger py-2">Could not save changes</div>`;
+      }
+    });
+
+    // --- Utility: when user selects local logo preview it instantly shows ---
+    logoFile.addEventListener('change', (e) => {
+      const f = e.target.files[0];
+      if (!f) return;
+      const url = URL.createObjectURL(f);
+      logoPreview.src = url;
+    });
   </script>
 </body>
 </html>
