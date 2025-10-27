@@ -1,623 +1,916 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact Us | HospiTour</title>
-    <meta
-      name="description"
-      content="Get in touch with HospiPro - we're here to help transform your hospitality business with innovative solutions."
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - HospiTour | Get in Touch</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
-      :root {
-        --gold: #d4af37;
-        --brown: #3b2f2f;
-        --light-gold: #f8f4e6;
-        --light-brown: #f6f2e8;
-      }
-      
-      body {
-        font-family: "Open Sans", sans-serif;
-        background: #fffdf9;
-        color: #3b2f2f;
-        scroll-behavior: smooth;
-      }
-      
-      .navbar {
-        background: #3b2f2f;
-      }
-      
-      .navbar-brand {
-        font-family: "Playfair Display", serif;
-        color: white !important;
-        font-size: 1.6rem;
-      }
-      
-      .nav-link {
-        color: #fff !important;
-        font-weight: 500;
-        transition: 0.3s;
-      }
-      
-      .nav-link:hover {
-        color: #d4af37 !important;
-      }
-      
-      .navbar-toggler {
-        border: none;
-        background: #d4af37;
-      }
-
-      .hero {
-        background: linear-gradient(rgba(59, 47, 47, 0.85), rgba(59, 47, 47, 0.85)),
-          url("img/contact-hero.jpg") center/cover no-repeat;
-        color: #fff;
-        text-align: center;
-        padding: 140px 15px 100px;
-        margin-top: 76px;
-      }
-      
-      .hero h1 {
-        font-family: "Playfair Display", serif;
-        color: #d4af37;
-        font-size: 2.8rem;
-        margin-bottom: 1rem;
-      }
-      
-      .hero p {
-        font-size: 1.2rem;
-        max-width: 600px;
-        margin: 0 auto;
-        opacity: 0.9;
-      }
-      
-      .btn-gold {
-        background: #d4af37;
-        color: #3b2f2f;
-        font-weight: 600;
-        border-radius: 6px;
-        border: none;
-        transition: all 0.3s ease;
-      }
-      
-      .btn-gold:hover {
-        background: #c19b2d;
-        color: #fff;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
-      }
-
-      .contact-section {
-        padding: 80px 0;
-      }
-      
-      .section-title {
-        font-family: "Playfair Display", serif;
-        font-size: 2rem;
-        color: #3b2f2f;
-        margin-bottom: 35px;
-        text-align: center;
-        position: relative;
-      }
-      
-      .section-title::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: var(--gold);
-      }
-      
-      .contact-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 30px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        height: 100%;
-        border-top: 4px solid var(--gold);
-      }
-      
-      .contact-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
-      }
-      
-      .contact-icon {
-        width: 70px;
-        height: 70px;
-        border-radius: 50%;
-        background: var(--light-gold);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 20px;
-      }
-      
-      .contact-icon i {
-        font-size: 1.8rem;
-        color: var(--gold);
-      }
-      
-      .contact-form {
-        background: #fff;
-        border-radius: 12px;
-        padding: 40px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-      }
-      
-      .form-control {
-        border-radius: 8px;
-        padding: 12px 15px;
-        border: 1px solid #e2e2e2;
-        transition: all 0.3s ease;
-      }
-      
-      .form-control:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
-      }
-      
-      .form-label {
-        font-weight: 600;
-        color: var(--brown);
-        margin-bottom: 8px;
-      }
-      
-      .faq-section {
-        background: var(--light-brown);
-        padding: 80px 0;
-      }
-      
-      .accordion-button {
-        background: #fff;
-        color: var(--brown);
-        font-weight: 600;
-        padding: 20px;
-        border-radius: 8px !important;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      }
-      
-      .accordion-button:not(.collapsed) {
-        background: var(--light-gold);
-        color: var(--brown);
-        border-color: var(--gold);
-      }
-      
-      .accordion-button:focus {
-        box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
-        border-color: var(--gold);
-      }
-      
-      .team-section {
-        padding: 80px 0;
-      }
-      
-      .team-card {
-        background: #fff;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        text-align: center;
-      }
-      
-      .team-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
-      }
-      
-      .team-img {
-        height: 200px;
-        background: var(--light-gold);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      
-      .team-img i {
-        font-size: 4rem;
-        color: var(--gold);
-      }
-      
-      .team-info {
-        padding: 25px 20px;
-      }
-      
-      .social-links a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--light-gold);
-        color: var(--gold);
-        margin: 0 5px;
-        transition: all 0.3s ease;
-      }
-      
-      .social-links a:hover {
-        background: var(--gold);
-        color: white;
-        transform: translateY(-3px);
-      }
-      
-      footer {
-        background: #3b2f2f;
-        color: #fff;
-        padding: 45px 0 25px;
-      }
-      
-      footer a {
-        color: #d4af37;
-        text-decoration: none;
-        transition: 0.3s;
-      }
-      
-      footer a:hover {
-        color: #fff;
-        text-decoration: underline;
-      }
-      
-      .footer-links {
-        list-style: none;
-        padding: 0;
-      }
-      
-      .footer-links li {
-        margin-bottom: 10px;
-      }
-
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2.2rem;
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
         }
         
-        .hero p {
-          font-size: 1rem;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
-        .contact-form {
-          padding: 25px;
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
         }
-      }
+        
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-brand .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Hero Section */
+        .contact-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.1"><path fill="white" d="M0,320L48,293.3C96,267,192,213,288,186.7C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 6rem 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Contact Cards */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .contact-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .contact-info {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--primary-dark);
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        /* Offices Section */
+        .offices-section {
+            background: white;
+            padding: 6rem 0;
+        }
+        
+        .office-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .office-card {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .office-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .office-flag {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .office-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .office-address {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .office-hours {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* FAQ Section */
+        .faq-section {
+            padding: 6rem 0;
+        }
+        
+        .accordion-button {
+            font-weight: 600;
+            padding: 1.5rem;
+            border: none;
+            background: white;
+        }
+        
+        .accordion-button:not(.collapsed) {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .accordion-body {
+            padding: 1.5rem;
+            color: var(--gray);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .contact-cards,
+            .office-cards {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
-      <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
-          <div class="contact-icon" style="width: 40px; height: 40px; margin-right: 10px;">
-            <i class="bi bi-building"></i>
-          </div>
-          <span style="font-size: 30px; font-weight: bold;">HospiTour</span>
-        </a>
-        <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-          <i class="bi bi-list text-dark fs-2"></i>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="nav">
-          <ul class="navbar-nav text-left">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
-            <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-            <li class="nav-item"><a class="nav-link" href="hire.html">Service Providers</a></li>
-            <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
-            <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
-          </ul>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="logo-icon">HT</div>
+                HospiTour
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="solutions.html">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
-    <section class="hero">
-      <div class="container">
-        <h1>Get In Touch With HospiPro</h1>
-        <p>We're here to answer your questions and help you transform your hospitality business with our innovative solutions.</p>
-      </div>
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Let's Start a Conversation</h1>
+                <p class="hero-subtitle">
+                    Ready to transform your hospitality business? Our team is here to answer your questions and help you get started.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="#contact-form" class="btn btn-light btn-lg">Send Message</a>
+                    <a href="#offices" class="btn btn-outline-light btn-lg">Visit Offices</a>
+                </div>
+            </div>
+        </div>
     </section>
 
+    <!-- Contact Methods Section -->
     <section class="contact-section">
-      <div class="container">
-        <h2 class="section-title">How Can We Help You?</h2>
-        <p class="text-center text-muted mb-5">Choose the best way to reach out based on your needs</p>
-        
-        <div class="row g-4 mb-5">
-          <div class="col-md-4">
-            <div class="contact-card">
-              <div class="contact-icon">
-                <i class="bi bi-telephone"></i>
-              </div>
-              <h4 class="text-center">Call Us</h4>
-              <p class="text-center text-muted">Speak directly with our support team</p>
-              <div class="text-center">
-                <h5 class="text-gold">+1 (555) 123-4567</h5>
-                <p class="small text-muted">Mon-Fri, 9am-6pm EST</p>
-              </div>
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Get in Touch</h2>
+                <p class="section-subtitle">
+                    Multiple ways to reach our hospitality experts. We're here to help you succeed.
+                </p>
             </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="contact-card">
-              <div class="contact-icon">
-                <i class="bi bi-envelope"></i>
-              </div>
-              <h4 class="text-center">Email Us</h4>
-              <p class="text-center text-muted">Send us a message anytime</p>
-              <div class="text-center">
-                <h5 class="text-gold">oborimusa@gmail.com</h5>
-                <p class="small text-muted">We respond within 24 hours</p>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="contact-card">
-              <div class="contact-icon">
-                <i class="bi bi-chat-dots"></i>
-              </div>
-              <h4 class="text-center">Live Chat</h4>
-              <p class="text-center text-muted">Get instant answers to your questions</p>
-              <div class="text-center mt-3">
-                <a href="#" class="btn btn-gold">Start Chat</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="row">
-          <div class="col-lg-8 mx-auto">
-            <div class="contact-form">
-              <h3 class="text-center mb-4">Send Us a Message</h3>
-              <form>
-                <div class="row g-3">
-                  <div class="col-md-6">
-                    <label for="firstName" class="form-label">First Name</label>
-                    <input type="text" class="form-control" id="firstName" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="lastName" class="form-label">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input type="email" class="form-control" id="email" required>
-                  </div>
-                  <div class="col-md-6">
-                    <label for="phone" class="form-label">Phone Number</label>
-                    <input type="tel" class="form-control" id="phone">
-                  </div>
-                  <div class="col-12">
-                    <label for="subject" class="form-label">Subject</label>
-                    <input type="text" class="form-control" id="subject" required>
-                  </div>
-                  <div class="col-12">
-                    <label for="message" class="form-label">Message</label>
-                    <textarea class="form-control" id="message" rows="5" required></textarea>
-                  </div>
-                  <div class="col-12">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="newsletter">
-                      <label class="form-check-label" for="newsletter">
-                        Subscribe to our newsletter for updates and tips
-                      </label>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
                     </div>
-                  </div>
-                  <div class="col-12 text-center mt-4">
-                    <button type="submit" class="btn btn-gold btn-lg px-5">Send Message</button>
-                  </div>
+                    <h3 class="contact-title">Call Us</h3>
+                    <p class="contact-info">
+                        Speak directly with our hospitality consultants for immediate assistance.
+                    </p>
+                    <a href="tel:+1-555-123-4567" class="contact-link">+1 (555) 123-4567</a>
+                    <div class="mt-2 text-sm text-muted">Mon-Fri, 9AM-6PM EST</div>
                 </div>
-              </form>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h3 class="contact-title">Email Us</h3>
+                    <p class="contact-info">
+                        Send us your questions and we'll get back to you within 24 hours.
+                    </p>
+                    <a href="mailto:hello@hospitour.com" class="contact-link">hospitour.com.ng</a>
+                    <div class="mt-2 text-sm text-muted">24/7 Support</div>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <h3 class="contact-title">Live Chat</h3>
+                    <p class="contact-info">
+                        Chat with our support team in real-time for quick answers.
+                    </p>
+                    <a href="#" class="contact-link">Start Live Chat</a>
+                    <div class="mt-2 text-sm text-muted">Mon-Sun, 8AM-10PM EST</div>
+                </div>
             </div>
-          </div>
+            
+            <!-- Contact Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-form-container">
+                        <h3 class="form-title" id="contact-form">Send us a Message</h3>
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">First Name *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Last Name *</label>
+                                        <input type="text" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Number</label>
+                                        <input type="tel" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Company Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Business Type *</label>
+                                <select class="form-control" required>
+                                    <option value="">Select your business type</option>
+                                    <option value="hotel">Hotel/Resort</option>
+                                    <option value="tour">Tour Operator</option>
+                                    <option value="rental">Vacation Rental</option>
+                                    <option value="restaurant">Restaurant/Bar</option>
+                                    <option value="venue">Event Venue</option>
+                                    <option value="venue">Catering Services</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">How can we help you? *</label>
+                                <textarea class="form-control" rows="4" placeholder="Tell us about your hospitality business needs..." required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">How did you hear about us?</label>
+                                <select class="form-control">
+                                    <option value="">Select an option</option>
+                                    <option value="search">Search Engine</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="referral">Referral</option>
+                                    <option value="event">Industry Event</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary w-100 py-3">
+                                <i class="bi bi-send me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
+    <!-- Offices Section -->
+    <section id="offices" class="offices-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Our Global Offices</h2>
+                <p class="section-subtitle">
+                    With teams around the world, we're always close to serve your hospitality needs.
+                </p>
+            </div>
+            
+            <div class="office-cards">
+                <div class="office-card">
+                    <div class="office-flag">🇺🇸</div>
+                    <h3 class="office-title">New York, USA</h3>
+                    <p class="office-address">
+                        123 Hospitality Avenue<br>
+                        Suite 500<br>
+                        New York, NY 10001
+                    </p>
+                    <div class="office-hours">
+                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM EST
+                    </div>
+                    <a href="tel:+1-555-123-4567" class="contact-link">+1 (555) 123-4567</a>
+                </div>
+                
+                <div class="office-card">
+                    <div class="office-flag">🇬🇧</div>
+                    <h3 class="office-title">London, UK</h3>
+                    <p class="office-address">
+                        45 Tourism Street<br>
+                        London EC2A 4NE<br>
+                        United Kingdom
+                    </p>
+                    <div class="office-hours">
+                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM GMT
+                    </div>
+                    <a href="tel:+44-20-7946-0958" class="contact-link">+44 20 7946 0958</a>
+                </div>
+                
+                <div class="office-card">
+                    <div class="office-flag">🇸🇬</div>
+                    <h3 class="office-title">Singapore</h3>
+                    <p class="office-address">
+                        78 Marina View<br>
+                        #12-05 Asia Square Tower 1<br>
+                        Singapore 018961
+                    </p>
+                    <div class="office-hours">
+                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM SGT
+                    </div>
+                    <a href="tel:+234-803-966-1354" class="contact-link">+234-803-966 1354</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
     <section class="faq-section">
-      <div class="container">
-        <h2 class="section-title">Frequently Asked Questions</h2>
-        <p class="text-center text-muted mb-5">Find quick answers to common questions about HospiPro</p>
-        
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Common Questions</h2>
+                <p class="section-subtitle">
+                    Quick answers to frequently asked questions about getting started with HospiTour.
+                </p>
+            </div>
+            
             <div class="accordion" id="faqAccordion">
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                    How quickly can I get started with HospiPro?
-                  </button>
-                </h2>
-                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">
-                    You can sign up and get started in minutes! Our platform is designed for quick onboarding, and our team is available to help you set up your account and import your existing data if needed.
-                  </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            How quickly can I get started with HospiTour?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You can start your free trial immediately after signing up. Most businesses are fully operational within 24-48 hours. Our onboarding team will guide you through the setup process and ensure everything is configured to meet your specific needs.
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                    Do you offer training for new users?
-                  </button>
-                </h2>
-                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">
-                    Yes! We provide comprehensive onboarding sessions, video tutorials, and detailed documentation. For Pro and Enterprise plans, we offer personalized training sessions with our experts.
-                  </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Do you offer custom solutions for large hotel chains?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Absolutely! Our Enterprise plan includes custom solutions tailored for large hotel chains and hospitality groups. We offer dedicated account management, custom integrations, white-label solutions, and enterprise-grade support to meet the complex needs of multi-property operations.
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                    Can I integrate HospiPro with my existing systems?
-                  </button>
-                </h2>
-                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">
-                    Absolutely. HospiPro offers API access and integrations with popular hospitality systems including PMS, POS, and accounting software. Contact our sales team to discuss your specific integration needs.
-                  </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            What kind of support do you provide?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We provide comprehensive support through multiple channels: email support for all plans, priority phone support for Professional and Enterprise plans, 24/7 dedicated support for Enterprise customers, live chat during business hours, and extensive documentation and training resources.
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
-              <div class="accordion-item mb-3">
-                <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                    What kind of support do you offer?
-                  </button>
-                </h2>
-                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                  <div class="accordion-body">
-                    We offer multiple support channels including email, phone, and live chat. Response times vary by plan, with our Pro and Enterprise customers receiving priority support. We also have an extensive knowledge base and community forum.
-                  </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Can I integrate with my existing systems?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, HospiTour offers robust API access and pre-built integrations with popular hospitality systems including PMS, POS, channel managers, payment gateways, and accounting software. Our technical team can help with custom integrations for unique requirements.
+                        </div>
+                    </div>
                 </div>
-              </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                            Is there training available for my staff?
+                        </button>
+                    </h2>
+                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We provide comprehensive training resources including video tutorials, documentation, live webinars, and one-on-one training sessions. Enterprise customers receive customized on-site or virtual training for their entire team to ensure smooth adoption.
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section class="team-section">
-      <div class="container">
-        <h2 class="section-title">Our Leadership Team</h2>
-        <p class="text-center text-muted mb-5">Meet the people behind HospiPro</p>
-        
-        <div class="row g-4">
-          <div class="col-md-4">
-            <div class="team-card">
-              <div class="team-img">
-                <i class="bi bi-person-circle"></i>
-              </div>
-              <div class="team-info">
-                <h4>Sarah Johnson</h4>
-                <p class="text-gold">CEO & Founder</p>
-                <p class="text-muted small">With 15+ years in hospitality management, Sarah founded HospiPro to solve industry challenges.</p>
-                <div class="social-links mt-3">
-                  <a href="#"><i class="bi bi-linkedin"></i></a>
-                  <a href="#"><i class="bi bi-twitter"></i></a>
-                  <a href="#"><i class="bi bi-envelope"></i></a>
-                </div>
-              </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Ready to Transform Your Hospitality Business?</h2>
+            <p class="cta-subtitle">
+                Join thousands of hotels, tour operators, and hospitality professionals who trust HospiTour to power their success.
+            </p>
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                <a href="get-started.html" class="btn btn-light btn-lg">Start Free Trial</a>
+                <a href="demo.html" class="btn btn-outline-light btn-lg">Schedule Demo</a>
             </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="team-card">
-              <div class="team-img">
-                <i class="bi bi-person-circle"></i>
-              </div>
-              <div class="team-info">
-                <h4>Michael Chen</h4>
-                <p class="text-gold">CTO</p>
-                <p class="text-muted small">Michael leads our technology team with expertise in scalable cloud solutions and AI integration.</p>
-                <div class="social-links mt-3">
-                  <a href="#"><i class="bi bi-linkedin"></i></a>
-                  <a href="#"><i class="bi bi-twitter"></i></a>
-                  <a href="#"><i class="bi bi-envelope"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="team-card">
-              <div class="team-img">
-                <i class="bi bi-person-circle"></i>
-              </div>
-              <div class="team-info">
-                <h4>Amara Okonjo</h4>
-                <p class="text-gold">Head of Customer Success</p>
-                <p class="text-muted small">Amara ensures our clients achieve their business goals through effective use of our platform.</p>
-                <div class="social-links mt-3">
-                  <a href="#"><i class="bi bi-linkedin"></i></a>
-                  <a href="#"><i class="bi bi-twitter"></i></a>
-                  <a href="#"><i class="bi bi-envelope"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <div class="d-flex align-items-center mb-3">
-              <div class="contact-icon" style="width: 40px; height: 40px; margin-right: 10px;">
-                <i class="bi bi-building"></i>
-              </div>
-              <h4 class="text-white mb-0">HospiPro</h4>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem;">HT</div>
+                        HospiTour
+                    </div>
+                    <p style="color: #94a3b8; margin-bottom: 2rem;">
+                        The complete ecosystem for hospitality and tourism excellence. Streamline operations and create unforgettable experiences.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-twitter"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Platform</h5>
+                        <a href="features.html">Features</a>
+                        <a href="solutions.html">Solutions</a>
+                        <a href="pricing.html">Pricing</a>
+                        <a href="demo.html">Demo</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <a href="#">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Support</a>
+                        <a href="#">API</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <a href="about.html">About</a>
+                        <a href="#">Careers</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="#">Partners</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Legal</h5>
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Security</a>
+                        <a href="#">Compliance</a>
+                    </div>
+                </div>
             </div>
-            <p class="text-light">Transforming hospitality management across Africa with innovative technology solutions.</p>
-          </div>
-          
-          <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-gold mb-3">Quick Links</h5>
-            <ul class="footer-links">
-              <li><a href="index.html">Home</a></li>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="pricing.html">Pricing</a></li>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-          </div>
-          
-          <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-gold mb-3">Resources</h5>
-            <ul class="footer-links">
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Help Center</a></li>
-              <li><a href="#">Community</a></li>
-              <li><a href="#">Partners</a></li>
-            </ul>
-          </div>
-          
-          <div class="col-lg-3">
-            <h5 class="text-gold mb-3">Contact Info</h5>
-            <ul class="footer-links">
-              <li class="d-flex align-items-center mb-2">
-                <i class="bi bi-geo-alt me-2 text-gold"></i>
-                <span>123 Hospitality Ave, Nairobi, Kenya</span>
-              </li>
-              <li class="d-flex align-items-center mb-2">
-                <i class="bi bi-telephone me-2 text-gold"></i>
-                <span>+254 700 123 456</span>
-              </li>
-              <li class="d-flex align-items-center">
-                <i class="bi bi-envelope me-2 text-gold"></i>
-                <span>info@hospipro.com</span>
-              </li>
-            </ul>
-          </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 HospiTour. All rights reserved. The complete ecosystem for hospitality and tourism excellence.</p>
+            </div>
         </div>
-        
-        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
-        
-        <div class="row align-items-center">
-          <div class="col-md-6 text-center text-md-start">
-            <p class="mb-0">&copy; 2025 HospiPro. All rights reserved.</p>
-          </div>
-          <div class="col-md-6 text-center text-md-end">
-            <a href="#" class="text-light me-3">Privacy Policy</a>
-            <a href="#" class="text-light me-3">Terms of Service</a>
-            <a href="#" class="text-light">Cookie Policy</a>
-          </div>
-        </div>
-      </div>
     </footer>
 
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    
+    <script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="bi bi-arrow-repeat spinner"></i> Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Show success message
+                alert('Thank you for your message! We will get back to you within 24 hours.');
+                
+                // Reset form
+                this.reset();
+                
+                // Restore button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe contact cards
+        document.querySelectorAll('.contact-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Observe office cards
+        document.querySelectorAll('.office-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
 </html>

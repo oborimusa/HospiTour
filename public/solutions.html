@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Features - HospiTour | Hospitality & Tourism Platform</title>
+    <title>Solutions - HospiTour | Tailored for Your Business</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -94,7 +94,7 @@
         }
         
         /* Hero Section */
-        .features-hero {
+        .solutions-hero {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 8rem 0 4rem;
@@ -102,7 +102,7 @@
             overflow: hidden;
         }
         
-        .features-hero::before {
+        .solutions-hero::before {
             content: '';
             position: absolute;
             top: 0;
@@ -133,8 +133,8 @@
             max-width: 600px;
         }
         
-        /* Features Navigation */
-        .features-nav {
+        /* Solutions Navigation */
+        .solutions-nav {
             background: white;
             padding: 2rem 0;
             border-bottom: 1px solid #e2e8f0;
@@ -150,6 +150,7 @@
             border-radius: 25px;
             margin: 0 0.5rem;
             transition: all 0.3s ease;
+            white-space: nowrap;
         }
         
         .nav-pills .nav-link.active {
@@ -162,13 +163,13 @@
             background: #f1f5f9;
         }
         
-        /* Feature Sections */
-        .feature-section {
+        /* Solution Sections */
+        .solution-section {
             padding: 6rem 0;
             scroll-margin-top: 140px;
         }
         
-        .feature-section:nth-child(even) {
+        .solution-section:nth-child(even) {
             background: white;
         }
         
@@ -191,60 +192,59 @@
             margin: 0 auto;
         }
         
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .feature-card {
+        /* Solution Cards */
+        .solution-card {
             background: white;
-            padding: 2.5rem;
             border-radius: 15px;
+            overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
             border: 1px solid rgba(0, 0, 0, 0.05);
             height: 100%;
         }
         
-        .feature-card:hover {
-            transform: translateY(-5px);
+        .solution-card:hover {
+            transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .feature-icon {
-            width: 70px;
-            height: 70px;
+        .solution-icon {
+            width: 80px;
+            height: 80px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 15px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 2rem;
             color: white;
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
-        .feature-title {
-            font-size: 1.4rem;
+        .solution-content {
+            padding: 2.5rem;
+        }
+        
+        .solution-title {
+            font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--dark);
         }
         
-        .feature-text {
+        .solution-text {
             color: var(--gray);
             line-height: 1.7;
             margin-bottom: 1.5rem;
         }
         
-        .feature-list {
+        .solution-features {
             list-style: none;
             padding: 0;
+            margin-bottom: 2rem;
         }
         
-        .feature-list li {
+        .solution-features li {
             padding: 0.5rem 0;
             color: var(--gray);
             display: flex;
@@ -252,31 +252,68 @@
             gap: 0.75rem;
         }
         
-        .feature-list li::before {
+        .solution-features li::before {
             content: '✓';
             color: var(--secondary);
             font-weight: bold;
             font-size: 1.1rem;
         }
         
-        /* Demo Section */
-        .demo-section {
+        /* Case Studies */
+        .case-study {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+        }
+        
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .case-study-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background: var(--dark);
             color: white;
             padding: 6rem 0;
             text-align: center;
         }
         
-        .demo-title {
+        .cta-title {
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
         }
         
-        .demo-subtitle {
+        .cta-subtitle {
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
-            opacity: 0.9;
+            opacity: 0.8;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
@@ -348,12 +385,18 @@
                 font-size: 2rem;
             }
             
-            .feature-card {
+            .solution-content {
                 padding: 2rem;
             }
             
-            .features-nav {
+            .solutions-nav {
                 top: 70px;
+            }
+            
+            .nav-pills {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 1rem;
             }
         }
     </style>
@@ -377,10 +420,10 @@
                         <a class="nav-link" href="index.html">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="features.html">Features</a>
+                        <a class="nav-link" href="features.html">Features</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="solutions.html">Solutions</a>
+                        <a class="nav-link active" href="solutions.html">Solutions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pricing.html">Pricing</a>
@@ -397,317 +440,299 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="features-hero">
+    <section class="solutions-hero">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Powerful Features for Hospitality Excellence</h1>
+            <div class="hero-content text-center">
+                <h1 class="hero-title">Tailored Solutions for Every Hospitality Business</h1>
                 <p class="hero-subtitle">
-                    Discover how HospiTour's comprehensive suite of tools transforms how you manage properties, connect with guests, and grow your tourism business.
+                    Discover how HospiTour adapts to your unique needs, whether you're running a boutique hotel, managing tour operations, or building a hospitality empire.
                 </p>
-                <div class="d-flex flex-column flex-sm-row gap-3">
-                    <a href="#demo" class="btn btn-light btn-lg">Watch Demo</a>
-                    <a href="#property-management" class="btn btn-outline-light btn-lg">Explore Features</a>
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                    <a href="#consultation" class="btn btn-light btn-lg">Get Custom Solution</a>
+                    <a href="#hotels-resorts" class="btn btn-outline-light btn-lg">Explore Solutions</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Navigation -->
-    <section class="features-nav">
+    <!-- Solutions Navigation -->
+    <section class="solutions-nav">
         <div class="container">
             <ul class="nav nav-pills justify-content-center flex-nowrap overflow-auto pb-2">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#property-management">Property Management</a>
+                    <a class="nav-link active" href="#hotels-resorts">Hotels & Resorts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#tour-management">Tour Management</a>
+                    <a class="nav-link" href="#tour-operators">Tour Operators</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#guest-experience">Guest Experience</a>
+                    <a class="nav-link" href="#vacation-rentals">Vacation Rentals</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#business-intelligence">Business Intelligence</a>
+                    <a class="nav-link" href="#restaurants-bars">Restaurants & Bars</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#professional-network">Professional Network</a>
+                    <a class="nav-link" href="#event-venues">Event Venues</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#mobile-platform">Mobile Platform</a>
+                    <a class="nav-link" href="#hospitality-groups">Hospitality Groups</a>
                 </li>
             </ul>
         </div>
     </section>
 
-    <!-- Property Management Section -->
-    <section id="property-management" class="feature-section">
+    <!-- Hotels & Resorts Section -->
+    <section id="hotels-resorts" class="solution-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Property Management</h2>
+                <h2 class="section-title">Hotels & Resorts</h2>
                 <p class="section-subtitle">
-                    Streamline hotel operations, room bookings, staff management, and guest services with our comprehensive property management system.
+                    Comprehensive property management solutions for hotels of all sizes, from boutique properties to luxury resort chains.
                 </p>
             </div>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-calendar-check"></i>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <h3 class="solution-title">Boutique Hotels</h3>
+                            <p class="solution-text">
+                                Perfect for independent hotels seeking to deliver personalized experiences while streamlining operations.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Personalized guest experiences</li>
+                                <li>Integrated booking management</li>
+                                <li>Local experience partnerships</li>
+                                <li>Revenue optimization tools</li>
+                                <li>Staff management suite</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Reservation Management</h3>
-                    <p class="feature-text">
-                        Handle bookings, modifications, and cancellations seamlessly across all channels with real-time availability updates.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Multi-channel booking integration</li>
-                        <li>Real-time availability sync</li>
-                        <li>Automated confirmation emails</li>
-                        <li>Waitlist management</li>
-                        <li>Group booking capabilities</li>
-                    </ul>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-house-door"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-house-check"></i>
+                            </div>
+                            <h3 class="solution-title">Luxury Resorts</h3>
+                            <p class="solution-text">
+                                End-to-end management for premium properties with multiple amenities and high service standards.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Spa & activity booking</li>
+                                <li>Multi-restaurant management</li>
+                                <li>Concierge services integration</li>
+                                <li>VIP guest handling</li>
+                                <li>Luxury amenity tracking</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Room Management</h3>
-                    <p class="feature-text">
-                        Optimize room allocation, housekeeping schedules, and maintenance tracking for maximum efficiency.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Dynamic room assignment</li>
-                        <li>Housekeeping workflow automation</li>
-                        <li>Maintenance request tracking</li>
-                        <li>Room status monitoring</li>
-                        <li>Inventory management</li>
-                    </ul>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-credit-card"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-building-fill"></i>
+                            </div>
+                            <h3 class="solution-title">Hotel Chains</h3>
+                            <p class="solution-text">
+                                Scalable solutions for multi-property management with centralized control and local flexibility.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Centralized reporting</li>
+                                <li>Brand standards enforcement</li>
+                                <li>Cross-property analytics</li>
+                                <li>Unified loyalty programs</li>
+                                <li>Corporate rate management</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Billing & Payments</h3>
-                    <p class="feature-text">
-                        Process payments, manage invoices, and handle financial reporting with built-in compliance and security.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Multi-currency support</li>
-                        <li>Automated invoicing</li>
-                        <li>Payment gateway integration</li>
-                        <li>Tax calculation</li>
-                        <li>Financial reporting</li>
-                    </ul>
+                </div>
+            </div>
+            
+            <!-- Case Study -->
+            <div class="case-study">
+                <h3 class="case-study-title">Success Story: Grand Horizon Resorts</h3>
+                <p>"HospiTour helped us increase occupancy by 35% and guest satisfaction scores by 28% across our 12-property portfolio."</p>
+                <div class="case-study-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">35%</div>
+                        <div class="stat-label">Occupancy Increase</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">28%</div>
+                        <div class="stat-label">Guest Satisfaction</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">42%</div>
+                        <div class="stat-label">Direct Bookings</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">$2.1M</div>
+                        <div class="stat-label">Annual Savings</div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tour Management Section -->
-    <section id="tour-management" class="feature-section" style="background: white;">
+    <!-- Tour Operators Section -->
+    <section id="tour-operators" class="solution-section" style="background: white;">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Tour & Experience Management</h2>
+                <h2 class="section-title">Tour & Activity Operators</h2>
                 <p class="section-subtitle">
-                    Create, manage, and promote tours, activities, and local experiences that delight your guests and boost revenue.
+                    Complete tour management solutions for operators of all sizes, from local guided tours to international adventure companies.
                 </p>
             </div>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-map"></i>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-compass"></i>
+                            </div>
+                            <h3 class="solution-title">Adventure Tours</h3>
+                            <p class="solution-text">
+                                Manage complex itineraries, equipment rentals, and safety compliance for adventure tourism businesses.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Equipment inventory management</li>
+                                <li>Safety compliance tracking</li>
+                                <li>Guide scheduling & certification</li>
+                                <li>Weather-dependent planning</li>
+                                <li>Adventure package creation</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Tour Creation</h3>
-                    <p class="feature-text">
-                        Design captivating tours and experiences with detailed itineraries, pricing, and capacity management.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Drag-and-drop itinerary builder</li>
-                        <li>Multi-language support</li>
-                        <li>Photo and video integration</li>
-                        <li>Capacity and availability controls</li>
-                        <li>Seasonal pricing</li>
-                    </ul>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-ticket-perforated"></i>
+                <div class="col-lg-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-bus-front"></i>
+                            </div>
+                            <h3 class="solution-title">City & Cultural Tours</h3>
+                            <p class="solution-text">
+                                Create immersive cultural experiences with multi-language support and local expert integration.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Multi-language tour creation</li>
+                                <li>Local expert network</li>
+                                <li>Audio guide integration</li>
+                                <li>Cultural attraction partnerships</li>
+                                <li>Group size optimization</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Booking Engine</h3>
-                    <p class="feature-text">
-                        Sell tours directly through your website, social media, and partner platforms with instant confirmation.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Embeddable booking widgets</li>
-                        <li>Real-time availability</li>
-                        <li>Mobile-optimized checkout</li>
-                        <li>Upsell and cross-sell options</li>
-                        <li>Voucher and gift card support</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-graph-up"></i>
-                    </div>
-                    <h3 class="feature-title">Tour Analytics</h3>
-                    <p class="feature-text">
-                        Track performance, guest satisfaction, and revenue metrics to optimize your tour offerings.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Booking conversion tracking</li>
-                        <li>Guest satisfaction scores</li>
-                        <li>Revenue per tour analysis</li>
-                        <li>Peak season identification</li>
-                        <li>Competitive benchmarking</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Guest Experience Section -->
-    <section id="guest-experience" class="feature-section">
+    <!-- Vacation Rentals Section -->
+    <section id="vacation-rentals" class="solution-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Guest Experience Management</h2>
+                <h2 class="section-title">Vacation Rentals & Airbnb Management</h2>
                 <p class="section-subtitle">
-                    Deliver exceptional, personalized experiences that turn first-time guests into loyal advocates for your brand.
+                    Streamline your short-term rental operations with automated management, cleaning coordination, and multi-platform synchronization.
                 </p>
             </div>
             
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-chat-heart"></i>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-house-door"></i>
+                            </div>
+                            <h3 class="solution-title">Individual Hosts</h3>
+                            <p class="solution-text">
+                                Perfect for hosts managing 1-5 properties with automated messaging and cleaning coordination.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Automated guest communication</li>
+                                <li>Cleaning crew coordination</li>
+                                <li>Multi-platform calendar sync</li>
+                                <li>Smart pricing recommendations</li>
+                                <li>Maintenance tracking</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Personalized Communication</h3>
-                    <p class="feature-text">
-                        Engage guests with tailored messaging, automated updates, and personalized offers throughout their journey.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Automated pre-arrival messages</li>
-                        <li>Personalized welcome notes</li>
-                        <li>In-stay experience recommendations</li>
-                        <li>Post-stay follow-up</li>
-                        <li>Multi-channel messaging</li>
-                    </ul>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-star"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-buildings"></i>
+                            </div>
+                            <h3 class="solution-title">Property Managers</h3>
+                            <p class="solution-text">
+                                Scale your management business with tools for handling 10+ properties and multiple team members.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Team task management</li>
+                                <li>Owner reporting portal</li>
+                                <li>Bulk pricing updates</li>
+                                <li>Performance benchmarking</li>
+                                <li>Contract management</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Loyalty Programs</h3>
-                    <p class="feature-text">
-                        Build lasting relationships with reward systems, exclusive benefits, and member-only experiences.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Customizable loyalty tiers</li>
-                        <li>Points and rewards system</li>
-                        <li>Member-exclusive offers</li>
-                        <li>Referral program management</li>
-                        <li>Lifetime value tracking</li>
-                    </ul>
                 </div>
                 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-hand-thumbs-up"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-card">
+                        <div class="solution-content">
+                            <div class="solution-icon">
+                                <i class="bi bi-collection"></i>
+                            </div>
+                            <h3 class="solution-title">Vacation Rental Companies</h3>
+                            <p class="solution-text">
+                                Enterprise-grade solutions for companies managing 50+ properties across multiple locations.
+                            </p>
+                            <ul class="solution-features">
+                                <li>Centralized operations</li>
+                                <li>Revenue management</li>
+                                <li>Quality control systems</li>
+                                <li>Corporate compliance</li>
+                                <li>API integrations</li>
+                            </ul>
+                            <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+                        </div>
                     </div>
-                    <h3 class="feature-title">Feedback & Reviews</h3>
-                    <p class="feature-text">
-                        Collect, analyze, and respond to guest feedback to continuously improve your service quality.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Automated review requests</li>
-                        <li>Sentiment analysis</li>
-                        <li>Response management</li>
-                        <li>Issue resolution tracking</li>
-                        <li>Competitive review monitoring</li>
-                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Business Intelligence Section -->
-    <section id="business-intelligence" class="feature-section" style="background: white;">
+    <!-- Consultation Section -->
+    <section id="consultation" class="cta-section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Business Intelligence</h2>
-                <p class="section-subtitle">
-                    Make data-driven decisions with real-time analytics, performance metrics, and market insights tailored to your business.
-                </p>
-            </div>
-            
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-bar-chart"></i>
-                    </div>
-                    <h3 class="feature-title">Performance Dashboards</h3>
-                    <p class="feature-text">
-                        Monitor key metrics, occupancy rates, revenue performance, and guest satisfaction in real-time.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Customizable dashboard widgets</li>
-                        <li>Real-time KPI tracking</li>
-                        <li>Competitive benchmarking</li>
-                        <li>Trend analysis</li>
-                        <li>Automated reporting</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-cash-coin"></i>
-                    </div>
-                    <h3 class="feature-title">Revenue Management</h3>
-                    <p class="feature-text">
-                        Optimize pricing, forecast demand, and maximize revenue with AI-powered insights and recommendations.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Dynamic pricing algorithms</li>
-                        <li>Demand forecasting</li>
-                        <li>Competitive rate shopping</li>
-                        <li>Yield management</li>
-                        <li>Revenue per available room</li>
-                    </ul>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="bi bi-shield-check"></i>
-                    </div>
-                    <h3 class="feature-title">Compliance & Security</h3>
-                    <p class="feature-text">
-                        Ensure data protection, regulatory compliance, and secure operations with enterprise-grade security features.
-                    </p>
-                    <ul class="feature-list">
-                        <li>GDPR compliance tools</li>
-                        <li>Data encryption</li>
-                        <li>Access control management</li>
-                        <li>Audit trail logging</li>
-                        <li>Backup and recovery</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Demo Section -->
-    <section id="demo" class="demo-section">
-        <div class="container">
-            <h2 class="demo-title">Ready to See HospiTour in Action?</h2>
-            <p class="demo-subtitle">
-                Schedule a personalized demo and discover how our platform can transform your hospitality business.
+            <h2 class="cta-title">Need a Custom Solution?</h2>
+            <p class="cta-subtitle">
+                Our hospitality experts will work with you to design a solution that perfectly matches your business needs and goals.
             </p>
             <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                <a href="demo.html" class="btn btn-light btn-lg">Schedule a Demo</a>
-                <a href="pricing.html" class="btn btn-outline-light btn-lg">View Pricing</a>
+                <a href="contact.html" class="btn btn-light btn-lg">Schedule Consultation</a>
+                <a href="pricing.html" class="btn btn-outline-light btn-lg">View Pricing Plans</a>
             </div>
         </div>
     </section>
@@ -799,7 +824,7 @@
 
         // Update active nav pill on scroll
         window.addEventListener('scroll', function() {
-            const sections = document.querySelectorAll('.feature-section');
+            const sections = document.querySelectorAll('.solution-section');
             const navPills = document.querySelectorAll('.nav-pills .nav-link');
             
             let currentSection = '';
@@ -817,6 +842,29 @@
                     pill.classList.add('active');
                 }
             });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe solution cards for animation
+        document.querySelectorAll('.solution-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
 </body>
