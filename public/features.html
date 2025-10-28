@@ -1,80 +1,823 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Features | Drecot Hospitality Hub</title>
-  <meta name="description" content="Explore Drecot Hospitality Hub's features—powerful tools to streamline hotel operations, enhance customer service, and grow your hospitality business.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --green: #0ea861;
-      --blue: #004aad;
-      --dark: #0b2540;
-      --muted: #6b7280;
-    }
-    body { font-family: 'Inter', sans-serif; background: #f9fafb; }
-    nav.navbar { background: var(--blue); }
-    footer { background: var(--dark); color: #fff; text-align: center; padding: 1rem; margin-top: 4rem; }
-    h1, h2, h3 { color: var(--dark); }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features - HospiTour | Hospitality & Tourism Platform</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--light);
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .navbar-brand .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark);
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        /* Hero Section */
+        .features-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .features-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.1"><path fill="white" d="M0,320L48,293.3C96,267,192,213,288,186.7C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 600px;
+        }
+        
+        /* Features Navigation */
+        .features-nav {
+            background: white;
+            padding: 2rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+        }
+        
+        .nav-pills .nav-link:hover:not(.active) {
+            color: var(--primary);
+            background: #f1f5f9;
+        }
+        
+        /* Feature Sections */
+        .feature-section {
+            padding: 6rem 0;
+            scroll-margin-top: 140px;
+        }
+        
+        .feature-section:nth-child(even) {
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .feature-text {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        /* Demo Section */
+        .demo-section {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 6rem 0;
+            text-align: center;
+        }
+        
+        .demo-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+        
+        .demo-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-light {
+            background: white;
+            color: var(--dark);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-light:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0f172a;
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer-brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links h5 {
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .features-nav {
+                top: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand fw-bold" href="index.html">Drecot Hub</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navMenu">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="features.html" class="nav-link active">Features</a></li>
-          <li class="nav-item"><a href="pricing.html" class="nav-link">Pricing</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero -->
-  <section class="py-5 text-center bg-light">
-    <div class="container">
-      <h1 class="fw-bold">Everything You Need to Run Your Hospitality Business</h1>
-      <p class="lead text-muted">From booking management to analytics—Drecot Hub gives you complete control.</p>
-    </div>
-  </section>
-
-  <!-- Features -->
-  <section class="container my-5">
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card p-4 border-0 shadow-sm h-100">
-          <h5 class="fw-bold text-blue">Smart Bookings</h5>
-          <p>Manage reservations seamlessly across your hotel or restaurant with real-time updates.</p>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="logo-icon">HT</div>
+                HospiTour
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="features.html">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="solutions.html">Solutions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pricing.html">Pricing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 mt-3 mt-lg-0">
+                    <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-4 border-0 shadow-sm h-100">
-          <h5 class="fw-bold text-blue">Customer CRM</h5>
-          <p>Keep track of guests, their preferences, and feedback to build lasting relationships.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card p-4 border-0 shadow-sm h-100">
-          <h5 class="fw-bold text-blue">Analytics Dashboard</h5>
-          <p>Gain insight into performance, revenue trends, and customer satisfaction metrics.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </nav>
 
-  <!-- Footer -->
-  <footer>
-    <p class="mb-0">&copy; 2025 Drecot Hospitality Hub. All rights reserved.</p>
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Hero Section -->
+    <section class="features-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Powerful Features for Hospitality Excellence</h1>
+                <p class="hero-subtitle">
+                    Discover how HospiTour's comprehensive suite of tools transforms how you manage properties, connect with guests, and grow your tourism business.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-3">
+                    <a href="#demo" class="btn btn-light btn-lg">Watch Demo</a>
+                    <a href="#property-management" class="btn btn-outline-light btn-lg">Explore Features</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Navigation -->
+    <section class="features-nav">
+        <div class="container">
+            <ul class="nav nav-pills justify-content-center flex-nowrap overflow-auto pb-2">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#property-management">Property Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#tour-management">Tour Management</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#guest-experience">Guest Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#business-intelligence">Business Intelligence</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#professional-network">Professional Network</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#mobile-platform">Mobile Platform</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Property Management Section -->
+    <section id="property-management" class="feature-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Property Management</h2>
+                <p class="section-subtitle">
+                    Streamline hotel operations, room bookings, staff management, and guest services with our comprehensive property management system.
+                </p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
+                    <h3 class="feature-title">Reservation Management</h3>
+                    <p class="feature-text">
+                        Handle bookings, modifications, and cancellations seamlessly across all channels with real-time availability updates.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Multi-channel booking integration</li>
+                        <li>Real-time availability sync</li>
+                        <li>Automated confirmation emails</li>
+                        <li>Waitlist management</li>
+                        <li>Group booking capabilities</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-house-door"></i>
+                    </div>
+                    <h3 class="feature-title">Room Management</h3>
+                    <p class="feature-text">
+                        Optimize room allocation, housekeeping schedules, and maintenance tracking for maximum efficiency.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Dynamic room assignment</li>
+                        <li>Housekeeping workflow automation</li>
+                        <li>Maintenance request tracking</li>
+                        <li>Room status monitoring</li>
+                        <li>Inventory management</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-credit-card"></i>
+                    </div>
+                    <h3 class="feature-title">Billing & Payments</h3>
+                    <p class="feature-text">
+                        Process payments, manage invoices, and handle financial reporting with built-in compliance and security.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Multi-currency support</li>
+                        <li>Automated invoicing</li>
+                        <li>Payment gateway integration</li>
+                        <li>Tax calculation</li>
+                        <li>Financial reporting</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Management Section -->
+    <section id="tour-management" class="feature-section" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Tour & Experience Management</h2>
+                <p class="section-subtitle">
+                    Create, manage, and promote tours, activities, and local experiences that delight your guests and boost revenue.
+                </p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-map"></i>
+                    </div>
+                    <h3 class="feature-title">Tour Creation</h3>
+                    <p class="feature-text">
+                        Design captivating tours and experiences with detailed itineraries, pricing, and capacity management.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Drag-and-drop itinerary builder</li>
+                        <li>Multi-language support</li>
+                        <li>Photo and video integration</li>
+                        <li>Capacity and availability controls</li>
+                        <li>Seasonal pricing</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-ticket-perforated"></i>
+                    </div>
+                    <h3 class="feature-title">Booking Engine</h3>
+                    <p class="feature-text">
+                        Sell tours directly through your website, social media, and partner platforms with instant confirmation.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Embeddable booking widgets</li>
+                        <li>Real-time availability</li>
+                        <li>Mobile-optimized checkout</li>
+                        <li>Upsell and cross-sell options</li>
+                        <li>Voucher and gift card support</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-graph-up"></i>
+                    </div>
+                    <h3 class="feature-title">Tour Analytics</h3>
+                    <p class="feature-text">
+                        Track performance, guest satisfaction, and revenue metrics to optimize your tour offerings.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Booking conversion tracking</li>
+                        <li>Guest satisfaction scores</li>
+                        <li>Revenue per tour analysis</li>
+                        <li>Peak season identification</li>
+                        <li>Competitive benchmarking</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest Experience Section -->
+    <section id="guest-experience" class="feature-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Guest Experience Management</h2>
+                <p class="section-subtitle">
+                    Deliver exceptional, personalized experiences that turn first-time guests into loyal advocates for your brand.
+                </p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-chat-heart"></i>
+                    </div>
+                    <h3 class="feature-title">Personalized Communication</h3>
+                    <p class="feature-text">
+                        Engage guests with tailored messaging, automated updates, and personalized offers throughout their journey.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Automated pre-arrival messages</li>
+                        <li>Personalized welcome notes</li>
+                        <li>In-stay experience recommendations</li>
+                        <li>Post-stay follow-up</li>
+                        <li>Multi-channel messaging</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <h3 class="feature-title">Loyalty Programs</h3>
+                    <p class="feature-text">
+                        Build lasting relationships with reward systems, exclusive benefits, and member-only experiences.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Customizable loyalty tiers</li>
+                        <li>Points and rewards system</li>
+                        <li>Member-exclusive offers</li>
+                        <li>Referral program management</li>
+                        <li>Lifetime value tracking</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-hand-thumbs-up"></i>
+                    </div>
+                    <h3 class="feature-title">Feedback & Reviews</h3>
+                    <p class="feature-text">
+                        Collect, analyze, and respond to guest feedback to continuously improve your service quality.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Automated review requests</li>
+                        <li>Sentiment analysis</li>
+                        <li>Response management</li>
+                        <li>Issue resolution tracking</li>
+                        <li>Competitive review monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Intelligence Section -->
+    <section id="business-intelligence" class="feature-section" style="background: white;">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Business Intelligence</h2>
+                <p class="section-subtitle">
+                    Make data-driven decisions with real-time analytics, performance metrics, and market insights tailored to your business.
+                </p>
+            </div>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </div>
+                    <h3 class="feature-title">Performance Dashboards</h3>
+                    <p class="feature-text">
+                        Monitor key metrics, occupancy rates, revenue performance, and guest satisfaction in real-time.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Customizable dashboard widgets</li>
+                        <li>Real-time KPI tracking</li>
+                        <li>Competitive benchmarking</li>
+                        <li>Trend analysis</li>
+                        <li>Automated reporting</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-cash-coin"></i>
+                    </div>
+                    <h3 class="feature-title">Revenue Management</h3>
+                    <p class="feature-text">
+                        Optimize pricing, forecast demand, and maximize revenue with AI-powered insights and recommendations.
+                    </p>
+                    <ul class="feature-list">
+                        <li>Dynamic pricing algorithms</li>
+                        <li>Demand forecasting</li>
+                        <li>Competitive rate shopping</li>
+                        <li>Yield management</li>
+                        <li>Revenue per available room</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3 class="feature-title">Compliance & Security</h3>
+                    <p class="feature-text">
+                        Ensure data protection, regulatory compliance, and secure operations with enterprise-grade security features.
+                    </p>
+                    <ul class="feature-list">
+                        <li>GDPR compliance tools</li>
+                        <li>Data encryption</li>
+                        <li>Access control management</li>
+                        <li>Audit trail logging</li>
+                        <li>Backup and recovery</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="demo-title">Ready to See HospiTour in Action?</h2>
+            <p class="demo-subtitle">
+                Schedule a personalized demo and discover how our platform can transform your hospitality business.
+            </p>
+            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
+                <a href="demo.html" class="btn btn-light btn-lg">Schedule a Demo</a>
+                <a href="pricing.html" class="btn btn-outline-light btn-lg">View Pricing</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem;">HT</div>
+                        HospiTour
+                    </div>
+                    <p style="color: #94a3b8; margin-bottom: 2rem;">
+                        The complete ecosystem for hospitality and tourism excellence. Streamline operations and create unforgettable experiences.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-twitter"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-linkedin"></i></a>
+                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Platform</h5>
+                        <a href="features.html">Features</a>
+                        <a href="solutions.html">Solutions</a>
+                        <a href="pricing.html">Pricing</a>
+                        <a href="demo.html">Demo</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Resources</h5>
+                        <a href="#">Blog</a>
+                        <a href="#">Documentation</a>
+                        <a href="#">Support</a>
+                        <a href="#">API</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Company</h5>
+                        <a href="#">About</a>
+                        <a href="#">Careers</a>
+                        <a href="contact.html">Contact</a>
+                        <a href="#">Partners</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <div class="footer-links">
+                        <h5>Legal</h5>
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Security</a>
+                        <a href="#">Compliance</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2024 HospiTour. All rights reserved. The complete ecosystem for hospitality and tourism excellence.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active nav pill on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.feature-section');
+            const navPills = document.querySelectorAll('.nav-pills .nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                if (window.scrollY >= sectionTop) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navPills.forEach(pill => {
+                pill.classList.remove('active');
+                if (pill.getAttribute('href') === `#${currentSection}`) {
+                    pill.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
