@@ -8,24 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root{ 
-            --gold: #c9a44c; 
-            --brown: #3b2f2f; 
-            --light-brown: #4a3c3c;
-            --cream: #f7f5f1;
-            --light-cream: #fefdfb;
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #059669;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
         }
         
         body{ 
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-            background: var(--cream);
-            color: var(--brown);
+            font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--light);
+            color: var(--dark);
             margin: 0;
             padding: 0;
         }
         
         .sidebar{ 
-            width: 250px; 
-            background: var(--brown); 
+            width: 280px; 
+            background: var(--dark); 
             height: 100vh; 
             position: fixed; 
             padding-top: 20px; 
@@ -35,33 +37,36 @@
         }
         
         .sidebar a{ 
-            color: rgba(255, 255, 255, 0.7); 
-            padding: 12px 15px; 
+            color: rgba(255, 255, 255, 0.8); 
+            padding: 12px 20px; 
             display: block; 
             text-decoration: none; 
             transition: all 0.3s ease;
-            border-radius: 0 30px 30px 0;
-            margin-right: 10px;
+            border-radius: 8px;
+            margin: 4px 15px;
             position: relative;
+            font-weight: 500;
         }
         
         .sidebar a:hover, .sidebar a.active{ 
-            background: var(--light-brown); 
+            background: var(--primary); 
             color: white; 
-            border-left: 3px solid var(--gold);
             transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         
         .main-content{ 
-            margin-left: 250px; 
+            margin-left: 280px; 
             padding: 30px;
             min-height: 100vh;
+            background: var(--light);
         }
         
-        .text-gold{ color: var(--gold); }
-        .text-brown { color: var(--brown); }
-        .bg-gold { background-color: var(--gold); }
-        .bg-brown { background-color: var(--brown); }
+        .text-primary { color: var(--primary); }
+        .text-secondary { color: var(--secondary); }
+        .text-accent { color: var(--accent); }
+        .bg-primary { background-color: var(--primary); }
+        .bg-secondary { background-color: var(--secondary); }
         
         .card {
             border: none;
@@ -69,104 +74,113 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             background: white;
+            border-left: 4px solid var(--primary);
         }
         
         .card:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
         }
         
-        .btn-gold {
-            background-color: var(--gold);
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 10px 20px;
             transition: all 0.3s ease;
-            font-weight: 500;
+            font-weight: 600;
         }
         
-        .btn-gold:hover {
-            background-color: #b8943a;
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3);
         }
         
-        .btn-outline-gold {
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            border-radius: 6px;
-            padding: 10px 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-gold:hover {
-            background-color: var(--gold);
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary), #047857);
             color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #047857, var(--secondary));
             transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
         }
         
         .metric-card {
-            background: var(--light-cream);
+            background: white;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--gold);
+            border-top: 4px solid var(--primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .metric-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .metric-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
         }
         
         .metric-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
         }
         
-        .metric-icon.primary {
-            background-color: rgba(13, 110, 253, 0.1);
-            color: #0d6efd;
+        .metric-icon.secondary {
+            background: linear-gradient(135deg, var(--secondary), #047857);
         }
         
-        .metric-icon.success {
-            background-color: rgba(25, 135, 84, 0.1);
-            color: #198754;
-        }
-        
-        .metric-icon.warning {
-            background-color: rgba(255, 193, 7, 0.1);
-            color: #ffc107;
-        }
-        
-        .metric-icon.info {
-            background-color: rgba(13, 202, 240, 0.1);
-            color: #0dcaf0;
+        .metric-icon.accent {
+            background: linear-gradient(135deg, var(--accent), #eab308);
         }
         
         .plan-badge {
             position: absolute;
-            top: -10px;
+            top: 15px;
             right: 15px;
-            background: var(--gold);
+            background: linear-gradient(135deg, var(--accent), #eab308);
             color: white;
-            padding: 5px 15px;
+            padding: 6px 16px;
             border-radius: 20px;
             font-size: 0.8rem;
             font-weight: 600;
+            box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
         }
         
         .section-title {
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 15px;
             margin-bottom: 25px;
+            font-weight: 700;
+            color: var(--dark);
         }
         
         .section-title:after {
@@ -174,9 +188,10 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--gold);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
         }
         
         .progress {
@@ -187,79 +202,126 @@
         }
         
         .progress-bar {
-            background-color: var(--gold);
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
             border-radius: 10px;
             transition: width 0.5s ease;
         }
         
         .quick-action-card {
-            background: var(--light-cream);
+            background: white;
             padding: 25px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--gold);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
             text-align: center;
             display: block;
             text-decoration: none;
             color: inherit;
+            border: 1px solid #e9ecef;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-action-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .quick-action-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
             text-decoration: none;
             color: inherit;
+            border-color: var(--primary);
         }
         
         .action-icon {
-            font-size: 2rem;
-            color: var(--gold);
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
         }
         
         .notification-badge {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            background: #e74c3c;
+            top: 12px;
+            right: 12px;
+            background: #ef4444;
             color: white;
             border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
             font-weight: bold;
+            box-shadow: 0 2px 6px rgba(239, 68, 68, 0.3);
         }
         
         .user-avatar {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: var(--gold);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
         
         .list-group-item {
             border: none;
-            padding: 12px 0;
+            padding: 15px 0;
+            border-bottom: 1px solid #f1f5f9 !important;
+        }
+        
+        .list-group-item:last-child {
+            border-bottom: none !important;
+        }
+        
+        .hospitour-brand {
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .upgrade-card {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 250px;
+            }
+            .main-content {
+                margin-left: 250px;
+            }
         }
         
         @media (max-width: 992px) {
             .sidebar {
-                width: 70px;
+                width: 80px;
                 overflow: hidden;
             }
             
-            .sidebar .text-center h5, .sidebar .text-center small, .sidebar a span {
+            .sidebar .brand-text, .sidebar a span {
                 display: none;
             }
             
@@ -267,6 +329,7 @@
                 text-align: center;
                 padding: 15px 5px;
                 font-size: 1.2rem;
+                margin: 4px 8px;
             }
             
             .sidebar a i {
@@ -274,11 +337,11 @@
             }
             
             .main-content {
-                margin-left: 70px;
+                margin-left: 80px;
             }
         }
         
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
             .sidebar {
                 width: 100%;
                 height: auto;
@@ -287,6 +350,7 @@
             
             .sidebar .d-flex {
                 justify-content: space-between;
+                padding: 10px 15px;
             }
             
             .main-content {
@@ -303,27 +367,42 @@
 <body>
     
     <div class="sidebar">
-        <div class="text-center mb-4">
-            <h5 class="text-white">HospiTour</h5>
-            <small class="text-gold">Business Operations</small>
+        <div class="d-flex align-items-center justify-content-between px-3 mb-4">
+            <div class="d-flex align-items-center">
+                <div class="user-avatar me-3">HT</div>
+                <div>
+                    <div class="hospitour-brand">HospiTour</div>
+                    <small class="text-white-50">Business Suite</small>
+                </div>
+            </div>
         </div>
-        <a href="#" class="active"><i class="fas fa-tachometer-alt me-2"></i> Dashboard</a>
-        <a href="#"><i class="fas fa-bed me-2"></i> Accommodation Mgmt</a>
+        
+        <a href="#" class="active"><i class="fas fa-tachometer-alt me-3"></i> <span>Dashboard</span></a>
+        <a href="#"><i class="fas fa-bed me-3"></i> <span>Accommodation</span></a>
         <a href="#" class="position-relative">
-            <i class="fas fa-utensils me-2"></i> Restaurant & F&B
+            <i class="fas fa-utensils me-3"></i> <span>Restaurant & F&B</span>
             <span class="notification-badge">3</span>
         </a>
-        <a href="#"><i class="fas fa-calendar-alt me-2"></i> Events & Planning</a>
-        <a href="#"><i class="fas fa-users me-2"></i> Staff Management</a>
-        <a href="#"><i class="fas fa-cog me-2"></i> Settings & Billing</a>
-        <hr class="text-white-50 my-4">
-        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Log Out</a>
+        <a href="#"><i class="fas fa-calendar-alt me-3"></i> <span>Events & Planning</span></a>
+        <a href="#"><i class="fas fa-users me-3"></i> <span>Staff Management</span></a>
+        <a href="#"><i class="fas fa-chart-line me-3"></i> <span>Analytics</span></a>
+        <a href="#"><i class="fas fa-cog me-3"></i> <span>Settings</span></a>
+        
+        <div class="upgrade-card">
+            <h6 class="mb-2">Upgrade to Pro</h6>
+            <p class="small mb-3">Unlock advanced features and analytics</p>
+            <button class="btn btn-light btn-sm w-100" onclick="upgradePlan('pro')">Upgrade Now</button>
+        </div>
+        
+        <div class="mt-auto px-3 py-4">
+            <a href="#" id="logoutBtn" class="text-white-50"><i class="fas fa-sign-out-alt me-2"></i> <span>Log Out</span></a>
+        </div>
     </div>
 
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h1 class="text-brown mb-0">Business Operations Dashboard</h1>
+                <h1 class="text-dark mb-1">Business Operations Dashboard</h1>
                 <p class="text-muted mb-0" id="planLevel">Current Plan: Free | Subscription Active</p>
             </div>
             <div class="d-flex align-items-center">
@@ -332,7 +411,7 @@
                 </div>
                 <div>
                     <div class="fw-bold" id="userName">Business User</div>
-                    <div class="small text-muted" id="userEmail">user@business.com</div>
+                    <div class="small text-muted" id="userEmail">admin@hospitour.com</div>
                 </div>
             </div>
         </div>
@@ -340,11 +419,11 @@
         <div class="row g-4 mb-5">
             <div class="col-md-4">
                 <div class="metric-card">
-                    <div class="metric-icon primary">
+                    <div class="metric-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <div class="small text-muted">Current Occupancy Rate</div>
-                    <h2 class="fw-bold text-brown mb-2" id="metricOccupancy">--%</h2>
+                    <h2 class="fw-bold text-dark mb-2" id="metricOccupancy">--%</h2>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 45%"></div>
                     </div>
@@ -355,11 +434,11 @@
             </div>
             <div class="col-md-4">
                 <div class="metric-card">
-                    <div class="metric-icon warning">
+                    <div class="metric-icon secondary">
                         <i class="fas fa-shopping-cart"></i>
                     </div>
                     <div class="small text-muted">Pending F&B Orders</div>
-                    <h2 class="fw-bold text-brown mb-2" id="metricOrders">--</h2>
+                    <h2 class="fw-bold text-dark mb-2" id="metricOrders">--</h2>
                     <small class="text-muted" id="ordersHint">
                         <i class="fas fa-info-circle me-1"></i> Requires Order Management (Pro+)
                     </small>
@@ -367,11 +446,11 @@
             </div>
             <div class="col-md-4">
                 <div class="metric-card">
-                    <div class="metric-icon success">
+                    <div class="metric-icon accent">
                         <i class="fas fa-dollar-sign"></i>
                     </div>
                     <div class="small text-muted">Revenue Forecast (7 Days)</div>
-                    <h2 class="fw-bold text-brown mb-2" id="metricRevenue">$----</h2>
+                    <h2 class="fw-bold text-dark mb-2" id="metricRevenue">$----</h2>
                     <small class="text-muted" id="revenueHint">
                         <i class="fas fa-info-circle me-1"></i> Requires Advanced Metrics (Pro+)
                     </small>
@@ -382,95 +461,96 @@
         <div class="row mb-5">
             <div class="col-12">
                 <div class="card p-4">
-                    <h4 class="section-title text-brown">Performance Overview</h4>
+                    <h4 class="section-title text-dark">Performance Overview</h4>
                     <div class="d-flex justify-content-center align-items-center bg-light rounded" style="height: 200px;">
                         <div class="text-center text-muted">
                             <i class="fas fa-chart-bar fa-2x mb-3"></i>
                             <p>Performance charts will appear here for Pro+ users</p>
+                            <button class="btn btn-primary mt-2" onclick="upgradePlan('pro')">Upgrade to View</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h3 class="section-title text-brown">Quick Actions</h3>
+        <h3 class="section-title text-dark">Quick Actions</h3>
         <div class="row g-4 mb-5">
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('New Reservation')">
                     <div class="action-icon">
                         <i class="fas fa-bed"></i>
                     </div>
-                    <h5 class="text-brown mb-2">New Reservation</h5>
+                    <h5 class="text-dark mb-2">New Reservation</h5>
                     <p class="small text-muted mb-0">Book a guest and allocate a room.</p>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('POS System')">
                     <div class="action-icon">
                         <i class="fas fa-utensils"></i>
                     </div>
-                    <h5 class="text-brown mb-2">New Order (POS)</h5>
-                    <p class="small text-muted mb-0">Process a food or beverage order (Pro+).</p>
-                </div>
+                    <h5 class="text-dark mb-2">POS System</h5>
+                    <p class="small text-muted mb-0">Process food & beverage orders (Pro+).</p>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('Event Calendar')">
                     <div class="action-icon">
                         <i class="fas fa-calendar-check"></i>
                     </div>
-                    <h5 class="text-brown mb-2">Event Calendar</h5>
-                    <p class="small text-muted mb-0">View today's scheduled events and tasks.</p>
-                </div>
+                    <h5 class="text-dark mb-2">Event Calendar</h5>
+                    <p class="small text-muted mb-0">View scheduled events and tasks.</p>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('Staff Management')">
                     <div class="action-icon">
                         <i class="fas fa-user-friends"></i>
                     </div>
-                    <h5 class="text-brown mb-2">Staff Management</h5>
+                    <h5 class="text-dark mb-2">Staff Management</h5>
                     <p class="small text-muted mb-0">Manage schedules and team performance.</p>
-                </div>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('Analytics')">
                     <div class="action-icon">
                         <i class="fas fa-chart-pie"></i>
                     </div>
-                    <h5 class="text-brown mb-2">Reports & Analytics</h5>
-                    <p class="small text-muted mb-0">View detailed business insights (Pro+).</p>
-                </div>
+                    <h5 class="text-dark mb-2">Reports & Analytics</h5>
+                    <p class="small text-muted mb-0">View business insights (Pro+).</p>
+                </a>
             </div>
             <div class="col-md-4">
-                <div class="quick-action-card">
+                <a href="#" class="quick-action-card" onclick="handleQuickAction('Settings')">
                     <div class="action-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h5 class="text-brown mb-2">Account Settings</h5>
-                    <p class="small text-muted mb-0">Update your business profile and preferences.</p>
-                </div>
+                    <h5 class="text-dark mb-2">Account Settings</h5>
+                    <p class="small text-muted mb-0">Update business profile and preferences.</p>
+                </a>
             </div>
         </div>
 
         <div class="row g-5">
             <div class="col-lg-6">
                 <div class="card p-4">
-                    <h4 class="section-title text-brown">Recent Activity</h4>
+                    <h4 class="section-title text-dark">Recent Activity</h4>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">New booking received</h6>
                                 <small class="text-muted">2 hours ago</small>
                             </div>
                             <p class="mb-1 small text-muted">Room 204 booked for 3 nights</p>
                         </div>
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Check-out completed</h6>
                                 <small class="text-muted">5 hours ago</small>
                             </div>
                             <p class="mb-1 small text-muted">Room 105 is now available</p>
                         </div>
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Maintenance request</h6>
                                 <small class="text-muted">1 day ago</small>
@@ -482,23 +562,23 @@
             </div>
             <div class="col-lg-6">
                 <div class="card p-4">
-                    <h4 class="section-title text-brown">Upcoming Events</h4>
+                    <h4 class="section-title text-dark">Upcoming Events</h4>
                     <div class="list-group list-group-flush">
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Corporate Conference</h6>
                                 <small class="text-muted">Tomorrow, 9:00 AM</small>
                             </div>
                             <p class="mb-1 small text-muted">Grand Ballroom - 150 attendees</p>
                         </div>
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Wedding Reception</h6>
                                 <small class="text-muted">This Saturday, 4:00 PM</small>
                             </div>
                             <p class="mb-1 small text-muted">Garden Pavilion - 80 guests</p>
                         </div>
-                        <div class="list-group-item px-0 border-0">
+                        <div class="list-group-item px-0">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">Team Meeting</h6>
                                 <small class="text-muted">Next Monday, 10:00 AM</small>
@@ -514,9 +594,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Dashboard functionality - completely self-contained
+        // Enhanced HospiTour Dashboard functionality
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Dashboard loaded successfully');
+            console.log('HospiTour Dashboard loaded successfully');
             
             // Initialize user data
             initializeUserData();
@@ -526,19 +606,21 @@
             
             // Initialize metrics
             updateMetrics();
+            
+            // Start real-time updates if applicable
+            startRealTimeUpdates();
         });
 
         function initializeUserData() {
-            // Check if user data exists in localStorage
             let userData = localStorage.getItem('hospitour_business_user');
             
             if (!userData) {
-                // Create default user data
                 userData = {
                     name: 'Business User',
                     email: 'admin@hospitour.com',
                     plan: 'free',
-                    lastLogin: new Date().toISOString()
+                    lastLogin: new Date().toISOString(),
+                    businessName: 'HospiTour Business'
                 };
                 localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
             } else {
@@ -558,43 +640,34 @@
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 if (confirm('Are you sure you want to log out?')) {
-                    // Simple logout - just show message
-                    alert('Logged out successfully');
-                    // In a real app, you would redirect to login page
-                    // window.location.href = 'login.html';
+                    alert('Logged out successfully from HospiTour');
+                    // In real app: window.location.href = 'login.html';
                 }
             });
+        }
+
+        function handleQuickAction(action) {
+            event.preventDefault();
+            const userData = JSON.parse(localStorage.getItem('hospitour_business_user'));
             
-            // Quick action cards
-            const quickActionCards = document.querySelectorAll('.quick-action-card');
-            quickActionCards.forEach(card => {
-                card.addEventListener('click', function(e) {
-                    const userData = JSON.parse(localStorage.getItem('hospitour_business_user'));
-                    const cardText = this.querySelector('p').textContent;
-                    
-                    if (cardText.includes('Pro+') && userData.plan === 'free') {
-                        e.preventDefault();
-                        alert('This feature requires a Pro or Enterprise plan. Please upgrade to access advanced features.');
-                        return;
-                    }
-                    
-                    // Show simple feedback for demo
-                    const title = this.querySelector('h5').textContent;
-                    alert(`Opening: ${title}`);
-                });
-            });
+            // Check if feature requires upgrade
+            const proFeatures = ['POS System', 'Analytics'];
+            if (proFeatures.includes(action) && userData.plan === 'free') {
+                alert(`🚀 ${action} requires a Pro plan upgrade!\n\nUpgrade to access advanced HospiTour features.`);
+                return;
+            }
             
-            // Navigation links
-            const navLinks = document.querySelectorAll('.sidebar a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    if (this.getAttribute('href') === '#') {
-                        e.preventDefault();
-                        const linkText = this.textContent.trim();
-                        alert(`Navigating to: ${linkText}`);
-                    }
-                });
-            });
+            // Show action feedback
+            const messages = {
+                'New Reservation': 'Opening reservation system...',
+                'POS System': 'Launching point of sale...',
+                'Event Calendar': 'Loading event calendar...',
+                'Staff Management': 'Opening staff management...',
+                'Analytics': 'Loading business analytics...',
+                'Settings': 'Opening account settings...'
+            };
+            
+            alert(messages[action] || `Opening ${action}...`);
         }
 
         function updateMetrics() {
@@ -602,100 +675,75 @@
             const plan = userData.plan;
             
             // Set metrics based on plan
-            if (plan === 'free') {
-                document.getElementById('metricOccupancy').textContent = '45%';
-                document.querySelector('.progress-bar').style.width = '45%';
-                document.getElementById('metricOrders').textContent = 'N/A';
-                document.getElementById('metricRevenue').textContent = 'N/A';
-            } else if (plan === 'pro') {
-                document.getElementById('metricOccupancy').textContent = '82%';
-                document.querySelector('.progress-bar').style.width = '82%';
-                document.getElementById('metricOrders').textContent = '12';
-                document.getElementById('metricRevenue').textContent = '$5,120';
-                document.getElementById('ordersHint').textContent = 'Pending orders requiring action.';
-                document.getElementById('ordersHint').className = 'text-warning';
-                document.getElementById('revenueHint').textContent = 'Based on current bookings';
-                document.getElementById('revenueHint').className = 'text-success';
-                
-                // Start real-time updates for Pro users
-                startRealTimeUpdates();
-            } else if (plan === 'enterprise') {
-                document.getElementById('metricOccupancy').textContent = '95%';
-                document.querySelector('.progress-bar').style.width = '95%';
-                document.getElementById('metricOrders').textContent = '6';
-                document.getElementById('metricRevenue').textContent = '$15,890';
-                document.getElementById('ordersHint').textContent = 'All teams notified.';
-                document.getElementById('ordersHint').className = 'text-success';
-                document.getElementById('revenueHint').textContent = 'Includes projected events';
-                document.getElementById('revenueHint').className = 'text-success';
-                
-                // Start real-time updates for Enterprise users
-                startRealTimeUpdates();
+            switch(plan) {
+                case 'free':
+                    document.getElementById('metricOccupancy').textContent = '45%';
+                    document.querySelector('.progress-bar').style.width = '45%';
+                    document.getElementById('metricOrders').textContent = 'N/A';
+                    document.getElementById('metricRevenue').textContent = 'N/A';
+                    break;
+                    
+                case 'pro':
+                    document.getElementById('metricOccupancy').textContent = '82%';
+                    document.querySelector('.progress-bar').style.width = '82%';
+                    document.getElementById('metricOrders').textContent = '12';
+                    document.getElementById('metricRevenue').textContent = '$5,120';
+                    document.getElementById('ordersHint').innerHTML = '<i class="fas fa-clock me-1"></i> Pending orders';
+                    document.getElementById('ordersHint').className = 'text-warning small';
+                    document.getElementById('revenueHint').innerHTML = '<i class="fas fa-trend-up me-1"></i> Based on current bookings';
+                    document.getElementById('revenueHint').className = 'text-success small';
+                    break;
+                    
+                case 'enterprise':
+                    document.getElementById('metricOccupancy').textContent = '95%';
+                    document.querySelector('.progress-bar').style.width = '95%';
+                    document.getElementById('metricOrders').textContent = '6';
+                    document.getElementById('metricRevenue').textContent = '$15,890';
+                    document.getElementById('ordersHint').innerHTML = '<i class="fas fa-check me-1"></i> All teams notified';
+                    document.getElementById('ordersHint').className = 'text-success small';
+                    document.getElementById('revenueHint').innerHTML = '<i class="fas fa-chart-line me-1"></i> Includes projected events';
+                    document.getElementById('revenueHint').className = 'text-success small';
+                    break;
             }
         }
 
-        // Real-time updates with proper cleanup
-        let realTimeInterval = null;
-
-        function startRealTimeUpdates() {
-            // Clear any existing interval
-            if (realTimeInterval) {
-                clearInterval(realTimeInterval);
-            }
-            
-            realTimeInterval = setInterval(() => {
-                const userData = JSON.parse(localStorage.getItem('hospitour_business_user'));
-                if (!userData || userData.plan === 'free') {
-                    clearInterval(realTimeInterval);
-                    return;
-                }
-                
-                // Update occupancy with small random variation
-                const occupancyElement = document.getElementById('metricOccupancy');
-                const currentOccupancy = parseInt(occupancyElement.textContent);
-                const variation = (Math.random() - 0.5) * 4; // -2 to +2
-                const newOccupancy = Math.max(70, Math.min(98, currentOccupancy + variation));
-                occupancyElement.textContent = Math.round(newOccupancy) + '%';
-                
-                // Update progress bar
-                const progressBar = document.querySelector('.progress-bar');
-                progressBar.style.width = Math.round(newOccupancy) + '%';
-                
-            }, 15000); // Update every 15 seconds
-        }
-
-        // Clean up on page unload
-        window.addEventListener('beforeunload', function() {
-            if (realTimeInterval) {
-                clearInterval(realTimeInterval);
-            }
-        });
-
-        // Demo: Add plan upgrade functionality
         function upgradePlan(newPlan) {
             const userData = JSON.parse(localStorage.getItem('hospitour_business_user'));
             userData.plan = newPlan;
             localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
+            
             updateMetrics();
-            alert(`Plan upgraded to ${newPlan.toUpperCase()}!`);
+            
+            const planNames = {
+                'free': 'Free',
+                'pro': 'Pro',
+                'enterprise': 'Enterprise'
+            };
+            
+            alert(`🎉 Successfully upgraded to ${planNames[newPlan]} Plan!\n\nYou now have access to advanced HospiTour features.`);
         }
 
-        // Add upgrade buttons for demo (optional)
-        function addDemoUpgradeButtons() {
-            const header = document.querySelector('.dashboard-header');
-            const upgradeDiv = document.createElement('div');
-            upgradeDiv.className = 'mt-3';
-            upgradeDiv.innerHTML = `
-                <small class="text-muted me-2">Demo:</small>
-                <button class="btn btn-sm btn-outline-success me-1" onclick="upgradePlan('pro')">Upgrade to Pro</button>
-                <button class="btn btn-sm btn-outline-primary" onclick="upgradePlan('enterprise')">Upgrade to Enterprise</button>
-                <button class="btn btn-sm btn-outline-secondary ms-1" onclick="upgradePlan('free')">Reset to Free</button>
-            `;
-            header.appendChild(upgradeDiv);
+        function startRealTimeUpdates() {
+            const userData = JSON.parse(localStorage.getItem('hospitour_business_user'));
+            if (userData.plan !== 'free') {
+                setInterval(() => {
+                    // Simulate real-time data updates for paid plans
+                    const occupancyElement = document.getElementById('metricOccupancy');
+                    if (occupancyElement && !occupancyElement.textContent.includes('N/A')) {
+                        const current = parseInt(occupancyElement.textContent);
+                        const variation = (Math.random() - 0.5) * 4;
+                        const newValue = Math.max(70, Math.min(98, current + variation));
+                        occupancyElement.textContent = Math.round(newValue) + '%';
+                        document.querySelector('.progress-bar').style.width = Math.round(newValue) + '%';
+                    }
+                }, 10000);
+            }
         }
 
-        // Uncomment the line below to add demo upgrade buttons
-        // addDemoUpgradeButtons();
+        // Demo function to show upgrade benefits
+        function showUpgradeBenefits() {
+            alert(`🚀 HospiTour Pro Features:\n\n• Real-time Analytics\n• POS System Integration\n• Advanced Reporting\n• Staff Performance Tracking\n• Revenue Forecasting\n• Multi-location Management\n\nUpgrade today to unlock the full potential of your hospitality business!`);
+        }
     </script>
 </body>
 </html>
