@@ -8,22 +8,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root{ 
-            --gold: #c9a44c; 
-            --brown: #3b2f2f; 
-            --light-brown: #4a3c3c;
-            --cream: #f7f5f1;
-            --light-cream: #fefdfb;
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-danger: #e74c3c;
+            --hospitour-gray: #95a5a6;
         }
         
         body{ 
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-            background: var(--cream);
-            color: var(--brown);
+            background: var(--hospitour-light);
+            color: var(--hospitour-dark);
         }
         
         .sidebar{ 
             width: 250px; 
-            background: var(--brown); 
+            background: var(--hospitour-primary); 
             height: 100vh; 
             position: fixed; 
             padding-top: 20px; 
@@ -32,7 +36,7 @@
         }
         
         .sidebar a{ 
-            color: rgba(255, 255, 255, 0.7); 
+            color: rgba(255, 255, 255, 0.8); 
             padding: 12px 15px; 
             display: block; 
             text-decoration: none; 
@@ -42,9 +46,9 @@
         }
         
         .sidebar a:hover, .sidebar a.active{ 
-            background: var(--light-brown); 
+            background: var(--hospitour-secondary); 
             color: white; 
-            border-left: 3px solid var(--gold);
+            border-left: 3px solid var(--hospitour-accent);
             transform: translateX(5px);
         }
         
@@ -55,11 +59,11 @@
         }
         
         .earning-box{ 
-            background: var(--light-cream); 
+            background: white; 
             padding: 25px; 
             border-radius: 12px; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            border-top: 4px solid var(--gold);
+            border-top: 4px solid var(--hospitour-accent);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             height: 100%;
         }
@@ -69,24 +73,35 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
         
-        .text-gold{ color: var(--gold); }
-        .text-brown { color: var(--brown); }
-        .bg-gold { background-color: var(--gold); }
-        .bg-brown { background-color: var(--brown); }
+        .text-primary { color: var(--hospitour-primary) !important; }
+        .text-secondary { color: var(--hospitour-secondary) !important; }
+        .text-accent { color: var(--hospitour-accent) !important; }
+        .text-dark { color: var(--hospitour-dark) !important; }
+        .text-success { color: var(--hospitour-success) !important; }
+        .text-warning { color: var(--hospitour-warning) !important; }
+        .text-danger { color: var(--hospitour-danger) !important; }
+        
+        .bg-primary { background-color: var(--hospitour-primary) !important; }
+        .bg-secondary { background-color: var(--hospitour-secondary) !important; }
+        .bg-accent { background-color: var(--hospitour-accent) !important; }
+        .bg-success { background-color: var(--hospitour-success) !important; }
+        .bg-warning { background-color: var(--hospitour-warning) !important; }
+        .bg-danger { background-color: var(--hospitour-danger) !important; }
         
         .card {
             border: none;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
+            background: white;
         }
         
         .card:hover {
             box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
         
-        .btn-gold {
-            background-color: var(--gold);
+        .btn-primary {
+            background-color: var(--hospitour-primary);
             color: white;
             border: none;
             border-radius: 6px;
@@ -94,22 +109,51 @@
             transition: all 0.3s ease;
         }
         
-        .btn-gold:hover {
-            background-color: #b8943a;
+        .btn-primary:hover {
+            background-color: #144360;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(201, 164, 76, 0.3);
+            box-shadow: 0 4px 8px rgba(26, 82, 118, 0.3);
         }
         
-        .btn-outline-gold {
-            border: 1px solid var(--gold);
-            color: var(--gold);
+        .btn-accent {
+            background-color: var(--hospitour-accent);
+            color: white;
+            border: none;
             border-radius: 6px;
             padding: 10px 20px;
             transition: all 0.3s ease;
         }
         
-        .btn-outline-gold:hover {
-            background-color: var(--gold);
+        .btn-accent:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 1px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-accent {
+            border: 1px solid var(--hospitour-accent);
+            color: var(--hospitour-accent);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-accent:hover {
+            background-color: var(--hospitour-accent);
             color: white;
             transform: translateY(-2px);
         }
@@ -125,25 +169,25 @@
         }
         
         .stat-icon.primary {
-            background-color: rgba(25, 135, 84, 0.1);
-            color: #198754;
+            background-color: rgba(26, 82, 118, 0.1);
+            color: var(--hospitour-primary);
         }
         
         .stat-icon.secondary {
-            background-color: rgba(59, 47, 47, 0.1);
-            color: var(--brown);
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--hospitour-secondary);
         }
         
-        .stat-icon.warning {
-            background-color: rgba(255, 193, 7, 0.1);
-            color: #ffc107;
+        .stat-icon.accent {
+            background-color: rgba(230, 126, 34, 0.1);
+            color: var(--hospitour-accent);
         }
         
         .plan-badge {
             position: absolute;
             top: -10px;
             right: 15px;
-            background: var(--gold);
+            background: var(--hospitour-accent);
             color: white;
             padding: 5px 15px;
             border-radius: 20px;
@@ -155,6 +199,7 @@
             position: relative;
             padding-bottom: 10px;
             margin-bottom: 25px;
+            color: var(--hospitour-dark);
         }
         
         .section-title:after {
@@ -164,18 +209,64 @@
             left: 0;
             width: 50px;
             height: 3px;
-            background: var(--gold);
+            background: var(--hospitour-accent);
         }
         
         .progress {
             height: 8px;
             border-radius: 10px;
             margin-top: 10px;
+            background-color: rgba(44, 62, 80, 0.1);
         }
         
         .progress-bar {
-            background-color: var(--gold);
+            background-color: var(--hospitour-accent);
             border-radius: 10px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background-color: var(--hospitour-danger);
+        }
+        
+        .notification.info {
+            background-color: var(--hospitour-secondary);
+        }
+        
+        .table {
+            color: var(--hospitour-dark);
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .badge.bg-success {
+            background-color: var(--hospitour-success) !important;
+        }
+        
+        .badge.bg-warning {
+            background-color: var(--hospitour-warning) !important;
+        }
+        
+        .badge.bg-light {
+            background-color: var(--hospitour-light) !important;
+            color: var(--hospitour-dark);
         }
         
         @media (max-width: 992px) {
@@ -221,26 +312,26 @@
     <div class="sidebar">
         <div class="text-center mb-4">
             <h5 class="text-white">HospiTour</h5>
-            <small class="text-gold">Service Professional</small>
+            <small class="text-accent">Service Professional</small>
         </div>
-        <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> Dashboard</a>
-        <a href="professional-profile.html"><i class="fas fa-user me-2"></i> Profile & Portfolio</a>
-        <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> Booking Management</a>
-        <a href="professional-clients.html"><i class="fas fa-users me-2"></i> Client Management</a>
-        <a href="professional-billing.html" class="active"><i class="fas fa-money-bill-wave me-2"></i> Billing & Payments</a>
+        <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> <span>Dashboard</span></a>
+        <a href="professional-profile.html"><i class="fas fa-user me-2"></i> <span>Profile & Portfolio</span></a>
+        <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> <span>Booking Management</span></a>
+        <a href="professional-clients.html"><i class="fas fa-users me-2"></i> <span>Client Management</span></a>
+        <a href="professional-billing.html" class="active"><i class="fas fa-money-bill-wave me-2"></i> <span>Billing & Payments</span></a>
         <hr class="text-white-50 my-4">
-        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> Log Out</a>
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> <span>Log Out</span></a>
     </div>
 
     <div class="main-content">
         <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1 class="text-brown mb-0">Billing & Payments</h1>
+            <h1 class="text-dark mb-0">Billing & Payments</h1>
             <div class="d-flex align-items-center">
                 <div class="me-3">
                     <small class="text-muted">Current Plan</small>
-                    <div class="badge bg-light text-brown">Free</div>
+                    <div class="badge bg-light text-dark" id="currentPlan">Free</div>
                 </div>
-                <button class="btn btn-gold btn-sm">
+                <button class="btn btn-accent btn-sm" id="upgradePlanBtn">
                     <i class="fas fa-crown me-1"></i> Upgrade Plan
                 </button>
             </div>
@@ -253,7 +344,7 @@
                         <i class="fas fa-chart-line fa-lg"></i>
                     </div>
                     <div class="small text-muted">This Month (Net)</div>
-                    <h2 class="fw-bold text-success">$1,450.00</h2>
+                    <h2 class="fw-bold text-success" id="monthlyEarnings">$1,450.00</h2>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 65%"></div>
                     </div>
@@ -266,7 +357,7 @@
                         <i class="fas fa-wallet fa-lg"></i>
                     </div>
                     <div class="small text-muted">Total Paid Out</div>
-                    <h2 class="fw-bold text-brown">$8,900.00</h2>
+                    <h2 class="fw-bold text-primary" id="totalPaid">$8,900.00</h2>
                     <div class="progress">
                         <div class="progress-bar" role="progressbar" style="width: 45%"></div>
                     </div>
@@ -275,7 +366,7 @@
             </div>
             <div class="col-md-4">
                 <div class="earning-box">
-                    <div class="stat-icon warning">
+                    <div class="stat-icon accent">
                         <i class="fas fa-clock fa-lg"></i>
                     </div>
                     <div class="small text-muted">Pending Payments</div>
@@ -290,15 +381,15 @@
 
         <div class="row g-5">
             <div class="col-lg-8">
-                <h3 class="section-title text-brown">Payment & Payout Setup</h3>
+                <h3 class="section-title text-dark">Payment & Payout Setup</h3>
                 <div class="card p-4 position-relative">
                     <span class="plan-badge">Pro+ Required</span>
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
                             <h5 class="text-primary mb-2">Connect Payment Gateway</h5>
-                            <p class="small text-muted mb-3">Connect your bank account or payment processor to receive payments directly through HospiPro's booking system.</p>
+                            <p class="small text-muted mb-3">Connect your bank account or payment processor to receive payments directly through HospiTour's booking system.</p>
                             <div class="d-flex align-items-center">
-                                <button class="btn btn-gold me-3" id="connectGatewayBtn">
+                                <button class="btn btn-primary me-3" id="connectGatewayBtn">
                                     <i class="fas fa-plug me-2"></i> Connect Now
                                 </button>
                                 <div id="gatewayStatus" class="small text-danger">
@@ -312,7 +403,7 @@
                     </div>
                 </div>
                 
-                <h3 class="section-title text-brown mt-5">Recent Transactions</h3>
+                <h3 class="section-title text-dark mt-5">Recent Transactions</h3>
                 <div class="card p-3">
                     <div class="table-responsive">
                         <table class="table table-hover">
@@ -323,15 +414,17 @@
                                     <th>Service</th>
                                     <th>Amount</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="transactionsTable">
                                 <tr>
                                     <td>Oct 12, 2023</td>
                                     <td>Johnson Wedding</td>
                                     <td>Catering</td>
                                     <td>$650.00</td>
                                     <td><span class="badge bg-success">Paid</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary generate-invoice" data-id="1">Invoice</button></td>
                                 </tr>
                                 <tr>
                                     <td>Oct 8, 2023</td>
@@ -339,6 +432,7 @@
                                     <td>Event Planning</td>
                                     <td>$1,200.00</td>
                                     <td><span class="badge bg-success">Paid</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary generate-invoice" data-id="2">Invoice</button></td>
                                 </tr>
                                 <tr>
                                     <td>Oct 5, 2023</td>
@@ -346,6 +440,7 @@
                                     <td>Photography</td>
                                     <td>$350.00</td>
                                     <td><span class="badge bg-warning">Pending</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary generate-invoice" data-id="3">Invoice</button></td>
                                 </tr>
                                 <tr>
                                     <td>Oct 1, 2023</td>
@@ -353,12 +448,13 @@
                                     <td>AV Services</td>
                                     <td>$800.00</td>
                                     <td><span class="badge bg-success">Paid</span></td>
+                                    <td><button class="btn btn-sm btn-outline-primary generate-invoice" data-id="4">Invoice</button></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <div class="text-center mt-3">
-                        <button class="btn btn-outline-gold">
+                        <button class="btn btn-outline-primary" id="viewAllTransactions">
                             <i class="fas fa-history me-2"></i> View All Transactions
                         </button>
                     </div>
@@ -366,75 +462,75 @@
             </div>
             
             <div class="col-lg-4">
-                <h3 class="section-title text-brown">Marketing & Analytics</h3>
+                <h3 class="section-title text-dark">Marketing & Analytics</h3>
                 <div class="card p-4 mb-4">
-                    <h5 class="mb-3">Booking Trends</h5>
+                    <h5 class="mb-3 text-dark">Booking Trends</h5>
                     <div class="d-flex align-items-center mb-3">
                         <div class="bg-success text-white rounded p-2 me-3">
                             <i class="fas fa-chart-bar"></i>
                         </div>
                         <div>
-                            <div class="fw-bold">30% Increase</div>
+                            <div class="fw-bold text-dark">30% Increase</div>
                             <small class="text-muted">in requests last quarter</small>
                         </div>
                     </div>
                     <div class="mb-3">
                         <div class="d-flex justify-content-between mb-1">
-                            <small>Top Service:</small>
-                            <small class="fw-bold">Catering</small>
+                            <small class="text-dark">Top Service:</small>
+                            <small class="fw-bold text-dark">Catering</small>
                         </div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: 75%"></div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <div class="d-flex justify-content-between mb-1>
-                            <small>Event Planning:</small>
-                            <small class="fw-bold">45%</small>
+                        <div class="d-flex justify-content-between mb-1">
+                            <small class="text-dark">Event Planning:</small>
+                            <small class="fw-bold text-dark">45%</small>
                         </div>
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: 45%"></div>
                         </div>
                     </div>
-                    <button class="btn btn-outline-gold w-100 mt-2">
+                    <button class="btn btn-outline-primary w-100 mt-2" id="viewAnalyticsBtn">
                         <i class="fas fa-chart-pie me-2"></i> View Detailed Analytics
                     </button>
                 </div>
                 
                 <div class="card p-4 bg-light position-relative">
                     <span class="plan-badge">Enterprise+</span>
-                    <h5 class="mb-3">Marketing Tools</h5>
+                    <h5 class="mb-3 text-dark">Marketing Tools</h5>
                     <p class="small text-danger mb-3">
                         <i class="fas fa-lock me-1"></i> Email campaigns and social media integration require <strong>Enterprise</strong> access.
                     </p>
                     <div class="mb-3">
-                        <div class="d-flex align-items-center text-muted mb-2">
+                        <div class="d-flex align-items-center text-dark mb-2">
                             <i class="fas fa-envelope me-2"></i>
                             <span>Email Campaigns</span>
                         </div>
-                        <div class="d-flex align-items-center text-muted mb-2">
+                        <div class="d-flex align-items-center text-dark mb-2">
                             <i class="fas fa-share-alt me-2"></i>
                             <span>Social Media Integration</span>
                         </div>
-                        <div class="d-flex align-items-center text-muted">
+                        <div class="d-flex align-items-center text-dark">
                             <i class="fas fa-bullhorn me-2"></i>
                             <span>Promotional Tools</span>
                         </div>
                     </div>
-                    <button class="btn btn-outline-danger w-100" disabled>
+                    <button class="btn btn-outline-danger w-100" id="campaignBuilderBtn" disabled>
                         <i class="fas fa-rocket me-2"></i> Launch Campaign Builder
                     </button>
                 </div>
                 
                 <div class="card p-4 mt-4">
-                    <h5 class="mb-3">Quick Actions</h5>
-                    <button class="btn btn-outline-gold w-100 mb-2">
+                    <h5 class="mb-3 text-dark">Quick Actions</h5>
+                    <button class="btn btn-outline-primary w-100 mb-2" id="generateInvoiceBtn">
                         <i class="fas fa-file-invoice-dollar me-2"></i> Generate Invoice
                     </button>
-                    <button class="btn btn-outline-gold w-100 mb-2">
+                    <button class="btn btn-outline-primary w-100 mb-2" id="downloadReportsBtn">
                         <i class="fas fa-download me-2"></i> Download Reports
                     </button>
-                    <button class="btn btn-outline-gold w-100">
+                    <button class="btn btn-outline-primary w-100" id="getSupportBtn">
                         <i class="fas fa-question-circle me-2"></i> Get Support
                     </button>
                 </div>
@@ -442,67 +538,153 @@
         </div>
     </div>
 
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Firebase App (the core Firebase SDK) -->
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        
-        // Your web app's Firebase configuration
-        // Replace with your actual Firebase config
-                const firebaseConfig = {
-        apiKey: "AIzaSyCJecurF3qb6kfefdpae8oKGDBOEdmywC4",
-        authDomain: "hospitour-6a1da.firebaseapp.com",
-        projectId: "hospitour-6a1da",
-        storageBucket: "hospitour-6a1da.firebasestorage.app",
-        messagingSenderId: "73315471607",
-        appId: "1:73315471607:web:b5a1f6384f5dc0432c03f2",
-        measurementId: "G-V82ZQPV48F"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        
+    <script>
+        // DOM elements
         const logoutBtn = document.getElementById('logoutBtn');
         const connectGatewayBtn = document.getElementById('connectGatewayBtn');
         const gatewayStatusEl = document.getElementById('gatewayStatus');
-        
-        // Simulate plan gating
-        const userPlan = 'free'; 
-        
-        if (userPlan === 'pro' || userPlan === 'enterprise') {
-            connectGatewayBtn.disabled = false;
-            gatewayStatusEl.textContent = 'Status: Ready to Connect';
-            gatewayStatusEl.classList.remove('text-danger');
-            gatewayStatusEl.classList.add('text-success');
-        } else {
-            connectGatewayBtn.disabled = true;
-        }
-        
-        // Logout functionality
-        logoutBtn.addEventListener('click', async (e) => {
-            e.preventDefault();
-            try {
-                await signOut(auth);
-                window.location.href = "login.html";
-            } catch (error) {
-                console.error("Logout failed:", error);
-                alert("Logout failed. Please try again.");
-            }
-        });
+        const upgradePlanBtn = document.getElementById('upgradePlanBtn');
+        const currentPlanEl = document.getElementById('currentPlan');
+        const viewAllTransactionsBtn = document.getElementById('viewAllTransactions');
+        const viewAnalyticsBtn = document.getElementById('viewAnalyticsBtn');
+        const campaignBuilderBtn = document.getElementById('campaignBuilderBtn');
+        const generateInvoiceBtn = document.getElementById('generateInvoiceBtn');
+        const downloadReportsBtn = document.getElementById('downloadReportsBtn');
+        const getSupportBtn = document.getElementById('getSupportBtn');
+        const notificationEl = document.getElementById('notification');
 
-        // Add click handler for connect gateway button
-        connectGatewayBtn.addEventListener('click', () => {
-            if (!connectGatewayBtn.disabled) {
-                alert("Redirecting to payment gateway setup...");
-                // In a real app, you would redirect to the payment gateway setup page
+        // User data
+        let userPlan = 'free';
+        let userData = {
+            monthlyEarnings: 1450.00,
+            totalPaid: 8900.00,
+            pendingAmount: 450.00
+        };
+
+        // Initialize the dashboard
+        function initDashboard() {
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Update UI based on user plan
+            updatePlanUI();
+        }
+
+        // Update UI based on user plan
+        function updatePlanUI() {
+            currentPlanEl.textContent = userPlan.charAt(0).toUpperCase() + userPlan.slice(1);
+            
+            if (userPlan === 'pro' || userPlan === 'enterprise') {
+                connectGatewayBtn.disabled = false;
+                gatewayStatusEl.textContent = 'Status: Ready to Connect';
+                gatewayStatusEl.classList.remove('text-danger');
+                gatewayStatusEl.classList.add('text-success');
+                
+                if (userPlan === 'enterprise') {
+                    campaignBuilderBtn.disabled = false;
+                    campaignBuilderBtn.classList.remove('btn-outline-danger');
+                    campaignBuilderBtn.classList.add('btn-primary');
+                }
             } else {
-                alert("Please upgrade to Pro+ plan to connect payment gateway.");
+                connectGatewayBtn.disabled = true;
             }
-        });
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Logout functionality
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification('Logged out successfully', 'success');
+                setTimeout(() => {
+                    // In a real app, you would redirect to login page
+                    console.log("Redirecting to login page...");
+                }, 1500);
+            });
+
+            // Connect payment gateway
+            connectGatewayBtn.addEventListener('click', () => {
+                if (!connectGatewayBtn.disabled) {
+                    showNotification('Redirecting to payment gateway setup...', 'info');
+                    // In a real app, you would redirect to the payment gateway setup page
+                    setTimeout(() => {
+                        showNotification('Payment gateway connected successfully!', 'success');
+                    }, 2000);
+                } else {
+                    showNotification('Please upgrade to Pro+ plan to connect payment gateway.', 'error');
+                }
+            });
+
+            // Upgrade plan
+            upgradePlanBtn.addEventListener('click', () => {
+                showNotification('Redirecting to plan selection...', 'info');
+                // In a real app, you would redirect to the plan selection page
+            });
+
+            // View all transactions
+            viewAllTransactionsBtn.addEventListener('click', () => {
+                showNotification('Loading all transactions...', 'info');
+                // In a real app, you would load and display all transactions
+            });
+
+            // View analytics
+            viewAnalyticsBtn.addEventListener('click', () => {
+                showNotification('Opening analytics dashboard...', 'info');
+                // In a real app, you would open the analytics dashboard
+            });
+
+            // Generate invoice
+            generateInvoiceBtn.addEventListener('click', () => {
+                showNotification('Generating invoice template...', 'info');
+                // In a real app, you would open an invoice generation form
+            });
+
+            // Download reports
+            downloadReportsBtn.addEventListener('click', () => {
+                showNotification('Preparing reports for download...', 'info');
+                // In a real app, you would generate and download reports
+                setTimeout(() => {
+                    showNotification('Reports downloaded successfully!', 'success');
+                }, 2000);
+            });
+
+            // Get support
+            getSupportBtn.addEventListener('click', () => {
+                showNotification('Opening support chat...', 'info');
+                // In a real app, you would open a support chat or form
+            });
+
+            // Generate invoice for specific transaction
+            document.querySelectorAll('.generate-invoice').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const transactionId = e.target.getAttribute('data-id');
+                    showNotification(`Generating invoice for transaction #${transactionId}...`, 'info');
+                    // In a real app, you would generate an invoice for the specific transaction
+                    setTimeout(() => {
+                        showNotification(`Invoice for transaction #${transactionId} generated!`, 'success');
+                    }, 1500);
+                });
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type}`;
+            notificationEl.style.display = 'block';
+            
+            setTimeout(() => {
+                notificationEl.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize the dashboard when the page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
     </script>
 </body>
 </html>

@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Staff Management | HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root{ 
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-danger: #e74c3c;
+            --hospitour-gray: #95a5a6;
+        }
+        
+        body{ 
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
+            background: var(--hospitour-light);
+            color: var(--hospitour-dark);
+        }
+        
+        .sidebar{ 
+            width: 250px; 
+            background: var(--hospitour-primary); 
+            height: 100vh; 
+            position: fixed; 
+            padding-top: 20px; 
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            z-index: 100;
+        }
+        
+        .sidebar a{ 
+            color: rgba(255, 255, 255, 0.8); 
+            padding: 12px 15px; 
+            display: block; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            border-radius: 0 30px 30px 0;
+            margin-right: 10px;
+        }
+        
+        .sidebar a:hover, .sidebar a.active{ 
+            background: var(--hospitour-secondary); 
+            color: white; 
+            border-left: 3px solid var(--hospitour-accent);
+            transform: translateX(5px);
+        }
+        
+        .main-content{ 
+            margin-left: 250px; 
+            padding: 30px;
+            min-height: 100vh;
+        }
+        
+        .text-primary { color: var(--hospitour-primary) !important; }
+        .text-secondary { color: var(--hospitour-secondary) !important; }
+        .text-accent { color: var(--hospitour-accent) !important; }
+        .text-dark { color: var(--hospitour-dark) !important; }
+        .text-success { color: var(--hospitour-success) !important; }
+        .text-warning { color: var(--hospitour-warning) !important; }
+        .text-danger { color: var(--hospitour-danger) !important; }
+        
+        .bg-primary { background-color: var(--hospitour-primary) !important; }
+        .bg-secondary { background-color: var(--hospitour-secondary) !important; }
+        .bg-accent { background-color: var(--hospitour-accent) !important; }
+        .bg-success { background-color: var(--hospitour-success) !important; }
+        .bg-warning { background-color: var(--hospitour-warning) !important; }
+        .bg-danger { background-color: var(--hospitour-danger) !important; }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .btn-primary {
+            background-color: var(--hospitour-primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: #144360;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-accent {
+            background-color: var(--hospitour-accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background-color: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 1px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline-accent {
+            border: 1px solid var(--hospitour-accent);
+            color: var(--hospitour-accent);
+            border-radius: 6px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-accent:hover {
+            background-color: var(--hospitour-accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .staff-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--hospitour-accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .staff-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .staff-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+        
+        .staff-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-available {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--hospitour-success);
+        }
+        
+        .status-busy {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--hospitour-warning);
+        }
+        
+        .status-offline {
+            background-color: rgba(149, 165, 166, 0.1);
+            color: var(--hospitour-gray);
+        }
+        
+        .status-on-leave {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--hospitour-secondary);
+        }
+        
+        .plan-badge {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            background: var(--hospitour-accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            color: var(--hospitour-dark);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--hospitour-accent);
+        }
+        
+        .stats-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--hospitour-accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .progress {
+            height: 8px;
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: rgba(44, 62, 80, 0.1);
+        }
+        
+        .progress-bar {
+            background-color: var(--hospitour-accent);
+            border-radius: 10px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.success {
+            background-color: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background-color: var(--hospitour-danger);
+        }
+        
+        .notification.info {
+            background-color: var(--hospitour-secondary);
+        }
+        
+        .table {
+            color: var(--hospitour-dark);
+        }
+        
+        .table-hover tbody tr:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+        
+        .badge.bg-success {
+            background-color: var(--hospitour-success) !important;
+        }
+        
+        .badge.bg-warning {
+            background-color: var(--hospitour-warning) !important;
+        }
+        
+        .badge.bg-danger {
+            background-color: var(--hospitour-danger) !important;
+        }
+        
+        .badge.bg-primary {
+            background-color: var(--hospitour-primary) !important;
+        }
+        
+        .badge.bg-light {
+            background-color: var(--hospitour-light) !important;
+            color: var(--hospitour-dark);
+        }
+        
+        .schedule-slot {
+            border-radius: 6px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+        }
+        
+        .schedule-available {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-left: 3px solid var(--hospitour-success);
+        }
+        
+        .schedule-booked {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 3px solid var(--hospitour-danger);
+        }
+        
+        .schedule-pending {
+            background-color: rgba(243, 156, 18, 0.1);
+            border-left: 3px solid var(--hospitour-warning);
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 70px;
+                overflow: hidden;
+            }
+            
+            .sidebar .text-center h5, .sidebar .text-center small, .sidebar a span {
+                display: none;
+            }
+            
+            .sidebar a {
+                text-align: center;
+                padding: 15px 5px;
+                font-size: 1.2rem;
+            }
+            
+            .main-content {
+                margin-left: 70px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            
+            .sidebar .d-flex {
+                justify-content: space-between;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="sidebar">
+        <div class="text-center mb-4">
+            <h5 class="text-white">HospiTour</h5>
+            <small class="text-accent">Service Professional</small>
+        </div>
+        <a href="professional-dashboard.html"><i class="fas fa-home me-2"></i> <span>Dashboard</span></a>
+        <a href="professional-profile.html"><i class="fas fa-user me-2"></i> <span>Profile & Portfolio</span></a>
+        <a href="professional-bookings.html"><i class="fas fa-calendar-alt me-2"></i> <span>Booking Management</span></a>
+        <a href="professional-clients.html"><i class="fas fa-users me-2"></i> <span>Client Management</span></a>
+        <a href="professional-billing.html"><i class="fas fa-money-bill-wave me-2"></i> <span>Billing & Payments</span></a>
+        <a href="staff-management.html" class="active"><i class="fas fa-user-tie me-2"></i> <span>Staff Management</span></a>
+        <hr class="text-white-50 my-4">
+        <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt me-2"></i> <span>Log Out</span></a>
+    </div>
+
+    <div class="main-content">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="text-dark mb-0">Staff Management</h1>
+            <div class="d-flex align-items-center">
+                <div class="me-3">
+                    <small class="text-muted">Current Plan</small>
+                    <div class="badge bg-light text-dark" id="currentPlan">Free</div>
+                </div>
+                <button class="btn btn-accent btn-sm" id="upgradePlanBtn">
+                    <i class="fas fa-crown me-1"></i> Upgrade Plan
+                </button>
+            </div>
+        </div>
+
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-primary text-white rounded p-2 me-3">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold" id="totalStaff">8</div>
+                            <small class="text-muted">Total Staff</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-success text-white rounded p-2 me-3">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold" id="availableStaff">6</div>
+                            <small class="text-muted">Available Today</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-warning text-white rounded p-2 me-3">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold" id="scheduledToday">12</div>
+                            <small class="text-muted">Bookings Today</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stats-card">
+                    <div class="d-flex align-items-center">
+                        <div class="bg-secondary text-white rounded p-2 me-3">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div>
+                            <div class="fw-bold" id="avgRating">4.7</div>
+                            <small class="text-muted">Avg. Staff Rating</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="d-flex gap-2">
+                <button class="btn btn-primary" id="addStaffBtn">
+                    <i class="fas fa-user-plus me-2"></i> Add New Staff
+                </button>
+                <button class="btn btn-outline-primary" id="importStaffBtn">
+                    <i class="fas fa-file-import me-2"></i> Import Staff (Pro+)
+                </button>
+            </div>
+            <div class="d-flex gap-2">
+                <div class="input-group" style="width: 250px;">
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search staff...">
+                    <button class="btn btn-outline-secondary" type="button" id="searchBtn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+                <button class="btn btn-outline-secondary" id="filterBtn">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h3 class="section-title text-dark">Staff Directory</h3>
+                
+                <div class="row g-4 mb-5" id="staffContainer">
+                    <!-- Staff cards will be dynamically loaded here -->
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <h3 class="section-title text-dark">Today's Schedule</h3>
+                
+                <div class="card p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">October 26, 2025</h5>
+                        <button class="btn btn-sm btn-outline-primary" id="viewFullScheduleBtn">
+                            <i class="fas fa-calendar me-1"></i> View Full
+                        </button>
+                    </div>
+                    
+                    <div id="todaysSchedule">
+                        <!-- Today's schedule will be dynamically loaded here -->
+                    </div>
+                </div>
+                
+                <h3 class="section-title text-dark">Quick Actions</h3>
+                
+                <div class="card p-4">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-outline-primary" id="scheduleManagerBtn">
+                            <i class="fas fa-calendar-alt me-2"></i> Schedule Manager
+                        </button>
+                        <button class="btn btn-outline-primary" id="timeOffRequestsBtn">
+                            <i class="fas fa-umbrella-beach me-2"></i> Time Off Requests
+                        </button>
+                        <button class="btn btn-outline-primary" id="performanceReportsBtn">
+                            <i class="fas fa-chart-line me-2"></i> Performance Reports
+                        </button>
+                        <button class="btn btn-outline-primary" id="payrollBtn">
+                            <i class="fas fa-money-check me-2"></i> Payroll Management
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-5">
+
+        <h3 class="section-title text-dark">Staff Management Tools</h3>
+        
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card p-4">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-primary text-white rounded p-2 me-3">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Staff Analytics</h5>
+                            <p class="small text-muted mb-0">Track staff performance, utilization, and client ratings.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-primary w-100" id="staffAnalyticsBtn">
+                        <i class="fas fa-chart-bar me-2"></i> View Analytics
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Pro+</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-success text-white rounded p-2 me-3">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Training & Development</h5>
+                            <p class="small text-muted mb-0">Manage staff training programs and certifications.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-success w-100" id="trainingBtn" disabled>
+                        <i class="fas fa-book me-2"></i> Training Portal (Pro+)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Pro+</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-warning text-white rounded p-2 me-3">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Task Management</h5>
+                            <p class="small text-muted mb-0">Assign and track tasks across your team.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-warning w-100" id="taskManagerBtn" disabled>
+                        <i class="fas fa-clipboard-list me-2"></i> Task Manager (Pro+)
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card p-4 position-relative">
+                    <span class="plan-badge">Enterprise</span>
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="bg-secondary text-white rounded p-2 me-3">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h5 class="mb-1">Mobile Staff App</h5>
+                            <p class="small text-muted mb-0">Enable mobile access for your staff team.</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline-secondary w-100" id="mobileAppBtn" disabled>
+                        <i class="fas fa-mobile me-2"></i> Enable Mobile (Enterprise)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-4 mt-5">
+            <h5 class="mb-3">Recent Staff Activity</h5>
+            <div class="table-responsive">
+                <table class="table table-hover" id="activityTable">
+                    <thead>
+                        <tr>
+                            <th>Staff Member</th>
+                            <th>Activity</th>
+                            <th>Client</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activityBody">
+                        <!-- Activity will be dynamically loaded here -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-outline-primary" id="viewAllActivityBtn">
+                    <i class="fas fa-history me-2"></i> View All Activity
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Add Staff Modal -->
+    <div class="modal fade" id="addStaffModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add New Staff Member</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addStaffForm">
+                        <div class="mb-3">
+                            <label for="staffName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="staffName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="staffEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="staffEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="staffPhone" class="form-label">Phone</label>
+                            <input type="tel" class="form-control" id="staffPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="staffRole" class="form-label">Role</label>
+                            <select class="form-select" id="staffRole">
+                                <option value="event-planner">Event Planner</option>
+                                <option value="caterer">Caterer</option>
+                                <option value="photographer">Photographer</option>
+                                <option value="coordinator">Coordinator</option>
+                                <option value="assistant">Assistant</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="staffStatus" class="form-label">Status</label>
+                            <select class="form-select" id="staffStatus">
+                                <option value="available">Available</option>
+                                <option value="busy">Busy</option>
+                                <option value="on-leave">On Leave</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveStaffBtn">Save Staff</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Sample staff data
+        const staffMembers = [
+            {
+                id: 1,
+                name: "Jennifer Wilson",
+                initials: "JW",
+                role: "Senior Event Planner",
+                status: "available",
+                email: "jennifer@hospitour.com",
+                phone: "(555) 123-4567",
+                rating: 4.9,
+                bookings: 24,
+                avatarColor: "bg-primary"
+            },
+            {
+                id: 2,
+                name: "Michael Chen",
+                initials: "MC",
+                role: "Head Caterer",
+                status: "busy",
+                email: "michael@hospitour.com",
+                phone: "(555) 234-5678",
+                rating: 4.8,
+                bookings: 18,
+                avatarColor: "bg-success"
+            },
+            {
+                id: 3,
+                name: "Sarah Johnson",
+                initials: "SJ",
+                role: "Photographer",
+                status: "available",
+                email: "sarah@hospitour.com",
+                phone: "(555) 345-6789",
+                rating: 4.7,
+                bookings: 15,
+                avatarColor: "bg-warning"
+            },
+            {
+                id: 4,
+                name: "Robert Martinez",
+                initials: "RM",
+                role: "Event Coordinator",
+                status: "on-leave",
+                email: "robert@hospitour.com",
+                phone: "(555) 456-7890",
+                rating: 4.6,
+                bookings: 12,
+                avatarColor: "bg-secondary"
+            },
+            {
+                id: 5,
+                name: "Emily Davis",
+                initials: "ED",
+                role: "Assistant Planner",
+                status: "available",
+                email: "emily@hospitour.com",
+                phone: "(555) 567-8901",
+                rating: 4.5,
+                bookings: 8,
+                avatarColor: "bg-danger"
+            },
+            {
+                id: 6,
+                name: "David Thompson",
+                initials: "DT",
+                role: "AV Technician",
+                status: "busy",
+                email: "david@hospitour.com",
+                phone: "(555) 678-9012",
+                rating: 4.8,
+                bookings: 14,
+                avatarColor: "bg-info"
+            }
+        ];
+
+        // Sample schedule data
+        const todaysSchedule = [
+            {
+                time: "9:00 AM - 11:00 AM",
+                staff: "Jennifer Wilson",
+                client: "Johnson Wedding",
+                type: "available",
+                service: "Venue Setup"
+            },
+            {
+                time: "10:30 AM - 12:30 PM",
+                staff: "Michael Chen",
+                client: "Corporate Gala",
+                type: "booked",
+                service: "Catering Setup"
+            },
+            {
+                time: "1:00 PM - 3:00 PM",
+                staff: "Sarah Johnson",
+                client: "Smith Anniversary",
+                type: "booked",
+                service: "Photography Session"
+            },
+            {
+                time: "2:00 PM - 4:00 PM",
+                staff: "David Thompson",
+                client: "Tech Conference",
+                type: "pending",
+                service: "AV Setup"
+            },
+            {
+                time: "4:30 PM - 6:30 PM",
+                staff: "Emily Davis",
+                client: "University Event",
+                type: "available",
+                service: "Event Coordination"
+            }
+        ];
+
+        // Sample activity data
+        const recentActivity = [
+            {
+                staff: "Jennifer Wilson",
+                activity: "Completed Johnson Wedding setup",
+                client: "Johnson Wedding",
+                time: "2 hours ago",
+                status: "completed"
+            },
+            {
+                staff: "Michael Chen",
+                activity: "Started catering for Corporate Gala",
+                client: "Corporate Gala",
+                time: "1 hour ago",
+                status: "in-progress"
+            },
+            {
+                staff: "Sarah Johnson",
+                activity: "Uploaded Smith Anniversary photos",
+                client: "Smith Anniversary",
+                time: "30 minutes ago",
+                status: "completed"
+            },
+            {
+                staff: "David Thompson",
+                activity: "Scheduled AV setup for Tech Conference",
+                client: "Tech Conference",
+                time: "15 minutes ago",
+                status: "scheduled"
+            }
+        ];
+
+        // DOM elements
+        const logoutBtn = document.getElementById('logoutBtn');
+        const upgradePlanBtn = document.getElementById('upgradePlanBtn');
+        const currentPlanEl = document.getElementById('currentPlan');
+        const addStaffBtn = document.getElementById('addStaffBtn');
+        const importStaffBtn = document.getElementById('importStaffBtn');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const filterBtn = document.getElementById('filterBtn');
+        const staffContainer = document.getElementById('staffContainer');
+        const viewFullScheduleBtn = document.getElementById('viewFullScheduleBtn');
+        const todaysScheduleEl = document.getElementById('todaysSchedule');
+        const scheduleManagerBtn = document.getElementById('scheduleManagerBtn');
+        const timeOffRequestsBtn = document.getElementById('timeOffRequestsBtn');
+        const performanceReportsBtn = document.getElementById('performanceReportsBtn');
+        const payrollBtn = document.getElementById('payrollBtn');
+        const staffAnalyticsBtn = document.getElementById('staffAnalyticsBtn');
+        const trainingBtn = document.getElementById('trainingBtn');
+        const taskManagerBtn = document.getElementById('taskManagerBtn');
+        const mobileAppBtn = document.getElementById('mobileAppBtn');
+        const activityBody = document.getElementById('activityBody');
+        const viewAllActivityBtn = document.getElementById('viewAllActivityBtn');
+        const notificationEl = document.getElementById('notification');
+        const saveStaffBtn = document.getElementById('saveStaffBtn');
+        const addStaffForm = document.getElementById('addStaffForm');
+
+        // User data
+        let userPlan = 'free';
+        let userData = {
+            totalStaff: 8,
+            availableStaff: 6,
+            scheduledToday: 12,
+            avgRating: 4.7
+        };
+
+        // Initialize the dashboard
+        function initDashboard() {
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Update UI based on user plan
+            updatePlanUI();
+            
+            // Load staff, schedule, and activity
+            loadStaff();
+            loadTodaysSchedule();
+            loadRecentActivity();
+            
+            // Update dashboard stats
+            updateDashboardStats();
+        }
+
+        // Update UI based on user plan
+        function updatePlanUI() {
+            currentPlanEl.textContent = userPlan.charAt(0).toUpperCase() + userPlan.slice(1);
+            
+            if (userPlan === 'pro' || userPlan === 'enterprise') {
+                importStaffBtn.disabled = false;
+                trainingBtn.disabled = false;
+                taskManagerBtn.disabled = false;
+                
+                if (userPlan === 'enterprise') {
+                    mobileAppBtn.disabled = false;
+                }
+            } else {
+                importStaffBtn.disabled = true;
+                trainingBtn.disabled = true;
+                taskManagerBtn.disabled = true;
+                mobileAppBtn.disabled = true;
+            }
+        }
+
+        // Load staff into the UI
+        function loadStaff(filteredStaff = staffMembers) {
+            staffContainer.innerHTML = '';
+            
+            filteredStaff.forEach(staff => {
+                const staffCard = document.createElement('div');
+                staffCard.className = 'col-lg-6 col-md-6';
+                
+                const statusText = staff.status === 'available' ? 'Available' : 
+                                 staff.status === 'busy' ? 'Busy' : 'On Leave';
+                
+                const statusClass = staff.status === 'available' ? 'status-available' : 
+                                  staff.status === 'busy' ? 'status-busy' : 'status-on-leave';
+                
+                staffCard.innerHTML = `
+                    <div class="staff-card position-relative">
+                        <span class="staff-status ${statusClass}">${statusText}</span>
+                        <div class="staff-avatar ${staff.avatarColor}">${staff.initials}</div>
+                        <h6 class="fw-bold mb-1">${staff.name}</h6>
+                        <p class="small text-muted mb-2">${staff.role}</p>
+                        <div class="mb-3">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="client-rating me-2">
+                                    <i class="fas fa-star"></i> ${staff.rating}
+                                </span>
+                                <span class="small text-muted">
+                                    <i class="fas fa-calendar me-1"></i> ${staff.bookings} bookings
+                                </span>
+                            </div>
+                            <div class="d-flex small text-muted">
+                                <i class="fas fa-envelope me-2"></i>
+                                <span>${staff.email}</span>
+                            </div>
+                            <div class="d-flex small text-muted">
+                                <i class="fas fa-phone me-2"></i>
+                                <span>${staff.phone}</span>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-outline-primary flex-fill view-staff" data-id="${staff.id}">
+                                <i class="fas fa-eye me-1"></i> View
+                            </button>
+                            <button class="btn btn-sm btn-outline-accent flex-fill message-staff" data-id="${staff.id}">
+                                <i class="fas fa-envelope me-1"></i> Message
+                            </button>
+                            <button class="btn btn-sm btn-outline-secondary flex-fill schedule-staff" data-id="${staff.id}">
+                                <i class="fas fa-calendar me-1"></i> Schedule
+                            </button>
+                        </div>
+                    </div>
+                `;
+                
+                staffContainer.appendChild(staffCard);
+            });
+            
+            // Add event listeners to the new buttons
+            document.querySelectorAll('.view-staff').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const staffId = e.target.closest('.view-staff').getAttribute('data-id');
+                    viewStaff(staffId);
+                });
+            });
+            
+            document.querySelectorAll('.message-staff').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const staffId = e.target.closest('.message-staff').getAttribute('data-id');
+                    messageStaff(staffId);
+                });
+            });
+            
+            document.querySelectorAll('.schedule-staff').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const staffId = e.target.closest('.schedule-staff').getAttribute('data-id');
+                    scheduleStaff(staffId);
+                });
+            });
+        }
+
+        // Load today's schedule
+        function loadTodaysSchedule() {
+            todaysScheduleEl.innerHTML = '';
+            
+            todaysSchedule.forEach(schedule => {
+                const scheduleItem = document.createElement('div');
+                
+                const typeClass = schedule.type === 'available' ? 'schedule-available' : 
+                                schedule.type === 'booked' ? 'schedule-booked' : 'schedule-pending';
+                
+                scheduleItem.className = `schedule-slot ${typeClass}`;
+                scheduleItem.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <strong>${schedule.time}</strong>
+                        <span class="badge ${schedule.type === 'available' ? 'bg-success' : schedule.type === 'booked' ? 'bg-danger' : 'bg-warning'}">
+                            ${schedule.type === 'available' ? 'Available' : schedule.type === 'booked' ? 'Booked' : 'Pending'}
+                        </span>
+                    </div>
+                    <div class="mt-1">
+                        <strong>${schedule.staff}</strong> - ${schedule.service}
+                    </div>
+                    <div class="small">
+                        ${schedule.client}
+                    </div>
+                `;
+                
+                todaysScheduleEl.appendChild(scheduleItem);
+            });
+        }
+
+        // Load recent activity
+        function loadRecentActivity() {
+            activityBody.innerHTML = '';
+            
+            recentActivity.forEach(activity => {
+                const row = document.createElement('tr');
+                
+                const statusBadge = activity.status === 'completed' ? 'bg-success' : 
+                                  activity.status === 'in-progress' ? 'bg-warning' : 'bg-primary';
+                
+                const statusText = activity.status === 'completed' ? 'Completed' : 
+                                 activity.status === 'in-progress' ? 'In Progress' : 'Scheduled';
+                
+                row.innerHTML = `
+                    <td>${activity.staff}</td>
+                    <td>${activity.activity}</td>
+                    <td>${activity.client}</td>
+                    <td>${activity.time}</td>
+                    <td><span class="badge ${statusBadge}">${statusText}</span></td>
+                `;
+                
+                activityBody.appendChild(row);
+            });
+        }
+
+        // Update dashboard statistics
+        function updateDashboardStats() {
+            document.getElementById('totalStaff').textContent = userData.totalStaff;
+            document.getElementById('availableStaff').textContent = userData.availableStaff;
+            document.getElementById('scheduledToday').textContent = userData.scheduledToday;
+            document.getElementById('avgRating').textContent = userData.avgRating;
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Logout functionality
+            logoutBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                showNotification('Logged out successfully', 'success');
+                setTimeout(() => {
+                    // In a real app, you would redirect to login page
+                    console.log("Redirecting to login page...");
+                }, 1500);
+            });
+
+            // Upgrade plan
+            upgradePlanBtn.addEventListener('click', () => {
+                showNotification('Redirecting to plan selection...', 'info');
+                // In a real app, you would redirect to the plan selection page
+            });
+
+            // Add new staff
+            addStaffBtn.addEventListener('click', () => {
+                const modal = new bootstrap.Modal(document.getElementById('addStaffModal'));
+                modal.show();
+            });
+
+            // Save new staff
+            saveStaffBtn.addEventListener('click', () => {
+                const name = document.getElementById('staffName').value;
+                const email = document.getElementById('staffEmail').value;
+                const phone = document.getElementById('staffPhone').value;
+                const role = document.getElementById('staffRole').value;
+                const status = document.getElementById('staffStatus').value;
+                
+                if (name && email) {
+                    // In a real app, you would save the staff to a database
+                    showNotification(`Staff member ${name} added successfully!`, 'success');
+                    
+                    // Update stats
+                    userData.totalStaff++;
+                    if (status === 'available') {
+                        userData.availableStaff++;
+                    }
+                    updateDashboardStats();
+                    
+                    // Close modal and reset form
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addStaffModal'));
+                    modal.hide();
+                    addStaffForm.reset();
+                    
+                    // Reload staff to show the new one
+                    loadStaff();
+                } else {
+                    showNotification('Please fill in all required fields', 'error');
+                }
+            });
+
+            // Import staff
+            importStaffBtn.addEventListener('click', () => {
+                if (!importStaffBtn.disabled) {
+                    showNotification('Opening staff import wizard...', 'info');
+                } else {
+                    showNotification('Please upgrade to Pro+ plan to import staff.', 'error');
+                }
+            });
+
+            // Search staff
+            searchBtn.addEventListener('click', searchStaff);
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    searchStaff();
+                }
+            });
+
+            // Filter staff
+            filterBtn.addEventListener('click', () => {
+                showNotification('Opening filter options...', 'info');
+            });
+
+            // View full schedule
+            viewFullScheduleBtn.addEventListener('click', () => {
+                showNotification('Opening full schedule view...', 'info');
+            });
+
+            // Schedule manager
+            scheduleManagerBtn.addEventListener('click', () => {
+                showNotification('Opening schedule manager...', 'info');
+            });
+
+            // Time off requests
+            timeOffRequestsBtn.addEventListener('click', () => {
+                showNotification('Opening time off requests...', 'info');
+            });
+
+            // Performance reports
+            performanceReportsBtn.addEventListener('click', () => {
+                showNotification('Opening performance reports...', 'info');
+            });
+
+            // Payroll management
+            payrollBtn.addEventListener('click', () => {
+                showNotification('Opening payroll management...', 'info');
+            });
+
+            // Staff analytics
+            staffAnalyticsBtn.addEventListener('click', () => {
+                showNotification('Opening staff analytics dashboard...', 'info');
+            });
+
+            // Training portal
+            trainingBtn.addEventListener('click', () => {
+                if (!trainingBtn.disabled) {
+                    showNotification('Opening training portal...', 'info');
+                } else {
+                    showNotification('Please upgrade to Pro+ plan to access training portal.', 'error');
+                }
+            });
+
+            // Task manager
+            taskManagerBtn.addEventListener('click', () => {
+                if (!taskManagerBtn.disabled) {
+                    showNotification('Opening task manager...', 'info');
+                } else {
+                    showNotification('Please upgrade to Pro+ plan to access task manager.', 'error');
+                }
+            });
+
+            // Mobile app
+            mobileAppBtn.addEventListener('click', () => {
+                if (!mobileAppBtn.disabled) {
+                    showNotification('Opening mobile app settings...', 'info');
+                } else {
+                    showNotification('Please upgrade to Enterprise plan to enable mobile app.', 'error');
+                }
+            });
+
+            // View all activity
+            viewAllActivityBtn.addEventListener('click', () => {
+                showNotification('Loading all activity...', 'info');
+            });
+        }
+
+        // Search staff
+        function searchStaff() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            if (searchTerm) {
+                const filteredStaff = staffMembers.filter(staff => 
+                    staff.name.toLowerCase().includes(searchTerm) || 
+                    staff.role.toLowerCase().includes(searchTerm) ||
+                    staff.email.toLowerCase().includes(searchTerm)
+                );
+                
+                loadStaff(filteredStaff);
+                showNotification(`Found ${filteredStaff.length} staff members matching "${searchTerm}"`, 'info');
+            } else {
+                loadStaff();
+            }
+        }
+
+        // View staff details
+        function viewStaff(staffId) {
+            const staff = staffMembers.find(s => s.id == staffId);
+            if (staff) {
+                showNotification(`Opening details for ${staff.name}...`, 'info');
+            }
+        }
+
+        // Message staff
+        function messageStaff(staffId) {
+            const staff = staffMembers.find(s => s.id == staffId);
+            if (staff) {
+                showNotification(`Opening message composer for ${staff.name}...`, 'info');
+            }
+        }
+
+        // Schedule staff
+        function scheduleStaff(staffId) {
+            const staff = staffMembers.find(s => s.id == staffId);
+            if (staff) {
+                showNotification(`Opening schedule for ${staff.name}...`, 'info');
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type}`;
+            notificationEl.style.display = 'block';
+            
+            setTimeout(() => {
+                notificationEl.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize the dashboard when the page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>
