@@ -3,29 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Find Jobs | Hospiple</title>
-  <meta name="description" content="Find hospitality jobs across Africa through Hospiple and Jobpitality — your gateway to verified hospitality careers.">
+  <title>Find Jobs | HospiTour</title>
+  <meta name="description" content="Find hospitality jobs across Africa through HospiTour and Jobpitality — your gateway to verified hospitality careers.">
   
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/style.css">
   <style>
     :root {
-      --gold: #c9a44c;
-      --brown: #3b2f2f;
-      --light-bg: #f9f6f2;
+      --hospitour-primary: #1a5276;
+      --hospitour-secondary: #3498db;
+      --hospitour-accent: #e67e22;
+      --hospitour-light: #f8f9fa;
+      --hospitour-dark: #2c3e50;
+      --hospitour-success: #27ae60;
+      --hospitour-warning: #f39c12;
+      --hospitour-danger: #e74c3c;
+      --hospitour-gray: #95a5a6;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background-color: var(--light-bg);
-      color: #222;
+      font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+      background-color: #f5f7fa;
+      color: var(--hospitour-dark);
+      padding-top: 80px;
     }
 
     /* ✅ Navbar */
     .navbar {
-      background-color: var(--brown);
+      background-color: var(--hospitour-primary);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
     .navbar .navbar-brand,
     .navbar .nav-link {
@@ -33,53 +40,238 @@
       font-weight: 500;
     }
     .navbar .nav-link:hover {
-      color: var(--gold) !important;
+      color: var(--hospitour-accent) !important;
+    }
+    .navbar .nav-link.active {
+      color: var(--hospitour-accent) !important;
+      font-weight: 600;
     }
 
     /* ✅ Header */
     header {
-      margin-top: 90px;
-      text-align: center;
+      padding: 40px 0;
+      background: linear-gradient(135deg, #ffffff 0%, rgba(248, 249, 250, 1) 100%);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     header h2 {
-      color: var(--brown);
+      color: var(--hospitour-primary);
       font-weight: 700;
     }
-    .text-gold {
-      color: var(--gold);
+    .text-hospitour {
+      color: var(--hospitour-primary);
+    }
+    .text-hospitour-secondary {
+      color: var(--hospitour-secondary);
+    }
+
+    /* ✅ Job Filters */
+    .job-filters {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      border-top: 4px solid var(--hospitour-primary);
+    }
+
+    .filter-group {
+      margin-bottom: 20px;
+    }
+
+    .filter-group label {
+      font-weight: 600;
+      color: var(--hospitour-dark);
+      margin-bottom: 8px;
+    }
+
+    .btn-hospitour {
+      background: var(--hospitour-primary);
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hospitour:hover {
+      background: #154360;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(26, 82, 118, 0.3);
+    }
+
+    .btn-hospitour-secondary {
+      background: var(--hospitour-secondary);
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hospitour-secondary:hover {
+      background: #2980b9;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
+    }
+
+    .btn-hospitour-outline {
+      background: transparent;
+      color: var(--hospitour-primary);
+      border: 1px solid var(--hospitour-primary);
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-hospitour-outline:hover {
+      background: var(--hospitour-primary);
+      color: white;
+    }
+
+    /* ✅ Job Cards */
+    .job-card {
+      background: white;
+      border-radius: 12px;
+      padding: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+      border-left: 4px solid var(--hospitour-secondary);
+      height: 100%;
+    }
+
+    .job-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .job-card.featured {
+      border-left: 4px solid var(--hospitour-accent);
+      background: linear-gradient(135deg, #ffffff 0%, rgba(230, 126, 34, 0.05) 100%);
+    }
+
+    .job-type-badge {
+      background: var(--hospitour-secondary);
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .job-salary {
+      color: var(--hospitour-success);
+      font-weight: 600;
+    }
+
+    .job-meta {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      font-size: 0.85rem;
+      color: var(--hospitour-gray);
+    }
+
+    .job-meta i {
+      margin-right: 5px;
     }
 
     /* ✅ Iframe Section */
+    .job-iframe-container {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+      border-top: 4px solid var(--hospitour-primary);
+    }
+
     iframe {
       width: 100%;
-      height: 85vh;
+      height: 70vh;
       border: none;
+      border-radius: 8px;
+    }
+
+    /* ✅ Stats Section */
+    .stats-section {
+      background: rgba(52, 152, 219, 0.05);
       border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--hospitour-primary);
+      margin-bottom: 5px;
+    }
+
+    .stat-label {
+      color: var(--hospitour-dark);
+      font-weight: 500;
     }
 
     /* ✅ Footer */
     footer {
-      background-color: var(--brown);
-      color: #f8f8f8;
+      background: var(--hospitour-primary);
+      color: #fff;
+      padding: 40px 0 20px;
+      margin-top: 60px;
     }
-    footer a {
-      color: var(--gold);
+
+    .footer-links {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.7);
       text-decoration: none;
+      transition: color 0.3s ease;
     }
-    footer a:hover {
-      text-decoration: underline;
+
+    .footer-links a:hover {
+      color: var(--hospitour-accent);
+    }
+
+    /* ✅ Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+      
+      header {
+        padding: 30px 0;
+      }
+      
+      .job-card {
+        padding: 20px;
+      }
     }
   </style>
 </head>
 
 <body>
   <!-- ✅ Navbar -->
-<nav class="navbar navbar-expand-lg py-3 fixed-top shadow-sm">
+  <nav class="navbar navbar-expand-lg py-3 fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
-        <img src="img/logo1.png" alt="Hospiple logo" style="width: 40px; margin-right: 8px;">
-        <span style="font-size: 30px; font-weight: bold;">HospiTour</span>
+        <div style="width: 40px; height: 40px; background: var(--hospitour-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+          <i class="bi bi-building text-white"></i>
+        </div>
+        <span style="font-size: 24px; font-weight: bold;">HospiTour</span>
       </a>
       <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
         <i class="bi bi-list text-dark fs-2"></i>
@@ -88,11 +280,11 @@
         <ul class="navbar-nav text-left">
           <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
           <li class="nav-item"><a class="nav-link" href="showcase.html">Showcase</a></li>
-          <li class="nav-item"><a class="nav-link" href="jobs.html">Jobs</a></li>
+          <li class="nav-item"><a class="nav-link active" href="jobs.html">Jobs</a></li>
           <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
           <li class="nav-item"><a class="nav-link" href="pricing.html">Pricing</a></li>
-          <li class="nav-item"><a class="nav-link active text-warning" href="hire.html">Service Providers</a></li>
+          <li class="nav-item"><a class="nav-link" href="hire.html">Service Providers</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
           <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
         </ul>
@@ -101,27 +293,410 @@
   </nav>
 
   <!-- ✅ Header -->
-  <header class="py-5">
+  <header>
     <div class="container">
-      <h2 class="fw-bold text-gold">Find Jobs on Jobpitality</h2>
-      <p class="lead text-muted">Powered by Jobpitality – Africa’s leading hospitality recruitment platform</p>
+      <div class="row align-items-center">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-3">Find Hospitality Jobs Across Africa</h2>
+          <p class="lead text-muted mb-4">Powered by Jobpitality – Africa's leading hospitality recruitment platform. Discover verified opportunities in hotels, restaurants, resorts, and more.</p>
+          <div class="d-flex gap-3 flex-wrap">
+            <button class="btn btn-hospitour" id="browseJobsBtn">
+              <i class="bi bi-search"></i> Browse All Jobs
+            </button>
+            <button class="btn btn-hospitour-outline" id="postJobBtn">
+              <i class="bi bi-plus-circle"></i> Post a Job
+            </button>
+          </div>
+        </div>
+        <div class="col-lg-4 text-center">
+          <div class="stats-section">
+            <div class="row">
+              <div class="col-6">
+                <div class="stat-number" id="jobCount">1,247</div>
+                <div class="stat-label">Active Jobs</div>
+              </div>
+              <div class="col-6">
+                <div class="stat-number" id="employerCount">328</div>
+                <div class="stat-label">Verified Employers</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <!-- ✅ Embedded Job Portal -->
+  <!-- ✅ Job Filters -->
   <section class="container mb-5">
-    <iframe 
-      src="https://jobpitality-1cfb2.web.app//job-list.html" 
-      title="Jobpitality Job Listings"
-      loading="lazy">
-    </iframe>
+    <div class="job-filters">
+      <h4 class="text-hospitour mb-4">Filter Jobs</h4>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label class="form-label">Job Category</label>
+            <select class="form-select" id="jobCategory">
+              <option value="">All Categories</option>
+              <option value="hotel">Hotel Management</option>
+              <option value="restaurant">Restaurant & F&B</option>
+              <option value="events">Events & Catering</option>
+              <option value="tourism">Tourism & Travel</option>
+              <option value="culinary">Culinary Arts</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label class="form-label">Location</label>
+            <select class="form-select" id="jobLocation">
+              <option value="">All Locations</option>
+              <option value="nigeria">Nigeria</option>
+              <option value="ghana">Ghana</option>
+              <option value="kenya">Kenya</option>
+              <option value="south-africa">South Africa</option>
+              <option value="egypt">Egypt</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label class="form-label">Job Type</label>
+            <select class="form-select" id="jobType">
+              <option value="">All Types</option>
+              <option value="full-time">Full Time</option>
+              <option value="part-time">Part Time</option>
+              <option value="contract">Contract</option>
+              <option value="remote">Remote</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="filter-group">
+            <label class="form-label">Experience Level</label>
+            <select class="form-select" id="experienceLevel">
+              <option value="">All Levels</option>
+              <option value="entry">Entry Level</option>
+              <option value="mid">Mid Level</option>
+              <option value="senior">Senior Level</option>
+              <option value="executive">Executive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <div>
+          <button class="btn btn-hospitour-secondary" id="applyFiltersBtn">
+            <i class="bi bi-funnel"></i> Apply Filters
+          </button>
+          <button class="btn btn-outline-secondary ms-2" id="resetFiltersBtn">
+            Reset
+          </button>
+        </div>
+        <div class="text-muted small">
+          <span id="filteredCount">12</span> jobs match your criteria
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Featured Jobs -->
+  <section class="container mb-5">
+    <h3 class="text-hospitour mb-4">Featured Jobs</h3>
+    <div class="row" id="featuredJobsContainer">
+      <!-- Featured jobs will be loaded here dynamically -->
+    </div>
+  </section>
+
+  <!-- ✅ Job Portal Iframe -->
+  <section class="container mb-5">
+    <div class="job-iframe-container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-hospitour mb-0">Jobpitality Job Portal</h4>
+        <div class="d-flex gap-2">
+          <button class="btn btn-sm btn-hospitour-outline" id="refreshJobsBtn">
+            <i class="bi bi-arrow-clockwise"></i> Refresh
+          </button>
+          <button class="btn btn-sm btn-hospitour-secondary" id="viewAllJobsBtn">
+            View All Jobs
+          </button>
+        </div>
+      </div>
+      <iframe 
+        src="https://jobpitality-1cfb2.web.app/job-list.html" 
+        title="Jobpitality Job Listings"
+        id="jobIframe"
+        loading="lazy">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ✅ Call to Action -->
+  <section class="container mb-5">
+    <div class="card p-5 border-0 text-center" style="background: rgba(52, 152, 219, 0.05);">
+      <h3 class="text-hospitour mb-3">Ready to Advance Your Hospitality Career?</h3>
+      <p class="text-muted mb-4">Join thousands of hospitality professionals who have found their dream jobs through HospiTour and Jobpitality.</p>
+      <div class="d-flex gap-3 justify-content-center flex-wrap">
+        <button class="btn btn-hospitour btn-lg" id="createProfileBtn">
+          <i class="bi bi-person-plus"></i> Create Professional Profile
+        </button>
+        <button class="btn btn-hospitour-outline btn-lg" id="uploadResumeBtn">
+          <i class="bi bi-upload"></i> Upload Resume
+        </button>
+      </div>
+    </div>
   </section>
 
   <!-- ✅ Footer -->
-  <footer class="py-4 text-center">
-    <p class="mb-0">&copy; 2025 <strong>HospiPro</strong>. Powered by <a href="https://jobpitality.web.app/" target="_blank">Jobpitality</a>.</p>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 mb-4 mb-lg-0">
+          <div class="d-flex align-items-center mb-3">
+            <div style="width: 40px; height: 40px; background: var(--hospitour-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-right: 10px;">
+              <i class="bi bi-building text-white"></i>
+            </div>
+            <h4 class="text-white mb-0">HospiTour</h4>
+          </div>
+          <p class="text-light mb-0">The complete ecosystem for hospitality excellence across Africa.</p>
+        </div>
+        
+        <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-hospitour-secondary mb-3">Resources</h5>
+          <ul class="footer-links">
+            <li><a href="help-center.html">Help Center</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Webinars</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-hospitour-secondary mb-3">Company</h5>
+          <ul class="footer-links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+        
+        <div class="col-lg-3">
+          <h5 class="text-hospitour-secondary mb-3">Legal</h5>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Security</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+      
+      <div class="row align-items-center">
+        <div class="col-md-6 text-center text-md-start">
+          <p class="mb-0">&copy; <span id="year"></span> HospiTour. All rights reserved.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <p class="mb-0">Powered by <a href="https://jobpitality.web.app/" target="_blank" class="text-hospitour-secondary">Jobpitality</a></p>
+        </div>
+      </div>
+    </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Sample job data
+    const featuredJobs = [
+      {
+        id: 1,
+        title: "Hotel General Manager",
+        company: "Luxury Resort Group",
+        location: "Lagos, Nigeria",
+        type: "full-time",
+        salary: "$60,000 - $80,000",
+        category: "hotel",
+        experience: "senior",
+        featured: true,
+        description: "Seeking an experienced General Manager to oversee operations at our luxury resort property."
+      },
+      {
+        id: 2,
+        title: "Executive Chef",
+        company: "Fine Dining Restaurant",
+        location: "Nairobi, Kenya",
+        type: "full-time",
+        salary: "$45,000 - $60,000",
+        category: "culinary",
+        experience: "senior",
+        featured: true,
+        description: "Creative Executive Chef needed to lead our kitchen and develop innovative menus."
+      },
+      {
+        id: 3,
+        title: "Events Coordinator",
+        company: "Grand Conference Center",
+        location: "Accra, Ghana",
+        type: "full-time",
+        salary: "$30,000 - $40,000",
+        category: "events",
+        experience: "mid",
+        featured: true,
+        description: "Organize and manage events at our premier conference facility."
+      },
+      {
+        id: 4,
+        title: "Front Desk Manager",
+        company: "Boutique Hotel Chain",
+        location: "Cape Town, South Africa",
+        type: "full-time",
+        salary: "$35,000 - $45,000",
+        category: "hotel",
+        experience: "mid",
+        featured: true,
+        description: "Lead our front desk team and ensure exceptional guest experiences."
+      }
+    ];
+
+    // Load featured jobs
+    function loadFeaturedJobs() {
+      const container = document.getElementById('featuredJobsContainer');
+      container.innerHTML = '';
+
+      featuredJobs.forEach(job => {
+        const jobCard = document.createElement('div');
+        jobCard.className = 'col-lg-6 mb-4';
+        jobCard.innerHTML = `
+          <div class="job-card ${job.featured ? 'featured' : ''}">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h5 class="text-hospitour mb-1">${job.title}</h5>
+              <span class="job-type-badge">${job.type.replace('-', ' ')}</span>
+            </div>
+            <p class="mb-2"><strong>${job.company}</strong> • ${job.location}</p>
+            <p class="text-muted small mb-3">${job.description}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="job-salary">${job.salary}</div>
+              <button class="btn btn-sm btn-hospitour" data-job-id="${job.id}">Apply Now</button>
+            </div>
+            <div class="job-meta">
+              <i class="bi bi-briefcase"></i> ${job.experience} level • 
+              <i class="bi bi-clock"></i> Posted 2 days ago
+            </div>
+          </div>
+        `;
+        container.appendChild(jobCard);
+      });
+
+      // Add event listeners to apply buttons
+      document.querySelectorAll('.job-card .btn').forEach(button => {
+        button.addEventListener('click', function() {
+          const jobId = this.getAttribute('data-job-id');
+          applyForJob(jobId);
+        });
+      });
+    }
+
+    // Apply for job function
+    function applyForJob(jobId) {
+      const job = featuredJobs.find(j => j.id == jobId);
+      if (job) {
+        alert(`Applying for: ${job.title} at ${job.company}\n\nYou will be redirected to the application form.`);
+        // In a real implementation, this would redirect to the application page
+      }
+    }
+
+    // Filter jobs function
+    function filterJobs() {
+      const category = document.getElementById('jobCategory').value;
+      const location = document.getElementById('jobLocation').value;
+      const type = document.getElementById('jobType').value;
+      const experience = document.getElementById('experienceLevel').value;
+
+      let filteredCount = 0;
+
+      // In a real implementation, this would filter the job list
+      // For now, we'll just update the count
+      if (category || location || type || experience) {
+        filteredCount = Math.floor(Math.random() * 8) + 5; // Random count for demo
+      } else {
+        filteredCount = featuredJobs.length;
+      }
+
+      document.getElementById('filteredCount').textContent = filteredCount;
+      
+      // Show notification
+      showNotification(`Found ${filteredCount} jobs matching your criteria`);
+    }
+
+    // Show notification
+    function showNotification(message) {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.className = 'alert alert-success position-fixed top-0 end-0 m-3';
+      notification.style.zIndex = '1050';
+      notification.innerHTML = `
+        <i class="bi bi-check-circle me-2"></i> ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      `;
+      
+      document.body.appendChild(notification);
+      
+      // Auto remove after 3 seconds
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 3000);
+    }
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load featured jobs
+      loadFeaturedJobs();
+      
+      // Set up event listeners
+      document.getElementById('applyFiltersBtn').addEventListener('click', filterJobs);
+      document.getElementById('resetFiltersBtn').addEventListener('click', function() {
+        document.getElementById('jobCategory').value = '';
+        document.getElementById('jobLocation').value = '';
+        document.getElementById('jobType').value = '';
+        document.getElementById('experienceLevel').value = '';
+        filterJobs();
+      });
+      
+      document.getElementById('browseJobsBtn').addEventListener('click', function() {
+        document.getElementById('jobIframe').scrollIntoView({ behavior: 'smooth' });
+      });
+      
+      document.getElementById('postJobBtn').addEventListener('click', function() {
+        alert('Redirecting to job posting page...');
+        // In a real implementation, this would redirect to the job posting page
+      });
+      
+      document.getElementById('refreshJobsBtn').addEventListener('click', function() {
+        document.getElementById('jobIframe').src = document.getElementById('jobIframe').src;
+        showNotification('Job listings refreshed');
+      });
+      
+      document.getElementById('viewAllJobsBtn').addEventListener('click', function() {
+        window.open('https://jobpitality-1cfb2.web.app/job-list.html', '_blank');
+      });
+      
+      document.getElementById('createProfileBtn').addEventListener('click', function() {
+        alert('Redirecting to profile creation...');
+        // In a real implementation, this would redirect to profile creation
+      });
+      
+      document.getElementById('uploadResumeBtn').addEventListener('click', function() {
+        alert('Opening resume upload dialog...');
+        // In a real implementation, this would open a file upload dialog
+      });
+      
+      // Initialize filter count
+      filterJobs();
+    });
+  </script>
 </body>
 </html>

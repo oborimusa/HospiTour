@@ -11,22 +11,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
       :root {
-        --gold: #c9a44c;
-        --brown: #3b2f2f;
-        --light-gold: #f5f0e4;
-        --light-brown: #f7f5f1;
+        --hospitour-primary: #1a5276;
+        --hospitour-secondary: #3498db;
+        --hospitour-accent: #e67e22;
+        --hospitour-light: #f8f9fa;
+        --hospitour-dark: #2c3e50;
+        --hospitour-success: #27ae60;
+        --hospitour-warning: #f39c12;
+        --hospitour-danger: #e74c3c;
+        --hospitour-gray: #95a5a6;
       }
       
       body {
-        font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+        font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto,
           "Helvetica Neue", Arial;
-        background: var(--light-brown);
-        color: #222;
+        background: #f5f7fa;
+        color: var(--hospitour-dark);
       }
       
       /* Navbar */
       .navbar-custom {
-        background: var(--brown);
+        background: var(--hospitour-primary);
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       }
       
@@ -41,12 +46,12 @@
       }
       
       .nav-link:hover, .nav-link.active {
-        color: var(--gold) !important;
+        color: var(--hospitour-accent) !important;
       }
       
       /* Hero Section */
       .hero-section {
-        background: linear-gradient(135deg, #ffffff 0%, var(--light-brown) 100%);
+        background: linear-gradient(135deg, #ffffff 0%, rgba(248, 249, 250, 1) 100%);
         padding: 100px 0 60px;
         position: relative;
         overflow: hidden;
@@ -59,7 +64,7 @@
         right: 0;
         width: 40%;
         height: 100%;
-        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f5f0e4" opacity="0.3"/></svg>');
+        background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f8f9fa" opacity="0.3"/></svg>');
         background-size: cover;
       }
       
@@ -82,7 +87,7 @@
         transform: translateX(-50%);
         width: 60px;
         height: 3px;
-        background: var(--gold);
+        background: var(--hospitour-secondary);
       }
       
       .search-container {
@@ -98,8 +103,8 @@
       }
       
       .search-input:focus {
-        border-color: var(--gold);
-        box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+        border-color: var(--hospitour-secondary);
+        box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
       }
       
       .search-icon {
@@ -107,13 +112,13 @@
         right: 20px;
         top: 50%;
         transform: translateY(-50%);
-        color: var(--gold);
+        color: var(--hospitour-secondary);
         font-size: 1.2rem;
       }
       
-      .btn-gold {
-        background: var(--gold);
-        color: var(--brown);
+      .btn-hospitour {
+        background: var(--hospitour-primary);
+        color: white;
         border: none;
         font-weight: 600;
         padding: 12px 30px;
@@ -121,11 +126,43 @@
         transition: all 0.3s ease;
       }
       
-      .btn-gold:hover {
-        background: #b8943a;
+      .btn-hospitour:hover {
+        background: #154360;
         color: white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+        box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+      }
+      
+      .btn-hospitour-secondary {
+        background: var(--hospitour-secondary);
+        color: white;
+        border: none;
+        font-weight: 600;
+        padding: 12px 30px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-hospitour-secondary:hover {
+        background: #2980b9;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+      
+      .btn-hospitour-outline {
+        background: transparent;
+        color: var(--hospitour-primary);
+        border: 1px solid var(--hospitour-primary);
+        font-weight: 500;
+        padding: 12px 30px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-hospitour-outline:hover {
+        background: var(--hospitour-primary);
+        color: white;
       }
       
       /* Service Cards */
@@ -133,10 +170,10 @@
         background: white;
         border-radius: 16px;
         padding: 25px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         transition: all 0.3s ease;
         height: 100%;
-        border-top: 4px solid var(--gold);
+        border-top: 4px solid var(--hospitour-secondary);
         position: relative;
         overflow: hidden;
       }
@@ -148,12 +185,17 @@
         left: 0;
         width: 100%;
         height: 4px;
-        background: var(--gold);
+        background: var(--hospitour-secondary);
       }
       
       .service-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+      }
+      
+      .service-card.featured {
+        border-top: 4px solid var(--hospitour-accent);
+        background: linear-gradient(135deg, #ffffff 0%, rgba(230, 126, 34, 0.05) 100%);
       }
       
       .provider-header {
@@ -166,7 +208,7 @@
         width: 60px;
         height: 60px;
         border-radius: 12px;
-        background: var(--light-gold);
+        background: rgba(52, 152, 219, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -176,7 +218,7 @@
       
       .provider-logo i {
         font-size: 1.8rem;
-        color: var(--gold);
+        color: var(--hospitour-secondary);
       }
       
       .provider-info {
@@ -184,8 +226,8 @@
       }
       
       .provider-badge {
-        background: var(--gold);
-        color: var(--brown);
+        background: var(--hospitour-accent);
+        color: white;
         padding: 4px 10px;
         border-radius: 20px;
         font-size: 0.75rem;
@@ -194,17 +236,17 @@
       }
       
       .provider-rating {
-        color: var(--gold);
+        color: var(--hospitour-warning);
         margin-bottom: 5px;
       }
       
       .provider-location {
-        color: #6c757d;
+        color: var(--hospitour-gray);
         font-size: 0.9rem;
       }
       
       .provider-description {
-        color: #6c757d;
+        color: var(--hospitour-gray);
         margin-bottom: 20px;
         line-height: 1.5;
       }
@@ -217,12 +259,12 @@
       
       .provider-features li {
         padding: 5px 0;
-        color: #6c757d;
+        color: var(--hospitour-gray);
         font-size: 0.9rem;
       }
       
       .provider-features li i {
-        color: var(--gold);
+        color: var(--hospitour-success);
         margin-right: 8px;
       }
       
@@ -230,14 +272,16 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        color: var(--gold);
+        color: var(--hospitour-secondary);
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
+        padding: 10px 0;
+        border-top: 1px solid rgba(0,0,0,0.1);
       }
       
       .view-profile-btn:hover {
-        color: #b8943a;
+        color: var(--hospitour-primary);
       }
       
       /* Categories */
@@ -246,6 +290,7 @@
         padding: 40px 0;
         border-radius: 0 0 20px 20px;
         margin-bottom: 40px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
       }
       
       .category-filter {
@@ -257,8 +302,8 @@
       
       .category-btn {
         background: white;
-        border: 2px solid var(--light-gold);
-        color: var(--brown);
+        border: 2px solid rgba(52, 152, 219, 0.2);
+        color: var(--hospitour-dark);
         padding: 10px 20px;
         border-radius: 25px;
         font-weight: 500;
@@ -267,14 +312,14 @@
       }
       
       .category-btn:hover, .category-btn.active {
-        background: var(--gold);
-        color: var(--brown);
-        border-color: var(--gold);
+        background: var(--hospitour-secondary);
+        color: white;
+        border-color: var(--hospitour-secondary);
       }
       
       /* Stats Section */
       .stats-section {
-        background: var(--brown);
+        background: var(--hospitour-primary);
         color: white;
         padding: 60px 0;
         text-align: center;
@@ -283,7 +328,7 @@
       .stat-number {
         font-size: 2.5rem;
         font-weight: 700;
-        color: var(--gold);
+        color: var(--hospitour-accent);
         margin-bottom: 10px;
       }
       
@@ -294,14 +339,14 @@
       
       /* CTA Section */
       .cta-section {
-        background: linear-gradient(135deg, var(--brown) 0%, #2a1f1f 100%);
+        background: linear-gradient(135deg, var(--hospitour-primary) 0%, #154360 100%);
         color: white;
         padding: 80px 0;
         text-align: center;
       }
       
       footer {
-        background: var(--brown);
+        background: var(--hospitour-primary);
         color: #fff;
         padding: 40px 0 20px;
       }
@@ -322,7 +367,33 @@
       }
       
       .footer-links a:hover {
-        color: var(--gold);
+        color: var(--hospitour-accent);
+      }
+      
+      .text-hospitour {
+        color: var(--hospitour-primary);
+      }
+      
+      .text-hospitour-secondary {
+        color: var(--hospitour-secondary);
+      }
+      
+      .filter-sidebar {
+        background: white;
+        border-radius: 12px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        margin-bottom: 30px;
+      }
+      
+      .filter-group {
+        margin-bottom: 20px;
+      }
+      
+      .filter-group label {
+        font-weight: 600;
+        color: var(--hospitour-dark);
+        margin-bottom: 8px;
       }
       
       @media (max-width: 768px) {
@@ -358,7 +429,7 @@
           <strong class="text-white">HospiTour</strong>
         </a>
         <button
-          class="navbar-toggler"
+          class="navbar-toggler bg-white"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarNav"
@@ -390,7 +461,7 @@
               <a class="nav-link text-white" href="login.html">Login</a>
             </li>
             <li class="nav-item ms-lg-3">
-              <a class="btn btn-gold" href="signup.html">Sign Up Free</a>
+              <a class="btn btn-hospitour-secondary" href="signup.html">Sign Up Free</a>
             </li>
           </ul>
         </div>
@@ -399,7 +470,7 @@
 
     <div class="hero-section">
       <div class="container">
-        <h1 class="text-brown fw-bold display-4 mb-3">Find Local Service Professionals</h1>
+        <h1 class="text-hospitour fw-bold display-4 mb-3">Find Local Service Professionals</h1>
         <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
           Browse verified caterers, event planners, staffing agencies, and more. Connect with Africa's top hospitality professionals.
         </p>
@@ -414,9 +485,9 @@
         </div>
         <div class="text-center mt-3">
           <span class="text-muted small">Popular: </span>
-          <a href="#" class="text-gold text-decoration-none small me-3">catering</a>
-          <a href="#" class="text-gold text-decoration-none small me-3">event planning</a>
-          <a href="#" class="text-gold text-decoration-none small">hotel staff</a>
+          <a href="#" class="text-hospitour-secondary text-decoration-none small me-3" data-search="catering">catering</a>
+          <a href="#" class="text-hospitour-secondary text-decoration-none small me-3" data-search="event planning">event planning</a>
+          <a href="#" class="text-hospitour-secondary text-decoration-none small" data-search="hotel staff">hotel staff</a>
         </div>
       </div>
     </div>
@@ -424,42 +495,125 @@
     <!-- Categories Section -->
     <section class="categories-section">
       <div class="container">
-        <h3 class="text-center text-brown mb-4">Browse by Category</h3>
+        <h3 class="text-center text-hospitour mb-4">Browse by Category</h3>
         <div class="category-filter">
-          <a href="#" class="category-btn active">All Services</a>
-          <a href="#" class="category-btn">Catering & Food</a>
-          <a href="#" class="category-btn">Event Planning</a>
-          <a href="#" class="category-btn">Hotel Staffing</a>
-          <a href="#" class="category-btn">Cleaning Services</a>
-          <a href="#" class="category-btn">Entertainment</a>
-          <a href="#" class="category-btn">Decoration</a>
-          <a href="#" class="category-btn">Security</a>
+          <a href="#" class="category-btn active" data-category="all">All Services</a>
+          <a href="#" class="category-btn" data-category="catering">Catering & Food</a>
+          <a href="#" class="category-btn" data-category="event">Event Planning</a>
+          <a href="#" class="category-btn" data-category="staffing">Hotel Staffing</a>
+          <a href="#" class="category-btn" data-category="cleaning">Cleaning Services</a>
+          <a href="#" class="category-btn" data-category="entertainment">Entertainment</a>
+          <a href="#" class="category-btn" data-category="decoration">Decoration</a>
+          <a href="#" class="category-btn" data-category="security">Security</a>
         </div>
       </div>
     </section>
 
     <main class="container py-5">
-      <h2 class="section-title text-center">Available Professionals</h2>
-      <p class="text-center text-muted mb-5">Top-rated service providers ready to help your business succeed</p>
-      
-      <div id="serviceListings" class="row g-4">
-        <div class="col-12 text-center text-muted py-5">
-          <div class="spinner-border text-gold mb-3" role="status">
-            <span class="visually-hidden">Loading...</span>
+      <div class="row">
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3 mb-4">
+          <div class="filter-sidebar">
+            <h5 class="text-hospitour mb-3">Filters</h5>
+            
+            <div class="filter-group">
+              <label class="form-label">Location</label>
+              <select class="form-select" id="locationFilter">
+                <option value="">All Locations</option>
+                <option value="lagos">Lagos, Nigeria</option>
+                <option value="abuja">Abuja, Nigeria</option>
+                <option value="nairobi">Nairobi, Kenya</option>
+                <option value="accra">Accra, Ghana</option>
+                <option value="cape town">Cape Town, South Africa</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="form-label">Rating</label>
+              <select class="form-select" id="ratingFilter">
+                <option value="">Any Rating</option>
+                <option value="5">5 Stars</option>
+                <option value="4">4+ Stars</option>
+                <option value="3">3+ Stars</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <label class="form-label">Price Range</label>
+              <select class="form-select" id="priceFilter">
+                <option value="">Any Price</option>
+                <option value="budget">Budget (Under $500)</option>
+                <option value="medium">Medium ($500 - $2000)</option>
+                <option value="premium">Premium ($2000+)</option>
+              </select>
+            </div>
+            
+            <div class="filter-group">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="verifiedFilter" checked>
+                <label class="form-check-label" for="verifiedFilter">
+                  Verified Providers Only
+                </label>
+              </div>
+            </div>
+            
+            <button class="btn btn-hospitour w-100 mt-2" id="applyFilters">Apply Filters</button>
+            <button class="btn btn-hospitour-outline w-100 mt-2" id="resetFilters">Reset Filters</button>
           </div>
-          <p>Loading available professionals...</p>
+          
+          <div class="filter-sidebar">
+            <h5 class="text-hospitour mb-3">Quick Stats</h5>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Total Providers:</span>
+              <strong id="totalProviders">0</strong>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+              <span class="text-muted">Average Rating:</span>
+              <strong id="averageRating">0.0</strong>
+            </div>
+            <div class="d-flex justify-content-between">
+              <span class="text-muted">Featured:</span>
+              <strong id="featuredCount">0</strong>
+            </div>
+          </div>
         </div>
-      </div>
-      
-      <div
-        id="noResults"
-        class="col-12 text-center text-muted mt-5 py-5"
-        style="display: none"
-      >
-        <i class="bi bi-search display-1 text-muted mb-3"></i>
-        <h4 class="text-muted">No professionals matched your search</h4>
-        <p class="text-muted">Try different keywords or browse all categories</p>
-        <button class="btn btn-gold mt-3" onclick="clearSearch()">Clear Search</button>
+        
+        <!-- Service Listings -->
+        <div class="col-lg-9">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-title text-hospitour">Available Professionals</h2>
+            <div class="text-muted">
+              <span id="resultsCount">0</span> providers found
+            </div>
+          </div>
+          
+          <div id="serviceListings" class="row g-4">
+            <div class="col-12 text-center text-muted py-5">
+              <div class="spinner-border text-hospitour-secondary mb-3" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <p>Loading available professionals...</p>
+            </div>
+          </div>
+          
+          <div
+            id="noResults"
+            class="col-12 text-center text-muted mt-5 py-5"
+            style="display: none"
+          >
+            <i class="bi bi-search display-1 text-muted mb-3"></i>
+            <h4 class="text-muted">No professionals matched your search</h4>
+            <p class="text-muted">Try different keywords or browse all categories</p>
+            <button class="btn btn-hospitour-secondary mt-3" onclick="clearSearch()">Clear Search</button>
+          </div>
+          
+          <!-- Load More Button -->
+          <div class="text-center mt-5" id="loadMoreContainer" style="display: none;">
+            <button class="btn btn-hospitour-outline" id="loadMoreBtn">
+              <i class="bi bi-arrow-down me-2"></i> Load More Providers
+            </button>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -495,7 +649,7 @@
           Join our marketplace and connect with thousands of hospitality businesses across Africa
         </p>
         <div class="d-flex gap-3 justify-content-center flex-wrap">
-          <a href="signup.html" class="btn btn-gold btn-lg">Create Your Profile</a>
+          <a href="signup.html" class="btn btn-hospitour-secondary btn-lg">Create Your Profile</a>
           <a href="pricing.html" class="btn btn-outline-light btn-lg">View Plans</a>
         </div>
       </div>
@@ -515,7 +669,7 @@
           </div>
           
           <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-gold mb-3">Marketplace</h5>
+            <h5 class="text-hospitour-secondary mb-3">Marketplace</h5>
             <ul class="footer-links">
               <li><a href="marketplace.html">Find Services</a></li>
               <li><a href="hire.html">Hire Talent</a></li>
@@ -525,7 +679,7 @@
           </div>
           
           <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-            <h5 class="text-gold mb-3">Company</h5>
+            <h5 class="text-hospitour-secondary mb-3">Company</h5>
             <ul class="footer-links">
               <li><a href="about.html">About Us</a></li>
               <li><a href="contact.html">Contact</a></li>
@@ -535,7 +689,7 @@
           </div>
           
           <div class="col-lg-3">
-            <h5 class="text-gold mb-3">Support</h5>
+            <h5 class="text-hospitour-secondary mb-3">Support</h5>
             <ul class="footer-links">
               <li><a href="help-center.html">Help Center</a></li>
               <li><a href="contact.html">Contact Support</a></li>
@@ -564,67 +718,119 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Sample data for demonstration (replaces Firebase functionality)
+      // Enhanced sample data with more details
       const serviceProviders = [
         {
           id: "1",
           name: "Royal Taste Catering",
-          category: "Catering",
+          category: "catering",
           city: "Lagos, Nigeria",
           rating: 4.5,
+          reviewCount: 127,
+          priceRange: "premium",
           description: "Exquisite catering for weddings, corporate events, and private dining with customized menus and exceptional service.",
           features: ["Custom menu planning", "Staffing services included", "Equipment rental available"],
-          verified: true
+          verified: true,
+          featured: true,
+          image: "catering"
         },
         {
           id: "2",
           name: "Prestige Events & Décor",
-          category: "Event Planning",
+          category: "event",
           city: "Abuja, Nigeria",
           rating: 5.0,
+          reviewCount: 89,
+          priceRange: "premium",
           description: "Bringing your events to life with creativity, elegance, and excellence in execution.",
           features: ["Full event coordination", "Theme development", "Vendor management"],
-          verified: true
+          verified: true,
+          featured: true,
+          image: "events"
         },
         {
           id: "3",
           name: "PureSparkle Cleaners",
-          category: "Cleaning Services",
+          category: "cleaning",
           city: "Port Harcourt, Nigeria",
           rating: 4.0,
+          reviewCount: 64,
+          priceRange: "budget",
           description: "Top-notch hotel and event hall cleaning services with eco-friendly methods and products.",
           features: ["Eco-friendly products", "24/7 emergency service", "Commercial & residential"],
-          verified: true
+          verified: true,
+          featured: false,
+          image: "cleaning"
         },
         {
           id: "4",
           name: "Elite Hotel Staffing",
-          category: "Staffing",
+          category: "staffing",
           city: "Nairobi, Kenya",
           rating: 4.7,
+          reviewCount: 203,
+          priceRange: "medium",
           description: "Professional staffing solutions for luxury hotels and resorts across East Africa.",
           features: ["Trained professionals", "Background checked", "Flexible staffing"],
-          verified: true
+          verified: true,
+          featured: true,
+          image: "staffing"
         },
         {
           id: "5",
           name: "Gourmet Chefs Collective",
-          category: "Catering",
+          category: "catering",
           city: "Accra, Ghana",
           rating: 4.9,
+          reviewCount: 156,
+          priceRange: "premium",
           description: "Award-winning chefs providing exceptional culinary experiences for all types of events.",
           features: ["Custom menus", "International cuisine", "Dietary accommodations"],
-          verified: true
+          verified: true,
+          featured: false,
+          image: "catering"
         },
         {
           id: "6",
           name: "African Rhythms Entertainment",
-          category: "Entertainment",
+          category: "entertainment",
           city: "Cape Town, South Africa",
           rating: 4.8,
+          reviewCount: 92,
+          priceRange: "medium",
           description: "Traditional and contemporary entertainment for hotels, events, and special occasions.",
           features: ["Live music", "Cultural performances", "DJ services"],
-          verified: true
+          verified: true,
+          featured: true,
+          image: "entertainment"
+        },
+        {
+          id: "7",
+          name: "SecureGuard Services",
+          category: "security",
+          city: "Lagos, Nigeria",
+          rating: 4.3,
+          reviewCount: 78,
+          priceRange: "medium",
+          description: "Professional security services for hotels, events, and corporate facilities.",
+          features: ["Trained personnel", "24/7 monitoring", "Event security"],
+          verified: true,
+          featured: false,
+          image: "security"
+        },
+        {
+          id: "8",
+          name: "Elegant Decor & Design",
+          category: "decoration",
+          city: "Nairobi, Kenya",
+          rating: 4.6,
+          reviewCount: 115,
+          priceRange: "premium",
+          description: "Creating stunning visual experiences through innovative decor and design solutions.",
+          features: ["Custom designs", "Theme development", "Installation services"],
+          verified: true,
+          featured: false,
+          image: "decoration"
         }
       ];
 
@@ -632,24 +838,53 @@
       const serviceListingsEl = document.getElementById("serviceListings");
       const searchBox = document.getElementById("searchBox");
       const noResultsEl = document.getElementById("noResults");
-      let allProfessionals = serviceProviders;
+      const resultsCountEl = document.getElementById("resultsCount");
+      const loadMoreContainer = document.getElementById("loadMoreContainer");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      
+      // Filter elements
+      const locationFilter = document.getElementById("locationFilter");
+      const ratingFilter = document.getElementById("ratingFilter");
+      const priceFilter = document.getElementById("priceFilter");
+      const verifiedFilter = document.getElementById("verifiedFilter");
+      const applyFiltersBtn = document.getElementById("applyFilters");
+      const resetFiltersBtn = document.getElementById("resetFilters");
+      
+      // Stats elements
+      const totalProvidersEl = document.getElementById("totalProviders");
+      const averageRatingEl = document.getElementById("averageRating");
+      const featuredCountEl = document.getElementById("featuredCount");
+
+      let allProfessionals = [...serviceProviders];
+      let filteredProfessionals = [...serviceProviders];
+      let displayedCount = 6; // Initial number of providers to show
+      let currentFilters = {
+        category: 'all',
+        location: '',
+        rating: '',
+        price: '',
+        verified: true
+      };
 
       // Initial render
-      renderProfessionals(allProfessionals);
+      updateStats();
+      renderProfessionals(filteredProfessionals.slice(0, displayedCount));
 
       // RENDERING
       function renderProfessionals(professionals) {
         serviceListingsEl.innerHTML = "";
         noResultsEl.style.display = "none";
+        loadMoreContainer.style.display = "none";
 
         if (professionals.length === 0) {
           noResultsEl.style.display = "block";
+          resultsCountEl.textContent = "0";
           return;
         }
 
         professionals.forEach((p) => {
           const col = document.createElement("div");
-          col.className = "col-lg-4 col-md-6";
+          col.className = "col-lg-6 col-md-6";
 
           // Generate star rating
           const stars = Array.from({length: 5}, (_, i) => 
@@ -657,19 +892,31 @@
             i < p.rating ? 'bi-star-half' : 'bi-star'
           ).map(starClass => `<i class="bi ${starClass}"></i>`).join('');
           
+          // Determine icon based on category
+          const categoryIcons = {
+            catering: 'bi-cup-hot',
+            event: 'bi-calendar-event',
+            staffing: 'bi-people',
+            cleaning: 'bi-droplet',
+            entertainment: 'bi-music-note-beamed',
+            decoration: 'bi-flower1',
+            security: 'bi-shield-check'
+          };
+          
           col.innerHTML = `
-            <div class="service-card">
+            <div class="service-card ${p.featured ? 'featured' : ''}">
               <div class="provider-header">
                 <div class="provider-logo">
-                  <i class="bi bi-building"></i>
+                  <i class="bi ${categoryIcons[p.category] || 'bi-building'}"></i>
                 </div>
                 <div class="provider-info">
                   <div class="d-flex align-items-center">
-                    <h5 class="mb-0 text-brown">${p.name}</h5>
+                    <h5 class="mb-0 text-hospitour">${p.name}</h5>
                     ${p.verified ? '<span class="provider-badge">Verified</span>' : ''}
+                    ${p.featured ? '<span class="provider-badge ms-1" style="background: var(--hospitour-accent);">Featured</span>' : ''}
                   </div>
                   <div class="provider-rating">
-                    ${stars} <span class="text-muted ms-1">(${p.rating})</span>
+                    ${stars} <span class="text-muted ms-1">${p.rating} (${p.reviewCount} reviews)</span>
                   </div>
                   <div class="provider-location">
                     <i class="bi bi-geo-alt"></i> ${p.city}
@@ -682,7 +929,7 @@
               <ul class="provider-features">
                 ${p.features.map(feature => `<li><i class="bi bi-check"></i> ${feature}</li>`).join('')}
               </ul>
-              <a href="service-detail.html?id=${p.id}" class="view-profile-btn">
+              <a href="service-detail.html?id=${p.id}" class="view-profile-btn" data-provider-id="${p.id}">
                 <span>View Profile & Book</span>
                 <i class="bi bi-arrow-right"></i>
               </a>
@@ -690,27 +937,103 @@
           `;
           serviceListingsEl.appendChild(col);
         });
+
+        // Update results count
+        resultsCountEl.textContent = professionals.length;
+        
+        // Show load more button if there are more results
+        if (filteredProfessionals.length > displayedCount) {
+          loadMoreContainer.style.display = "block";
+        }
       }
 
-      // SEARCH FILTERING
-      searchBox.addEventListener("input", (e) => {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        const filtered = allProfessionals.filter((p) => {
-          return (
+      // FILTERING FUNCTIONS
+      function applyFilters() {
+        const searchTerm = searchBox.value.toLowerCase().trim();
+        const location = locationFilter.value;
+        const rating = ratingFilter.value;
+        const price = priceFilter.value;
+        const verified = verifiedFilter.checked;
+        const category = currentFilters.category;
+
+        filteredProfessionals = allProfessionals.filter((p) => {
+          // Search term filter
+          const matchesSearch = !searchTerm || 
             p.name.toLowerCase().includes(searchTerm) ||
             p.city.toLowerCase().includes(searchTerm) ||
             p.description.toLowerCase().includes(searchTerm) ||
-            p.category.toLowerCase().includes(searchTerm)
-          );
-        });
-        renderProfessionals(filtered);
-      });
+            p.category.toLowerCase().includes(searchTerm);
 
-      // Clear search function
-      function clearSearch() {
-        searchBox.value = '';
-        renderProfessionals(allProfessionals);
+          // Location filter
+          const matchesLocation = !location || 
+            p.city.toLowerCase().includes(location);
+
+          // Rating filter
+          const matchesRating = !rating || 
+            (rating === '5' && p.rating >= 5) ||
+            (rating === '4' && p.rating >= 4) ||
+            (rating === '3' && p.rating >= 3);
+
+          // Price filter
+          const matchesPrice = !price || p.priceRange === price;
+
+          // Verified filter
+          const matchesVerified = !verified || p.verified;
+
+          // Category filter
+          const matchesCategory = category === 'all' || p.category === category;
+
+          return matchesSearch && matchesLocation && matchesRating && 
+                 matchesPrice && matchesVerified && matchesCategory;
+        });
+
+        displayedCount = 6; // Reset to initial count
+        renderProfessionals(filteredProfessionals.slice(0, displayedCount));
+        updateStats();
       }
+
+      function resetFilters() {
+        searchBox.value = '';
+        locationFilter.value = '';
+        ratingFilter.value = '';
+        priceFilter.value = '';
+        verifiedFilter.checked = true;
+        
+        // Reset category buttons
+        document.querySelectorAll('.category-btn').forEach(btn => {
+          btn.classList.remove('active');
+        });
+        document.querySelector('[data-category="all"]').classList.add('active');
+        currentFilters.category = 'all';
+        
+        applyFilters();
+      }
+
+      function updateStats() {
+        totalProvidersEl.textContent = allProfessionals.length;
+        
+        // Calculate average rating
+        const totalRating = allProfessionals.reduce((sum, p) => sum + p.rating, 0);
+        const avgRating = (totalRating / allProfessionals.length).toFixed(1);
+        averageRatingEl.textContent = avgRating;
+        
+        // Count featured providers
+        const featuredCount = allProfessionals.filter(p => p.featured).length;
+        featuredCountEl.textContent = featuredCount;
+      }
+
+      // SEARCH FILTERING
+      searchBox.addEventListener("input", applyFilters);
+
+      // Popular search links
+      document.querySelectorAll('[data-search]').forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const searchTerm = this.getAttribute('data-search');
+          searchBox.value = searchTerm;
+          applyFilters();
+        });
+      });
 
       // Category filter functionality
       document.querySelectorAll('.category-btn').forEach(btn => {
@@ -725,16 +1048,34 @@
           // Add active class to clicked button
           this.classList.add('active');
           
-          const category = this.textContent;
-          if (category === 'All Services') {
-            renderProfessionals(allProfessionals);
-          } else {
-            const filtered = allProfessionals.filter(p => 
-              p.category.toLowerCase().includes(category.toLowerCase().split(' ')[0])
-            );
-            renderProfessionals(filtered);
-          }
+          currentFilters.category = this.getAttribute('data-category');
+          applyFilters();
         });
+      });
+
+      // Filter event listeners
+      applyFiltersBtn.addEventListener('click', applyFilters);
+      resetFiltersBtn.addEventListener('click', resetFilters);
+
+      // Load more functionality
+      loadMoreBtn.addEventListener('click', function() {
+        displayedCount += 3;
+        renderProfessionals(filteredProfessionals.slice(0, displayedCount));
+      });
+
+      // Clear search function
+      function clearSearch() {
+        searchBox.value = '';
+        applyFilters();
+      }
+
+      // Provider click tracking
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.view-profile-btn')) {
+          const providerId = e.target.closest('.view-profile-btn').getAttribute('data-provider-id');
+          console.log('Viewing provider:', providerId);
+          // In a real app, you would track this analytics event
+        }
       });
 
       // Footer year

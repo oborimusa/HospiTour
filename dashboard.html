@@ -325,6 +325,42 @@
             background-color: rgba(26, 82, 118, 0.05);
         }
 
+        .service-tabs {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-top: 4px solid var(--hospitour-primary);
+        }
+
+        .service-tab {
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .service-tab.active {
+            background: rgba(52, 152, 219, 0.1);
+            border-color: var(--hospitour-secondary);
+            color: var(--hospitour-primary);
+            font-weight: 600;
+        }
+
+        .service-tab:hover:not(.active) {
+            background: rgba(52, 152, 219, 0.05);
+        }
+
+        .service-content {
+            display: none;
+        }
+
+        .service-content.active {
+            display: block;
+        }
+
         @media (max-width: 992px) {
             .sidebar {
                 width: 80px;
@@ -390,14 +426,14 @@
     <div class="sidebar">
         <div class="sidebar-brand">
             <h3><i class="bi bi-building"></i> <span>HospiTour</span></h3>
-            <p>Business Operations Dashboard</p>
+            <p>Hospitality & Tourism Operations</p>
         </div>
 
         <a href="dashboard.html" class="active">
             <i class="bi bi-speedometer2"></i>
             <span class="nav-text">Dashboard</span>
         </a>
-        <a href="rooms.html">
+        <a href="accommodation.html">
             <i class="bi bi-house-door"></i>
             <span class="nav-text">Accommodation</span>
         </a>
@@ -405,6 +441,10 @@
             <i class="bi bi-cup-hot"></i>
             <span class="nav-text">Restaurant & F&B</span>
             <span class="notification-badge">3</span>
+        </a>
+        <a href="tourism.html">
+            <i class="bi bi-geo-alt"></i>
+            <span class="nav-text">Tourism Services</span>
         </a>
         <a href="events.html">
             <i class="bi bi-calendar-event"></i>
@@ -450,109 +490,235 @@
             </div>
         </div>
 
-        <!-- Demo Controls -->
-        <div class="demo-controls">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <small class="text-muted">Demo Controls: Test different plan levels to see feature access</small>
+        <!-- Service Tabs -->
+        <div class="service-tabs">
+            <div class="d-flex gap-3 mb-4 flex-wrap">
+                <div class="service-tab active" data-service="hospitality">
+                    <i class="bi bi-building me-2"></i> Hospitality Services
                 </div>
-                <div class="col-md-4 text-end">
-                    <button class="btn btn-hospitour-secondary btn-sm me-1" onclick="upgradePlan('pro')">Pro</button>
-                    <button class="btn btn-hospitour btn-sm me-1" onclick="upgradePlan('enterprise')">Enterprise</button>
-                    <button class="btn btn-hospitour-outline btn-sm" onclick="upgradePlan('free')">Free</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="row g-4 mb-5">
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-4 card-metric">
-                    <div class="metric-icon">
-                        <i class="bi bi-graph-up"></i>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="small text-muted">Occupancy Rate</div>
-                    </div>
-                    <h2 class="fw-bold text-hospitour mb-2" id="metricOccupancy">--%</h2>
-                    <div class="progress-bar-custom mb-2">
-                        <div class="progress" style="width: 45%"></div>
-                    </div>
-                    <p class="small mb-0 text-success">
-                        <i class="bi bi-arrow-up"></i> 5.2% from last month
-                    </p>
+                <div class="service-tab" data-service="tourism">
+                    <i class="bi bi-geo-alt me-2"></i> Tourism Services
                 </div>
             </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-4 card-metric">
-                    <div class="metric-icon">
-                        <i class="bi bi-cart"></i>
+            <!-- Hospitality Services Content -->
+            <div class="service-content active" id="hospitality-content">
+                <!-- Demo Controls -->
+                <div class="demo-controls">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <small class="text-muted">Demo Controls: Test different plan levels to see feature access</small>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-hospitour-secondary btn-sm me-1" onclick="upgradePlan('pro')">Pro</button>
+                            <button class="btn btn-hospitour btn-sm me-1" onclick="upgradePlan('enterprise')">Enterprise</button>
+                            <button class="btn btn-hospitour-outline btn-sm" onclick="upgradePlan('free')">Free</button>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="small text-muted">Pending F&B Orders</div>
-                    </div>
-                    <h2 class="fw-bold text-hospitour mb-2" id="metricOrders">--</h2>
-                    <p class="small mb-0 text-danger" id="ordersHint">
-                        <i class="bi bi-info-circle"></i> Requires Order Management (Pro+)
-                    </p>
                 </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-4 card-metric">
-                    <div class="metric-icon">
-                        <i class="bi bi-currency-dollar"></i>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-graph-up"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Occupancy Rate</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricOccupancy">--%</h2>
+                            <div class="progress-bar-custom mb-2">
+                                <div class="progress" style="width: 45%"></div>
+                            </div>
+                            <p class="small mb-0 text-success">
+                                <i class="bi bi-arrow-up"></i> 5.2% from last month
+                            </p>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="small text-muted">Revenue Forecast</div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Pending F&B Orders</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricOrders">--</h2>
+                            <p class="small mb-0 text-danger" id="ordersHint">
+                                <i class="bi bi-info-circle"></i> Requires Order Management (Pro+)
+                            </p>
+                        </div>
                     </div>
-                    <h2 class="fw-bold text-hospitour mb-2" id="metricRevenue">$----</h2>
-                    <p class="small mb-0 text-info" id="revenueHint">
-                        <i class="bi bi-info-circle"></i> Requires Advanced Metrics (Pro+)
-                    </p>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Revenue Forecast</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricRevenue">$----</h2>
+                            <p class="small mb-0 text-info" id="revenueHint">
+                                <i class="bi bi-info-circle"></i> Requires Advanced Metrics (Pro+)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-person-check"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Guest Satisfaction</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2">94%</h2>
+                            <div class="progress-bar-custom mb-2">
+                                <div class="progress" style="width: 94%"></div>
+                            </div>
+                            <p class="small mb-0 text-success">
+                                <i class="bi bi-arrow-up"></i> 2.1% from last week
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-lg-3 col-md-6">
-                <div class="card p-4 card-metric">
-                    <div class="metric-icon">
-                        <i class="bi bi-person-check"></i>
+                <div class="row mb-5">
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <h4 class="text-hospitour mb-4">Hospitality Performance</h4>
+                            <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
+                                <div class="text-center">
+                                    <i class="bi bi-graph-up" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
+                                    <p class="text-muted mt-3">Performance charts will appear here for Pro+ users</p>
+                                    <button class="btn btn-hospitour-secondary mt-2" onclick="upgradePlan('pro')">Upgrade to Pro</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <div class="small text-muted">Guest Satisfaction</div>
-                    </div>
-                    <h2 class="fw-bold text-hospitour mb-2">94%</h2>
-                    <div class="progress-bar-custom mb-2">
-                        <div class="progress" style="width: 94%"></div>
-                    </div>
-                    <p class="small mb-0 text-success">
-                        <i class="bi bi-arrow-up"></i> 2.1% from last week
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mb-5">
-            <div class="col-lg-8">
-                <div class="chart-container">
-                    <h4 class="text-hospitour mb-4">Performance Overview</h4>
-                    <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
-                        <div class="text-center">
-                            <i class="bi bi-graph-up" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
-                            <p class="text-muted mt-3">Performance charts will appear here for Pro+ users</p>
-                            <button class="btn btn-hospitour-secondary mt-2" onclick="upgradePlan('pro')">Upgrade to Pro</button>
+                    <div class="col-lg-4">
+                        <div class="chart-container h-100">
+                            <h4 class="text-hospitour mb-4">Room Status</h4>
+                            <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
+                                <div class="text-center">
+                                    <i class="bi bi-pie-chart" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
+                                    <p class="text-muted mt-3">Room analytics available in Pro plan</p>
+                                    <button class="btn btn-hospitour-outline mt-2" onclick="upgradePlan('pro')">View Details</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="chart-container h-100">
-                    <h4 class="text-hospitour mb-4">Room Status</h4>
-                    <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
-                        <div class="text-center">
-                            <i class="bi bi-pie-chart" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
-                            <p class="text-muted mt-3">Room analytics available in Pro plan</p>
-                            <button class="btn btn-hospitour-outline mt-2" onclick="upgradePlan('pro')">View Details</button>
+
+            <!-- Tourism Services Content -->
+            <div class="service-content" id="tourism-content">
+                <div class="demo-controls">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <small class="text-muted">Tourism Services: Manage tours, activities, and travel experiences</small>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-hospitour-secondary btn-sm me-1" onclick="upgradePlan('pro')">Pro</button>
+                            <button class="btn btn-hospitour btn-sm me-1" onclick="upgradePlan('enterprise')">Enterprise</button>
+                            <button class="btn btn-hospitour-outline btn-sm" onclick="upgradePlan('free')">Free</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Tour Bookings</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricTours">24</h2>
+                            <div class="progress-bar-custom mb-2">
+                                <div class="progress" style="width: 65%"></div>
+                            </div>
+                            <p class="small mb-0 text-success">
+                                <i class="bi bi-arrow-up"></i> 8.7% from last week
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-person-walking"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Activity Participants</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricActivities">156</h2>
+                            <p class="small mb-0 text-warning">
+                                <i class="bi bi-clock"></i> 12 pending confirmations
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Tour Revenue</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2" id="metricTourRevenue">$8,420</h2>
+                            <p class="small mb-0 text-success" id="tourRevenueHint">
+                                <i class="bi bi-graph-up"></i> 12.3% from last month
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card p-4 card-metric">
+                            <div class="metric-icon">
+                                <i class="bi bi-star"></i>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <div class="small text-muted">Tour Ratings</div>
+                            </div>
+                            <h2 class="fw-bold text-hospitour mb-2">4.8/5</h2>
+                            <div class="progress-bar-custom mb-2">
+                                <div class="progress" style="width: 96%"></div>
+                            </div>
+                            <p class="small mb-0 text-success">
+                                <i class="bi bi-arrow-up"></i> 0.2 from last month
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-8">
+                        <div class="chart-container">
+                            <h4 class="text-hospitour mb-4">Tourism Performance</h4>
+                            <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
+                                <div class="text-center">
+                                    <i class="bi bi-map" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
+                                    <p class="text-muted mt-3">Tourism analytics and booking trends</p>
+                                    <button class="btn btn-hospitour-secondary mt-2" onclick="upgradePlan('pro')">View Detailed Reports</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="chart-container h-100">
+                            <h4 class="text-hospitour mb-4">Popular Tours</h4>
+                            <div class="d-flex justify-content-center align-items-center bg-hospitour-light" style="height: 300px; border-radius: 8px;">
+                                <div class="text-center">
+                                    <i class="bi bi-binoculars" style="font-size: 3rem; color: var(--hospitour-gray);"></i>
+                                    <p class="text-muted mt-3">Tour popularity and availability</p>
+                                    <button class="btn btn-hospitour-outline mt-2" onclick="handleQuickAction('Tour Management')">Manage Tours</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -570,7 +736,7 @@
                         <h5 class="text-hospitour mb-0">New Reservation</h5>
                     </div>
                     <p class="small text-muted mb-0">
-                        Book a guest and allocate a room.
+                        Book accommodation or tour packages.
                     </p>
                 </div>
             </div>
@@ -584,21 +750,21 @@
                         <h5 class="text-hospitour mb-0">New Order (POS)</h5>
                     </div>
                     <p class="small text-muted mb-0">
-                        Process a food or beverage order (Pro+).
+                        Process F&B or activity bookings (Pro+).
                     </p>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <div class="quick-access-card" onclick="handleQuickAction('Event Calendar')">
+                <div class="quick-access-card" onclick="handleQuickAction('Tour Management')">
                     <div class="d-flex align-items-center mb-3">
                         <div class="user-avatar me-3">
                             <i class="bi bi-plus-lg"></i>
                         </div>
-                        <h5 class="text-hospitour mb-0">Event Calendar</h5>
+                        <h5 class="text-hospitour mb-0">Tour Management</h5>
                     </div>
                     <p class="small text-muted mb-0">
-                        View today's scheduled events and tasks.
+                        Create and manage tour packages.
                     </p>
                 </div>
             </div>
@@ -655,46 +821,46 @@
                             <h6 class="mb-1">New booking received</h6>
                             <small class="text-muted">2 hours ago</small>
                         </div>
-                        <p class="mb-1 small">Room 204 booked for 3 nights</p>
+                        <p class="mb-1 small">Safari Tour booked for 4 guests</p>
                     </div>
                     <div class="activity-item">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Check-out completed</h6>
+                            <h6 class="mb-1">Tour completed</h6>
                             <small class="text-muted">5 hours ago</small>
                         </div>
-                        <p class="mb-1 small">Room 105 is now available</p>
+                        <p class="mb-1 small">City walking tour received 5-star rating</p>
                     </div>
                     <div class="activity-item">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Maintenance request</h6>
+                            <h6 class="mb-1">New activity added</h6>
                             <small class="text-muted">1 day ago</small>
                         </div>
-                        <p class="mb-1 small">AC unit in Room 312 needs service</p>
+                        <p class="mb-1 small">Sunset cruise now available for booking</p>
                     </div>
                 </div>
 
                 <div class="col-md-6">
-                    <h5 class="text-hospitour mb-3">Upcoming Events</h5>
+                    <h5 class="text-hospitour mb-3">Upcoming Tours & Events</h5>
                     <div class="activity-item">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Corporate Conference</h6>
-                            <small class="text-muted">Tomorrow, 9:00 AM</small>
+                            <h6 class="mb-1">Morning Safari</h6>
+                            <small class="text-muted">Tomorrow, 6:00 AM</small>
                         </div>
-                        <p class="mb-1 small">Grand Ballroom - 150 attendees</p>
+                        <p class="mb-1 small">12 guests confirmed • 2 guides assigned</p>
                     </div>
                     <div class="activity-item">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Wedding Reception</h6>
-                            <small class="text-muted">This Saturday, 4:00 PM</small>
+                            <h6 class="mb-1">Cultural Village Tour</h6>
+                            <small class="text-muted">This Saturday, 2:00 PM</small>
                         </div>
-                        <p class="mb-1 small">Garden Pavilion - 80 guests</p>
+                        <p class="mb-1 small">8 guests • Traditional dinner included</p>
                     </div>
                     <div class="activity-item">
                         <div class="d-flex w-100 justify-content-between">
-                            <h6 class="mb-1">Staff Training</h6>
-                            <small class="text-muted">Next Monday, 10:00 AM</small>
+                            <h6 class="mb-1">Wine Tasting Event</h6>
+                            <small class="text-muted">Next Monday, 4:00 PM</small>
                         </div>
-                        <p class="mb-1 small">New POS system training session</p>
+                        <p class="mb-1 small">Local vineyard tour and tasting session</p>
                     </div>
                 </div>
             </div>
@@ -708,6 +874,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             initializeUserData();
             setupEventListeners();
+            setupServiceTabs();
         });
 
         function initializeUserData() {
@@ -720,7 +887,7 @@
                     email: 'alex.johnson@hospitour.com',
                     plan: 'free',
                     lastLogin: new Date().toISOString(),
-                    businessName: 'Grand Plaza Hotel'
+                    businessName: 'Safari Adventures & Resort'
                 };
                 localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
             } else {
@@ -743,6 +910,28 @@
             });
         }
 
+        function setupServiceTabs() {
+            const tabs = document.querySelectorAll('.service-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    
+                    // Hide all content
+                    document.querySelectorAll('.service-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Show corresponding content
+                    const service = this.getAttribute('data-service');
+                    document.getElementById(`${service}-content`).classList.add('active');
+                });
+            });
+        }
+
         function updateMetrics(plan, userData) {
             const planLevelEl = document.getElementById("planLevel");
             const userNameEl = document.getElementById("userName");
@@ -757,31 +946,49 @@
 
             if (plan === "free") {
                 document.getElementById("metricOccupancy").textContent = "45%";
-                document.querySelector(".progress-bar-custom .progress").style.width = "45%";
+                document.querySelector("#hospitality-content .progress-bar-custom .progress").style.width = "45%";
                 document.getElementById("metricOrders").textContent = "N/A";
                 document.getElementById("metricRevenue").textContent = "N/A";
                 document.getElementById("ordersHint").innerHTML = '<i class="bi bi-info-circle"></i> Requires Order Management (Pro+)';
                 document.getElementById("ordersHint").className = "small mb-0 text-danger";
                 document.getElementById("revenueHint").innerHTML = '<i class="bi bi-info-circle"></i> Requires Advanced Metrics (Pro+)';
                 document.getElementById("revenueHint").className = "small mb-0 text-info";
+                
+                // Tourism metrics for free plan
+                document.getElementById("metricTours").textContent = "8";
+                document.querySelector("#tourism-content .progress-bar-custom .progress").style.width = "32%";
+                document.getElementById("metricActivities").textContent = "45";
+                document.getElementById("metricTourRevenue").textContent = "$2,150";
             } else if (plan === "pro") {
                 document.getElementById("metricOccupancy").textContent = "82%";
-                document.querySelector(".progress-bar-custom .progress").style.width = "82%";
+                document.querySelector("#hospitality-content .progress-bar-custom .progress").style.width = "82%";
                 document.getElementById("metricOrders").textContent = "12";
                 document.getElementById("ordersHint").innerHTML = '<i class="bi bi-clock"></i> Pending orders requiring action';
                 document.getElementById("ordersHint").className = "small mb-0 text-warning";
                 document.getElementById("metricRevenue").textContent = "$5,120";
                 document.getElementById("revenueHint").innerHTML = '<i class="bi bi-graph-up"></i> Based on current bookings';
                 document.getElementById("revenueHint").className = "small mb-0 text-success";
+                
+                // Tourism metrics for pro plan
+                document.getElementById("metricTours").textContent = "24";
+                document.querySelector("#tourism-content .progress-bar-custom .progress").style.width = "65%";
+                document.getElementById("metricActivities").textContent = "156";
+                document.getElementById("metricTourRevenue").textContent = "$8,420";
             } else if (plan === "enterprise") {
                 document.getElementById("metricOccupancy").textContent = "95%";
-                document.querySelector(".progress-bar-custom .progress").style.width = "95%";
+                document.querySelector("#hospitality-content .progress-bar-custom .progress").style.width = "95%";
                 document.getElementById("metricOrders").textContent = "6";
                 document.getElementById("ordersHint").innerHTML = '<i class="bi bi-check-circle"></i> All teams notified';
                 document.getElementById("ordersHint").className = "small mb-0 text-success";
                 document.getElementById("metricRevenue").textContent = "$15,890";
                 document.getElementById("revenueHint").innerHTML = '<i class="bi bi-bar-chart"></i> Includes projected events';
                 document.getElementById("revenueHint").className = "small mb-0 text-success";
+                
+                // Tourism metrics for enterprise plan
+                document.getElementById("metricTours").textContent = "42";
+                document.querySelector("#tourism-content .progress-bar-custom .progress").style.width = "84%";
+                document.getElementById("metricActivities").textContent = "289";
+                document.getElementById("metricTourRevenue").textContent = "$18,750";
             }
         }
 
@@ -813,7 +1020,7 @@
             const messages = {
                 'New Reservation': 'Opening reservation system...',
                 'New Order (POS)': 'Launching point of sale system...',
-                'Event Calendar': 'Loading event calendar...',
+                'Tour Management': 'Opening tour management system...',
                 'Staff Management': 'Opening staff management...',
                 'Reports & Analytics': 'Loading business analytics...',
                 'Account Settings': 'Opening account settings...'

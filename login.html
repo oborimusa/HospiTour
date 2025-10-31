@@ -1,170 +1,454 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | HospiPro</title>
-    <meta
-      name="description"
-      content="Login to HospiPro – your one-stop hub for hospitality jobs, business management, and professional growth."
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-      body {
-        background-color: #f7f9fc;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      }
-      .login-container {
-        max-width: 420px;
-        margin: 5rem auto;
-        background: #fff;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-      }
-      .brand {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      .brand h3 {
-        font-weight: 700;
-        /* Updated brand name text for consistency with your project name */
-        color: #0d6efd; 
-      }
-      .google-btn {
-        background-color: #db4437 !important; 
-        color: white !important;
-        border: none;
-      }
-      .google-btn:hover {
-        background-color: #c23321 !important;
-      }
+        :root {
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-danger: #e74c3c;
+            --hospitour-gray: #95a5a6;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .login-container {
+            max-width: 420px;
+            width: 100%;
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid var(--hospitour-primary);
+        }
+        
+        .brand {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .brand-logo {
+            width: 70px;
+            height: 70px;
+            background: var(--hospitour-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 1.8rem;
+        }
+        
+        .brand h3 {
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .brand p {
+            color: var(--hospitour-gray);
+            margin: 0;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #e1e5e9;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--hospitour-secondary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--hospitour-dark);
+            margin-bottom: 8px;
+        }
+        
+        .btn-hospitour {
+            background: var(--hospitour-primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .btn-hospitour:hover {
+            background: #154360;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-hospitour:disabled {
+            background: var(--hospitour-gray);
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .google-btn {
+            background-color: white !important;
+            color: #5f6368 !important;
+            border: 1px solid #dadce0 !important;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .google-btn:hover {
+            background-color: #f8f9fa !important;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .google-btn:disabled {
+            opacity: 0.7;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #e1e5e9;
+        }
+        
+        .divider-text {
+            padding: 0 1rem;
+            color: var(--hospitour-gray);
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-bottom: 1.5rem;
+        }
+        
+        .forgot-password a {
+            color: var(--hospitour-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .signup-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--hospitour-gray);
+        }
+        
+        .signup-link a {
+            color: var(--hospitour-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .spinner {
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+        }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <div class="login-container">
-      <div class="brand">
-        <h3>HospiPro</h3> 
-        <p class="text-muted">Welcome back! Please log in to continue.</p>
-      </div>
+        <div class="brand">
+            <div class="brand-logo">
+                <i class="bi bi-building"></i>
+            </div>
+            <h3>HospiTour</h3>
+            <p class="text-muted">Welcome back! Please log in to continue.</p>
+        </div>
 
-      <form id="loginForm">
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            id="email"
-            class="form-control"
-            placeholder="name@example.com"
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            placeholder="••••••••"
-            required
-          />
-        </div>
-        <button type="submit" class="btn btn-primary w-100 mb-3">Login</button>
-        <div class="text-center text-muted my-3 small">
-            — OR —
-        </div>
-        <button id="googleLogin" type="button" class="btn google-btn w-100">
-          <i class="bi bi-google me-2"></i> Continue with Google
-        </button>
-      </form>
+        <form id="loginForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+            </div>
+            
+            <div class="forgot-password">
+                <a href="forgot-password.html">Forgot your password?</a>
+            </div>
+            
+            <button type="submit" class="btn btn-hospitour mb-3" id="loginBtn">
+                <i class="bi bi-box-arrow-in-right me-2"></i> Login to HospiTour
+            </button>
+            
+            <div class="divider">
+                <span class="divider-text">OR CONTINUE WITH</span>
+            </div>
+            
+            <button type="button" id="googleLogin" class="btn google-btn mb-4">
+                <i class="bi bi-google me-2"></i> Continue with Google
+            </button>
+        </form>
 
-      <p class="text-center mt-4 small">
-        Don’t have an account?
-        <a href="signup.html">Sign up here</a>
-      </p>
+        <p class="signup-link">
+            Don't have an account?
+            <a href="signup.html">Sign up here</a>
+        </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<script type="module">
-    // 1. Import ONLY the SDKs needed (no Firestore needed for just login and hardcoded redirect)
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import {
-        getAuth,
-        signInWithEmailAndPassword,
-        GoogleAuthProvider,
-        signInWithPopup,
-    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    <!-- Firebase Authentication -->
+    <script type="module">
+        // Import only the Firebase modules we need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { 
+            getAuth, 
+            signInWithEmailAndPassword, 
+            GoogleAuthProvider, 
+            signInWithPopup 
+        } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-    // 2. Firebase config (HospiPro)
-    const firebaseConfig = {
-        apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok", 
-        authDomain: "hospipro-86b8d.firebaseapp.com",
-        projectId: "hospipro-86b8d",
-        storageBucket: "hospipro-86b8d.firebasestorage.app",
-        messagingSenderId: "801856698977",
-        appId: "1:801856698977:web:05562aaf88584d2af0c820",
-    };
+        // Your Firebase configuration - REPLACE WITH YOUR ACTUAL CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgDu8Pd2IcvIWRYnxnASoNvrxjC3rJ3Ok",
+            authDomain: "hospipro-86b8d.firebaseapp.com",
+            projectId: "hospipro-86b8d",
+            storageBucket: "hospipro-86b8d.firebasestorage.app",
+            messagingSenderId: "801856698977",
+            appId: "1:801856698977:web:05562aaf88584d2af0c820"
+        };
 
-    // 3. Initialize Firebase services
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-    const provider = new GoogleAuthProvider();
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
-    // Define the single target dashboard URL
-    const DASHBOARD_URL = "service-providerdashboard.html";
+        // Get DOM elements
+        const loginForm = document.getElementById('loginForm');
+        const loginBtn = document.getElementById('loginBtn');
+        const googleBtn = document.getElementById('googleLogin');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
 
-    // 4. Email/Password Login Handler
-    const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        
-        try {
-            await signInWithEmailAndPassword(auth, email, password);
+        // Email/Password Login
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
             
-            // Success: Hardcode redirect to the specified dashboard
-            alert("Login successful! Redirecting to dashboard...");
-            window.location.href = DASHBOARD_URL; 
+            const email = emailInput.value;
+            const password = passwordInput.value;
             
-        } catch (error) {
-            console.error("Login Error:", error);
-            
-            // Provide a user-friendly error message for security
-            let message = error.message;
-            if (error.code === 'auth/invalid-credential') {
-                message = "Invalid email or password. Please double-check your credentials.";
-            } else if (error.code === 'auth/user-disabled') {
-                message = "Your account has been disabled.";
+            // Validate inputs
+            if (!email || !password) {
+                showNotification('Please fill in all fields', 'error');
+                return;
             }
             
-            alert(`Login failed: ${message}`);
-        }
-    });
+            // Show loading state
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="bi bi-arrow-repeat spinner me-2"></i> Logging in...';
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                console.log('User logged in:', user);
+                
+                // Store user data in localStorage
+                const userData = {
+                    uid: user.uid,
+                    name: user.displayName || email.split('@')[0],
+                    email: user.email,
+                    emailVerified: user.emailVerified,
+                    plan: 'free', // Default plan
+                    lastLogin: new Date().toISOString(),
+                    businessName: 'HospiTour Business'
+                };
+                
+                localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
+                showNotification('Login successful! Redirecting to dashboard...', 'success');
+                
+                // Redirect to dashboard after short delay
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Login error:', error);
+                let message = 'Login failed. Please try again.';
+                
+                // User-friendly error messages
+                switch (error.code) {
+                    case 'auth/invalid-email':
+                        message = 'Invalid email address.';
+                        break;
+                    case 'auth/user-disabled':
+                        message = 'This account has been disabled.';
+                        break;
+                    case 'auth/user-not-found':
+                        message = 'No account found with this email.';
+                        break;
+                    case 'auth/wrong-password':
+                        message = 'Incorrect password.';
+                        break;
+                    case 'auth/invalid-credential':
+                        message = 'Invalid email or password.';
+                        break;
+                    case 'auth/too-many-requests':
+                        message = 'Too many failed attempts. Please try again later.';
+                        break;
+                    case 'auth/network-request-failed':
+                        message = 'Network error. Please check your connection.';
+                        break;
+                    default:
+                        message = `Login failed: ${error.message}`;
+                }
+                
+                showNotification(message, 'error');
+                
+            } finally {
+                // Reset button state
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="bi bi-box-arrow-in-right me-2"></i> Login to HospiTour';
+            }
+        });
 
-    // 5. Google Login Handler
-    const googleBtn = document.getElementById("googleLogin");
-    googleBtn.addEventListener("click", async () => {
-        try {
-            await signInWithPopup(auth, provider);
+        // Google Login
+        googleBtn.addEventListener('click', async () => {
+            googleBtn.disabled = true;
+            googleBtn.innerHTML = '<i class="bi bi-arrow-repeat spinner me-2"></i> Connecting...';
             
-            // Success: Hardcode redirect to the specified dashboard
-            alert("Google login successful! Redirecting to dashboard...");
-            window.location.href = DASHBOARD_URL;
+            try {
+                const result = await signInWithPopup(auth, provider);
+                const user = result.user;
+                
+                console.log('Google user:', user);
+                
+                // Store user data
+                const userData = {
+                    uid: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    emailVerified: user.emailVerified,
+                    plan: 'free',
+                    lastLogin: new Date().toISOString(),
+                    businessName: 'HospiTour Business'
+                };
+                
+                localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
+                showNotification('Google login successful! Redirecting...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Google login error:', error);
+                let message = 'Google login failed. Please try again.';
+                
+                if (error.code === 'auth/popup-closed-by-user') {
+                    message = 'Google login was cancelled.';
+                } else if (error.code === 'auth/popup-blocked') {
+                    message = 'Popup was blocked. Please allow popups for this site.';
+                }
+                
+                showNotification(message, 'error');
+            } finally {
+                googleBtn.disabled = false;
+                googleBtn.innerHTML = '<i class="bi bi-google me-2"></i> Continue with Google';
+            }
+        });
+
+        // Notification function
+        function showNotification(message, type) {
+            // Remove any existing notifications
+            const existingAlert = document.querySelector('.custom-alert');
+            if (existingAlert) {
+                existingAlert.remove();
+            }
             
-        } catch (error) {
-            console.error("Google Login Error:", error);
-            alert("Google login failed: " + error.message);
+            // Create new alert
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type === 'error' ? 'danger' : 'success'} custom-alert`;
+            alert.style.position = 'fixed';
+            alert.style.top = '20px';
+            alert.style.right = '20px';
+            alert.style.zIndex = '1050';
+            alert.style.minWidth = '300px';
+            alert.style.maxWidth = '90%';
+            alert.innerHTML = `
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-triangle'} me-2"></i>
+                    <span>${message}</span>
+                </div>
+                <button type="button" class="btn-close ms-2" onclick="this.parentElement.remove()"></button>
+            `;
+            
+            document.body.appendChild(alert);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (alert.parentNode) {
+                    alert.remove();
+                }
+            }, 5000);
         }
-    });
-</script>
-  </body>
+
+        // Test function to check if Firebase is working
+        console.log('Firebase initialized:', app.name);
+        console.log('Auth instance:', auth);
+    </script>
+</body>
 </html>

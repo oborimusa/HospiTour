@@ -8,20 +8,25 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root{
-            --gold: #c9a44c;
-            --brown: #3b2f2f;
-            --light-gold: #f5f0e4;
-            --light-brown: #f7f5f1;
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-danger: #e74c3c;
+            --hospitour-gray: #95a5a6;
         }
         
         body{
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-            background:#f7f5f1; 
-            color:#222;
+            background:#f5f7fa; 
+            color: var(--hospitour-dark);
         }
         
         .navbar-custom{
-            background:var(--brown);
+            background: var(--hospitour-primary);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         
@@ -36,11 +41,11 @@
         }
         
         .nav-link:hover, .nav-link.active {
-            color: var(--gold) !important;
+            color: var(--hospitour-accent) !important;
         }
         
         .hero-section{
-            background: linear-gradient(135deg, #ffffff 0%, var(--light-brown) 100%);
+            background: linear-gradient(135deg, #ffffff 0%, rgba(248, 249, 250, 1) 100%);
             padding: 80px 0 60px;
             position: relative;
             overflow: hidden;
@@ -53,7 +58,7 @@
             right: 0;
             width: 40%;
             height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f5f0e4" opacity="0.3"/></svg>');
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="%23f8f9fa" opacity="0.3"/></svg>');
             background-size: cover;
         }
         
@@ -72,7 +77,7 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--muted);
+            color: var(--hospitour-gray);
         }
         
         .search-input {
@@ -83,8 +88,8 @@
         }
         
         .search-input:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 0 0.2rem rgba(201, 164, 76, 0.25);
+            border-color: var(--hospitour-secondary);
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
         }
         
         .category-section {
@@ -96,14 +101,14 @@
             align-items: center;
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--light-gold);
+            border-bottom: 2px solid rgba(52, 152, 219, 0.1);
         }
         
         .category-icon {
             width: 50px;
             height: 50px;
             border-radius: 12px;
-            background: var(--light-gold);
+            background: rgba(52, 152, 219, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -112,20 +117,21 @@
         
         .category-icon i {
             font-size: 1.5rem;
-            color: var(--gold);
+            color: var(--hospitour-secondary);
         }
         
         .doc-card{
             background: white;
             border-radius: 12px;
             padding: 25px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
-            border-left: 4px solid var(--gold);
+            border-left: 4px solid var(--hospitour-secondary);
             height: 100%;
             margin-bottom: 20px;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
         
         .doc-card::before {
@@ -135,7 +141,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: var(--gold);
+            background: var(--hospitour-secondary);
         }
         
         .doc-card:hover{
@@ -145,14 +151,14 @@
         
         .doc-card a {
             text-decoration: none;
-            color: var(--brown);
+            color: var(--hospitour-dark);
             font-weight: 600;
             display: block;
             transition: color 0.3s ease;
         }
         
         .doc-card a:hover {
-            color: var(--gold);
+            color: var(--hospitour-secondary);
         }
         
         .doc-meta {
@@ -160,16 +166,16 @@
             align-items: center;
             margin-top: 10px;
             font-size: 0.85rem;
-            color: #6c757d;
+            color: var(--hospitour-gray);
         }
         
         .doc-meta i {
             margin-right: 5px;
         }
         
-        .btn-gold{
-            background:var(--gold); 
-            color:var(--brown); 
+        .btn-hospitour{
+            background: var(--hospitour-primary); 
+            color: white; 
             border:none;
             font-weight: 600;
             padding: 12px 30px;
@@ -177,19 +183,52 @@
             transition: all 0.3s ease;
         }
         
-        .btn-gold:hover{
-            background: #b8943a;
+        .btn-hospitour:hover{
+            background: #154360;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-hospitour-secondary{
+            background: var(--hospitour-secondary); 
+            color: white; 
+            border:none;
+            font-weight: 600;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hospitour-secondary:hover{
+            background: #2980b9;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-hospitour-outline{
+            background: transparent; 
+            color: var(--hospitour-primary); 
+            border: 1px solid var(--hospitour-primary);
+            font-weight: 500;
+            padding: 12px 30px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hospitour-outline:hover{
+            background: var(--hospitour-primary);
+            color: white;
         }
         
         .quick-links {
             background: white;
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             margin-bottom: 40px;
+            border-top: 4px solid var(--hospitour-primary);
         }
         
         .quick-link-item {
@@ -198,6 +237,7 @@
             padding: 15px 0;
             border-bottom: 1px solid #f1f1f1;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .quick-link-item:last-child {
@@ -205,7 +245,7 @@
         }
         
         .quick-link-item:hover {
-            background: var(--light-gold);
+            background: rgba(52, 152, 219, 0.05);
             margin: 0 -20px;
             padding: 15px 20px;
             border-radius: 8px;
@@ -215,7 +255,7 @@
             width: 40px;
             height: 40px;
             border-radius: 8px;
-            background: var(--light-gold);
+            background: rgba(52, 152, 219, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -223,19 +263,20 @@
         }
         
         .quick-link-icon i {
-            color: var(--gold);
+            color: var(--hospitour-secondary);
         }
         
         .popular-articles {
-            background: var(--light-brown);
+            background: rgba(52, 152, 219, 0.05);
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 40px;
+            border-top: 4px solid var(--hospitour-secondary);
         }
         
         .article-tag {
-            background: var(--gold);
-            color: var(--brown);
+            background: var(--hospitour-accent);
+            color: white;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -243,8 +284,26 @@
             margin-left: 10px;
         }
         
+        .plan-tag {
+            background: var(--hospitour-primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        
+        .text-hospitour {
+            color: var(--hospitour-primary);
+        }
+        
+        .text-hospitour-secondary {
+            color: var(--hospitour-secondary);
+        }
+        
         footer {
-            background: var(--brown);
+            background: var(--hospitour-primary);
             color: #fff;
             padding: 40px 0 20px;
             margin-top: 80px;
@@ -266,7 +325,58 @@
         }
         
         .footer-links a:hover {
-            color: var(--gold);
+            color: var(--hospitour-accent);
+        }
+        
+        .search-results {
+            display: none;
+            margin-top: 30px;
+        }
+        
+        .search-result-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--hospitour-secondary);
+            transition: all 0.3s ease;
+        }
+        
+        .search-result-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .article-content {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 30px;
+        }
+        
+        .back-button {
+            background: var(--hospitour-secondary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .back-button:hover {
+            background: #2980b9;
         }
         
         @media (max-width: 768px) {
@@ -310,7 +420,7 @@
                         <a class="nav-link text-white" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item ms-lg-3">
-                        <a class="btn btn-gold" href="login.html">Login</a>
+                        <a class="btn btn-hospitour-secondary" href="login.html">Login</a>
                     </li>
                 </ul>
             </div>
@@ -319,288 +429,303 @@
 
     <div class="hero-section">
         <div class="container">
-            <h1 class="text-brown fw-bold display-4 mb-3">HospiTour Help Center</h1>
+            <h1 class="text-hospitour fw-bold display-4 mb-3">HospiTour Help Center</h1>
             <p class="lead text-muted mb-4">Find guides, documentation, and answers to your questions. We're here to help you succeed.</p>
             
             <div class="search-container mx-auto">
                 <i class="bi bi-search search-icon"></i>
-                <input type="text" class="form-control form-control-lg search-input" placeholder="Search articles, e.g., 'setting up payments' or 'room management'">
+                <input type="text" class="form-control form-control-lg search-input" id="searchInput" placeholder="Search articles, e.g., 'setting up payments' or 'room management'">
             </div>
             
             <div class="text-center mt-3">
                 <span class="text-muted small">Popular searches: </span>
-                <a href="#" class="text-gold text-decoration-none small me-3">billing</a>
-                <a href="#" class="text-gold text-decoration-none small me-3">account setup</a>
-                <a href="#" class="text-gold text-decoration-none small">troubleshooting</a>
+                <a href="#" class="text-hospitour-secondary text-decoration-none small me-3" data-search="billing">billing</a>
+                <a href="#" class="text-hospitour-secondary text-decoration-none small me-3" data-search="account setup">account setup</a>
+                <a href="#" class="text-hospitour-secondary text-decoration-none small" data-search="troubleshooting">troubleshooting</a>
             </div>
         </div>
     </div>
 
     <main class="container py-5">
-        <!-- Quick Links -->
-        <div class="quick-links">
-            <h3 class="text-brown mb-4">Quick Help</h3>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="quick-link-item">
-                        <div class="quick-link-icon">
-                            <i class="bi bi-question-circle"></i>
-                        </div>
-                        <div>
-                            <a href="#" class="fw-bold">Common Issues & Troubleshooting</a>
-                            <p class="small text-muted mb-0">Solutions to frequent problems</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="quick-link-item">
-                        <div class="quick-link-icon">
-                            <i class="bi bi-play-circle"></i>
-                        </div>
-                        <div>
-                            <a href="#" class="fw-bold">Video Tutorials</a>
-                            <p class="small text-muted mb-0">Step-by-step visual guides</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="quick-link-item">
-                        <div class="quick-link-icon">
-                            <i class="bi bi-download"></i>
-                        </div>
-                        <div>
-                            <a href="#" class="fw-bold">Download Resources</a>
-                            <p class="small text-muted mb-0">Templates, checklists & guides</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="quick-link-item">
-                        <div class="quick-link-icon">
-                            <i class="bi bi-megaphone"></i>
-                        </div>
-                        <div>
-                            <a href="#" class="fw-bold">What's New</a>
-                            <p class="small text-muted mb-0">Latest features & updates</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Popular Articles -->
-        <div class="popular-articles">
-            <h3 class="text-brown mb-4">Popular Articles</h3>
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <a href="#" class="text-decoration-none fw-bold">
-                        How to set up your business profile <span class="article-tag">New</span>
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <a href="#" class="text-decoration-none fw-bold">
-                        Understanding billing and invoices
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <a href="#" class="text-decoration-none fw-bold">
-                        Managing user roles and permissions
-                    </a>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <a href="#" class="text-decoration-none fw-bold">
-                        Integrating with payment gateways <span class="article-tag">Pro+</span>
-                    </a>
-                </div>
-            </div>
+        <!-- Search Results -->
+        <div class="search-results" id="searchResults">
+            <h3 class="text-hospitour mb-4">Search Results</h3>
+            <div id="resultsContainer"></div>
         </div>
 
-        <div class="row g-4">
-            
-            <!-- Getting Started -->
-            <div class="col-lg-4">
-                <div class="category-section">
-                    <div class="category-header">
-                        <div class="category-icon">
-                            <i class="bi bi-rocket"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-brown mb-0">Getting Started</h4>
-                            <p class="text-muted small mb-0">New to HospiTour? Start here</p>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Understanding Role Selection (Business vs. Professional)</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 5 min read • <i class="bi bi-eye"></i> 1.2k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Choosing the Right Pricing Plan</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 3 min read • <i class="bi bi-eye"></i> 894 views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Initial Account Setup Checklist</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 7 min read • <i class="bi bi-eye"></i> 2.1k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Importing Your Existing Data</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 10 min read • <i class="bi bi-eye"></i> 567 views
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Business Operations -->
-            <div class="col-lg-4">
-                <div class="category-section">
-                    <div class="category-header">
-                        <div class="category-icon">
-                            <i class="bi bi-building"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-brown mb-0">Business Operations</h4>
-                            <p class="text-muted small mb-0">Manage your hospitality business</p>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">How to manage Room Reservations and Status</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 8 min read • <i class="bi bi-eye"></i> 3.4k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Using the F&B Order Management (POS) system</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 12 min read • <i class="bi bi-eye"></i> 2.8k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Adding and managing Staff User Roles</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 6 min read • <i class="bi bi-eye"></i> 1.5k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Event Planning and Management Guide</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 15 min read • <i class="bi bi-eye"></i> 1.9k views
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Service Professional -->
-            <div class="col-lg-4">
-                <div class="category-section">
-                    <div class="category-header">
-                        <div class="category-icon">
-                            <i class="bi bi-person-badge"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-brown mb-0">Service Professional</h4>
-                            <p class="text-muted small mb-0">For freelancers and service providers</p>
-                        </div>
-                    </div>
-                    
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Optimizing Your Marketplace Profile & Portfolio</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 9 min read • <i class="bi bi-eye"></i> 4.2k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Handling Incoming Booking Requests and payments</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 11 min read • <i class="bi bi-eye"></i> 3.1k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Setting up Payment Gateway (Pro+ Guide)</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 7 min read • <i class="bi bi-eye"></i> 1.7k views
-                        </div>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Building Client Relationships & Getting Reviews</a>
-                        <div class="doc-meta">
-                            <i class="bi bi-clock"></i> 8 min read • <i class="bi bi-eye"></i> 2.3k views
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Article Content -->
+        <div class="article-content" id="articleContent">
+            <button class="back-button" id="backButton"><i class="bi bi-arrow-left"></i> Back to Help Center</button>
+            <div id="articleBody"></div>
         </div>
 
-        <!-- Additional Categories -->
-        <div class="row g-4 mt-2">
-            <div class="col-lg-6">
-                <div class="category-section">
-                    <div class="category-header">
-                        <div class="category-icon">
-                            <i class="bi bi-credit-card"></i>
+        <!-- Main Content (shown by default) -->
+        <div id="mainContent">
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h3 class="text-hospitour mb-4">Quick Help</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="quick-link-item" data-target="common-issues">
+                            <div class="quick-link-icon">
+                                <i class="bi bi-question-circle"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="fw-bold">Common Issues & Troubleshooting</a>
+                                <p class="small text-muted mb-0">Solutions to frequent problems</p>
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="text-brown mb-0">Billing & Account</h4>
-                            <p class="text-muted small mb-0">Manage payments and subscriptions</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="quick-link-item" data-target="video-tutorials">
+                            <div class="quick-link-icon">
+                                <i class="bi bi-play-circle"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="fw-bold">Video Tutorials</a>
+                                <p class="small text-muted mb-0">Step-by-step visual guides</p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Understanding Your Invoice and Billing Cycle</a>
+                    <div class="col-md-6">
+                        <div class="quick-link-item" data-target="download-resources">
+                            <div class="quick-link-icon">
+                                <i class="bi bi-download"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="fw-bold">Download Resources</a>
+                                <p class="small text-muted mb-0">Templates, checklists & guides</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Upgrading or Changing Your Plan</a>
-                    </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Setting up Automatic Payments</a>
+                    <div class="col-md-6">
+                        <div class="quick-link-item" data-target="whats-new">
+                            <div class="quick-link-icon">
+                                <i class="bi bi-megaphone"></i>
+                            </div>
+                            <div>
+                                <a href="#" class="fw-bold">What's New</a>
+                                <p class="small text-muted mb-0">Latest features & updates</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-6">
-                <div class="category-section">
-                    <div class="category-header">
-                        <div class="category-icon">
-                            <i class="bi bi-tools"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-brown mb-0">Technical Support</h4>
-                            <p class="text-muted small mb-0">Troubleshooting and technical guides</p>
-                        </div>
+            <!-- Popular Articles -->
+            <div class="popular-articles">
+                <h3 class="text-hospitour mb-4">Popular Articles</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <a href="#" class="text-decoration-none fw-bold" data-article="business-profile">
+                            How to set up your business profile <span class="article-tag">New</span>
+                        </a>
                     </div>
-                    
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Browser Compatibility & System Requirements</a>
+                    <div class="col-md-6 mb-3">
+                        <a href="#" class="text-decoration-none fw-bold" data-article="billing-invoices">
+                            Understanding billing and invoices
+                        </a>
                     </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Mobile App Installation & Setup</a>
+                    <div class="col-md-6 mb-3">
+                        <a href="#" class="text-decoration-none fw-bold" data-article="user-roles">
+                            Managing user roles and permissions
+                        </a>
                     </div>
-                    <div class="doc-card">
-                        <a href="#" class="text-decoration-none">Data Export & Backup Procedures</a>
+                    <div class="col-md-6 mb-3">
+                        <a href="#" class="text-decoration-none fw-bold" data-article="payment-gateways">
+                            Integrating with payment gateways <span class="plan-tag">Pro+</span>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="text-center mt-5 py-5">
-            <div class="card p-5 border-0" style="background: var(--light-brown);">
-                <h3 class="text-brown mb-3">Can't find what you need?</h3>
-                <p class="text-muted mb-4">Our support team is here to help you get the most out of HospiTour</p>
-                <div class="d-flex gap-3 justify-content-center flex-wrap">
-                    <a href="contact.html" class="btn btn-gold btn-lg">Contact Support</a>
-                    <a href="contact.html" class="btn btn-outline-secondary btn-lg">Schedule a Call</a>
+            <div class="row g-4">
+                
+                <!-- Getting Started -->
+                <div class="col-lg-4">
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="bi bi-rocket"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-hospitour mb-0">Getting Started</h4>
+                                <p class="text-muted small mb-0">New to HospiTour? Start here</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-card" data-article="role-selection">
+                            <a href="#" class="text-decoration-none">Understanding Role Selection (Business vs. Professional)</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 5 min read • <i class="bi bi-eye"></i> 1.2k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="pricing-plan">
+                            <a href="#" class="text-decoration-none">Choosing the Right Pricing Plan</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 3 min read • <i class="bi bi-eye"></i> 894 views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="account-setup">
+                            <a href="#" class="text-decoration-none">Initial Account Setup Checklist</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 7 min read • <i class="bi bi-eye"></i> 2.1k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="import-data">
+                            <a href="#" class="text-decoration-none">Importing Your Existing Data</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 10 min read • <i class="bi bi-eye"></i> 567 views
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <p class="text-muted small mt-3">
-                    <i class="bi bi-clock"></i> Average response time: 2 hours • 
-                    <i class="bi bi-envelope"></i> support@hospitour.com
-                </p>
+
+                <!-- Business Operations -->
+                <div class="col-lg-4">
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="bi bi-building"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-hospitour mb-0">Business Operations</h4>
+                                <p class="text-muted small mb-0">Manage your hospitality business</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-card" data-article="room-reservations">
+                            <a href="#" class="text-decoration-none">How to manage Room Reservations and Status</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 8 min read • <i class="bi bi-eye"></i> 3.4k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="pos-system">
+                            <a href="#" class="text-decoration-none">Using the F&B Order Management (POS) system</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 12 min read • <i class="bi bi-eye"></i> 2.8k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="staff-roles">
+                            <a href="#" class="text-decoration-none">Adding and managing Staff User Roles</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 6 min read • <i class="bi bi-eye"></i> 1.5k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="event-planning">
+                            <a href="#" class="text-decoration-none">Event Planning and Management Guide</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 15 min read • <i class="bi bi-eye"></i> 1.9k views
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Professional -->
+                <div class="col-lg-4">
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-hospitour mb-0">Service Professional</h4>
+                                <p class="text-muted small mb-0">For freelancers and service providers</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-card" data-article="marketplace-profile">
+                            <a href="#" class="text-decoration-none">Optimizing Your Marketplace Profile & Portfolio</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 9 min read • <i class="bi bi-eye"></i> 4.2k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="booking-requests">
+                            <a href="#" class="text-decoration-none">Handling Incoming Booking Requests and payments</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 11 min read • <i class="bi bi-eye"></i> 3.1k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="payment-gateway">
+                            <a href="#" class="text-decoration-none">Setting up Payment Gateway (Pro+ Guide)</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 7 min read • <i class="bi bi-eye"></i> 1.7k views
+                            </div>
+                        </div>
+                        <div class="doc-card" data-article="client-relationships">
+                            <a href="#" class="text-decoration-none">Building Client Relationships & Getting Reviews</a>
+                            <div class="doc-meta">
+                                <i class="bi bi-clock"></i> 8 min read • <i class="bi bi-eye"></i> 2.3k views
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Categories -->
+            <div class="row g-4 mt-2">
+                <div class="col-lg-6">
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="bi bi-credit-card"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-hospitour mb-0">Billing & Account</h4>
+                                <p class="text-muted small mb-0">Manage payments and subscriptions</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-card" data-article="invoice-billing">
+                            <a href="#" class="text-decoration-none">Understanding Your Invoice and Billing Cycle</a>
+                        </div>
+                        <div class="doc-card" data-article="upgrade-plan">
+                            <a href="#" class="text-decoration-none">Upgrading or Changing Your Plan</a>
+                        </div>
+                        <div class="doc-card" data-article="automatic-payments">
+                            <a href="#" class="text-decoration-none">Setting up Automatic Payments</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="category-section">
+                        <div class="category-header">
+                            <div class="category-icon">
+                                <i class="bi bi-tools"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-hospitour mb-0">Technical Support</h4>
+                                <p class="text-muted small mb-0">Troubleshooting and technical guides</p>
+                            </div>
+                        </div>
+                        
+                        <div class="doc-card" data-article="browser-compatibility">
+                            <a href="#" class="text-decoration-none">Browser Compatibility & System Requirements</a>
+                        </div>
+                        <div class="doc-card" data-article="mobile-app">
+                            <a href="#" class="text-decoration-none">Mobile App Installation & Setup</a>
+                        </div>
+                        <div class="doc-card" data-article="data-export">
+                            <a href="#" class="text-decoration-none">Data Export & Backup Procedures</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 py-5">
+                <div class="card p-5 border-0" style="background: rgba(52, 152, 219, 0.05);">
+                    <h3 class="text-hospitour mb-3">Can't find what you need?</h3>
+                    <p class="text-muted mb-4">Our support team is here to help you get the most out of HospiTour</p>
+                    <div class="d-flex gap-3 justify-content-center flex-wrap">
+                        <a href="contact.html" class="btn btn-hospitour btn-lg">Contact Support</a>
+                        <a href="contact.html" class="btn btn-hospitour-outline btn-lg">Schedule a Call</a>
+                    </div>
+                    <p class="text-muted small mt-3">
+                        <i class="bi bi-clock"></i> Average response time: 2 hours • 
+                        <i class="bi bi-envelope"></i> support@hospitour.com
+                    </p>
+                </div>
             </div>
         </div>
     </main>
@@ -619,7 +744,7 @@
                 </div>
                 
                 <div class="col-lg-2 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-gold mb-3">Resources</h5>
+                    <h5 class="text-hospitour-secondary mb-3">Resources</h5>
                     <ul class="footer-links">
                         <li><a href="help-center.html">Help Center</a></li>
                         <li><a href="#">Blog</a></li>
@@ -629,7 +754,7 @@
                 </div>
                 
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-gold mb-3">Company</h5>
+                    <h5 class="text-hospitour-secondary mb-3">Company</h5>
                     <ul class="footer-links">
                         <li><a href="about.html">About Us</a></li>
                         <li><a href="pricing.html">Pricing</a></li>
@@ -639,7 +764,7 @@
                 </div>
                 
                 <div class="col-lg-3">
-                    <h5 class="text-gold mb-3">Legal</h5>
+                    <h5 class="text-hospitour-secondary mb-3">Legal</h5>
                     <ul class="footer-links">
                         <li><a href="#">Privacy Policy</a></li>
                         <li><a href="#">Terms of Service</a></li>
@@ -667,7 +792,255 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Set current year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Article database
+        const articles = {
+            'role-selection': {
+                title: 'Understanding Role Selection (Business vs. Professional)',
+                content: `
+                    <h2>Understanding Role Selection (Business vs. Professional)</h2>
+                    <p>HospiTour offers two primary user roles tailored to different needs in the hospitality industry:</p>
+                    
+                    <h4>Business Account</h4>
+                    <p>Designed for hospitality establishments such as hotels, resorts, restaurants, and event venues.</p>
+                    <ul>
+                        <li>Manage multiple staff accounts</li>
+                        <li>Access to comprehensive analytics and reporting</li>
+                        <li>Inventory and supply chain management</li>
+                        <li>Multi-location support</li>
+                        <li>Advanced booking and reservation systems</li>
+                    </ul>
+                    
+                    <h4>Professional Account</h4>
+                    <p>Perfect for individual service providers, freelancers, and consultants in the hospitality sector.</p>
+                    <ul>
+                        <li>Personal portfolio and service listings</li>
+                        <li>Direct client booking system</li>
+                        <li>Simplified invoicing and payment processing</li>
+                        <li>Client relationship management</li>
+                        <li>Service scheduling and calendar integration</li>
+                    </ul>
+                    
+                    <div class="alert alert-info mt-4">
+                        <strong>Tip:</strong> You can switch between roles in your account settings, but some features may be limited based on your subscription plan.
+                    </div>
+                `
+            },
+            'pricing-plan': {
+                title: 'Choosing the Right Pricing Plan',
+                content: `
+                    <h2>Choosing the Right Pricing Plan</h2>
+                    <p>HospiTour offers flexible pricing plans to suit businesses of all sizes. Here's a breakdown of our plans:</p>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Free</h5>
+                                    <p class="card-text">Perfect for small businesses getting started</p>
+                                    <ul>
+                                        <li>Basic booking management</li>
+                                        <li>Up to 5 staff accounts</li>
+                                        <li>Email support</li>
+                                        <li>Standard reporting</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Pro</h5>
+                                    <p class="card-text">Ideal for growing businesses</p>
+                                    <ul>
+                                        <li>Advanced analytics</li>
+                                        <li>Unlimited staff accounts</li>
+                                        <li>Priority support</li>
+                                        <li>Custom reporting</li>
+                                        <li>API access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">Enterprise</h5>
+                                    <p class="card-text">For large-scale operations</p>
+                                    <ul>
+                                        <li>Dedicated account manager</li>
+                                        <li>Custom integrations</li>
+                                        <li>24/7 premium support</li>
+                                        <li>Advanced security features</li>
+                                        <li>Multi-location management</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="mt-4">To change your plan, visit the Billing section in your account settings.</p>
+                `
+            },
+            'room-reservations': {
+                title: 'How to manage Room Reservations and Status',
+                content: `
+                    <h2>Managing Room Reservations and Status</h2>
+                    <p>Efficient room management is crucial for hospitality businesses. Here's how to manage reservations in HospiTour:</p>
+                    
+                    <h4>Room Status Types</h4>
+                    <ul>
+                        <li><strong>Available:</strong> Room is clean and ready for guests</li>
+                        <li><strong>Occupied:</strong> Currently occupied by guests</li>
+                        <li><strong>Maintenance:</strong> Under repair or maintenance</li>
+                        <li><strong>Cleaning:</strong> Being cleaned after checkout</li>
+                        <li><strong>Out of Order:</strong> Not available for any bookings</li>
+                    </ul>
+                    
+                    <h4>Managing Reservations</h4>
+                    <ol>
+                        <li>Navigate to the Accommodation section in your dashboard</li>
+                        <li>View the room calendar to see availability</li>
+                        <li>Click on a room to create a new reservation</li>
+                        <li>Fill in guest details, dates, and special requirements</li>
+                        <li>Set the room status accordingly</li>
+                    </ol>
+                    
+                    <div class="alert alert-warning mt-4">
+                        <strong>Note:</strong> Room status updates automatically when reservations are created or modified.
+                    </div>
+                `
+            },
+            'pos-system': {
+                title: 'Using the F&B Order Management (POS) system',
+                content: `
+                    <h2>Using the F&B Order Management (POS) System</h2>
+                    <p>HospiTour's Point of Sale system helps you manage food and beverage orders efficiently.</p>
+                    
+                    <h4>Key Features</h4>
+                    <ul>
+                        <li>Table management and floor plan</li>
+                        <li>Order taking and modification</li>
+                        <li>Payment processing</li>
+                        <li>Inventory tracking</li>
+                        <li>Kitchen display system</li>
+                    </ul>
+                    
+                    <h4>Creating an Order</h4>
+                    <ol>
+                        <li>Select a table from the floor plan</li>
+                        <li>Add menu items to the order</li>
+                        <li>Apply modifications or special instructions</li>
+                        <li>Send to kitchen or bar</li>
+                        <li>Process payment when order is complete</li>
+                    </ol>
+                    
+                    <p>For advanced POS features, consider upgrading to our Pro or Enterprise plans.</p>
+                `
+            }
+        };
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const searchResults = document.getElementById('searchResults');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (searchTerm.length > 2) {
+                // Show search results, hide main content
+                searchResults.style.display = 'block';
+                mainContent.style.display = 'none';
+                
+                // Filter articles based on search term
+                const filteredArticles = Object.entries(articles).filter(([key, article]) => {
+                    return article.title.toLowerCase().includes(searchTerm) || 
+                           article.content.toLowerCase().includes(searchTerm);
+                });
+                
+                // Display results
+                if (filteredArticles.length > 0) {
+                    resultsContainer.innerHTML = '';
+                    filteredArticles.forEach(([key, article]) => {
+                        const resultItem = document.createElement('div');
+                        resultItem.className = 'search-result-item';
+                        resultItem.innerHTML = `
+                            <h5><a href="#" class="text-decoration-none view-article" data-article="${key}">${article.title}</a></h5>
+                            <p class="text-muted mb-0">${article.content.substring(0, 150)}...</p>
+                        `;
+                        resultsContainer.appendChild(resultItem);
+                    });
+                } else {
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <i class="bi bi-search display-1 text-muted mb-3"></i>
+                            <h4>No results found</h4>
+                            <p class="text-muted">Try different keywords or browse the categories below</p>
+                        </div>
+                    `;
+                }
+            } else {
+                // Hide search results, show main content
+                searchResults.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        });
+
+        // Popular search links
+        document.querySelectorAll('[data-search]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const searchTerm = this.getAttribute('data-search');
+                document.getElementById('searchInput').value = searchTerm;
+                document.getElementById('searchInput').dispatchEvent(new Event('input'));
+            });
+        });
+
+        // Article navigation
+        document.addEventListener('click', function(e) {
+            // Handle article clicks
+            if (e.target.closest('.doc-card') || e.target.closest('[data-article]') || e.target.closest('.view-article')) {
+                e.preventDefault();
+                const articleId = e.target.closest('.doc-card')?.getAttribute('data-article') || 
+                                 e.target.closest('[data-article]')?.getAttribute('data-article') ||
+                                 e.target.closest('.view-article')?.getAttribute('data-article');
+                
+                if (articleId && articles[articleId]) {
+                    showArticle(articleId);
+                }
+            }
+            
+            // Handle quick link clicks
+            if (e.target.closest('.quick-link-item')) {
+                e.preventDefault();
+                const target = e.target.closest('.quick-link-item').getAttribute('data-target');
+                alert(`Opening ${target.replace('-', ' ')} section...`);
+                // In a real implementation, this would navigate to the appropriate section
+            }
+        });
+
+        // Back button functionality
+        document.getElementById('backButton').addEventListener('click', function() {
+            document.getElementById('articleContent').style.display = 'none';
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('searchResults').style.display = 'none';
+        });
+
+        // Show article function
+        function showArticle(articleId) {
+            const article = articles[articleId];
+            if (!article) return;
+            
+            document.getElementById('articleBody').innerHTML = article.content;
+            document.getElementById('articleContent').style.display = 'block';
+            document.getElementById('mainContent').style.display = 'none';
+            document.getElementById('searchResults').style.display = 'none';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     </script>
 </body>
 </html>

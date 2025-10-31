@@ -3,43 +3,75 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Events & Planning | HospiPro</title>
+    <title>Events & Planning | HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
         :root{ 
-            --gold: #c9a44c; 
-            --brown: #3b2f2f; 
-            --light-gold: #f5f0e4;
-            --light-brown: #f7f5f1;
+            --hospitour-primary: #1a5276; 
+            --hospitour-secondary: #3498db; 
+            --hospitour-accent: #e67e22;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-danger: #e74c3c;
+            --hospitour-gray: #95a5a6;
         }
         
         body{ 
             font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; 
-            background:#f7f5f1; 
+            background:#f5f7fa; 
             margin: 0;
             padding: 0;
         }
         
         .sidebar{ 
             width: 280px; 
-            background: var(--brown); 
+            background: linear-gradient(180deg, var(--hospitour-primary) 0%, #154360 100%);
             height: 100vh; 
             position: fixed; 
             padding-top: 20px; 
-            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            box-shadow: 3px 0 15px rgba(0,0,0,0.1);
             z-index: 100;
         }
         
+        .sidebar-brand {
+            padding: 0 25px 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .sidebar-brand h3 {
+            color: white;
+            font-weight: 700;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sidebar-brand h3 i {
+            color: var(--hospitour-accent);
+        }
+
+        .sidebar-brand p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            margin: 5px 0 0 0;
+        }
+        
         .sidebar a{ 
-            color: rgba(255, 255, 255, 0.8); 
-            padding: 12px 20px; 
+            color: rgba(255, 255, 255, 0.85); 
+            padding: 12px 25px; 
             display: flex;
             align-items: center;
             text-decoration: none; 
             transition: all 0.3s ease;
-            border-left: 3px solid transparent;
+            border-left: 4px solid transparent;
             margin-bottom: 5px;
+            font-weight: 500;
+            position: relative;
         }
         
         .sidebar a i {
@@ -52,7 +84,20 @@
         .sidebar a:hover, .sidebar a.active{ 
             background: rgba(255,255,255,0.1); 
             color: white; 
-            border-left: 3px solid var(--gold); 
+            border-left: 4px solid var(--hospitour-accent); 
+        }
+
+        .sidebar a.active::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 6px solid #f5f7fa;
         }
         
         .main-content{ 
@@ -66,7 +111,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
-            padding-bottom: 15px;
+            padding-bottom: 20px;
             border-bottom: 1px solid rgba(0,0,0,0.1);
         }
         
@@ -77,29 +122,31 @@
         }
         
         .user-avatar {
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            background: var(--light-gold);
+            background: var(--hospitour-secondary);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold);
-            font-size: 1.2rem;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
         }
         
         .event-card {
             border-radius: 12px;
             border: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
             overflow: hidden;
             height: 100%;
+            border-top: 4px solid var(--hospitour-primary);
         }
         
         .event-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .event-card-header {
@@ -112,8 +159,8 @@
         }
         
         .event-type-badge {
-            background: var(--gold);
-            color: var(--brown);
+            background: var(--hospitour-accent);
+            color: white;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -121,54 +168,92 @@
         }
         
         .task-list-item {
-            border-left: 4px solid #0d6efd;
+            border-left: 4px solid var(--hospitour-secondary);
             padding-left: 15px;
             transition: all 0.2s ease;
         }
         
         .task-list-item:hover {
-            background-color: rgba(13, 110, 253, 0.05);
+            background-color: rgba(52, 152, 219, 0.05);
         }
         
         .task-completed {
-            border-left-color: #198754;
+            border-left-color: var(--hospitour-success);
             opacity: 0.8;
         }
         
         .task-overdue {
-            border-left-color: #dc3545;
+            border-left-color: var(--hospitour-danger);
         }
         
         .stats-card {
             background: white;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             text-align: center;
+            border-top: 4px solid var(--hospitour-primary);
         }
         
         .stats-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--brown);
+            color: var(--hospitour-primary);
             margin-bottom: 5px;
         }
         
         .stats-label {
-            color: var(--brown);
+            color: var(--hospitour-dark);
             font-weight: 500;
             font-size: 0.9rem;
         }
         
-        .btn-gold {
-            background: var(--gold);
-            color: var(--brown);
-            font-weight: 600;
+        .btn-hospitour {
+            background: var(--hospitour-primary);
+            color: white;
             border: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
         }
         
-        .btn-gold:hover {
-            background: #b8943a;
+        .btn-hospitour:hover {
+            background: #154360;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-hospitour-secondary {
+            background: var(--hospitour-secondary);
+            color: white;
+            border: none;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hospitour-secondary:hover {
+            background: #2980b9;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-hospitour-outline {
+            background: transparent;
+            color: var(--hospitour-primary);
+            border: 1px solid var(--hospitour-primary);
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hospitour-outline:hover {
+            background: var(--hospitour-primary);
             color: white;
         }
         
@@ -176,7 +261,8 @@
             background: white;
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--hospitour-primary);
         }
         
         .calendar-day {
@@ -188,12 +274,12 @@
         }
         
         .calendar-day:hover {
-            background: var(--light-gold);
+            background: rgba(52, 152, 219, 0.1);
         }
         
         .calendar-day.event {
-            background: var(--gold);
-            color: var(--brown);
+            background: var(--hospitour-accent);
+            color: white;
             font-weight: 600;
         }
         
@@ -208,16 +294,71 @@
             position: absolute;
             bottom: 20px;
             width: 100%;
-            padding: 0 20px;
+            padding: 0 25px;
+        }
+        
+        .text-hospitour {
+            color: var(--hospitour-primary);
+        }
+        
+        .text-hospitour-secondary {
+            color: var(--hospitour-secondary);
+        }
+        
+        .plan-badge {
+            background: var(--hospitour-accent);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 5px;
+        }
+        
+        .notification-badge {
+            background: var(--hospitour-accent);
+            color: white;
+            border-radius: 10px;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+        
+        .feature-restricted {
+            position: relative;
+            opacity: 0.7;
+        }
+        
+        .feature-restricted::after {
+            content: "Upgrade Required";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .feature-restricted:hover::after {
+            opacity: 1;
         }
         
         @media (max-width: 992px) {
             .sidebar {
-                width: 70px;
+                width: 80px;
                 overflow: hidden;
             }
             
-            .sidebar .nav-text {
+            .sidebar .nav-text,
+            .sidebar-brand p,
+            .sidebar-brand h3 span {
                 display: none;
             }
             
@@ -227,11 +368,13 @@
             }
             
             .main-content {
-                margin-left: 70px;
+                margin-left: 80px;
             }
             
-            .brand-text {
-                display: none;
+            .notification-badge {
+                position: absolute;
+                top: 10px;
+                right: 10px;
             }
         }
         
@@ -252,7 +395,7 @@
             
             .sidebar a:hover, .sidebar a.active {
                 border-left: none;
-                border-bottom: 3px solid var(--gold);
+                border-bottom: 3px solid var(--hospitour-accent);
             }
             
             .main-content {
@@ -276,41 +419,47 @@
 <body>
     
     <div class="sidebar">
-        <div class="text-center mb-4 px-3">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="user-avatar">
-                    <i class="bi bi-building"></i>
-                </div>
-                <div class="ms-2">
-                    <h5 class="text-white mb-0 brand-text">HospiPro</h5>
-                    <small class="text-gold brand-text">Business Operations</small>
-                </div>
-            </div>
+        <div class="sidebar-brand">
+            <h3><i class="bi bi-building"></i> <span>HospiTour</span></h3>
+            <p>Tourism Services Management</p>
         </div>
-        
+
         <a href="dashboard.html">
             <i class="bi bi-speedometer2"></i>
             <span class="nav-text">Dashboard</span>
         </a>
         <a href="rooms.html">
             <i class="bi bi-house-door"></i>
-            <span class="nav-text">Accommodation Mgmt</span>
+            <span class="nav-text">Accommodation</span>
         </a>
         <a href="restaurant.html">
             <i class="bi bi-cup-hot"></i>
             <span class="nav-text">Restaurant & F&B</span>
         </a>
-        <a href="events.html" class="active">
+        <a href="tourism.html" class="active">
+            <i class="bi bi-geo-alt"></i>
+            <span class="nav-text">Tourism Services</span>
+            <span class="notification-badge">5</span>
+        </a>
+        <a href="events.html">
             <i class="bi bi-calendar-event"></i>
             <span class="nav-text">Events & Planning</span>
+        </a>
+        <a href="staff.html">
+            <i class="bi bi-people"></i>
+            <span class="nav-text">Staff Management</span>
+        </a>
+        <a href="reports.html">
+            <i class="bi bi-graph-up"></i>
+            <span class="nav-text">Reports & Analytics</span>
         </a>
         <a href="settings.html">
             <i class="bi bi-gear"></i>
             <span class="nav-text">Settings & Billing</span>
         </a>
-        
+
         <div class="sidebar-footer">
-            <hr class="text-white-50">
+            <hr class="text-white-50" />
             <a href="#" id="logoutBtn" class="d-flex align-items-center">
                 <i class="bi bi-box-arrow-right"></i>
                 <span class="nav-text">Log Out</span>
@@ -321,8 +470,8 @@
     <div class="main-content">
         <div class="header-section">
             <div>
-                <h1 class="mb-2 text-brown">Events & Planning Management</h1>
-                <p class="small text-muted mb-0">Manage your events, tasks, and schedules in one place</p>
+                <h1 class="mb-2 text-hospitour">Events & Planning Management</h1>
+                <p class="text-muted mb-0" id="planLevel">Loading Plan Level...</p>
             </div>
             
             <div class="user-info">
@@ -330,21 +479,21 @@
                     <i class="bi bi-person-circle"></i>
                 </div>
                 <div>
-                    <p class="mb-0 fw-bold" id="userName">Business User</p>
-                    <p class="mb-0 small text-muted" id="userEmail">user@example.com</p>
+                    <p class="mb-0 fw-bold" id="userName">Loading...</p>
+                    <p class="mb-0 small text-muted" id="userEmail">Loading...</p>
                 </div>
             </div>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
-            <button class="btn btn-gold" data-bs-toggle="modal" data-bs-target="#newEventModal">
+            <button class="btn btn-hospitour" data-bs-toggle="modal" data-bs-target="#newEventModal">
                 <i class="bi bi-plus-circle"></i> Create New Event
             </button>
             <div class="d-flex gap-2 flex-wrap">
-                <button class="btn btn-outline-secondary">
+                <button class="btn btn-hospitour-outline" id="vendorManagementBtn">
                     <i class="bi bi-people"></i> Vendor Management
                 </button>
-                <button class="btn btn-outline-danger" id="ticketingBtn">
+                <button class="btn btn-hospitour-outline" id="ticketingBtn">
                     <i class="bi bi-ticket-perforated"></i> Ticketing & Registration
                 </button>
             </div>
@@ -354,25 +503,25 @@
         <div class="row g-4 mb-5">
             <div class="col-md-3 col-sm-6">
                 <div class="stats-card">
-                    <div class="stats-number">5</div>
+                    <div class="stats-number" id="upcomingEventsCount">5</div>
                     <div class="stats-label">Upcoming Events</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stats-card">
-                    <div class="stats-number">12</div>
+                    <div class="stats-number" id="pendingTasksCount">12</div>
                     <div class="stats-label">Pending Tasks</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stats-card">
-                    <div class="stats-number">3</div>
+                    <div class="stats-number" id="thisWeekEventsCount">3</div>
                     <div class="stats-label">This Week</div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
                 <div class="stats-card">
-                    <div class="stats-number">2</div>
+                    <div class="stats-number" id="attentionEventsCount">2</div>
                     <div class="stats-label">Require Attention</div>
                 </div>
             </div>
@@ -380,163 +529,40 @@
 
         <div class="row g-4">
             <div class="col-lg-8">
-                <h3 class="mb-3 text-brown">Upcoming Events</h3>
-                <div class="row g-4 mb-5">
-                    
-                    <div class="col-md-6">
-                        <div class="event-card">
-                            <div class="event-card-header">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="text-primary mb-1">Q4 Sales Conference</h5>
-                                    <span class="event-type-badge">Conference</span>
-                                </div>
-                                <p class="small text-muted mb-2">
-                                    <i class="bi bi-calendar"></i> October 28, 2025<br>
-                                    <i class="bi bi-geo-alt"></i> Grand Ballroom
-                                </p>
-                            </div>
-                            <div class="event-card-body">
-                                <span class="badge bg-secondary mb-2">Catering: External</span>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <a href="#" class="small fw-bold text-decoration-none">
-                                        <i class="bi bi-list-check"></i> View Planning Checklist
-                                    </a>
-                                    <div class="text-warning">
-                                        <i class="bi bi-exclamation-triangle"></i> 3 pending
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="event-card">
-                            <div class="event-card-header">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="text-success mb-1">The Smiths' Wedding</h5>
-                                    <span class="event-type-badge">Wedding</span>
-                                </div>
-                                <p class="small text-muted mb-2">
-                                    <i class="bi bi-calendar"></i> November 15, 2025<br>
-                                    <i class="bi bi-geo-alt"></i> Garden Terrace
-                                </p>
-                            </div>
-                            <div class="event-card-body">
-                                <span class="badge bg-warning mb-2">Catering: In-House</span>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <a href="#" class="small fw-bold text-decoration-none">
-                                        <i class="bi bi-person"></i> Manage Client Details
-                                    </a>
-                                    <div class="text-success">
-                                        <i class="bi bi-check-circle"></i> On track
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="event-card">
-                            <div class="event-card-header">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="text-info mb-1">Corporate Gala Dinner</h5>
-                                    <span class="event-type-badge">Gala</span>
-                                </div>
-                                <p class="small text-muted mb-2">
-                                    <i class="bi bi-calendar"></i> December 5, 2025<br>
-                                    <i class="bi bi-geo-alt"></i> Main Dining Hall
-                                </p>
-                            </div>
-                            <div class="event-card-body">
-                                <span class="badge bg-info mb-2">Catering: In-House</span>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <a href="#" class="small fw-bold text-decoration-none">
-                                        <i class="bi bi-list-check"></i> View Details
-                                    </a>
-                                    <div class="text-primary">
-                                        <i class="bi bi-clock"></i> Planning
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6">
-                        <div class="event-card">
-                            <div class="event-card-header">
-                                <div class="d-flex justify-content-between align-items-start mb-2">
-                                    <h5 class="text-warning mb-1">Product Launch Event</h5>
-                                    <span class="event-type-badge">Launch</span>
-                                </div>
-                                <p class="small text-muted mb-2">
-                                    <i class="bi bi-calendar"></i> January 12, 2026<br>
-                                    <i class="bi bi-geo-alt"></i> Conference Center
-                                </p>
-                            </div>
-                            <div class="event-card-body">
-                                <span class="badge bg-secondary mb-2">Catering: External</span>
-                                <div class="d-flex justify-content-between align-items-center mt-3">
-                                    <a href="#" class="small fw-bold text-decoration-none">
-                                        <i class="bi bi-list-check"></i> View Planning Checklist
-                                    </a>
-                                    <div class="text-secondary">
-                                        <i class="bi bi-dash-circle"></i> Not started
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <h3 class="mb-3 text-hospitour">Upcoming Events</h3>
+                <div class="row g-4 mb-5" id="eventsContainer">
+                    <!-- Events will be dynamically loaded here -->
                 </div>
                 
-                <h3 class="mb-3 text-brown">Planning Tasks (Q4 Conference)</h3>
+                <h3 class="mb-3 text-hospitour">Planning Tasks</h3>
                 <div class="card p-4 mb-5">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-circle me-2 text-primary"></i>
-                                <span class="small">Finalize seating chart with client</span>
-                            </div>
-                            <span class="badge bg-warning">Due: Oct 20</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item task-completed">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-check-circle me-2 text-success"></i>
-                                <span class="small text-muted text-decoration-line-through">Catering menu approved</span>
-                            </div>
-                            <span class="badge bg-success">Complete</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item task-overdue">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-exclamation-circle me-2 text-danger"></i>
-                                <span class="small">Send final invoice reminder</span>
-                            </div>
-                            <span class="badge bg-danger">Overdue</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-circle me-2 text-primary"></i>
-                                <span class="small">Confirm AV equipment setup</span>
-                            </div>
-                            <span class="badge bg-info">Due: Oct 25</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center task-list-item">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-circle me-2 text-primary"></i>
-                                <span class="small">Arrange transportation for speakers</span>
-                            </div>
-                            <span class="badge bg-secondary">Due: Oct 26</span>
-                        </li>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="text-hospitour mb-0" id="selectedEventTitle">Q4 Sales Conference</h5>
+                        <select class="form-select w-auto" id="eventSelector">
+                            <option value="q4-conference">Q4 Sales Conference</option>
+                            <option value="wedding">The Smiths' Wedding</option>
+                            <option value="gala">Corporate Gala Dinner</option>
+                            <option value="launch">Product Launch Event</option>
+                        </select>
+                    </div>
+                    <ul class="list-group list-group-flush" id="tasksList">
+                        <!-- Tasks will be dynamically loaded here -->
                     </ul>
+                    <div class="mt-3">
+                        <button class="btn btn-hospitour-outline btn-sm" id="addTaskBtn">
+                            <i class="bi bi-plus"></i> Add New Task
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <div class="col-lg-4">
                 <div class="calendar-widget mb-4">
                     <div class="calendar-header">
-                        <h5 class="text-brown mb-0">October 2025</h5>
+                        <h5 class="text-hospitour mb-0" id="calendarMonth">October 2025</h5>
                         <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-chevron-left"></i></button>
-                            <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-chevron-right"></i></button>
+                            <button class="btn btn-sm btn-hospitour-outline" id="prevMonthBtn"><i class="bi bi-chevron-left"></i></button>
+                            <button class="btn btn-sm btn-hospitour-outline" id="nextMonthBtn"><i class="bi bi-chevron-right"></i></button>
                         </div>
                     </div>
                     <div class="row text-center fw-bold small mb-2">
@@ -548,66 +574,24 @@
                         <div class="col p-1">F</div>
                         <div class="col p-1">S</div>
                     </div>
-                    <div class="row">
-                        <div class="col p-1"><div class="calendar-day text-muted">29</div></div>
-                        <div class="col p-1"><div class="calendar-day text-muted">30</div></div>
-                        <div class="col p-1"><div class="calendar-day">1</div></div>
-                        <div class="col p-1"><div class="calendar-day">2</div></div>
-                        <div class="col p-1"><div class="calendar-day">3</div></div>
-                        <div class="col p-1"><div class="calendar-day">4</div></div>
-                        <div class="col p-1"><div class="calendar-day">5</div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col p-1"><div class="calendar-day">6</div></div>
-                        <div class="col p-1"><div class="calendar-day">7</div></div>
-                        <div class="col p-1"><div class="calendar-day">8</div></div>
-                        <div class="col p-1"><div class="calendar-day">9</div></div>
-                        <div class="col p-1"><div class="calendar-day">10</div></div>
-                        <div class="col p-1"><div class="calendar-day">11</div></div>
-                        <div class="col p-1"><div class="calendar-day">12</div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col p-1"><div class="calendar-day">13</div></div>
-                        <div class="col p-1"><div class="calendar-day">14</div></div>
-                        <div class="col p-1"><div class="calendar-day">15</div></div>
-                        <div class="col p-1"><div class="calendar-day">16</div></div>
-                        <div class="col p-1"><div class="calendar-day">17</div></div>
-                        <div class="col p-1"><div class="calendar-day">18</div></div>
-                        <div class="col p-1"><div class="calendar-day">19</div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col p-1"><div class="calendar-day">20</div></div>
-                        <div class="col p-1"><div class="calendar-day">21</div></div>
-                        <div class="col p-1"><div class="calendar-day">22</div></div>
-                        <div class="col p-1"><div class="calendar-day">23</div></div>
-                        <div class="col p-1"><div class="calendar-day">24</div></div>
-                        <div class="col p-1"><div class="calendar-day">25</div></div>
-                        <div class="col p-1"><div class="calendar-day">26</div></div>
-                    </div>
-                    <div class="row">
-                        <div class="col p-1"><div class="calendar-day">27</div></div>
-                        <div class="col p-1"><div class="calendar-day event">28</div></div>
-                        <div class="col p-1"><div class="calendar-day">29</div></div>
-                        <div class="col p-1"><div class="calendar-day">30</div></div>
-                        <div class="col p-1"><div class="calendar-day">31</div></div>
-                        <div class="col p-1"><div class="calendar-day text-muted">1</div></div>
-                        <div class="col p-1"><div class="calendar-day text-muted">2</div></div>
+                    <div id="calendarDays">
+                        <!-- Calendar days will be dynamically loaded here -->
                     </div>
                 </div>
                 
                 <div class="card p-4">
-                    <h5 class="text-brown mb-3">Quick Actions</h5>
+                    <h5 class="text-hospitour mb-3">Quick Actions</h5>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-outline-primary text-start">
+                        <button class="btn btn-hospitour-outline text-start" id="generateReportBtn">
                             <i class="bi bi-file-earmark-text"></i> Generate Event Report
                         </button>
-                        <button class="btn btn-outline-primary text-start">
+                        <button class="btn btn-hospitour-outline text-start" id="sendUpdatesBtn">
                             <i class="bi bi-envelope"></i> Send Client Updates
                         </button>
-                        <button class="btn btn-outline-primary text-start">
+                        <button class="btn btn-hospitour-outline text-start" id="printScheduleBtn">
                             <i class="bi bi-printer"></i> Print Event Schedule
                         </button>
-                        <button class="btn btn-outline-primary text-start">
+                        <button class="btn btn-hospitour-outline text-start" id="shareTeamBtn">
                             <i class="bi bi-share"></i> Share with Team
                         </button>
                     </div>
@@ -616,6 +600,7 @@
         </div>
     </div>
     
+    <!-- New Event Modal -->
     <div class="modal fade" id="newEventModal" tabindex="-1" aria-labelledby="newEventModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -624,14 +609,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="newEventForm">
                         <div class="mb-3">
                             <label class="form-label">Event Name</label>
-                            <input type="text" class="form-control" placeholder="Enter event name" required>
+                            <input type="text" class="form-control" id="eventName" placeholder="Enter event name" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Event Type</label>
-                            <select class="form-select" required>
+                            <select class="form-select" id="eventType" required>
                                 <option value="">Select Event Type</option>
                                 <option value="wedding">Wedding</option>
                                 <option value="conference">Conference</option>
@@ -643,17 +628,50 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Event Date</label>
-                            <input type="date" class="form-control" placeholder="Event Date" required>
+                            <input type="date" class="form-control" id="eventDate" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Location</label>
-                            <input type="text" class="form-control" placeholder="Event location">
+                            <input type="text" class="form-control" id="eventLocation" placeholder="Event location">
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description and Notes</label>
-                            <textarea class="form-control" rows="3" placeholder="Event details and special requirements"></textarea>
+                            <textarea class="form-control" id="eventDescription" rows="3" placeholder="Event details and special requirements"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-gold d-block w-100">Save Event</button>
+                        <button type="submit" class="btn btn-hospitour d-block w-100">Save Event</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Task Modal -->
+    <div class="modal fade" id="addTaskModal" tabindex="-1" aria-labelledby="addTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTaskModalLabel">Add New Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addTaskForm">
+                        <div class="mb-3">
+                            <label class="form-label">Task Description</label>
+                            <input type="text" class="form-control" id="taskDescription" placeholder="Enter task description" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Due Date</label>
+                            <input type="date" class="form-control" id="taskDueDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Priority</label>
+                            <select class="form-select" id="taskPriority" required>
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-hospitour d-block w-100">Add Task</button>
                     </form>
                 </div>
             </div>
@@ -663,45 +681,451 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Check if user is logged in
+        // Initialize data and UI
         document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            initializeUserData();
+            loadEvents();
+            loadTasks('q4-conference');
+            setupCalendar();
+            setupEventListeners();
+        });
+
+        // User data management
+        function initializeUserData() {
+            let userData = localStorage.getItem('hospitour_business_user');
             
-            if (!currentUser) {
-                window.location.href = 'login.html';
-                return;
+            if (!userData) {
+                // Create default user data
+                userData = {
+                    name: 'Alex Johnson',
+                    email: 'alex.johnson@hospitour.com',
+                    plan: 'free',
+                    lastLogin: new Date().toISOString(),
+                    businessName: 'Grand Plaza Hotel'
+                };
+                localStorage.setItem('hospitour_business_user', JSON.stringify(userData));
+            } else {
+                userData = JSON.parse(userData);
             }
-
-            // Update user info
-            if (currentUser.name) {
-                document.getElementById('userName').textContent = currentUser.name;
-            }
-            if (currentUser.email) {
-                document.getElementById('userEmail').textContent = currentUser.email;
-            }
-
-            // Plan gating for features
-            const userPlan = currentUser.plan || 'free';
-            const ticketingBtn = document.getElementById('ticketingBtn');
             
-            if (userPlan !== 'enterprise') {
-                ticketingBtn.classList.remove('btn-outline-danger');
-                ticketingBtn.classList.add('btn-secondary');
-                ticketingBtn.disabled = true;
-                ticketingBtn.title = 'Upgrade to the Enterprise Plan to access Ticketing and Registration.';
-            }
+            updateUserInfo(userData);
+            checkFeatureAccess(userData.plan);
+            return userData;
+        }
 
-            // Logout functionality
+        function updateUserInfo(userData) {
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('userEmail').textContent = userData.email;
+            document.getElementById('planLevel').innerHTML = `Current Plan: <span class="plan-badge">${userData.plan.toUpperCase()}</span> | Subscription Active`;
+        }
+
+        // Feature access control based on plan
+        function checkFeatureAccess(plan) {
+            const restrictedFeatures = [
+                'vendorManagementBtn',
+                'ticketingBtn',
+                'generateReportBtn',
+                'sendUpdatesBtn',
+                'printScheduleBtn',
+                'shareTeamBtn'
+            ];
+
+            if (plan === 'free') {
+                restrictedFeatures.forEach(featureId => {
+                    const element = document.getElementById(featureId);
+                    if (element) {
+                        element.classList.add('feature-restricted');
+                        element.disabled = true;
+                        element.title = 'Upgrade to Pro or Enterprise plan to access this feature';
+                    }
+                });
+            } else if (plan === 'pro') {
+                // Enable some features for Pro users
+                document.getElementById('vendorManagementBtn').classList.remove('feature-restricted');
+                document.getElementById('vendorManagementBtn').disabled = false;
+                document.getElementById('vendorManagementBtn').removeAttribute('title');
+                
+                document.getElementById('generateReportBtn').classList.remove('feature-restricted');
+                document.getElementById('generateReportBtn').disabled = false;
+                document.getElementById('generateReportBtn').removeAttribute('title');
+                
+                document.getElementById('printScheduleBtn').classList.remove('feature-restricted');
+                document.getElementById('printScheduleBtn').disabled = false;
+                document.getElementById('printScheduleBtn').removeAttribute('title');
+            }
+        }
+
+        // Event management
+        function loadEvents() {
+            // In a real app, this would come from an API
+            const events = [
+                {
+                    id: 'q4-conference',
+                    name: 'Q4 Sales Conference',
+                    type: 'Conference',
+                    date: '2025-10-28',
+                    location: 'Grand Ballroom',
+                    status: 'warning',
+                    statusText: '3 pending',
+                    catering: 'External'
+                },
+                {
+                    id: 'wedding',
+                    name: 'The Smiths\' Wedding',
+                    type: 'Wedding',
+                    date: '2025-11-15',
+                    location: 'Garden Terrace',
+                    status: 'success',
+                    statusText: 'On track',
+                    catering: 'In-House'
+                },
+                {
+                    id: 'gala',
+                    name: 'Corporate Gala Dinner',
+                    type: 'Gala',
+                    date: '2025-12-05',
+                    location: 'Main Dining Hall',
+                    status: 'primary',
+                    statusText: 'Planning',
+                    catering: 'In-House'
+                },
+                {
+                    id: 'launch',
+                    name: 'Product Launch Event',
+                    type: 'Launch',
+                    date: '2026-01-12',
+                    location: 'Conference Center',
+                    status: 'secondary',
+                    statusText: 'Not started',
+                    catering: 'External'
+                }
+            ];
+
+            const eventsContainer = document.getElementById('eventsContainer');
+            eventsContainer.innerHTML = '';
+
+            events.forEach(event => {
+                const eventDate = new Date(event.date);
+                const formattedDate = eventDate.toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    day: 'numeric', 
+                    year: 'numeric' 
+                });
+
+                const eventCard = document.createElement('div');
+                eventCard.className = 'col-md-6';
+                eventCard.innerHTML = `
+                    <div class="event-card">
+                        <div class="event-card-header">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="text-${event.status} mb-1">${event.name}</h5>
+                                <span class="event-type-badge">${event.type}</span>
+                            </div>
+                            <p class="small text-muted mb-2">
+                                <i class="bi bi-calendar"></i> ${formattedDate}<br>
+                                <i class="bi bi-geo-alt"></i> ${event.location}
+                            </p>
+                        </div>
+                        <div class="event-card-body">
+                            <span class="badge bg-${event.catering === 'In-House' ? 'warning' : 'secondary'} mb-2">Catering: ${event.catering}</span>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <a href="#" class="small fw-bold text-decoration-none view-checklist" data-event-id="${event.id}">
+                                    <i class="bi bi-list-check"></i> View Planning Checklist
+                                </a>
+                                <div class="text-${event.status}">
+                                    <i class="bi bi-${getStatusIcon(event.status)}"></i> ${event.statusText}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                eventsContainer.appendChild(eventCard);
+            });
+
+            // Add event listeners to view checklist buttons
+            document.querySelectorAll('.view-checklist').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const eventId = this.getAttribute('data-event-id');
+                    document.getElementById('eventSelector').value = eventId;
+                    loadTasks(eventId);
+                });
+            });
+        }
+
+        function getStatusIcon(status) {
+            switch(status) {
+                case 'warning': return 'exclamation-triangle';
+                case 'success': return 'check-circle';
+                case 'primary': return 'clock';
+                case 'secondary': return 'dash-circle';
+                default: return 'circle';
+            }
+        }
+
+        // Task management
+        function loadTasks(eventId) {
+            // In a real app, this would come from an API
+            const tasks = {
+                'q4-conference': [
+                    { id: 1, description: 'Finalize seating chart with client', dueDate: '2025-10-20', completed: false, overdue: false },
+                    { id: 2, description: 'Catering menu approved', dueDate: '2025-10-15', completed: true, overdue: false },
+                    { id: 3, description: 'Send final invoice reminder', dueDate: '2025-10-18', completed: false, overdue: true },
+                    { id: 4, description: 'Confirm AV equipment setup', dueDate: '2025-10-25', completed: false, overdue: false },
+                    { id: 5, description: 'Arrange transportation for speakers', dueDate: '2025-10-26', completed: false, overdue: false }
+                ],
+                'wedding': [
+                    { id: 1, description: 'Finalize floral arrangements', dueDate: '2025-11-05', completed: false, overdue: false },
+                    { id: 2, description: 'Confirm wedding cake design', dueDate: '2025-11-01', completed: true, overdue: false },
+                    { id: 3, description: 'Schedule rehearsal dinner', dueDate: '2025-11-10', completed: false, overdue: false }
+                ],
+                'gala': [
+                    { id: 1, description: 'Send invitations to VIP guests', dueDate: '2025-11-20', completed: false, overdue: false },
+                    { id: 2, description: 'Finalize entertainment lineup', dueDate: '2025-11-25', completed: false, overdue: false }
+                ],
+                'launch': [
+                    { id: 1, description: 'Book keynote speakers', dueDate: '2025-12-15', completed: false, overdue: false },
+                    { id: 2, description: 'Design promotional materials', dueDate: '2025-12-20', completed: false, overdue: false }
+                ]
+            };
+
+            const eventTitles = {
+                'q4-conference': 'Q4 Sales Conference',
+                'wedding': 'The Smiths\' Wedding',
+                'gala': 'Corporate Gala Dinner',
+                'launch': 'Product Launch Event'
+            };
+
+            document.getElementById('selectedEventTitle').textContent = eventTitles[eventId];
+            const tasksList = document.getElementById('tasksList');
+            tasksList.innerHTML = '';
+
+            const eventTasks = tasks[eventId] || [];
+            
+            eventTasks.forEach(task => {
+                const taskItem = document.createElement('li');
+                taskItem.className = `list-group-item d-flex justify-content-between align-items-center task-list-item ${task.completed ? 'task-completed' : ''} ${task.overdue ? 'task-overdue' : ''}`;
+                
+                const dueDate = new Date(task.dueDate);
+                const formattedDueDate = dueDate.toLocaleDateString('en-US', { 
+                    month: 'short', 
+                    day: 'numeric' 
+                });
+                
+                taskItem.innerHTML = `
+                    <div class="d-flex align-items-center">
+                        <i class="bi ${task.completed ? 'bi-check-circle text-success' : task.overdue ? 'bi-exclamation-circle text-danger' : 'bi-circle text-primary'} me-2"></i>
+                        <span class="small ${task.completed ? 'text-muted text-decoration-line-through' : ''}">${task.description}</span>
+                    </div>
+                    <span class="badge bg-${task.completed ? 'success' : task.overdue ? 'danger' : 'info'}">${task.completed ? 'Complete' : `Due: ${formattedDueDate}`}</span>
+                `;
+                
+                // Add click event to toggle task completion
+                if (!task.completed) {
+                    taskItem.addEventListener('click', function() {
+                        toggleTaskCompletion(eventId, task.id);
+                    });
+                }
+                
+                tasksList.appendChild(taskItem);
+            });
+
+            // Update task counts
+            updateTaskCounts(eventTasks);
+        }
+
+        function toggleTaskCompletion(eventId, taskId) {
+            // In a real app, this would update the backend
+            alert(`Task ${taskId} for event ${eventId} marked as completed!`);
+            loadTasks(eventId);
+        }
+
+        function updateTaskCounts(tasks) {
+            const pendingTasks = tasks.filter(task => !task.completed).length;
+            const overdueTasks = tasks.filter(task => !task.completed && task.overdue).length;
+            
+            document.getElementById('pendingTasksCount').textContent = pendingTasks;
+            document.getElementById('attentionEventsCount').textContent = overdueTasks;
+        }
+
+        // Calendar functionality
+        function setupCalendar() {
+            const currentDate = new Date();
+            updateCalendar(currentDate);
+            
+            document.getElementById('prevMonthBtn').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                updateCalendar(currentDate);
+            });
+            
+            document.getElementById('nextMonthBtn').addEventListener('click', function() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                updateCalendar(currentDate);
+            });
+        }
+
+        function updateCalendar(date) {
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            
+            document.getElementById('calendarMonth').textContent = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
+            
+            const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+            const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDay = firstDay.getDay();
+            
+            let calendarHTML = '';
+            let dayCounter = 1;
+            
+            // Event dates (in a real app, this would come from the events data)
+            const eventDates = [28]; // October 28 has an event
+            
+            // Create calendar rows
+            for (let i = 0; i < 6; i++) {
+                calendarHTML += '<div class="row">';
+                
+                for (let j = 0; j < 7; j++) {
+                    if (i === 0 && j < startingDay) {
+                        // Days from previous month
+                        const prevMonthDays = new Date(date.getFullYear(), date.getMonth(), 0).getDate();
+                        const day = prevMonthDays - startingDay + j + 1;
+                        calendarHTML += `<div class="col p-1"><div class="calendar-day text-muted">${day}</div></div>`;
+                    } else if (dayCounter > daysInMonth) {
+                        // Days from next month
+                        const day = dayCounter - daysInMonth;
+                        calendarHTML += `<div class="col p-1"><div class="calendar-day text-muted">${day}</div></div>`;
+                        dayCounter++;
+                    } else {
+                        // Current month days
+                        const hasEvent = eventDates.includes(dayCounter);
+                        calendarHTML += `<div class="col p-1"><div class="calendar-day ${hasEvent ? 'event' : ''}">${dayCounter}</div></div>`;
+                        dayCounter++;
+                    }
+                }
+                
+                calendarHTML += '</div>';
+                
+                // Stop if we've displayed all days
+                if (dayCounter > daysInMonth) break;
+            }
+            
+            document.getElementById('calendarDays').innerHTML = calendarHTML;
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Event selector
+            document.getElementById('eventSelector').addEventListener('change', function() {
+                loadTasks(this.value);
+            });
+            
+            // Add task button
+            document.getElementById('addTaskBtn').addEventListener('click', function() {
+                const modal = new bootstrap.Modal(document.getElementById('addTaskModal'));
+                modal.show();
+            });
+            
+            // New event form
+            document.getElementById('newEventForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                createNewEvent();
+            });
+            
+            // Add task form
+            document.getElementById('addTaskForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                addNewTask();
+            });
+            
+            // Logout button
             document.getElementById('logoutBtn').addEventListener('click', function(e) {
                 e.preventDefault();
                 logoutUser();
             });
-        });
+            
+            // Quick action buttons
+            document.getElementById('generateReportBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Generating event report...');
+                }
+            });
+            
+            document.getElementById('sendUpdatesBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Sending client updates...');
+                }
+            });
+            
+            document.getElementById('printScheduleBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Printing event schedule...');
+                }
+            });
+            
+            document.getElementById('shareTeamBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Sharing with team...');
+                }
+            });
+            
+            document.getElementById('vendorManagementBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Opening vendor management...');
+                }
+            });
+            
+            document.getElementById('ticketingBtn').addEventListener('click', function() {
+                if (!this.disabled) {
+                    alert('Opening ticketing & registration...');
+                }
+            });
+        }
 
-        // Logout user
+        function createNewEvent() {
+            const eventName = document.getElementById('eventName').value;
+            const eventType = document.getElementById('eventType').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventLocation = document.getElementById('eventLocation').value;
+            const eventDescription = document.getElementById('eventDescription').value;
+            
+            // In a real app, this would save to a backend
+            alert(`New event "${eventName}" created successfully!`);
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('newEventModal'));
+            modal.hide();
+            document.getElementById('newEventForm').reset();
+            
+            // Reload events to show the new one
+            loadEvents();
+        }
+
+        function addNewTask() {
+            const taskDescription = document.getElementById('taskDescription').value;
+            const taskDueDate = document.getElementById('taskDueDate').value;
+            const taskPriority = document.getElementById('taskPriority').value;
+            
+            // In a real app, this would save to a backend
+            alert(`New task "${taskDescription}" added successfully!`);
+            
+            // Close modal and reset form
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addTaskModal'));
+            modal.hide();
+            document.getElementById('addTaskForm').reset();
+            
+            // Reload tasks to show the new one
+            const currentEvent = document.getElementById('eventSelector').value;
+            loadTasks(currentEvent);
+        }
+
         function logoutUser() {
-            localStorage.removeItem('currentUser');
-            window.location.href = 'login.html';
+            if (confirm('Are you sure you want to log out?')) {
+                localStorage.removeItem('hospitour_business_user');
+                alert('Logged out successfully from HospiTour');
+                window.location.href = 'login.html';
+            }
         }
     </script>
 </body>
