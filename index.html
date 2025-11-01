@@ -1,562 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HospiTour - Africa's Hospitality & Tourism Ecosystem</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        :root {
-            --hospitour-primary: #1a5276;
-            --hospitour-secondary: #3498db;
-            --hospitour-accent: #e67e22;
-            --hospitour-success: #27ae60;
-            --hospitour-warning: #f39c12;
-            --hospitour-light: #f8f9fa;
-            --hospitour-dark: #2c3e50;
+      :root {
+        --hospitour-primary: #1a5276;
+        --hospitour-secondary: #3498db;
+        --hospitour-accent: #e67e22;
+        --hospitour-success: #27ae60;
+        --hospitour-warning: #f39c12;
+        --hospitour-light: #f8f9fa;
+        --hospitour-dark: #2c3e50;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, sans-serif;
+        color: var(--hospitour-dark);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+        transition: all 0.3s ease;
+      }
+
+      .navbar.scrolled {
+        padding: 0.5rem 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        color: var(--hospitour-primary);
+        font-size: 1.5rem;
+      }
+
+      .nav-link {
+        color: var(--hospitour-dark) !important;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        transition: color 0.3s ease;
+        position: relative;
+      }
+
+      .nav-link:hover,
+      .nav-link.active {
+        color: var(--hospitour-accent) !important;
+      }
+
+      /* Language Selector Styles for Navbar */
+      .navbar .language-selector {
+        max-width: 120px;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        background: white;
+        color: #495057;
+        padding: 0.375rem 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      .navbar .language-selector:focus {
+        border-color: var(--hospitour-primary);
+        box-shadow: 0 0 0 0.2rem rgba(26, 82, 118, 0.25);
+      }
+
+      /* For scrolled navbar state */
+      .navbar.scrolled .language-selector {
+        background: rgba(255, 255, 255, 0.95);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--hospitour-accent);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .btn-primary {
+        background: var(--hospitour-primary);
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background: #144360;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+      }
+
+      .btn-accent {
+        background: var(--hospitour-accent);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-accent:hover {
+        background: #d35400;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+      }
+
+      .btn-outline-primary {
+        border: 2px solid var(--hospitour-primary);
+        color: var(--hospitour-primary);
+        background: transparent;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .btn-outline-primary:hover {
+        background: var(--hospitour-primary);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .hero-section {
+        background: linear-gradient(
+          135deg,
+          var(--hospitour-primary) 0%,
+          var(--hospitour-secondary) 100%
+        );
+        color: white;
+        padding: 8rem 0 6rem;
+        position: relative;
+        overflow: hidden;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+        background-size: cover;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-image {
+        position: relative;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
         }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--hospitour-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
+        50% {
+          transform: translateY(-20px);
         }
-        
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 0.5rem 0;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-        }
-        
-        .navbar-brand {
-            font-weight: 700;
-            color: var(--hospitour-primary);
-            font-size: 1.5rem;
-        }
-        
-        .nav-link {
-            color: var(--hospitour-dark) !important;
-            font-weight: 500;
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-link:hover, .nav-link.active {
-            color: var(--hospitour-accent) !important;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--hospitour-accent);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-link:hover::after, .nav-link.active::after {
-            width: 100%;
-        }
-        
-        .btn-primary {
-            background: var(--hospitour-primary);
-            border: none;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background: #144360;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
-        }
-        
-        .btn-accent {
-            background: var(--hospitour-accent);
-            color: white;
-            border: none;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-accent:hover {
-            background: #d35400;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
-        }
-        
-        .btn-outline-primary {
-            border: 2px solid var(--hospitour-primary);
-            color: var(--hospitour-primary);
-            background: transparent;
-            padding: 0.75rem 2rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-primary:hover {
-            background: var(--hospitour-primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
+      }
+
+      .section-title {
+        position: relative;
+        margin-bottom: 3rem;
+        color: var(--hospitour-dark);
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--hospitour-accent);
+        transition: width 0.3s ease;
+      }
+
+      .section-title.centered::after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      .solution-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2.5rem;
+        height: 100%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        border-top: 4px solid transparent;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .solution-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(230, 126, 34, 0.1),
+          transparent
+        );
+        transition: left 0.6s ease;
+      }
+
+      .solution-card:hover::before {
+        left: 100%;
+      }
+
+      .solution-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        border-top: 4px solid var(--hospitour-accent);
+      }
+
+      .solution-icon {
+        width: 70px;
+        height: 70px;
+        background: rgba(230, 126, 34, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        color: var(--hospitour-accent);
+        font-size: 1.8rem;
+        transition: all 0.3s ease;
+      }
+
+      .solution-card:hover .solution-icon {
+        transform: scale(1.1);
+        background: var(--hospitour-accent);
+        color: white;
+      }
+
+      .stats-section {
+        background: var(--hospitour-light);
+        padding: 4rem 0;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 1rem;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .stat-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .stat-number {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--hospitour-primary);
+        display: block;
+      }
+
+      .stat-label {
+        color: var(--hospitour-dark);
+        font-weight: 500;
+      }
+
+      .testimonial-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid var(--hospitour-accent);
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: all 0.6s ease;
+      }
+
+      .testimonial-card.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .testimonial-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 1rem;
+      }
+
+      .country-card {
+        background: white;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .country-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .country-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+      }
+
+      .country-flag {
+        height: 120px;
+        background-size: cover;
+        background-position: center;
+        position: relative;
+      }
+
+      .country-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .country-card:hover .country-overlay {
+        transform: translateY(0);
+      }
+
+      .partner-logo {
+        height: 60px;
+        filter: grayscale(100%);
+        opacity: 0.7;
+        transition: all 0.3s ease;
+        cursor: pointer;
+      }
+
+      .partner-logo:hover {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .footer {
+        background: var(--hospitour-dark);
+        color: white;
+        padding: 4rem 0 2rem;
+      }
+
+      .footer a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .footer a:hover {
+        color: white;
+      }
+
+      .social-links a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        margin-right: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .social-links a:hover {
+        background: var(--hospitour-accent);
+        transform: translateY(-2px);
+      }
+
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        display: none;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .notification.show {
+        display: block;
+        transform: translateX(0);
+      }
+
+      .notification.success {
+        background: var(--hospitour-success);
+      }
+
+      .notification.error {
+        background: #e74c3c;
+      }
+
+      .notification.info {
+        background: var(--hospitour-secondary);
+      }
+
+      .search-bar {
+        background: white;
+        border-radius: 50px;
+        padding: 0.5rem 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 2rem;
+        max-width: 600px;
+      }
+
+      .search-input {
+        border: none;
+        outline: none;
+        flex: 1;
+        padding: 0.5rem;
+      }
+
+      .search-btn {
+        background: var(--hospitour-accent);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 0.5rem 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .search-btn:hover {
+        background: #d35400;
+        transform: scale(1.05);
+      }
+
+      .newsletter-form {
+        max-width: 400px;
+      }
+
+      .newsletter-input {
+        border-radius: 50px 0 0 50px;
+        border: 2px solid var(--hospitour-primary);
+        border-right: none;
+        padding: 0.75rem 1.5rem;
+      }
+
+      .newsletter-btn {
+        border-radius: 0 50px 50px 0;
+        background: var(--hospitour-primary);
+        color: white;
+        border: 2px solid var(--hospitour-primary);
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .newsletter-btn:hover {
+        background: #144360;
+      }
+
+      .language-selector {
+        border: none;
+        background: transparent;
+        color: var(--hospitour-dark);
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
         .hero-section {
-            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
-            color: white;
-            padding: 8rem 0 6rem;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+          padding: 6rem 0 4rem;
+          text-align: center;
         }
-        
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
-            background-size: cover;
+
+        .hero-buttons {
+          justify-content: center;
         }
-        
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero-image {
-            position: relative;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .section-title {
-            position: relative;
-            margin-bottom: 3rem;
-            color: var(--hospitour-dark);
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--hospitour-accent);
-            transition: width 0.3s ease;
-        }
-        
-        .section-title.centered::after {
-            left: 50%;
-            transform: translateX(-50%);
-        }
-        
-        .solution-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2.5rem;
-            height: 100%;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            border-top: 4px solid transparent;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .solution-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
-            transition: left 0.6s ease;
-        }
-        
-        .solution-card:hover::before {
-            left: 100%;
-        }
-        
-        .solution-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-            border-top: 4px solid var(--hospitour-accent);
-        }
-        
-        .solution-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(230, 126, 34, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: var(--hospitour-accent);
-            font-size: 1.8rem;
-            transition: all 0.3s ease;
-        }
-        
-        .solution-card:hover .solution-icon {
-            transform: scale(1.1);
-            background: var(--hospitour-accent);
-            color: white;
-        }
-        
-        .stats-section {
-            background: var(--hospitour-light);
-            padding: 4rem 0;
-        }
-        
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .stat-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--hospitour-primary);
-            display: block;
-        }
-        
-        .stat-label {
-            color: var(--hospitour-dark);
-            font-weight: 500;
-        }
-        
-        .testimonial-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            border-left: 4px solid var(--hospitour-accent);
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: all 0.6s ease;
-        }
-        
-        .testimonial-card.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .testimonial-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1rem;
-        }
-        
-        .country-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .country-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .country-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-        }
-        
-        .country-flag {
-            height: 120px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .country-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            color: white;
-            padding: 1rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .country-card:hover .country-overlay {
-            transform: translateY(0);
-        }
-        
-        .partner-logo {
-            height: 60px;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .partner-logo:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.1);
-        }
-        
-        .footer {
-            background: var(--hospitour-dark);
-            color: white;
-            padding: 4rem 0 2rem;
-        }
-        
-        .footer a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer a:hover {
-            color: white;
-        }
-        
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            margin-right: 0.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .social-links a:hover {
-            background: var(--hospitour-accent);
-            transform: translateY(-2px);
-        }
-        
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            display: none;
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-        }
-        
-        .notification.show {
-            display: block;
-            transform: translateX(0);
-        }
-        
-        .notification.success {
-            background: var(--hospitour-success);
-        }
-        
-        .notification.error {
-            background: #e74c3c;
-        }
-        
-        .notification.info {
-            background: var(--hospitour-secondary);
-        }
-        
+
         .search-bar {
-            background: white;
-            border-radius: 50px;
-            padding: 0.5rem 1rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            margin-top: 2rem;
-            max-width: 600px;
+          flex-direction: column;
+          gap: 1rem;
+          border-radius: 12px;
         }
-        
+
         .search-input {
-            border: none;
-            outline: none;
-            flex: 1;
-            padding: 0.5rem;
+          border-radius: 8px;
         }
-        
+
         .search-btn {
-            background: var(--hospitour-accent);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 0.5rem 1.5rem;
-            transition: all 0.3s ease;
+          border-radius: 8px;
+          width: 100%;
         }
-        
-        .search-btn:hover {
-            background: #d35400;
-            transform: scale(1.05);
-        }
-        
-        .newsletter-form {
-            max-width: 400px;
-        }
-        
-        .newsletter-input {
-            border-radius: 50px 0 0 50px;
-            border: 2px solid var(--hospitour-primary);
-            border-right: none;
-            padding: 0.75rem 1.5rem;
-        }
-        
-        .newsletter-btn {
-            border-radius: 0 50px 50px 0;
-            background: var(--hospitour-primary);
-            color: white;
-            border: 2px solid var(--hospitour-primary);
-            padding: 0.75rem 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .newsletter-btn:hover {
-            background: #144360;
-        }
-        
-        .language-selector {
-            border: none;
-            background: transparent;
-            color: var(--hospitour-dark);
-            cursor: pointer;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-section {
-                padding: 6rem 0 4rem;
-                text-align: center;
-            }
-            
-            .hero-buttons {
-                justify-content: center;
-            }
-            
-            .search-bar {
-                flex-direction: column;
-                gap: 1rem;
-                border-radius: 12px;
-            }
-            
-            .search-input {
-                border-radius: 8px;
-            }
-            
-            .search-btn {
-                border-radius: 8px;
-                width: 100%;
-            }
-        }
-        
-        /* Animation classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.6s ease;
-        }
-        
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.6s ease;
-        }
-        
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+      }
+
+      /* Animation classes */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.6s ease;
+      }
+
+      .slide-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.6s ease;
+      }
+
+      .slide-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-hotel me-2"></i>HospiTour
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#" data-section="home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="businesses.html" data-section="businesses">For Businesses</a></li>
-                    <li class="nav-item"><a class="nav-link" href="professionals.html" data-section="professionals">For Professionals</a></li>
-                    <li class="nav-item"><a class="nav-link" href="solutions.html" data-section="solutions">Solutions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="resources.html" data-section="resources">Resources</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html" data-section="about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html" data-section="contact">Contact</a></li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <select class="language-selector form-select me-3" id="languageSelector">
-                        <option value="en">EN</option>
-                        <option value="fr">FR</option>
-                        <option value="pt">PT</option>
-                        <option value="sw">SW</option>
-                    </select>
-                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
-                    <a href="#" class="btn btn-primary" id="signupBtn">Sign Up</a>
-                </div>
-            </div>
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="fas fa-hotel me-2"></i>HospiTour
+        </a>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="businesses.html">For Businesses</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="professionals.html"
+                >For Professionals</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="solutions.html">Solutions</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="resources.html">Resources</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+
+          <!-- LANGUAGE SELECTOR IN NAVBAR (CORRECT PLACEMENT) -->
+          <div class="d-flex align-items-center">
+            <select
+              class="language-selector form-select me-3"
+              id="languageSelector"
+            >
+              <option value="en">🇬🇧 EN</option>
+              <option value="fr">🇫🇷 FR</option>
+              <option value="pt">🇵🇹 PT</option>
+              <option value="sw">🇹🇿 SW</option>
+            </select>
+            <a href="#" class="btn btn-outline-primary me-2" id="loginBtn"
+              >Login</a
+            >
+            <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
+          </div>
         </div>
+      </div>
     </nav>
 
     <!-- Notification Element -->
@@ -564,678 +629,868 @@
 
     <!-- Hero Section -->
     <section class="hero-section" id="home">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 hero-content">
-                    <h1 class="display-4 fw-bold mb-4 slide-in-left">Africa's Hospitality & Tourism Ecosystem</h1>
-                    <p class="lead mb-4 slide-in-left" data-delay="200">Connect, collaborate, and grow with Africa's premier platform for hospitality and tourism professionals. Join thousands of businesses already transforming their operations.</p>
-                    <div class="hero-buttons d-flex flex-wrap gap-3 slide-in-left" data-delay="400">
-                        <button class="btn btn-accent btn-lg" id="joinBusinessBtn">
-                            <i class="fas fa-building me-2"></i>Join as Business
-                        </button>
-                        <button class="btn btn-light btn-lg" id="joinProfessionalBtn">
-                            <i class="fas fa-user-tie me-2"></i>Join as Professional
-                        </button>
-                    </div>
-                    <div class="mt-4 d-flex flex-wrap gap-4 slide-in-left" data-delay="600">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-warning me-2"></i>
-                            <span>2,500+ Businesses</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-warning me-2"></i>
-                            <span>15 African Countries</span>
-                        </div>
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-check-circle text-warning me-2"></i>
-                            <span>98% Satisfaction</span>
-                        </div>
-                    </div>
-                    
-                    <!-- Search Bar -->
-                    <div class="search-bar d-flex align-items-center slide-in-left" data-delay="800">
-                        <input type="text" class="search-input" placeholder="Search for hotels, restaurants, tour operators...">
-                        <button class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <div class="hero-image">
-                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                             alt="African Hospitality" class="img-fluid rounded-3 shadow-lg" style="max-height: 500px;">
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 hero-content">
+            <h1 class="display-4 fw-bold mb-4 slide-in-left">
+              Africa's Hospitality & Tourism Ecosystem
+            </h1>
+            <p class="lead mb-4 slide-in-left" data-delay="200">
+              Connect, collaborate, and grow with Africa's premier platform for
+              hospitality and tourism professionals. Join thousands of
+              businesses already transforming their operations.
+            </p>
+            <div
+              class="hero-buttons d-flex flex-wrap gap-3 slide-in-left"
+              data-delay="400"
+            >
+              <button class="btn btn-accent btn-lg" id="joinBusinessBtn">
+                <i class="fas fa-building me-2"></i>Join as Business
+              </button>
+              <button class="btn btn-light btn-lg" id="joinProfessionalBtn">
+                <i class="fas fa-user-tie me-2"></i>Join as Professional
+              </button>
             </div>
+            <div
+              class="mt-4 d-flex flex-wrap gap-4 slide-in-left"
+              data-delay="600"
+            >
+              <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle text-warning me-2"></i>
+                <span>2,500+ Businesses</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle text-warning me-2"></i>
+                <span>15 African Countries</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="fas fa-check-circle text-warning me-2"></i>
+                <span>98% Satisfaction</span>
+              </div>
+            </div>
+
+            <!-- Search Bar -->
+            <div
+              class="search-bar d-flex align-items-center slide-in-left"
+              data-delay="800"
+            >
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search for hotels, restaurants, tour operators..."
+              />
+              <button class="search-btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-6 text-center">
+            <div class="hero-image">
+              <img
+                src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="African Hospitality"
+                class="img-fluid rounded-3 shadow-lg"
+                style="max-height: 500px"
+              />
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Solutions Section -->
     <section class="py-5" id="solutions">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="section-title centered fade-in">Complete Solutions for Your Business</h2>
-                <p class="text-muted fade-in" data-delay="200">Everything you need to thrive in Africa's growing hospitality industry</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6">
-                    <div class="solution-card fade-in" data-delay="0">
-                        <div class="solution-icon">
-                            <i class="fas fa-store"></i>
-                        </div>
-                        <h4>Business Marketplace</h4>
-                        <p class="text-muted">Showcase your services to millions of travelers and connect with industry partners across Africa.</p>
-                        <button class="btn btn-outline-primary btn-sm solution-learn-more">Learn More</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="solution-card fade-in" data-delay="100">
-                        <div class="solution-icon">
-                            <i class="fas fa-users-cog"></i>
-                        </div>
-                        <h4>Staff Management</h4>
-                        <p class="text-muted">Recruit, train, and manage your team with our comprehensive HR and scheduling tools.</p>
-                        <button class="btn btn-outline-primary btn-sm solution-learn-more">Learn More</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="solution-card fade-in" data-delay="200">
-                        <div class="solution-icon">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <h4>Digital Marketing</h4>
-                        <p class="text-muted">Reach global audiences with our marketing suite and distribution network.</p>
-                        <button class="btn btn-outline-primary btn-sm solution-learn-more">Learn More</button>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="solution-card fade-in" data-delay="300">
-                        <div class="solution-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h4>Operations Tools</h4>
-                        <p class="text-muted">Streamline bookings, payments, and operations with our integrated management system.</p>
-                        <button class="btn btn-outline-primary btn-sm solution-learn-more">Learn More</button>
-                    </div>
-                </div>
-            </div>
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="section-title centered fade-in">
+            Complete Solutions for Your Business
+          </h2>
+          <p class="text-muted fade-in" data-delay="200">
+            Everything you need to thrive in Africa's growing hospitality
+            industry
+          </p>
         </div>
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="solution-card fade-in" data-delay="0">
+              <div class="solution-icon">
+                <i class="fas fa-store"></i>
+              </div>
+              <h4>Business Marketplace</h4>
+              <p class="text-muted">
+                Showcase your services to millions of travelers and connect with
+                industry partners across Africa.
+              </p>
+              <button
+                class="btn btn-outline-primary btn-sm solution-learn-more"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="solution-card fade-in" data-delay="100">
+              <div class="solution-icon">
+                <i class="fas fa-users-cog"></i>
+              </div>
+              <h4>Staff Management</h4>
+              <p class="text-muted">
+                Recruit, train, and manage your team with our comprehensive HR
+                and scheduling tools.
+              </p>
+              <button
+                class="btn btn-outline-primary btn-sm solution-learn-more"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="solution-card fade-in" data-delay="200">
+              <div class="solution-icon">
+                <i class="fas fa-bullhorn"></i>
+              </div>
+              <h4>Digital Marketing</h4>
+              <p class="text-muted">
+                Reach global audiences with our marketing suite and distribution
+                network.
+              </p>
+              <button
+                class="btn btn-outline-primary btn-sm solution-learn-more"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="solution-card fade-in" data-delay="300">
+              <div class="solution-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h4>Operations Tools</h4>
+              <p class="text-muted">
+                Streamline bookings, payments, and operations with our
+                integrated management system.
+              </p>
+              <button
+                class="btn btn-outline-primary btn-sm solution-learn-more"
+              >
+                Learn More
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Stats Section -->
     <section class="stats-section" id="stats">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-lg-3 col-6 stat-item" data-delay="0">
-                    <span class="stat-number" id="businessesCount">0</span>
-                    <span class="stat-label">Businesses Connected</span>
-                </div>
-                <div class="col-lg-3 col-6 stat-item" data-delay="100">
-                    <span class="stat-number" id="countriesCount">0</span>
-                    <span class="stat-label">African Countries</span>
-                </div>
-                <div class="col-lg-3 col-6 stat-item" data-delay="200">
-                    <span class="stat-number" id="bookingsProcessed">0</span>
-                    <span class="stat-label">Bookings Processed</span>
-                </div>
-                <div class="col-lg-3 col-6 stat-item" data-delay="300">
-                    <span class="stat-number" id="satisfactionRate">0%</span>
-                    <span class="stat-label">Satisfaction Rate</span>
-                </div>
-            </div>
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-lg-3 col-6 stat-item" data-delay="0">
+            <span class="stat-number" id="businessesCount">0</span>
+            <span class="stat-label">Businesses Connected</span>
+          </div>
+          <div class="col-lg-3 col-6 stat-item" data-delay="100">
+            <span class="stat-number" id="countriesCount">0</span>
+            <span class="stat-label">African Countries</span>
+          </div>
+          <div class="col-lg-3 col-6 stat-item" data-delay="200">
+            <span class="stat-number" id="bookingsProcessed">0</span>
+            <span class="stat-label">Bookings Processed</span>
+          </div>
+          <div class="col-lg-3 col-6 stat-item" data-delay="300">
+            <span class="stat-number" id="satisfactionRate">0%</span>
+            <span class="stat-label">Satisfaction Rate</span>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Success Stories -->
     <section class="py-5" id="testimonials">
-        <div class="container">
-            <h2 class="section-title centered fade-in">Success Stories</h2>
-            <div class="row g-4">
-                <div class="col-lg-4">
-                    <div class="testimonial-card" data-delay="0">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="testimonial-avatar bg-primary text-white d-flex align-items-center justify-content-center fw-bold">
-                                AK
-                            </div>
-                            <div>
-                                <h5 class="mb-0">Amina Kwame</h5>
-                                <small class="text-muted">Hotel Owner, Lagos</small>
-                            </div>
-                        </div>
-                        <p>"HospiTour helped us increase our occupancy by 65% and connect with reliable staff. The platform transformed our business."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
+      <div class="container">
+        <h2 class="section-title centered fade-in">Success Stories</h2>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="testimonial-card" data-delay="0">
+              <div class="d-flex align-items-center mb-3">
+                <div
+                  class="testimonial-avatar bg-primary text-white d-flex align-items-center justify-content-center fw-bold"
+                >
+                  AK
                 </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-card" data-delay="100">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="testimonial-avatar bg-success text-white d-flex align-items-center justify-content-center fw-bold">
-                                AC
-                            </div>
-                            <div>
-                                <h5 class="mb-0">ABC Corporation</h5>
-                                <small class="text-muted">Corporate Events</small>
-                            </div>
-                        </div>
-                        <p>"The partnership network alone made joining worthwhile. We've expanded to 3 new countries through HospiTour connections."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                    </div>
+                <div>
+                  <h5 class="mb-0">Amina Kwame</h5>
+                  <small class="text-muted">Hotel Owner, Lagos</small>
                 </div>
-                <div class="col-lg-4">
-                    <div class="testimonial-card" data-delay="200">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="testimonial-avatar bg-warning text-white d-flex align-items-center justify-content-center fw-bold">
-                                SG
-                            </div>
-                            <div>
-                                <h5 class="mb-0">Sarah Green</h5>
-                                <small class="text-muted">Luxury Events</small>
-                            </div>
-                        </div>
-                        <p>"From staff management to digital marketing, HospiTour provides all the tools we need to compete internationally."</p>
-                        <div class="text-warning">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <p>
+                "HospiTour helped us increase our occupancy by 65% and connect
+                with reliable staff. The platform transformed our business."
+              </p>
+              <div class="text-warning">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-card" data-delay="100">
+              <div class="d-flex align-items-center mb-3">
+                <div
+                  class="testimonial-avatar bg-success text-white d-flex align-items-center justify-content-center fw-bold"
+                >
+                  AC
+                </div>
+                <div>
+                  <h5 class="mb-0">ABC Corporation</h5>
+                  <small class="text-muted">Corporate Events</small>
+                </div>
+              </div>
+              <p>
+                "The partnership network alone made joining worthwhile. We've
+                expanded to 3 new countries through HospiTour connections."
+              </p>
+              <div class="text-warning">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="testimonial-card" data-delay="200">
+              <div class="d-flex align-items-center mb-3">
+                <div
+                  class="testimonial-avatar bg-warning text-white d-flex align-items-center justify-content-center fw-bold"
+                >
+                  SG
+                </div>
+                <div>
+                  <h5 class="mb-0">Sarah Green</h5>
+                  <small class="text-muted">Luxury Events</small>
+                </div>
+              </div>
+              <p>
+                "From staff management to digital marketing, HospiTour provides
+                all the tools we need to compete internationally."
+              </p>
+              <div class="text-warning">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Regional Coverage -->
     <section class="py-5 bg-light" id="coverage">
-        <div class="container">
-            <h2 class="section-title centered fade-in">Across Africa</h2>
-            <p class="text-muted text-center mb-4 fade-in" data-delay="200">Growing network across the continent's most dynamic tourism markets</p>
-            <div class="row g-4">
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="0">
-                        <div class="country-flag" style="background-color: #1a5276;"></div>
-                        <div class="p-3">
-                            <h6>Nigeria</h6>
-                            <small class="text-muted">450+ Businesses</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">Nigeria</h6>
-                            <small>450+ Businesses</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="50">
-                        <div class="country-flag" style="background-color: #27ae60;"></div>
-                        <div class="p-3">
-                            <h6>Kenya</h6>
-                            <small class="text-muted">380+ Businesses</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">Kenya</h6>
-                            <small>380+ Businesses</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="100">
-                        <div class="country-flag" style="background-color: #e67e22;"></div>
-                        <div class="p-3">
-                            <h6>Ghana</h6>
-                            <small class="text-muted">320+ Businesses</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">Ghana</h6>
-                            <small>320+ Businesses</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="150">
-                        <div class="country-flag" style="background-color: #3498db;"></div>
-                        <div class="p-3">
-                            <h6>South Africa</h6>
-                            <small class="text-muted">290+ Businesses</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">South Africa</h6>
-                            <small>290+ Businesses</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="200">
-                        <div class="country-flag" style="background-color: #95a5a6;"></div>
-                        <div class="p-3">
-                            <h6>Egypt</h6>
-                            <small class="text-muted">270+ Businesses</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">Egypt</h6>
-                            <small>270+ Businesses</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-4 col-6">
-                    <div class="country-card" data-delay="250">
-                        <div class="country-flag" style="background-color: #e74c3c;"></div>
-                        <div class="p-3">
-                            <h6>+10 More</h6>
-                            <small class="text-muted">Growing rapidly</small>
-                        </div>
-                        <div class="country-overlay">
-                            <h6 class="mb-1">+10 More</h6>
-                            <small>Growing rapidly</small>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title centered fade-in">Across Africa</h2>
+        <p class="text-muted text-center mb-4 fade-in" data-delay="200">
+          Growing network across the continent's most dynamic tourism markets
+        </p>
+        <div class="row g-4">
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="0">
+              <div class="country-flag" style="background-color: #1a5276"></div>
+              <div class="p-3">
+                <h6>Nigeria</h6>
+                <small class="text-muted">450+ Businesses</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">Nigeria</h6>
+                <small>450+ Businesses</small>
+              </div>
             </div>
-            <div class="text-center mt-4 fade-in" data-delay="300">
-                <button class="btn btn-outline-primary" id="viewAllCountries">See All Countries</button>
+          </div>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="50">
+              <div class="country-flag" style="background-color: #27ae60"></div>
+              <div class="p-3">
+                <h6>Kenya</h6>
+                <small class="text-muted">380+ Businesses</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">Kenya</h6>
+                <small>380+ Businesses</small>
+              </div>
             </div>
+          </div>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="100">
+              <div class="country-flag" style="background-color: #e67e22"></div>
+              <div class="p-3">
+                <h6>Ghana</h6>
+                <small class="text-muted">320+ Businesses</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">Ghana</h6>
+                <small>320+ Businesses</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="150">
+              <div class="country-flag" style="background-color: #3498db"></div>
+              <div class="p-3">
+                <h6>South Africa</h6>
+                <small class="text-muted">290+ Businesses</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">South Africa</h6>
+                <small>290+ Businesses</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="200">
+              <div class="country-flag" style="background-color: #95a5a6"></div>
+              <div class="p-3">
+                <h6>Egypt</h6>
+                <small class="text-muted">270+ Businesses</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">Egypt</h6>
+                <small>270+ Businesses</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-4 col-6">
+            <div class="country-card" data-delay="250">
+              <div class="country-flag" style="background-color: #e74c3c"></div>
+              <div class="p-3">
+                <h6>+10 More</h6>
+                <small class="text-muted">Growing rapidly</small>
+              </div>
+              <div class="country-overlay">
+                <h6 class="mb-1">+10 More</h6>
+                <small>Growing rapidly</small>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="text-center mt-4 fade-in" data-delay="300">
+          <button class="btn btn-outline-primary" id="viewAllCountries">
+            See All Countries
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Partners -->
     <section class="py-5" id="partners">
-        <div class="container">
-            <h2 class="section-title centered fade-in">Trusted Partners</h2>
-            <div class="row align-items-center justify-content-center g-4">
-                <div class="col-lg-2 col-md-3 col-4 text-center">
-                    <div class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold text-primary">VISA</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 text-center">
-                    <div class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold text-success">Safaricom</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 text-center">
-                    <div class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold text-warning">Flutterwave</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 text-center">
-                    <div class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold text-info">Google</span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-4 text-center">
-                    <div class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center">
-                        <span class="fw-bold text-secondary">Mastercard</span>
-                    </div>
-                </div>
+      <div class="container">
+        <h2 class="section-title centered fade-in">Trusted Partners</h2>
+        <div class="row align-items-center justify-content-center g-4">
+          <div class="col-lg-2 col-md-3 col-4 text-center">
+            <div
+              class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center"
+            >
+              <span class="fw-bold text-primary">VISA</span>
             </div>
-            <div class="text-center mt-4 fade-in" data-delay="200">
-                <button class="btn btn-outline-primary" id="becomePartnerBtn">Become a Partner</button>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4 text-center">
+            <div
+              class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center"
+            >
+              <span class="fw-bold text-success">Safaricom</span>
             </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4 text-center">
+            <div
+              class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center"
+            >
+              <span class="fw-bold text-warning">Flutterwave</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4 text-center">
+            <div
+              class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center"
+            >
+              <span class="fw-bold text-info">Google</span>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-4 text-center">
+            <div
+              class="partner-logo bg-light rounded p-3 d-flex align-items-center justify-content-center"
+            >
+              <span class="fw-bold text-secondary">Mastercard</span>
+            </div>
+          </div>
         </div>
+        <div class="text-center mt-4 fade-in" data-delay="200">
+          <button class="btn btn-outline-primary" id="becomePartnerBtn">
+            Become a Partner
+          </button>
+        </div>
+      </div>
     </section>
 
     <!-- Newsletter -->
     <section class="py-5 bg-primary text-white">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 fade-in">
-                    <h3 class="fw-bold mb-3">Stay Updated with HospiTour</h3>
-                    <p class="mb-0">Get the latest insights, trends, and opportunities in Africa's hospitality industry delivered to your inbox.</p>
-                </div>
-                <div class="col-lg-6 fade-in" data-delay="200">
-                    <div class="d-flex newsletter-form ms-lg-auto">
-                        <input type="email" class="form-control newsletter-input" placeholder="Your email address">
-                        <button class="btn newsletter-btn" id="newsletterSubscribe">
-                            Subscribe
-                        </button>
-                    </div>
-                    <small class="text-white-50 mt-2 d-block">By subscribing, you agree to our Privacy Policy</small>
-                </div>
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6 fade-in">
+            <h3 class="fw-bold mb-3">Stay Updated with HospiTour</h3>
+            <p class="mb-0">
+              Get the latest insights, trends, and opportunities in Africa's
+              hospitality industry delivered to your inbox.
+            </p>
+          </div>
+          <div class="col-lg-6 fade-in" data-delay="200">
+            <div class="d-flex newsletter-form ms-lg-auto">
+              <input
+                type="email"
+                class="form-control newsletter-input"
+                placeholder="Your email address"
+              />
+              <button class="btn newsletter-btn" id="newsletterSubscribe">
+                Subscribe
+              </button>
             </div>
+            <small class="text-white-50 mt-2 d-block"
+              >By subscribing, you agree to our Privacy Policy</small
+            >
+          </div>
         </div>
+      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">
-                        <i class="fas fa-hotel me-2"></i>HospiTour
-                    </h5>
-                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Quick Links</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">For Businesses</a></li>
-                        <li class="mb-2"><a href="#">For Professionals</a></li>
-                        <li class="mb-2"><a href="#">Marketplace</a></li>
-                        <li class="mb-2"><a href="#">Resources</a></li>
-                        <li class="mb-2"><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Solutions</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Business Marketplace</a></li>
-                        <li class="mb-2"><a href="#">Staff Management</a></li>
-                        <li class="mb-2"><a href="#">Digital Marketing</a></li>
-                        <li class="mb-2"><a href="#">Operations Tools</a></li>
-                        <li class="mb-2"><a href="#">Partner Network</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Support</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Help Center</a></li>
-                        <li class="mb-2"><a href="#">Contact Us</a></li>
-                        <li class="mb-2"><a href="#">Community</a></li>
-                        <li class="mb-2"><a href="#">Webinars</a></li>
-                        <li class="mb-2"><a href="#">Status</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Contact</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <i class="fas fa-envelope me-2"></i>
-                            <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-phone me-2"></i>
-                            <a href="tel:+234800000000">+234 800 000 0000</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            Lagos, Nigeria
-                        </li>
-                    </ul>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5 class="mb-3"><i class="fas fa-hotel me-2"></i>HospiTour</h5>
+            <p class="mb-3">
+              Africa's premier platform for hospitality and tourism
+              professionals. Connect, collaborate, and grow with us.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="me-3">Privacy Policy</a>
-                    <a href="#" class="me-3">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Quick Links</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#">For Businesses</a></li>
+              <li class="mb-2"><a href="#">For Professionals</a></li>
+              <li class="mb-2"><a href="#">Marketplace</a></li>
+              <li class="mb-2"><a href="#">Resources</a></li>
+              <li class="mb-2"><a href="#">About Us</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Solutions</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#">Business Marketplace</a></li>
+              <li class="mb-2"><a href="#">Staff Management</a></li>
+              <li class="mb-2"><a href="#">Digital Marketing</a></li>
+              <li class="mb-2"><a href="#">Operations Tools</a></li>
+              <li class="mb-2"><a href="#">Partner Network</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Support</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#">Help Center</a></li>
+              <li class="mb-2"><a href="#">Contact Us</a></li>
+              <li class="mb-2"><a href="#">Community</a></li>
+              <li class="mb-2"><a href="#">Webinars</a></li>
+              <li class="mb-2"><a href="#">Status</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Contact</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:+234800000000">+234 800 000 0000</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-map-marker-alt me-2"></i>
+                Lagos, Nigeria
+              </li>
+            </ul>
+          </div>
         </div>
+        <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1)" />
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="me-3">Privacy Policy</a>
+            <a href="#" class="me-3">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+          <!-- REMOVED LANGUAGE SELECTOR FROM HERE -->
+        </div>
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // DOM Elements
-        const notificationEl = document.getElementById('notification');
-        const businessesCountEl = document.getElementById('businessesCount');
-        const countriesCountEl = document.getElementById('countriesCount');
-        const bookingsProcessedEl = document.getElementById('bookingsProcessed');
-        const satisfactionRateEl = document.getElementById('satisfactionRate');
-        const searchInput = document.querySelector('.search-input');
-        const searchBtn = document.querySelector('.search-btn');
-        const newsletterInput = document.querySelector('.newsletter-input');
-        const newsletterSubscribe = document.getElementById('newsletterSubscribe');
-        const languageSelector = document.getElementById('languageSelector');
+      // Language translations
+      const translations = {
+        en: {
+          "nav-solutions": "Solutions",
+          "hero-title": "Complete Solutions for Africa's Hospitality Industry",
+          "btn-login": "Login",
+          "btn-get-started": "Get Started",
+          // Add other English translations as needed
+        },
+        fr: {
+          "nav-solutions": "Solutions",
+          "hero-title":
+            "Solutions Complètes pour l'Industrie Hôtelière Africaine",
+          "btn-login": "Connexion",
+          "btn-get-started": "Commencer",
+        },
+        pt: {
+          "nav-solutions": "Soluções",
+          "hero-title":
+            "Soluções Completas para a Indústria Hoteleira Africana",
+          "btn-login": "Entrar",
+          "btn-get-started": "Começar",
+        },
+        sw: {
+          "nav-solutions": "Suluhisho",
+          "hero-title": "Suluhisho Kamili kwa Sekta ya Ukarimu ya Kiafrika",
+          "btn-login": "Ingia",
+          "btn-get-started": "Anza",
+        },
+      };
 
-        // Show notification
-        function showNotification(message, type) {
-            notificationEl.textContent = message;
-            notificationEl.className = `notification ${type} show`;
-            
-            setTimeout(() => {
-                notificationEl.classList.remove('show');
-            }, 5000);
-        }
+      // DOM Elements
+      const notificationEl = document.getElementById("notification");
+      const businessesCountEl = document.getElementById("businessesCount");
+      const countriesCountEl = document.getElementById("countriesCount");
+      const bookingsProcessedEl = document.getElementById("bookingsProcessed");
+      const satisfactionRateEl = document.getElementById("satisfactionRate");
+      const searchInput = document.querySelector(".search-input");
+      const searchBtn = document.querySelector(".search-btn");
+      const newsletterInput = document.querySelector(".newsletter-input");
+      const newsletterSubscribe = document.getElementById(
+        "newsletterSubscribe"
+      );
+      const languageSelector = document.getElementById("languageSelector");
 
-        // Animate statistics
-        function animateStatistics() {
-            const stats = [
-                { element: businessesCountEl, target: 2500, suffix: '+' },
-                { element: countriesCountEl, target: 15, suffix: '' },
-                { element: bookingsProcessedEl, target: 50, suffix: 'M+' },
-                { element: satisfactionRateEl, target: 98, suffix: '%' }
-            ];
+      // Show notification
+      function showNotification(message, type = "info") {
+        notificationEl.textContent = message;
+        notificationEl.className = `notification ${type} show`;
 
-            stats.forEach(stat => {
-                let current = 0;
-                const increment = stat.target / 100;
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= stat.target) {
-                        current = stat.target;
-                        clearInterval(timer);
-                    }
-                    stat.element.textContent = Math.floor(current) + stat.suffix;
-                }, 20);
-            });
-        }
+        setTimeout(() => {
+          notificationEl.classList.remove("show");
+        }, 3000);
+      }
 
-        // Scroll animations
-        function checkScroll() {
-            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .stat-item, .testimonial-card, .country-card');
-            
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const elementBottom = element.getBoundingClientRect().bottom;
-                const delay = element.getAttribute('data-delay') || 0;
-                
-                if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
-                    setTimeout(() => {
-                        element.classList.add('visible');
-                    }, parseInt(delay));
-                }
-            });
-        }
+      // Language functionality
+      function initLanguageSelector() {
+        // Set initial language
+        const browserLang = navigator.language.split("-")[0];
+        const defaultLang = ["en", "fr", "pt", "sw"].includes(browserLang)
+          ? browserLang
+          : "en";
+        languageSelector.value = defaultLang;
+        updateLanguage(defaultLang);
 
-        // Navbar scroll effect
-        function handleNavbarScroll() {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
+        // Language selector change event
+        languageSelector.addEventListener("change", function () {
+          const selectedLang = this.value;
+          updateLanguage(selectedLang);
+          showNotification(
+            `Language changed to ${this.options[this.selectedIndex].text}`,
+            "info"
+          );
+        });
+      }
+
+      function updateLanguage(lang) {
+        // Update all translatable elements on the page
+        Object.keys(translations[lang]).forEach((key) => {
+          const element = document.querySelector(`[data-translate="${key}"]`);
+          if (element) {
+            element.textContent = translations[lang][key];
+          }
+        });
+
+        document.documentElement.lang = lang;
+      }
+
+      // Animate statistics
+      function animateStatistics() {
+        const stats = [
+          { element: businessesCountEl, target: 2500, suffix: "+" },
+          { element: countriesCountEl, target: 15, suffix: "" },
+          { element: bookingsProcessedEl, target: 50, suffix: "M+" },
+          { element: satisfactionRateEl, target: 98, suffix: "%" },
+        ];
+
+        stats.forEach((stat) => {
+          let current = 0;
+          const increment = stat.target / 100;
+          const timer = setInterval(() => {
+            current += increment;
+            if (current >= stat.target) {
+              current = stat.target;
+              clearInterval(timer);
             }
-        }
+            stat.element.textContent = Math.floor(current) + stat.suffix;
+          }, 20);
+        });
+      }
 
-        // Smooth scrolling for navigation
-        function initSmoothScroll() {
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }
-                });
-            });
-        }
+      // Scroll animations
+      function checkScroll() {
+        const elements = document.querySelectorAll(
+          ".fade-in, .slide-in-left, .slide-in-right, .stat-item, .testimonial-card, .country-card"
+        );
 
-        // Search functionality
-        function initSearch() {
-            searchBtn.addEventListener('click', function() {
-                const query = searchInput.value.trim();
-                if (query) {
-                    showNotification(`Searching for "${query}"...`, 'info');
-                    // In a real implementation, this would redirect to search results
-                    setTimeout(() => {
-                        showNotification(`Found 125 results for "${query}"`, 'success');
-                    }, 1500);
-                } else {
-                    showNotification('Please enter a search term', 'error');
-                }
-            });
+        elements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementBottom = element.getBoundingClientRect().bottom;
+          const delay = element.getAttribute("data-delay") || 0;
 
-            searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    searchBtn.click();
-                }
-            });
-        }
-
-        // Newsletter subscription
-        function initNewsletter() {
-            newsletterSubscribe.addEventListener('click', function() {
-                const email = newsletterInput.value.trim();
-                if (email && isValidEmail(email)) {
-                    showNotification('Subscribing to newsletter...', 'info');
-                    // Simulate API call
-                    setTimeout(() => {
-                        showNotification('Successfully subscribed to newsletter!', 'success');
-                        newsletterInput.value = '';
-                    }, 1500);
-                } else {
-                    showNotification('Please enter a valid email address', 'error');
-                }
-            });
-        }
-
-        // Email validation
-        function isValidEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
-        }
-
-        // Language selector
-        function initLanguageSelector() {
-            languageSelector.addEventListener('change', function() {
-                const selectedLanguage = this.value;
-                showNotification(`Language changed to ${this.options[this.selectedIndex].text}`, 'info');
-                // In a real implementation, this would change the site language
-            });
-        }
-
-        // Button interactions
-        function initButtonInteractions() {
-            // Join as Business
-            document.getElementById('joinBusinessBtn').addEventListener('click', function() {
-                showNotification('Redirecting to business registration...', 'info');
-                // In real implementation, redirect to businesses.html
-            });
-
-            // Join as Professional
-            document.getElementById('joinProfessionalBtn').addEventListener('click', function() {
-                showNotification('Redirecting to professional registration...', 'info');
-            });
-
-            // View All Countries
-            document.getElementById('viewAllCountries').addEventListener('click', function() {
-                showNotification('Loading all countries...', 'info');
-            });
-
-            // Become a Partner
-            document.getElementById('becomePartnerBtn').addEventListener('click', function() {
-                showNotification('Opening partnership application...', 'info');
-            });
-
-            // Solution Learn More buttons
-            document.querySelectorAll('.solution-learn-more').forEach(button => {
-                button.addEventListener('click', function() {
-                    const card = this.closest('.solution-card');
-                    const title = card.querySelector('h4').textContent;
-                    showNotification(`Loading details for ${title}...`, 'info');
-                });
-            });
-
-            // Login/Signup buttons
-            document.getElementById('loginBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                showNotification('Opening login form...', 'info');
-            });
-
-            document.getElementById('signupBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                showNotification('Opening registration form...', 'info');
-            });
-        }
-
-        // Country card interactions
-        function initCountryCards() {
-            document.querySelectorAll('.country-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    const country = this.querySelector('h6').textContent;
-                    showNotification(`Showing businesses in ${country}...`, 'info');
-                });
-            });
-        }
-
-        // Partner logo interactions
-        function initPartnerLogos() {
-            document.querySelectorAll('.partner-logo').forEach(logo => {
-                logo.addEventListener('click', function() {
-                    const partner = this.querySelector('span').textContent;
-                    showNotification(`Loading partnership details for ${partner}...`, 'info');
-                });
-            });
-        }
-
-        // Initialize all functionality
-        function init() {
-            // Initial animations
+          if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
             setTimeout(() => {
-                document.querySelectorAll('.slide-in-left').forEach(el => {
-                    el.classList.add('visible');
-                });
-            }, 100);
+              element.classList.add("visible");
+            }, parseInt(delay));
+          }
+        });
+      }
 
-            // Animate statistics when stats section is in view
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        animateStatistics();
-                        observer.unobserve(entry.target);
-                    }
-                });
-            });
+      // Navbar scroll effect
+      function handleNavbarScroll() {
+        const navbar = document.querySelector(".navbar");
+        if (window.scrollY > 100) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      }
 
-            observer.observe(document.getElementById('stats'));
+      // Smooth scrolling for navigation
+      function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute("href"));
+            if (target) {
+              target.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+            }
+          });
+        });
+      }
 
-            // Initialize all components
-            initSmoothScroll();
-            initSearch();
-            initNewsletter();
-            initLanguageSelector();
-            initButtonInteractions();
-            initCountryCards();
-            initPartnerLogos();
+      // Search functionality
+      function initSearch() {
+        if (!searchBtn || !searchInput) return;
 
-            // Event listeners
-            window.addEventListener('scroll', () => {
-                handleNavbarScroll();
-                checkScroll();
-            });
+        searchBtn.addEventListener("click", function () {
+          const query = searchInput.value.trim();
+          if (query) {
+            showNotification(`Searching for "${query}"...`, "info");
+            setTimeout(() => {
+              showNotification(`Found 125 results for "${query}"`, "success");
+            }, 1500);
+          } else {
+            showNotification("Please enter a search term", "error");
+          }
+        });
 
-            // Initial check for elements in view
-            checkScroll();
-            handleNavbarScroll();
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            searchBtn.click();
+          }
+        });
+      }
+
+      // Newsletter subscription
+      function initNewsletter() {
+        if (!newsletterSubscribe || !newsletterInput) return;
+
+        newsletterSubscribe.addEventListener("click", function () {
+          const email = newsletterInput.value.trim();
+          if (email && isValidEmail(email)) {
+            showNotification("Subscribing to newsletter...", "info");
+            setTimeout(() => {
+              showNotification(
+                "Successfully subscribed to newsletter!",
+                "success"
+              );
+              newsletterInput.value = "";
+            }, 1500);
+          } else {
+            showNotification("Please enter a valid email address", "error");
+          }
+        });
+      }
+
+      // Email validation
+      function isValidEmail(email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      // Button interactions
+      function initButtonInteractions() {
+        // Join as Business
+        const joinBusinessBtn = document.getElementById("joinBusinessBtn");
+        if (joinBusinessBtn) {
+          joinBusinessBtn.addEventListener("click", function () {
+            showNotification("Redirecting to business registration...", "info");
+          });
         }
 
-        // Start the application
-        document.addEventListener('DOMContentLoaded', init);
+        // Join as Professional
+        const joinProfessionalBtn = document.getElementById(
+          "joinProfessionalBtn"
+        );
+        if (joinProfessionalBtn) {
+          joinProfessionalBtn.addEventListener("click", function () {
+            showNotification(
+              "Redirecting to professional registration...",
+              "info"
+            );
+          });
+        }
+
+        // View All Countries
+        const viewAllCountries = document.getElementById("viewAllCountries");
+        if (viewAllCountries) {
+          viewAllCountries.addEventListener("click", function () {
+            showNotification("Loading all countries...", "info");
+          });
+        }
+
+        // Become a Partner
+        const becomePartnerBtn = document.getElementById("becomePartnerBtn");
+        if (becomePartnerBtn) {
+          becomePartnerBtn.addEventListener("click", function () {
+            showNotification("Opening partnership application...", "info");
+          });
+        }
+
+        // Solution Learn More buttons
+        document.querySelectorAll(".solution-learn-more").forEach((button) => {
+          button.addEventListener("click", function () {
+            const card = this.closest(".solution-card");
+            const title = card.querySelector("h4").textContent;
+            showNotification(`Loading details for ${title}...`, "info");
+          });
+        });
+
+        // Login/Signup buttons
+        const loginBtn = document.getElementById("loginBtn");
+        if (loginBtn) {
+          loginBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            showNotification("Opening login form...", "info");
+          });
+        }
+
+        const signupBtn = document.getElementById("signupBtn");
+        if (signupBtn) {
+          signupBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            showNotification("Opening registration form...", "info");
+          });
+        }
+      }
+
+      // Country card interactions
+      function initCountryCards() {
+        document.querySelectorAll(".country-card").forEach((card) => {
+          card.addEventListener("click", function () {
+            const country = this.querySelector("h6").textContent;
+            showNotification(`Showing businesses in ${country}...`, "info");
+          });
+        });
+      }
+
+      // Partner logo interactions
+      function initPartnerLogos() {
+        document.querySelectorAll(".partner-logo").forEach((logo) => {
+          logo.addEventListener("click", function () {
+            const partner = this.querySelector("span").textContent;
+            showNotification(
+              `Loading partnership details for ${partner}...`,
+              "info"
+            );
+          });
+        });
+      }
+
+      // Initialize all functionality
+      function init() {
+        // Initial animations
+        setTimeout(() => {
+          document.querySelectorAll(".slide-in-left").forEach((el) => {
+            el.classList.add("visible");
+          });
+        }, 100);
+
+        // Animate statistics when stats section is in view
+        const statsSection = document.getElementById("stats");
+        if (statsSection) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                animateStatistics();
+                observer.unobserve(entry.target);
+              }
+            });
+          });
+          observer.observe(statsSection);
+        }
+
+        // Initialize all components
+        initLanguageSelector();
+        initSmoothScroll();
+        initSearch();
+        initNewsletter();
+        initButtonInteractions();
+        initCountryCards();
+        initPartnerLogos();
+
+        // Event listeners
+        window.addEventListener("scroll", () => {
+          handleNavbarScroll();
+          checkScroll();
+        });
+
+        // Initial check for elements in view
+        checkScroll();
+        handleNavbarScroll();
+      }
+
+      // Start the application
+      document.addEventListener("DOMContentLoaded", init);
     </script>
-</body>
+  </body>
 </html>
