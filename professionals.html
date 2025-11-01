@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Professionals - HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hospitour-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--hospitour-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--hospitour-accent) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--hospitour-primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #144360;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-accent {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--hospitour-dark);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .benefit-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .benefit-card:hover::before {
+            left: 100%;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--hospitour-secondary);
+        }
+        
+        .benefit-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--hospitour-secondary);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            transform: scale(1.1);
+            background: var(--hospitour-secondary);
+            color: white;
+        }
+        
+        .job-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--hospitour-accent);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .job-type-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .job-remote {
+            background: rgba(39, 174, 96, 0.1);
+            color: var(--hospitour-success);
+        }
+        
+        .job-fulltime {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--hospitour-secondary);
+        }
+        
+        .job-parttime {
+            background: rgba(243, 156, 18, 0.1);
+            color: var(--hospitour-warning);
+        }
+        
+        .stats-section {
+            background: var(--hospitour-light);
+            padding: 4rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--hospitour-dark);
+            font-weight: 500;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hospitour-accent);
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.6s ease;
+        }
+        
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .skill-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-top: 4px solid var(--hospitour-accent);
+        }
+        
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--hospitour-accent);
+            font-size: 1.5rem;
+        }
+        
+        .training-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .training-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .training-image {
+            height: 160px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .training-level {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--hospitour-accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: var(--hospitour-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--hospitour-accent);
+            transform: translateY(-2px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            display: block;
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background: #e74c3c;
+        }
+        
+        .notification.info {
+            background: var(--hospitour-secondary);
+        }
+        
+        .search-bar {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+        
+        .search-input {
+            border: none;
+            outline: none;
+            flex: 1;
+            padding: 0.5rem;
+        }
+        
+        .search-btn {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-btn:hover {
+            background: #d35400;
+            transform: scale(1.05);
+        }
+        
+        .filter-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .filter-tag {
+            display: inline-block;
+            background: var(--hospitour-light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            margin: 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--hospitour-primary);
+            color: white;
+        }
+        
+        .profile-completion {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        
+        .progress-bar {
+            background: var(--hospitour-accent);
+            border-radius: 5px;
+        }
+        
+        .language-selector {
+            border: none;
+            background: transparent;
+            color: var(--hospitour-dark);
+            cursor: pointer;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0 4rem;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+                gap: 1rem;
+                border-radius: 12px;
+            }
+            
+            .search-input {
+                border-radius: 8px;
+            }
+            
+            .search-btn {
+                border-radius: 8px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel me-2"></i>HospiTour
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Join Now</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 slide-in-left">Advance Your Hospitality Career in Africa</h1>
+                    <p class="lead mb-4 slide-in-left" data-delay="200">Connect with top employers, access exclusive training, and grow your career in Africa's booming hospitality industry. Join thousands of professionals already advancing with HospiTour.</p>
+                    <div class="hero-buttons d-flex flex-wrap gap-3 slide-in-left" data-delay="400">
+                        <button class="btn btn-accent btn-lg" id="createProfileBtn">
+                            <i class="fas fa-user-plus me-2"></i>Create Profile
+                        </button>
+                        <button class="btn btn-light btn-lg" id="findJobsBtn">
+                            <i class="fas fa-search me-2"></i>Find Jobs
+                        </button>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-4 slide-in-left" data-delay="600">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>15,000+ Professionals</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>2,500+ Employers</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>98% Job Success Rate</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Hospitality Professionals" class="img-fluid rounded-3 shadow-lg" style="max-height: 500px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-3 col-6 stat-item" data-delay="0">
+                    <span class="stat-number" id="professionalsCount">0</span>
+                    <span class="stat-label">Professionals</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item" data-delay="100">
+                    <span class="stat-number" id="jobsPosted">0</span>
+                    <span class="stat-label">Jobs Posted</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item" data-delay="200">
+                    <span class="stat-number" id="avgSalaryIncrease">0%</span>
+                    <span class="stat-label">Avg. Salary Increase</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item" data-delay="300">
+                    <span class="stat-number" id="trainingCompletion">0%</span>
+                    <span class="stat-label">Training Completion</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="py-5" id="benefits">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Why Join HospiTour Professionals?</h2>
+                <p class="text-muted fade-in" data-delay="200">Access exclusive opportunities and resources to accelerate your hospitality career</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="benefit-card fade-in" data-delay="0">
+                        <div class="benefit-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4>Premium Job Opportunities</h4>
+                        <p class="text-muted">Access exclusive job postings from top hotels, resorts, and restaurants across Africa. Get matched with opportunities that fit your skills and career goals.</p>
+                        <button class="btn btn-outline-primary btn-sm benefit-action">View Jobs</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="benefit-card fade-in" data-delay="100">
+                        <div class="benefit-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Skill Development</h4>
+                        <p class="text-muted">Enhance your expertise with our curated training programs, certifications, and workshops designed for hospitality professionals.</p>
+                        <button class="btn btn-outline-primary btn-sm benefit-action">Explore Training</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="benefit-card fade-in" data-delay="200">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h4>Professional Network</h4>
+                        <p class="text-muted">Connect with industry leaders, mentors, and peers across Africa's hospitality sector. Attend exclusive networking events and forums.</p>
+                        <button class="btn btn-outline-primary btn-sm benefit-action">Join Network</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Job Search Section -->
+    <section class="py-5 bg-light" id="jobSearch">
+        <div class="container">
+            <h2 class="section-title fade-in">Find Your Dream Job</h2>
+            <p class="text-muted mb-4 fade-in" data-delay="200">Browse thousands of opportunities across Africa's hospitality industry</p>
+            
+            <!-- Search Bar -->
+            <div class="search-bar d-flex align-items-center fade-in" data-delay="400">
+                <input type="text" class="search-input" placeholder="Job title, skills, or company..." id="jobSearchInput">
+                <button class="search-btn" id="jobSearchBtn">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+            
+            <!-- Filters -->
+            <div class="filter-section fade-in" data-delay="600">
+                <h6 class="mb-3">Filter by:</h6>
+                <div class="d-flex flex-wrap">
+                    <span class="filter-tag active" data-filter="all">All Jobs</span>
+                    <span class="filter-tag" data-filter="hotel">Hotels & Resorts</span>
+                    <span class="filter-tag" data-filter="restaurant">Restaurants</span>
+                    <span class="filter-tag" data-filter="tour">Tour Operations</span>
+                    <span class="filter-tag" data-filter="event">Events</span>
+                    <span class="filter-tag" data-filter="remote">Remote</span>
+                    <span class="filter-tag" data-filter="fulltime">Full-time</span>
+                    <span class="filter-tag" data-filter="parttime">Part-time</span>
+                </div>
+            </div>
+            
+            <!-- Job Listings -->
+            <div id="jobListings">
+                <div class="job-card fade-in" data-delay="0" data-category="hotel fulltime">
+                    <div class="position-relative">
+                        <span class="job-type-badge job-fulltime">Full-time</span>
+                        <h5 class="text-primary">Hotel General Manager</h5>
+                        <p class="text-muted mb-2">Luxury Safari Lodge · Serengeti, Tanzania</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-light text-dark">$75,000-$95,000</span>
+                            <span class="badge bg-light text-dark">5+ years experience</span>
+                            <span class="badge bg-light text-dark">Management</span>
+                        </div>
+                        <p class="mb-3">Seeking experienced General Manager to lead our 5-star safari lodge operations. Must have proven track record in luxury hospitality.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Posted 2 days ago</small>
+                            <button class="btn btn-primary btn-sm apply-job">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="job-card fade-in" data-delay="100" data-category="restaurant fulltime">
+                    <div class="position-relative">
+                        <span class="job-type-badge job-fulltime">Full-time</span>
+                        <h5 class="text-primary">Executive Chef</h5>
+                        <p class="text-muted mb-2">Fine Dining Restaurant · Lagos, Nigeria</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-light text-dark">$45,000-$60,000</span>
+                            <span class="badge bg-light text-dark">7+ years experience</span>
+                            <span class="badge bg-light text-dark">Culinary</span>
+                        </div>
+                        <p class="mb-3">Creative Executive Chef needed to lead kitchen operations and develop innovative menus for our upscale restaurant.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Posted 1 week ago</small>
+                            <button class="btn btn-primary btn-sm apply-job">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="job-card fade-in" data-delay="200" data-category="tour remote">
+                    <div class="position-relative">
+                        <span class="job-type-badge job-remote">Remote</span>
+                        <h5 class="text-primary">Tour Consultant</h5>
+                        <p class="text-muted mb-2">Adventure Travel Company · Remote</p>
+                        <div class="d-flex flex-wrap gap-2 mb-3">
+                            <span class="badge bg-light text-dark">$30,000-$40,000</span>
+                            <span class="badge bg-light text-dark">3+ years experience</span>
+                            <span class="badge bg-light text-dark">Sales</span>
+                        </div>
+                        <p class="mb-3">Virtual tour consultant to create custom African safari experiences for international clients. Fluent English required.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">Posted 3 days ago</small>
+                            <button class="btn btn-primary btn-sm apply-job">Apply Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 fade-in" data-delay="800">
+                <button class="btn btn-outline-primary" id="loadMoreJobs">Load More Jobs</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Development Section -->
+    <section class="py-5" id="skills">
+        <div class="container">
+            <h2 class="section-title centered fade-in">Develop In-Demand Skills</h2>
+            <p class="text-muted text-center mb-5 fade-in" data-delay="200">Enhance your expertise with our specialized training programs</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="skill-card fade-in" data-delay="0">
+                        <div class="skill-icon">
+                            <i class="fas fa-concierge-bell"></i>
+                        </div>
+                        <h5>Guest Services</h5>
+                        <p class="text-muted small">Master the art of exceptional customer service and guest experience management.</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2">Enroll</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="skill-card fade-in" data-delay="100">
+                        <div class="skill-icon">
+                            <i class="fas fa-wine-glass-alt"></i>
+                        </div>
+                        <h5>Food & Beverage</h5>
+                        <p class="text-muted small">Learn restaurant management, menu planning, and beverage service excellence.</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2">Enroll</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="skill-card fade-in" data-delay="200">
+                        <div class="skill-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h5>Revenue Management</h5>
+                        <p class="text-muted small">Optimize pricing strategies and maximize profitability in hospitality operations.</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2">Enroll</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="skill-card fade-in" data-delay="300">
+                        <div class="skill-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h5>Multilingual Service</h5>
+                        <p class="text-muted small">Develop language skills for international guest service (French, Arabic, Mandarin).</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2">Enroll</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Training Programs -->
+    <section class="py-5 bg-light" id="training">
+        <div class="container">
+            <h2 class="section-title centered fade-in">Featured Training Programs</h2>
+            <p class="text-muted text-center mb-5 fade-in" data-delay="200">Certifications and courses to boost your career</p>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="training-card fade-in" data-delay="0">
+                        <div class="training-image" style="background-color: #1a5276; position: relative;">
+                            <span class="training-level">Advanced</span>
+                        </div>
+                        <div class="p-3">
+                            <h5>Hospitality Leadership Certificate</h5>
+                            <p class="text-muted small mb-3">12-week program for aspiring hotel and resort managers</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">8 Modules</span>
+                                <span class="text-accent fw-bold">$499</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100 mt-3">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="training-card fade-in" data-delay="100">
+                        <div class="training-image" style="background-color: #27ae60; position: relative;">
+                            <span class="training-level">Intermediate</span>
+                        </div>
+                        <div class="p-3">
+                            <h5>Digital Marketing for Hotels</h5>
+                            <p class="text-muted small mb-3">Master online booking systems and digital guest acquisition</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">6 Modules</span>
+                                <span class="text-accent fw-bold">$349</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100 mt-3">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="training-card fade-in" data-delay="200">
+                        <div class="training-image" style="background-color: #e67e22; position: relative;">
+                            <span class="training-level">Beginner</span>
+                        </div>
+                        <div class="p-3">
+                            <h5>African Cuisine Specialist</h5>
+                            <p class="text-muted small mb-3">Learn traditional and modern African cooking techniques</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="badge bg-primary">10 Modules</span>
+                                <span class="text-accent fw-bold">$299</span>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm w-100 mt-3">Learn More</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 fade-in" data-delay="300">
+                <button class="btn btn-primary" id="viewAllTraining">View All Training Programs</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories -->
+    <section class="py-5" id="successStories">
+        <div class="container">
+            <h2 class="section-title centered fade-in">Career Success Stories</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card" data-delay="0">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-primary text-white d-flex align-items-center justify-content-center fw-bold">
+                                JK
+                            </div>
+                            <div>
+                                <h5 class="mb-0">James Kariuki</h5>
+                                <small class="text-muted">Former Bellboy to Hotel Manager</small>
+                            </div>
+                        </div>
+                        <p>"Through HospiTour's training programs and job matching, I advanced from bellboy to hotel manager in just 4 years. The mentorship I received was invaluable."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card" data-delay="100">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-success text-white d-flex align-items-center justify-content-center fw-bold">
+                                AN
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Amina Ndiaye</h5>
+                                <small class="text-muted">Restaurant Manager</small>
+                            </div>
+                        </div>
+                        <p>"The networking opportunities on HospiTour connected me with international restaurant chains. I now manage a fine dining establishment in Dakar."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card" data-delay="200">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-warning text-white d-flex align-items-center justify-content-center fw-bold">
+                                TM
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Thomas Mensah</h5>
+                                <small class="text-muted">Tour Guide Entrepreneur</small>
+                            </div>
+                        </div>
+                        <p>"HospiTour's business development program helped me start my own tour company. We now host over 500 international tourists annually."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold mb-4 fade-in">Ready to Advance Your Career?</h2>
+            <p class="lead mb-4 fade-in" data-delay="200">Join 15,000+ hospitality professionals already growing with HospiTour</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3 fade-in" data-delay="400">
+                <button class="btn btn-light btn-lg" id="joinNowBtn">
+                    <i class="fas fa-user-plus me-2"></i>Create Free Profile
+                </button>
+                <button class="btn btn-outline-light btn-lg" id="discoverJobsBtn">
+                    <i class="fas fa-search me-2"></i>Discover Jobs
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-hotel me-2"></i>HospiTour
+                    </h5>
+                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">For Professionals</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Find Jobs</a></li>
+                        <li class="mb-2"><a href="#">Training Programs</a></li>
+                        <li class="mb-2"><a href="#">Career Resources</a></li>
+                        <li class="mb-2"><a href="#">Networking</a></li>
+                        <li class="mb-2"><a href="#">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Resources</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Career Advice</a></li>
+                        <li class="mb-2"><a href="#">Resume Builder</a></li>
+                        <li class="mb-2"><a href="#">Interview Prep</a></li>
+                        <li class="mb-2"><a href="#">Salary Guide</a></li>
+                        <li class="mb-2"><a href="#">Industry Insights</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Help Center</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                        <li class="mb-2"><a href="#">Webinars</a></li>
+                        <li class="mb-2"><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Contact</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:careers@hospitour.com">careers@hospitour.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+234800000000">+234 800 000 0000</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Lagos, Nigeria
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // DOM Elements
+        const notificationEl = document.getElementById('notification');
+        const professionalsCountEl = document.getElementById('professionalsCount');
+        const jobsPostedEl = document.getElementById('jobsPosted');
+        const avgSalaryIncreaseEl = document.getElementById('avgSalaryIncrease');
+        const trainingCompletionEl = document.getElementById('trainingCompletion');
+        const jobSearchInput = document.getElementById('jobSearchInput');
+        const jobSearchBtn = document.getElementById('jobSearchBtn');
+        const filterTags = document.querySelectorAll('.filter-tag');
+        const jobCards = document.querySelectorAll('.job-card');
+        const applyButtons = document.querySelectorAll('.apply-job');
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notificationEl.classList.remove('show');
+            }, 5000);
+        }
+
+        // Animate statistics
+        function animateStatistics() {
+            const stats = [
+                { element: professionalsCountEl, target: 15000, suffix: '+' },
+                { element: jobsPostedEl, target: 2500, suffix: '+' },
+                { element: avgSalaryIncreaseEl, target: 35, suffix: '%' },
+                { element: trainingCompletionEl, target: 92, suffix: '%' }
+            ];
+
+            stats.forEach(stat => {
+                let current = 0;
+                const increment = stat.target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    stat.element.textContent = Math.floor(current) + stat.suffix;
+                }, 20);
+            });
+        }
+
+        // Scroll animations
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .stat-item, .testimonial-card');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementBottom = element.getBoundingClientRect().bottom;
+                const delay = element.getAttribute('data-delay') || 0;
+                
+                if (elementTop < window.innerHeight - 100 && elementBottom > 0) {
+                    setTimeout(() => {
+                        element.classList.add('visible');
+                    }, parseInt(delay));
+                }
+            });
+        }
+
+        // Navbar scroll effect
+        function handleNavbarScroll() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+
+        // Job search functionality
+        function initJobSearch() {
+            jobSearchBtn.addEventListener('click', function() {
+                const query = jobSearchInput.value.trim();
+                if (query) {
+                    showNotification(`Searching for "${query}" jobs...`, 'info');
+                    // In a real implementation, this would filter job listings
+                    setTimeout(() => {
+                        showNotification(`Found 42 jobs matching "${query}"`, 'success');
+                    }, 1500);
+                } else {
+                    showNotification('Please enter a job title or keyword', 'error');
+                }
+            });
+
+            jobSearchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    jobSearchBtn.click();
+                }
+            });
+        }
+
+        // Job filtering
+        function initJobFilters() {
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    // Remove active class from all tags
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tag
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    if (filter === 'all') {
+                        // Show all jobs
+                        jobCards.forEach(card => {
+                            card.style.display = 'block';
+                        });
+                    } else {
+                        // Filter jobs
+                        jobCards.forEach(card => {
+                            const categories = card.getAttribute('data-category');
+                            if (categories.includes(filter)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        });
+                    }
+                    
+                    showNotification(`Filtered by: ${this.textContent}`, 'info');
+                });
+            });
+        }
+
+        // Job application
+        function initJobApplications() {
+            applyButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const jobCard = this.closest('.job-card');
+                    const jobTitle = jobCard.querySelector('h5').textContent;
+                    const company = jobCard.querySelector('p').textContent.split('·')[0].trim();
+                    
+                    showNotification(`Applying for ${jobTitle} at ${company}...`, 'info');
+                    
+                    // Simulate application process
+                    setTimeout(() => {
+                        showNotification(`Application submitted for ${jobTitle}!`, 'success');
+                    }, 2000);
+                });
+            });
+        }
+
+        // Button interactions
+        function initButtonInteractions() {
+            // Create Profile
+            document.getElementById('createProfileBtn').addEventListener('click', function() {
+                showNotification('Opening profile creation wizard...', 'info');
+            });
+
+            // Find Jobs
+            document.getElementById('findJobsBtn').addEventListener('click', function() {
+                document.getElementById('jobSearch').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Join Now
+            document.getElementById('joinNowBtn').addEventListener('click', function() {
+                showNotification('Redirecting to registration...', 'info');
+            });
+
+            // Discover Jobs
+            document.getElementById('discoverJobsBtn').addEventListener('click', function() {
+                document.getElementById('jobSearch').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // View All Training
+            document.getElementById('viewAllTraining').addEventListener('click', function() {
+                showNotification('Loading all training programs...', 'info');
+            });
+
+            // Load More Jobs
+            document.getElementById('loadMoreJobs').addEventListener('click', function() {
+                showNotification('Loading more job opportunities...', 'info');
+                // Simulate loading more jobs
+                setTimeout(() => {
+                    showNotification('15 more jobs loaded!', 'success');
+                }, 1500);
+            });
+
+            // Benefit actions
+            document.querySelectorAll('.benefit-action').forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.benefit-card');
+                    const title = card.querySelector('h4').textContent;
+                    showNotification(`Exploring ${title}...`, 'info');
+                });
+            });
+
+            // Skill enrollment
+            document.querySelectorAll('.skill-card .btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.skill-card');
+                    const skill = card.querySelector('h5').textContent;
+                    showNotification(`Enrolling in ${skill} training...`, 'info');
+                });
+            });
+
+            // Training program buttons
+            document.querySelectorAll('.training-card .btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const card = this.closest('.training-card');
+                    const program = card.querySelector('h5').textContent;
+                    showNotification(`Loading details for ${program}...`, 'info');
+                });
+            });
+
+            // Login/Signup buttons
+            document.getElementById('loginBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Opening login form...', 'info');
+            });
+
+            document.getElementById('signupBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showNotification('Opening professional registration...', 'info');
+            });
+        }
+
+        // Language selector
+        function initLanguageSelector() {
+            const languageSelector = document.getElementById('languageSelector');
+            languageSelector.addEventListener('change', function() {
+                const selectedLanguage = this.value;
+                showNotification(`Language changed to ${this.options[this.selectedIndex].text}`, 'info');
+            });
+        }
+
+        // Initialize all functionality
+        function init() {
+            // Initial animations
+            setTimeout(() => {
+                document.querySelectorAll('.slide-in-left').forEach(el => {
+                    el.classList.add('visible');
+                });
+            }, 100);
+
+            // Animate statistics when stats section is in view
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateStatistics();
+                        observer.unobserve(entry.target);
+                    }
+                });
+            });
+
+            observer.observe(document.getElementById('stats'));
+
+            // Initialize all components
+            initJobSearch();
+            initJobFilters();
+            initJobApplications();
+            initButtonInteractions();
+            initLanguageSelector();
+
+            // Event listeners
+            window.addEventListener('scroll', () => {
+                handleNavbarScroll();
+                checkScroll();
+            });
+
+            // Initial check for elements in view
+            checkScroll();
+            handleNavbarScroll();
+        }
+
+        // Start the application
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

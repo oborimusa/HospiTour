@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Businesses - HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hospitour-dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--hospitour-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--hospitour-accent) !important;
+        }
+        
+        .btn-primary {
+            background: var(--hospitour-primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #144360;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-accent {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
+            color: white;
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--hospitour-dark);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--hospitour-accent);
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+            cursor: pointer;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--hospitour-accent);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--hospitour-accent);
+            font-size: 2rem;
+        }
+        
+        .stats-section {
+            background: var(--hospitour-light);
+            padding: 4rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--hospitour-dark);
+            font-weight: 500;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--hospitour-accent);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.featured::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--hospitour-accent);
+            color: white;
+            padding: 5px 30px;
+            transform: rotate(45deg);
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+        
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hospitour-accent);
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .business-type-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+        
+        .business-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: var(--hospitour-accent);
+        }
+        
+        .business-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--hospitour-secondary);
+            font-size: 2rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .footer {
+            background: var(--hospitour-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--hospitour-accent);
+            transform: translateY(-2px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.success {
+            background: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background: var(--hospitour-danger);
+        }
+        
+        .notification.info {
+            background: var(--hospitour-secondary);
+        }
+        
+        .form-control:focus {
+            border-color: var(--hospitour-accent);
+            box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.25);
+        }
+        
+        .form-select:focus {
+            border-color: var(--hospitour-accent);
+            box-shadow: 0 0 0 0.2rem rgba(230, 126, 34, 0.25);
+        }
+        
+        .calculator-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--hospitour-accent);
+        }
+        
+        .calculator-result {
+            background: var(--hospitour-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 4rem 0;
+                text-align: center;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+                margin: 1rem 0;
+            }
+            
+            .pricing-card.featured:hover {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel me-2"></i>HospiTour
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link active" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <select class="form-select me-3" style="width: auto;">
+                        <option>EN</option>
+                        <option>FR</option>
+                        <option>PT</option>
+                        <option>SW</option>
+                    </select>
+                    <a href="login.html" class="btn btn-outline-primary me-2">Login</a>
+                    <a href="signup.html" class="btn btn-primary">Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4">Grow Your Hospitality Business in Africa</h1>
+                    <p class="lead mb-4">Join Africa's premier hospitality ecosystem and connect with millions of travelers, streamline your operations, and scale your business across the continent.</p>
+                    <div class="hero-buttons d-flex flex-wrap gap-3">
+                        <button class="btn btn-accent btn-lg" data-bs-toggle="modal" data-bs-target="#signupModal">
+                            <i class="fas fa-rocket me-2"></i>Start Growing Today
+                        </button>
+                        <button class="btn btn-light btn-lg" id="watchDemoBtn">
+                            <i class="fas fa-play-circle me-2"></i>Watch Demo
+                        </button>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-4">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>Free 30-day trial</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>No credit card required</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span>Setup in 15 minutes</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Hospitality Business" class="img-fluid rounded-3 shadow-lg" style="max-height: 500px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="revenueGrowth">0%</span>
+                    <span class="stat-label">Average Revenue Growth</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="travelersReached">0</span>
+                    <span class="stat-label">Travelers Reached</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="costReduction">0%</span>
+                    <span class="stat-label">Operational Cost Reduction</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="customerRating">0</span>
+                    <span class="stat-label">Customer Rating</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Types -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Perfect for All Hospitality Businesses</h2>
+            <p class="text-muted text-center mb-5">Whether you're a small boutique or a large chain, HospiTour has solutions tailored for your needs</p>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="business-type-card" data-business-type="hotels">
+                        <div class="business-icon">
+                            <i class="fas fa-hotel"></i>
+                        </div>
+                        <h5>Hotels & Resorts</h5>
+                        <p class="text-muted">Increase occupancy and streamline operations with our complete hotel management suite.</p>
+                        <button class="btn btn-outline-primary btn-sm learn-more-btn">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="business-type-card" data-business-type="restaurants">
+                        <div class="business-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <h5>Restaurants & Bars</h5>
+                        <p class="text-muted">Attract more customers and manage your F&B operations efficiently.</p>
+                        <button class="btn btn-outline-primary btn-sm learn-more-btn">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="business-type-card" data-business-type="tours">
+                        <div class="business-icon">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <h5>Tour Operators</h5>
+                        <p class="text-muted">Connect with travelers and manage tours, activities, and transportation.</p>
+                        <button class="btn btn-outline-primary btn-sm learn-more-btn">Learn More</button>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="business-type-card" data-business-type="events">
+                        <div class="business-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h5>Event Venues</h5>
+                        <p class="text-muted">Showcase your space and manage bookings for events and conferences.</p>
+                        <button class="btn btn-outline-primary btn-sm learn-more-btn">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Everything You Need to Succeed</h2>
+            <p class="text-muted text-center mb-5">Comprehensive tools designed specifically for Africa's hospitality industry</p>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card" data-feature="storefront">
+                        <div class="feature-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h4>Digital Storefront</h4>
+                        <p class="text-muted">Create a beautiful online presence with your customized business profile, photo gallery, and service offerings.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Customizable business profile</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>High-quality photo gallery</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Service catalog management</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card" data-feature="booking">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <h4>Smart Booking System</h4>
+                        <p class="text-muted">Manage reservations across all channels with real-time availability and automated confirmations.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Multi-channel booking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Real-time availability</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Automated confirmations</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card" data-feature="staff">
+                        <div class="feature-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <h4>Staff Management</h4>
+                        <p class="text-muted">Recruit, schedule, and manage your team with our comprehensive HR tools and training resources.</p>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Shift scheduling</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Performance tracking</li>
+                            <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Training modules</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROI Calculator -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Calculate Your Potential ROI</h2>
+            <p class="text-muted text-center mb-5">See how much your business could grow with HospiTour</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="calculator-card">
+                        <form id="roiCalculator">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="businessType" class="form-label">Business Type</label>
+                                    <select class="form-select" id="businessType" required>
+                                        <option value="">Select your business type</option>
+                                        <option value="hotel">Hotel/Resort</option>
+                                        <option value="restaurant">Restaurant/Bar</option>
+                                        <option value="tour">Tour Operator</option>
+                                        <option value="event">Event Venue</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="monthlyRevenue" class="form-label">Current Monthly Revenue ($)</label>
+                                    <input type="number" class="form-control" id="monthlyRevenue" placeholder="e.g., 10000" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="occupancyRate" class="form-label">Current Occupancy Rate (%)</label>
+                                    <input type="number" class="form-control" id="occupancyRate" placeholder="e.g., 60" min="0" max="100" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="staffCount" class="form-label">Number of Staff</label>
+                                    <input type="number" class="form-control" id="staffCount" placeholder="e.g., 15" required>
+                                </div>
+                                <div class="col-12 text-center mt-4">
+                                    <button type="submit" class="btn btn-accent btn-lg">
+                                        <i class="fas fa-calculator me-2"></i>Calculate ROI
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="calculator-result" id="calculatorResult">
+                            <h5 class="text-center mb-3">Your Potential Results</h5>
+                            <div class="row text-center">
+                                <div class="col-md-4 mb-3">
+                                    <div class="fw-bold text-primary fs-4" id="revenueIncrease">0%</div>
+                                    <small>Revenue Increase</small>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="fw-bold text-success fs-4" id="occupancyIncrease">0%</div>
+                                    <small>Occupancy Increase</small>
+                                </div>
+                                <div class="col-md-4 mb-3">
+                                    <div class="fw-bold text-warning fs-4" id="timeSaved">0</div>
+                                    <small>Hours Saved/Month</small>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-outline-primary btn-sm" id="saveCalculation">Save Calculation</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Trusted by Hospitality Leaders</h2>
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-primary text-white d-flex align-items-center justify-content-center fw-bold">
+                                AK
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Amina Kwame</h5>
+                                <small class="text-muted">Owner, Lagos Luxury Suites</small>
+                            </div>
+                        </div>
+                        <p>"Since joining HospiTour, our occupancy rate increased from 45% to 85%. The staff management tools alone saved us 20 hours per week in administrative work."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-success text-white d-flex align-items-center justify-content-center fw-bold">
+                                TM
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Thomas Mbeki</h5>
+                                <small class="text-muted">General Manager, Safari Adventures Kenya</small>
+                            </div>
+                        </div>
+                        <p>"The partnership network helped us create amazing safari packages with local hotels and restaurants. Our revenue grew by 150% in the first year."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="testimonial-avatar bg-warning text-white d-flex align-items-center justify-content-center fw-bold">
+                                FG
+                            </div>
+                            <div>
+                                <h5 class="mb-0">Fatima Gbadamosi</h5>
+                                <small class="text-muted">CEO, Taste of Ghana Restaurant Group</small>
+                            </div>
+                        </div>
+                        <p>"HospiTour's marketing tools helped us reach international food tourists. We've expanded from 1 to 4 locations thanks to the increased visibility."</p>
+                        <div class="text-warning">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Simple, Transparent Pricing</h2>
+            <p class="text-muted text-center mb-5">Choose the plan that works best for your business. All plans include a 30-day free trial.</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card text-center">
+                        <h4>Starter</h4>
+                        <div class="my-4">
+                            <span class="h1 fw-bold">$29</span>
+                            <span class="text-muted">/month</span>
+                        </div>
+                        <p class="text-muted mb-4">Perfect for small businesses getting started</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Basic business profile</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Up to 50 bookings/month</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Email support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Basic analytics</li>
+                            <li class="mb-3"><i class="fas fa-times text-muted me-2"></i>Staff management</li>
+                            <li class="mb-3"><i class="fas fa-times text-muted me-2"></i>Marketing tools</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100" data-plan="starter">Get Started</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card text-center featured">
+                        <h4>Professional</h4>
+                        <div class="my-4">
+                            <span class="h1 fw-bold">$79</span>
+                            <span class="text-muted">/month</span>
+                        </div>
+                        <p class="text-muted mb-4">Everything growing businesses need</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Advanced business profile</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Unlimited bookings</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Priority support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Advanced analytics</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Staff management</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Basic marketing tools</li>
+                        </ul>
+                        <button class="btn btn-accent w-100" data-plan="professional">Get Started</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="pricing-card text-center">
+                        <h4>Enterprise</h4>
+                        <div class="my-4">
+                            <span class="h1 fw-bold">$199</span>
+                            <span class="text-muted">/month</span>
+                        </div>
+                        <p class="text-muted mb-4">For large businesses and chains</p>
+                        <ul class="list-unstyled mb-4">
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Custom business profile</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Unlimited everything</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>24/7 dedicated support</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Custom analytics</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Advanced staff management</li>
+                            <li class="mb-3"><i class="fas fa-check text-success me-2"></i>Full marketing suite</li>
+                        </ul>
+                        <button class="btn btn-outline-primary w-100" data-plan="enterprise">Get Started</button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p class="text-muted">Need a custom solution? <a href="contact.html" class="text-primary">Contact our sales team</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="display-5 fw-bold mb-4">Ready to Transform Your Business?</h2>
+            <p class="lead mb-4">Join 2,500+ hospitality businesses already growing with HospiTour</p>
+            <div class="d-flex flex-wrap justify-content-center gap-3">
+                <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#signupModal">
+                    <i class="fas fa-rocket me-2"></i>Start Free Trial
+                </button>
+                <button class="btn btn-outline-light btn-lg" id="scheduleDemoBtn">
+                    <i class="fas fa-calendar me-2"></i>Book a Demo
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-hotel me-2"></i>HospiTour
+                    </h5>
+                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">For Businesses</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Hotels & Resorts</a></li>
+                        <li class="mb-2"><a href="#">Restaurants & Bars</a></li>
+                        <li class="mb-2"><a href="#">Tour Operators</a></li>
+                        <li class="mb-2"><a href="#">Event Venues</a></li>
+                        <li class="mb-2"><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Solutions</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Business Marketplace</a></li>
+                        <li class="mb-2"><a href="#">Staff Management</a></li>
+                        <li class="mb-2"><a href="#">Digital Marketing</a></li>
+                        <li class="mb-2"><a href="#">Operations Tools</a></li>
+                        <li class="mb-2"><a href="#">Partner Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Help Center</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                        <li class="mb-2"><a href="#">Webinars</a></li>
+                        <li class="mb-2"><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Contact</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:business@hospitour.com">business@hospitour.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+234800000000">+234 800 000 0000</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Lagos, Nigeria
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Start Your Free Trial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="businessSignupForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label for="businessName" class="form-label">Business Name *</label>
+                                <input type="text" class="form-control" id="businessName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="businessType" class="form-label">Business Type *</label>
+                                <select class="form-select" id="modalBusinessType" required>
+                                    <option value="">Select type</option>
+                                    <option value="hotel">Hotel/Resort</option>
+                                    <option value="restaurant">Restaurant/Bar</option>
+                                    <option value="tour">Tour Operator</option>
+                                    <option value="event">Event Venue</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fullName" class="form-label">Your Full Name *</label>
+                                <input type="text" class="form-control" id="fullName" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="country" class="form-label">Country *</label>
+                                <select class="form-select" id="country" required>
+                                    <option value="">Select country</option>
+                                    <option value="nigeria">Nigeria</option>
+                                    <option value="kenya">Kenya</option>
+                                    <option value="ghana">Ghana</option>
+                                    <option value="south-africa">South Africa</option>
+                                    <option value="other">Other African Country</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="termsAgreement" required>
+                                    <label class="form-check-label" for="termsAgreement">
+                                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" form="businessSignupForm" class="btn btn-accent">Start Free Trial</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // DOM Elements
+        const notificationEl = document.getElementById('notification');
+        const revenueGrowthEl = document.getElementById('revenueGrowth');
+        const travelersReachedEl = document.getElementById('travelersReached');
+        const costReductionEl = document.getElementById('costReduction');
+        const customerRatingEl = document.getElementById('customerRating');
+        const roiCalculatorForm = document.getElementById('roiCalculator');
+        const calculatorResult = document.getElementById('calculatorResult');
+        const revenueIncreaseEl = document.getElementById('revenueIncrease');
+        const occupancyIncreaseEl = document.getElementById('occupancyIncrease');
+        const timeSavedEl = document.getElementById('timeSaved');
+        const businessSignupForm = document.getElementById('businessSignupForm');
+
+        // Animate statistics on page load
+        function animateStatistics() {
+            const stats = [
+                { element: revenueGrowthEl, target: 65, suffix: '%' },
+                { element: travelersReachedEl, target: 2500000, suffix: '+' },
+                { element: costReductionEl, target: 40, suffix: '%' },
+                { element: customerRatingEl, target: 4.8, suffix: '/5' }
+            ];
+
+            stats.forEach(stat => {
+                let current = 0;
+                const increment = stat.target / 100;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        current = stat.target;
+                        clearInterval(timer);
+                    }
+                    stat.element.textContent = current.toFixed(stat.element === customerRatingEl ? 1 : 0) + stat.suffix;
+                }, 20);
+            });
+        }
+
+        // Show notification
+        function showNotification(message, type) {
+            notificationEl.textContent = message;
+            notificationEl.className = `notification ${type}`;
+            notificationEl.style.display = 'block';
+            
+            setTimeout(() => {
+                notificationEl.style.display = 'none';
+            }, 5000);
+        }
+
+        // ROI Calculator
+        function calculateROI(data) {
+            const { businessType, monthlyRevenue, occupancyRate, staffCount } = data;
+            
+            // Base multipliers for different business types
+            const multipliers = {
+                hotel: { revenue: 0.65, occupancy: 0.35, time: 25 },
+                restaurant: { revenue: 0.45, occupancy: 0.25, time: 20 },
+                tour: { revenue: 0.75, occupancy: 0.40, time: 30 },
+                event: { revenue: 0.55, occupancy: 0.30, time: 22 }
+            };
+            
+            const multiplier = multipliers[businessType] || multipliers.hotel;
+            
+            return {
+                revenueIncrease: Math.round(multiplier.revenue * 100),
+                occupancyIncrease: Math.round(multiplier.occupancy * 100),
+                timeSaved: Math.round(staffCount * multiplier.time)
+            };
+        }
+
+        // Business type card interactions
+        document.querySelectorAll('.business-type-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const businessType = this.getAttribute('data-business-type');
+                showNotification(`Showing solutions for ${businessType} businesses`, 'info');
+                
+                // Scroll to features section
+                document.getElementById('features').scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        });
+
+        // Feature card interactions
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const feature = this.getAttribute('data-feature');
+                showNotification(`Learn more about our ${feature} features`, 'info');
+            });
+        });
+
+        // Pricing plan selection
+        document.querySelectorAll('.pricing-card .btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const plan = this.getAttribute('data-plan');
+                showNotification(`Selected ${plan} plan - redirecting to signup`, 'info');
+                
+                // Open signup modal
+                const signupModal = new bootstrap.Modal(document.getElementById('signupModal'));
+                signupModal.show();
+            });
+        });
+
+        // Watch demo button
+        document.getElementById('watchDemoBtn').addEventListener('click', function() {
+            showNotification('Opening product demo video...', 'info');
+            // In a real implementation, this would open a video modal or redirect
+            setTimeout(() => {
+                showNotification('Demo video is loading...', 'info');
+            }, 1000);
+        });
+
+        // Schedule demo button
+        document.getElementById('scheduleDemoBtn').addEventListener('click', function() {
+            showNotification('Redirecting to demo scheduling...', 'info');
+            // In a real implementation, this would open a calendar booking system
+        });
+
+        // Save calculation
+        document.getElementById('saveCalculation').addEventListener('click', function() {
+            showNotification('Calculation saved to your account', 'success');
+        });
+
+        // ROI Calculator form submission
+        roiCalculatorForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                businessType: document.getElementById('businessType').value,
+                monthlyRevenue: parseInt(document.getElementById('monthlyRevenue').value),
+                occupancyRate: parseInt(document.getElementById('occupancyRate').value),
+                staffCount: parseInt(document.getElementById('staffCount').value)
+            };
+            
+            if (!formData.businessType || !formData.monthlyRevenue || !formData.occupancyRate || !formData.staffCount) {
+                showNotification('Please fill in all fields', 'error');
+                return;
+            }
+            
+            const results = calculateROI(formData);
+            
+            // Animate results
+            animateValue(revenueIncreaseEl, 0, results.revenueIncrease, 1000);
+            animateValue(occupancyIncreaseEl, 0, results.occupancyIncrease, 1000);
+            animateValue(timeSavedEl, 0, results.timeSaved, 1000);
+            
+            calculatorResult.style.display = 'block';
+            showNotification('ROI calculation completed!', 'success');
+        });
+
+        // Animate value function
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = value + (element === revenueIncreaseEl || element === occupancyIncreaseEl ? '%' : '');
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Business signup form
+        businessSignupForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Form validation
+            const businessName = document.getElementById('businessName').value;
+            const businessType = document.getElementById('modalBusinessType').value;
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const country = document.getElementById('country').value;
+            const termsAgreed = document.getElementById('termsAgreement').checked;
+            
+            if (!businessName || !businessType || !fullName || !email || !phone || !country || !termsAgreed) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            // Simulate form submission
+            showNotification('Creating your account...', 'info');
+            
+            setTimeout(() => {
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('signupModal'));
+                modal.hide();
+                
+                // Show success message
+                showNotification(`Welcome to HospiTour, ${fullName}! Your free trial has started.`, 'success');
+                
+                // Reset form
+                businessSignupForm.reset();
+            }, 2000);
+        });
+
+        // Learn more buttons
+        document.querySelectorAll('.learn-more-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.business-type-card');
+                const businessType = card.getAttribute('data-business-type');
+                showNotification(`Loading detailed information for ${businessType}...`, 'info');
+            });
+        });
+
+        // Initialize page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            animateStatistics();
+            
+            // Add loading animation to buttons
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.type !== 'submit') {
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Loading...';
+                        this.disabled = true;
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.disabled = false;
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

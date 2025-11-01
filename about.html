@@ -3,113 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - HospiTour | Our Story & Mission</title>
-    
-    <!-- Bootstrap CSS -->
+    <title>About - HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #059669;
-            --accent: #f59e0b;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hospitour-dark);
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            overflow-x: hidden;
         }
         
-        /* Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
         }
         
         .navbar-brand {
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .navbar-brand .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            font-size: 1.5rem;
         }
         
         .nav-link {
+            color: var(--hospitour-dark) !important;
             font-weight: 500;
-            color: var(--dark);
             margin: 0 0.5rem;
             transition: color 0.3s ease;
+            position: relative;
         }
         
         .nav-link:hover, .nav-link.active {
-            color: var(--primary);
+            color: var(--hospitour-accent) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--hospitour-primary);
             border: none;
             padding: 0.75rem 2rem;
-            border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
+            background: #144360;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
         }
         
-        /* Hero Section */
-        .about-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-accent {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
             color: white;
             padding: 8rem 0 4rem;
             position: relative;
             overflow: hidden;
         }
         
-        .about-hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.1"><path fill="white" d="M0,320L48,293.3C96,267,192,213,288,186.7C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
             background-size: cover;
         }
         
@@ -118,341 +138,382 @@
             z-index: 2;
         }
         
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
-            max-width: 600px;
-        }
-        
-        /* Section Styles */
-        .about-section {
-            padding: 6rem 0;
-        }
-        
-        .about-section:nth-child(even) {
-            background: white;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        /* Story Section */
-        .story-timeline {
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .timeline-item {
-            display: flex;
             margin-bottom: 3rem;
-            position: relative;
+            color: var(--hospitour-dark);
         }
         
-        .timeline-item:nth-child(even) {
-            flex-direction: row-reverse;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
         }
         
-        .timeline-content {
-            flex: 1;
-            padding: 2rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .timeline-year {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .timeline-description {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* Values Section */
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .value-card {
             background: white;
+            border-radius: 12px;
             padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .value-card:hover::before {
+            left: 100%;
         }
         
         .value-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--hospitour-accent);
         }
         
         .value-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 20px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            color: white;
+            color: var(--hospitour-accent);
             font-size: 2rem;
+            transition: all 0.3s ease;
         }
         
-        .value-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .value-text {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* Team Section */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .value-card:hover .value-icon {
+            transform: scale(1.1);
+            background: var(--hospitour-accent);
+            color: white;
         }
         
         .team-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            height: 100%;
+            text-align: center;
         }
         
         .team-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
         
         .team-image {
-            width: 100%;
             height: 250px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
+            background-size: cover;
+            background-position: center;
         }
         
         .team-content {
-            padding: 2rem;
-        }
-        
-        .team-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .team-role {
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-        
-        .team-bio {
-            color: var(--gray);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
+            padding: 1.5rem;
         }
         
         .team-social {
             display: flex;
-            gap: 1rem;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
         }
         
         .team-social a {
-            color: var(--gray);
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-        
-        .team-social a:hover {
-            color: var(--primary);
-        }
-        
-        /* Stats Section */
-        .stats-section {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 4rem 0;
-        }
-        
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-        
-        .stat-item {
-            padding: 2rem;
-        }
-        
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-        }
-        
-        .stat-label {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: var(--dark);
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .btn-light {
-            background: white;
-            color: var(--dark);
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 10px;
-            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--hospitour-light);
+            border-radius: 50%;
+            color: var(--hospitour-dark);
             transition: all 0.3s ease;
         }
         
-        .btn-light:hover {
+        .team-social a:hover {
+            background: var(--hospitour-accent);
+            color: white;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
         }
         
-        /* Footer */
+        .milestone-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--hospitour-secondary);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        
+        .milestone-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .milestone-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            display: block;
+            line-height: 1;
+        }
+        
+        .milestone-label {
+            color: var(--hospitour-dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .stats-section {
+            background: var(--hospitour-light);
+            padding: 4rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--hospitour-dark);
+            font-weight: 500;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hospitour-accent);
+            height: 100%;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
         .footer {
-            background: #0f172a;
+            background: var(--hospitour-dark);
             color: white;
             padding: 4rem 0 2rem;
         }
         
-        .footer-brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .footer-links h5 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links a {
-            color: #94a3b8;
+        .footer a {
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
             transition: color 0.3s ease;
         }
         
-        .footer-links a:hover {
+        .footer a:hover {
             color: white;
         }
         
-        .copyright {
-            border-top: 1px solid #334155;
-            padding-top: 2rem;
-            margin-top: 3rem;
-            text-align: center;
-            color: #94a3b8;
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
         }
         
-        /* Responsive */
+        .social-links a:hover {
+            background: var(--hospitour-accent);
+            transform: translateY(-2px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .notification.success {
+            background: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background: #e74c3c;
+        }
+        
+        .notification.info {
+            background: var(--hospitour-secondary);
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: var(--hospitour-primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--hospitour-accent);
+            border: 4px solid white;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .left {
+            left: 0;
+        }
+        
+        .left::after {
+            right: -10px;
+        }
+        
+        .right {
+            left: 50%;
+        }
+        
+        .right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .partner-logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+            .hero-section {
+                padding: 6rem 0 3rem;
+                text-align: center;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .timeline::after {
+                left: 31px;
             }
             
             .timeline-item {
-                flex-direction: column !important;
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
             }
             
-            .team-grid {
-                grid-template-columns: 1fr;
+            .timeline-item::after {
+                left: 21px;
             }
             
-            .values-grid {
-                grid-template-columns: 1fr;
+            .right {
+                left: 0%;
             }
         }
     </style>
@@ -462,433 +523,548 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <div class="logo-icon">HT</div>
-                HospiTour
+                <i class="fas fa-hotel me-2"></i>HospiTour
             </a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="features.html">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="solutions.html">Solutions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pricing.html">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
                 </ul>
-                <div class="ms-lg-3 mt-3 mt-lg-0">
-                    <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
     <!-- Hero Section -->
-    <section class="about-hero">
+    <section class="hero-section" id="home">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Transforming Hospitality & Tourism Through Innovation</h1>
-                <p class="hero-subtitle">
-                    We're on a mission to create unforgettable guest experiences while empowering hospitality businesses to thrive in the digital age.
-                </p>
-                <div class="d-flex flex-column flex-sm-row gap-3">
-                    <a href="#story" class="btn btn-light btn-lg">Our Story</a>
-                    <a href="#team" class="btn btn-outline-light btn-lg">Meet the Team</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Story Section -->
-    <section id="story" class="about-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Journey</h2>
-                <p class="section-subtitle">
-                    From a simple idea to revolutionizing how hospitality businesses operate worldwide.
-                </p>
-            </div>
-            
-            <div class="story-timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2018</div>
-                        <h3 class="timeline-title">The Beginning</h3>
-                        <p class="timeline-description">
-                            Founded by hospitality veterans who saw the need for a unified platform that could streamline operations while enhancing guest experiences. Started with a small team of 5 passionate individuals.
-                        </p>
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 slide-in-left">Transforming Africa's Hospitality Industry</h1>
+                    <p class="lead mb-4 slide-in-left" data-delay="200">HospiTour was founded with a vision to empower African hospitality businesses with technology solutions tailored to their unique needs and challenges.</p>
+                    <div class="hero-buttons d-flex flex-wrap gap-3 slide-in-left" data-delay="400">
+                        <button class="btn btn-accent btn-lg" id="ourStoryBtn">
+                            <i class="fas fa-book me-2"></i>Our Story
+                        </button>
+                        <button class="btn btn-light btn-lg" id="meetTeamBtn">
+                            <i class="fas fa-users me-2"></i>Meet Our Team
+                        </button>
                     </div>
                 </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2019</div>
-                        <h3 class="timeline-title">First Major Breakthrough</h3>
-                        <p class="timeline-description">
-                            Launched our MVP with 50+ hotel partners. Secured $2M in seed funding to accelerate development and expand our team. Introduced our signature property management module.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2020</div>
-                        <h3 class="timeline-title">Pandemic Adaptation</h3>
-                        <p class="timeline-description">
-                            Despite industry challenges, we pivoted to help hotels implement contactless solutions and remote management tools. Grew our customer base by 150% as businesses sought digital transformation.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2022</div>
-                        <h3 class="timeline-title">Global Expansion</h3>
-                        <p class="timeline-description">
-                            Expanded to 15 countries across Europe, Asia, and the Americas. Launched our tour management module and reached 1,000+ business customers. Recognized as "Most Innovative Hospitality Tech" by Industry Awards.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-year">2024</div>
-                        <h3 class="timeline-title">Today & Beyond</h3>
-                        <p class="timeline-description">
-                            Serving 2,500+ hospitality businesses worldwide with a team of 85+ dedicated professionals. Continuously innovating with AI-powered features and expanding our ecosystem to cover every aspect of hospitality and tourism.
-                        </p>
+                <div class="col-lg-4 text-center">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="HospiTour Team" class="img-fluid rounded-3 shadow-lg">
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Mission & Values Section -->
-    <section class="about-section" style="background: white;">
+    <!-- Mission & Vision -->
+    <section class="py-5" id="mission">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Mission & Values</h2>
-                <p class="section-subtitle">
-                    What drives us to innovate and serve the hospitality industry every day.
-                </p>
-            </div>
-            
-            <div class="row align-items-center mb-5">
+            <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h3 class="mb-3">Our Mission</h3>
-                    <p class="text-lg mb-4">
-                        To empower every hospitality business with technology that enhances guest experiences, streamlines operations, and drives sustainable growth in the digital era.
-                    </p>
-                    <h3 class="mb-3">Our Vision</h3>
-                    <p class="text-lg">
-                        We envision a world where technology seamlessly connects every aspect of hospitality and tourism, creating unforgettable experiences for guests while making business operations effortless and profitable.
-                    </p>
+                    <h2 class="section-title fade-in">Our Mission & Vision</h2>
+                    <p class="text-muted mb-4 fade-in" data-delay="200">We believe that Africa's hospitality industry has immense potential to become a global leader in tourism and service excellence.</p>
+                    
+                    <div class="mission-card bg-primary text-white p-4 rounded-3 mb-4 fade-in" data-delay="400">
+                        <h4><i class="fas fa-bullseye me-2"></i>Our Mission</h4>
+                        <p class="mb-0">To provide innovative, accessible technology solutions that empower African hospitality businesses to optimize operations, enhance guest experiences, and drive sustainable growth.</p>
+                    </div>
+                    
+                    <div class="vision-card bg-accent text-white p-4 rounded-3 fade-in" data-delay="600">
+                        <h4><i class="fas fa-eye me-2"></i>Our Vision</h4>
+                        <p class="mb-0">To be the leading technology partner for Africa's hospitality industry, enabling businesses across the continent to compete on a global scale while preserving their unique cultural identities.</p>
+                    </div>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <div style="font-size: 200px; color: var(--primary); opacity: 0.1;">🎯</div>
+                <div class="col-lg-6">
+                    <div class="p-4 fade-in" data-delay="800">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="African Hospitality" class="img-fluid rounded-3 shadow">
+                    </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-5 bg-light" id="story">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Our Story</h2>
+                <p class="text-muted fade-in" data-delay="200">From a simple idea to a pan-African hospitality technology leader</p>
+            </div>
             
-            <div class="values-grid">
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="bi bi-heart"></i>
+            <div class="timeline fade-in" data-delay="400">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>2018</h5>
+                        <h4>The Beginning</h4>
+                        <p>Founded by hospitality veterans who saw the technology gap in African hotels and restaurants. Started with a simple booking management system for small hotels in Kenya.</p>
                     </div>
-                    <h3 class="value-title">Guest-Centric</h3>
-                    <p class="value-text">
-                        Every feature we build is designed with the end guest experience in mind. We believe technology should enhance, not replace, human connection.
-                    </p>
                 </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="bi bi-lightbulb"></i>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h5>2019</h5>
+                        <h4>First Major Client</h4>
+                        <p>Signed our first major hotel chain client, expanding our operations to Tanzania and Uganda. Developed our comprehensive operations management module.</p>
                     </div>
-                    <h3 class="value-title">Innovation</h3>
-                    <p class="value-text">
-                        We constantly push boundaries to deliver cutting-edge solutions that anticipate industry needs and set new standards for excellence.
-                    </p>
                 </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="bi bi-shield-check"></i>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>2020</h5>
+                        <h4>Pandemic Response</h4>
+                        <p>Adapted our platform to help hospitality businesses navigate COVID-19 challenges. Launched contactless check-in and enhanced hygiene management features.</p>
                     </div>
-                    <h3 class="value-title">Reliability</h3>
-                    <p class="value-text">
-                        Hospitality businesses depend on us 24/7. We build robust, secure systems that businesses can trust with their most critical operations.
-                    </p>
                 </div>
-                
-                <div class="value-card">
-                    <div class="value-icon">
-                        <i class="bi bi-people"></i>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h5>2021</h5>
+                        <h4>Series A Funding</h4>
+                        <p>Secured $5M in Series A funding to expand across West Africa. Opened offices in Nigeria and Ghana, growing our team to 50+ professionals.</p>
                     </div>
-                    <h3 class="value-title">Partnership</h3>
-                    <p class="value-text">
-                        We view our customers as partners in innovation. Their success is our success, and we're committed to their growth every step of the way.
-                    </p>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>2022</h5>
+                        <h4>Product Expansion</h4>
+                        <p>Launched our staff management and marketing automation modules. Reached 500+ business clients across 12 African countries.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h5>2023</h5>
+                        <h4>Award Recognition</h4>
+                        <p>Received the "Best Hospitality Tech Solution" award at Africa Tech Awards. Expanded to Southern Africa with offices in South Africa.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h5>2024</h5>
+                        <h4>Current Focus</h4>
+                        <p>Developing AI-powered analytics and expanding our integration ecosystem. On track to serve 1,500+ businesses by end of year.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values -->
+    <section class="py-5" id="values">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Our Values</h2>
+                <p class="text-muted fade-in" data-delay="200">The principles that guide everything we do</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="0">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Partnership</h4>
+                        <p class="text-muted">We see ourselves as partners in our clients' success, not just vendors. Your growth is our growth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="100">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4>Innovation</h4>
+                        <p class="text-muted">We continuously evolve our solutions to address the unique challenges of African hospitality businesses.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="200">
+                        <div class="value-icon">
+                            <i class="fas fa-globe-africa"></i>
+                        </div>
+                        <h4>Local Expertise</h4>
+                        <p class="text-muted">We understand the nuances of African markets and build solutions that work in local contexts.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="300">
+                        <div class="value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Reliability</h4>
+                        <p class="text-muted">Our clients depend on us to keep their operations running smoothly 24/7/365.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="400">
+                        <div class="value-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Passion for Hospitality</h4>
+                        <p class="text-muted">We're driven by a genuine love for the hospitality industry and its power to create memorable experiences.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="value-card fade-in" data-delay="500">
+                        <div class="value-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h4>Growth Mindset</h4>
+                        <p class="text-muted">We're constantly learning, improving, and pushing boundaries to deliver more value to our clients.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
-    <section id="team" class="about-section">
+    <section class="py-5 bg-light" id="team">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Meet Our Leadership Team</h2>
-                <p class="section-subtitle">
-                    The passionate individuals driving innovation in hospitality technology.
-                </p>
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Meet Our Leadership Team</h2>
+                <p class="text-muted fade-in" data-delay="200">Experienced professionals passionate about hospitality and technology</p>
             </div>
             
-            <div class="team-grid">
-                <div class="team-card">
-                    <div class="team-image">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="team-name">Sarah Chen</h3>
-                        <div class="team-role">CEO & Co-Founder</div>
-                        <p class="team-bio">
-                            Former hotel general manager with 15+ years in luxury hospitality. Passionate about using technology to enhance guest experiences.
-                        </p>
-                        <div class="team-social">
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                            <a href="#"><i class="bi bi-twitter"></i></a>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card fade-in" data-delay="0">
+                        <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="team-content">
+                            <h4>James Okonjo</h4>
+                            <p class="text-primary mb-2">CEO & Co-Founder</p>
+                            <p class="text-muted small">Former regional director for a major hotel chain with 15+ years in hospitality management.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="team-card">
-                    <div class="team-image">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="team-name">Marcus Rodriguez</h3>
-                        <div class="team-role">CTO & Co-Founder</div>
-                        <p class="team-bio">
-                            Tech visionary with background in enterprise software and AI. Previously led engineering teams at major tech companies.
-                        </p>
-                        <div class="team-social">
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                            <a href="#"><i class="bi bi-github"></i></a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card fade-in" data-delay="100">
+                        <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="team-content">
+                            <h4>Fatima Diallo</h4>
+                            <p class="text-primary mb-2">CTO & Co-Founder</p>
+                            <p class="text-muted small">Tech entrepreneur with expertise in SaaS platforms and previous experience at leading fintech companies.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="team-card">
-                    <div class="team-image">
-                        <i class="bi bi-person"></i>
-                    </div>
-                    <div class="team-content">
-                        <h3 class="team-name">Amira Hassan</h3>
-                        <div class="team-role">Chief Product Officer</div>
-                        <p class="team-bio">
-                            Product strategist with expertise in UX design and customer-centric development. Leads our product vision and roadmap.
-                        </p>
-                        <div class="team-social">
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                            <a href="#"><i class="bi bi-medium"></i></a>
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-card fade-in" data-delay="200">
+                        <div class="team-image" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="team-content">
+                            <h4>David Mensah</h4>
+                            <p class="text-primary mb-2">Head of Product</p>
+                            <p class="text-muted small">Product management expert with background in both hospitality operations and technology development.</p>
+                            <div class="team-social">
+                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fas fa-envelope"></i></a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <div class="team-card">
-                    <div class="team-image">
-                        <i class="bi bi-person"></i>
+            </div>
+            
+            <div class="text-center mt-5 fade-in" data-delay="300">
+                <button class="btn btn-outline-primary" id="viewFullTeam">View Full Team</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Milestones -->
+    <section class="py-5" id="milestones">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Our Milestones</h2>
+                <p class="text-muted fade-in" data-delay="200">Celebrating growth and impact across Africa</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="milestone-card fade-in" data-delay="0">
+                        <span class="milestone-number" data-count="1250">0</span>
+                        <span class="milestone-label">Businesses Powered</span>
                     </div>
-                    <div class="team-content">
-                        <h3 class="team-name">David Kim</h3>
-                        <div class="team-role">Head of Customer Success</div>
-                        <p class="team-bio">
-                            Hospitality operations expert dedicated to ensuring our customers achieve their business goals and maximize platform value.
-                        </p>
-                        <div class="team-social">
-                            <a href="#"><i class="bi bi-linkedin"></i></a>
-                            <a href="#"><i class="bi bi-instagram"></i></a>
-                        </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="milestone-card fade-in" data-delay="100">
+                        <span class="milestone-number" data-count="15">0</span>
+                        <span class="milestone-label">African Countries</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="milestone-card fade-in" data-delay="200">
+                        <span class="milestone-number" data-count="98">0</span>
+                        <span class="milestone-label">Customer Satisfaction</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="milestone-card fade-in" data-delay="300">
+                        <span class="milestone-number" data-count="50">0</span>
+                        <span class="milestone-label">Team Members</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="stats-section">
+    <!-- Partners -->
+    <section class="py-5 bg-light" id="partners">
         <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-number">2,500+</div>
-                    <div class="stat-label">Happy Customers</div>
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Our Partners</h2>
+                <p class="text-muted fade-in" data-delay="200">Working with leading organizations across the hospitality ecosystem</p>
+            </div>
+            
+            <div class="row justify-content-center">
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="partner-logo fade-in" data-delay="0">
+                        <img src="https://via.placeholder.com/120x60/1a5276/ffffff?text=HTA" alt="Hospitality Association" class="img-fluid">
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">15</div>
-                    <div class="stat-label">Countries Served</div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="partner-logo fade-in" data-delay="100">
+                        <img src="https://via.placeholder.com/120x60/3498db/ffffff?text=ATB" alt="Africa Tourism Board" class="img-fluid">
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">85+</div>
-                    <div class="stat-label">Team Members</div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="partner-logo fade-in" data-delay="200">
+                        <img src="https://via.placeholder.com/120x60/e67e22/ffffff?text=TechHub" alt="TechHub Africa" class="img-fluid">
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-number">99.9%</div>
-                    <div class="stat-label">Uptime</div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="partner-logo fade-in" data-delay="300">
+                        <img src="https://via.placeholder.com/120x60/27ae60/ffffff?text=HIF" alt="Hospitality Innovation Fund" class="img-fluid">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="partner-logo fade-in" data-delay="400">
+                        <img src="https://via.placeholder.com/120x60/f39c12/ffffff?text=UNWTO" alt="UNWTO" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="py-5 bg-primary text-white">
         <div class="container">
-            <h2 class="cta-title">Join the Hospitality Revolution</h2>
-            <p class="cta-subtitle">
-                Be part of the growing community of forward-thinking hospitality businesses transforming their operations with HospiTour.
-            </p>
-            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                <a href="get-started.html" class="btn btn-light btn-lg">Start Free Trial</a>
-                <a href="contact.html" class="btn btn-outline-light btn-lg">Contact Us</a>
+            <div class="row justify-content-center text-center fade-in">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Join Us in Transforming African Hospitality</h2>
+                    <p class="lead mb-4">Whether you're a hospitality business looking for solutions or a professional passionate about our mission, we'd love to connect.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <button class="btn btn-light btn-lg px-4">Contact Us</button>
+                        <button class="btn btn-outline-light btn-lg px-4">Careers</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+  <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <div class="footer-brand">
-                        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem;">HT</div>
-                        HospiTour
-                    </div>
-                    <p style="color: #94a3b8; margin-bottom: 2rem;">
-                        The complete ecosystem for hospitality and tourism excellence. Streamline operations and create unforgettable experiences.
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-twitter"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-instagram"></i></a>
+                    <h5 class="mb-3">
+                        <i class="fas fa-hotel me-2"></i>HospiTour
+                    </h5>
+                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Platform</h5>
-                        <a href="features.html">Features</a>
-                        <a href="solutions.html">Solutions</a>
-                        <a href="pricing.html">Pricing</a>
-                        <a href="demo.html">Demo</a>
-                    </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">For Businesses</a></li>
+                        <li class="mb-2"><a href="#">For Professionals</a></li>
+                        <li class="mb-2"><a href="#">Marketplace</a></li>
+                        <li class="mb-2"><a href="#">Resources</a></li>
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                    </ul>
                 </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Resources</h5>
-                        <a href="#">Blog</a>
-                        <a href="#">Documentation</a>
-                        <a href="#">Support</a>
-                        <a href="#">API</a>
-                    </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Solutions</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Business Marketplace</a></li>
+                        <li class="mb-2"><a href="#">Staff Management</a></li>
+                        <li class="mb-2"><a href="#">Digital Marketing</a></li>
+                        <li class="mb-2"><a href="#">Operations Tools</a></li>
+                        <li class="mb-2"><a href="#">Partner Network</a></li>
+                    </ul>
                 </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Company</h5>
-                        <a href="about.html">About</a>
-                        <a href="#">Careers</a>
-                        <a href="contact.html">Contact</a>
-                        <a href="#">Partners</a>
-                    </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Help Center</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                        <li class="mb-2"><a href="#">Webinars</a></li>
+                        <li class="mb-2"><a href="#">Status</a></li>
+                    </ul>
                 </div>
-                
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Legal</h5>
-                        <a href="#">Privacy</a>
-                        <a href="#">Terms</a>
-                        <a href="#">Security</a>
-                        <a href="#">Compliance</a>
-                    </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Contact</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+234800000000">+234 800 000 0000</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Lagos, Nigeria
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
-            <div class="copyright">
-                <p>&copy; 2024 HospiTour. All rights reserved. The complete ecosystem for hospitality and tourism excellence.</p>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
                 }
             });
-        }, observerOptions);
-
-        // Observe timeline items
-        document.querySelectorAll('.timeline-content').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateX(-20px)';
-            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(item);
-        });
-
-        // Observe value cards
-        document.querySelectorAll('.value-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Observe team cards
-        document.querySelectorAll('.team-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type} show`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Hero button functionality
+            document.getElementById('ourStoryBtn').addEventListener('click', function() {
+                document.getElementById('story').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            document.getElementById('meetTeamBtn').addEventListener('click', function() {
+                document.getElementById('team').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // View full team button
+            document.getElementById('viewFullTeam').addEventListener('click', function() {
+                showNotification('Loading full team directory...', 'info');
+            });
+            
+            // Animated counter for milestones
+            const milestoneNumbers = document.querySelectorAll('.milestone-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const count = parseInt(target.getAttribute('data-count'));
+                        const duration = 2000; // 2 seconds
+                        const step = count / (duration / 16); // 60fps
+                        let current = 0;
+                        
+                        const timer = setInterval(() => {
+                            current += step;
+                            if (current >= count) {
+                                current = count;
+                                clearInterval(timer);
+                            }
+                            target.textContent = Math.floor(current);
+                        }, 16);
+                        
+                        observer.unobserve(target);
+                    }
+                });
+            });
+            
+            milestoneNumbers.forEach(number => {
+                observer.observe(number);
+            });
+            
+            // Team card interaction
+            document.querySelectorAll('.team-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const name = this.querySelector('h4').textContent;
+                    const role = this.querySelector('.text-primary').textContent;
+                    showNotification(`Viewing profile: ${name} - ${role}`, 'info');
+                });
+            });
+            
+            // Value card interaction
+            document.querySelectorAll('.value-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    const value = this.querySelector('h4').textContent;
+                    showNotification(`Learn more about our value: ${value}`, 'info');
+                });
+            });
+            
+            // Timeline item interaction
+            document.querySelectorAll('.timeline-content').forEach(item => {
+                item.addEventListener('click', function() {
+                    const year = this.querySelector('h5').textContent;
+                    const title = this.querySelector('h4').textContent;
+                    showNotification(`Company milestone: ${year} - ${title}`, 'info');
+                });
             });
         });
     </script>

@@ -3,435 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - HospiTour | Get in Touch</title>
-    
-    <!-- Bootstrap CSS -->
+    <title>Contact - HospiTour</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #059669;
-            --accent: #f59e0b;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --gray: #64748b;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
         }
         
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hospitour-dark);
             line-height: 1.6;
-            color: var(--dark);
-            background-color: var(--light);
+            overflow-x: hidden;
         }
         
-        /* Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
         }
         
         .navbar-brand {
-            font-weight: 800;
-            font-size: 1.8rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .navbar-brand .logo-icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            font-size: 1.5rem;
         }
         
         .nav-link {
+            color: var(--hospitour-dark) !important;
             font-weight: 500;
-            color: var(--dark);
             margin: 0 0.5rem;
             transition: color 0.3s ease;
+            position: relative;
         }
         
         .nav-link:hover, .nav-link.active {
-            color: var(--primary);
+            color: var(--hospitour-accent) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: var(--hospitour-primary);
             border: none;
             padding: 0.75rem 2rem;
-            border-radius: 10px;
             font-weight: 600;
             transition: all 0.3s ease;
         }
         
         .btn-primary:hover {
+            background: #144360;
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
         }
         
-        /* Hero Section */
-        .contact-hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .btn-accent {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
             color: white;
             padding: 8rem 0 4rem;
             position: relative;
             overflow: hidden;
         }
         
-        .contact-hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" opacity="0.1"><path fill="white" d="M0,320L48,293.3C96,267,192,213,288,186.7C384,160,480,160,576,176C672,192,768,224,864,224C960,224,1056,192,1152,176C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
             background-size: cover;
         }
         
         .hero-content {
             position: relative;
             z-index: 2;
-            text-align: center;
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Contact Section */
-        .contact-section {
-            padding: 6rem 0;
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
         }
         
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--hospitour-dark);
         }
         
-        .section-subtitle {
-            font-size: 1.2rem;
-            color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
         }
         
-        /* Contact Cards */
-        .contact-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 4rem;
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
         }
         
         .contact-card {
             background: white;
+            border-radius: 12px;
             padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            text-align: center;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-top: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .contact-card:hover::before {
+            left: 100%;
         }
         
         .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--hospitour-accent);
         }
         
         .contact-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 20px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            color: white;
+            color: var(--hospitour-accent);
             font-size: 2rem;
-        }
-        
-        .contact-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .contact-info {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .contact-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .contact-link:hover {
-            color: var(--primary-dark);
-        }
-        
-        /* Contact Form */
-        .contact-form-container {
-            background: white;
-            border-radius: 15px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 2rem;
-            color: var(--dark);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-        
-        .form-control {
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 0.75rem 1rem;
             transition: all 0.3s ease;
         }
         
-        .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1);
+            background: var(--hospitour-accent);
+            color: white;
         }
         
-        textarea.form-control {
-            resize: vertical;
-            min-height: 120px;
-        }
-        
-        /* Offices Section */
-        .offices-section {
+        .contact-form {
             background: white;
-            padding: 6rem 0;
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
         
-        .office-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .form-control, .form-select {
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--hospitour-primary);
+            box-shadow: 0 0 0 0.2rem rgba(26, 82, 118, 0.25);
         }
         
         .office-card {
-            background: var(--light);
-            border-radius: 15px;
-            padding: 2.5rem;
-            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--hospitour-secondary);
+            height: 100%;
         }
         
         .office-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
         }
         
-        .office-flag {
-            font-size: 3rem;
+        .office-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
             margin-bottom: 1.5rem;
         }
         
-        .office-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-        
-        .office-address {
-            color: var(--gray);
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-        }
-        
-        .office-hours {
-            color: var(--gray);
-            font-size: 0.9rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            padding: 6rem 0;
-        }
-        
-        .accordion-button {
-            font-weight: 600;
-            padding: 1.5rem;
-            border: none;
+        .faq-card {
             background: white;
-        }
-        
-        .accordion-button:not(.collapsed) {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .accordion-body {
-            padding: 1.5rem;
-            color: var(--gray);
-        }
-        
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 6rem 0;
-            text-align: center;
-        }
-        
-        .cta-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-subtitle {
-            font-size: 1.2rem;
-            margin-bottom: 2.5rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .btn-light {
-            background: white;
-            color: var(--dark);
-            border: none;
-            padding: 1rem 2.5rem;
-            border-radius: 10px;
-            font-weight: 600;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
+            margin-bottom: 1rem;
+            cursor: pointer;
         }
         
-        .btn-light:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+        .faq-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
         }
         
-        /* Footer */
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+        
+        .faq-answer {
+            margin-top: 1rem;
+            color: #6c757d;
+            display: none;
+        }
+        
+        .faq-card.active .faq-answer {
+            display: block;
+        }
+        
+        .faq-card.active .fa-toggle {
+            transform: rotate(180deg);
+        }
+        
+        .fa-toggle {
+            transition: transform 0.3s ease;
+        }
+        
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            height: 400px;
+        }
+        
         .footer {
-            background: #0f172a;
+            background: var(--hospitour-dark);
             color: white;
             padding: 4rem 0 2rem;
         }
         
-        .footer-brand {
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .footer-links h5 {
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-        
-        .footer-links a {
-            color: #94a3b8;
+        .footer a {
+            color: rgba(255,255,255,0.8);
             text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
             transition: color 0.3s ease;
         }
         
-        .footer-links a:hover {
+        .footer a:hover {
             color: white;
         }
         
-        .copyright {
-            border-top: 1px solid #334155;
-            padding-top: 2rem;
-            margin-top: 3rem;
-            text-align: center;
-            color: #94a3b8;
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
         }
         
-        /* Responsive */
+        .social-links a:hover {
+            background: var(--hospitour-accent);
+            transform: translateY(-2px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .notification.success {
+            background: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background: #e74c3c;
+        }
+        
+        .notification.info {
+            background: var(--hospitour-secondary);
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
         @media (max-width: 768px) {
-            .hero-title {
-                font-size: 2.5rem;
+            .hero-section {
+                padding: 6rem 0 3rem;
+                text-align: center;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .hero-buttons {
+                justify-content: center;
             }
             
-            .contact-form-container {
-                padding: 2rem;
-            }
-            
-            .contact-cards,
-            .office-cards {
-                grid-template-columns: 1fr;
+            .contact-form {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -441,316 +402,349 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <div class="logo-icon">HT</div>
-                HospiTour
+                <i class="fas fa-hotel me-2"></i>HospiTour
             </a>
-            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="features.html">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="solutions.html">Solutions</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="pricing.html">Pricing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="contact.html">Contact</a>
-                    </li>
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
                 </ul>
-                <div class="ms-lg-3 mt-3 mt-lg-0">
-                    <a href="get-started.html" class="btn btn-primary">Get Started</a>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
     <!-- Hero Section -->
-    <section class="contact-hero">
+    <section class="hero-section" id="home">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Let's Start a Conversation</h1>
-                <p class="hero-subtitle">
-                    Ready to transform your hospitality business? Our team is here to answer your questions and help you get started.
-                </p>
-                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                    <a href="#contact-form" class="btn btn-light btn-lg">Send Message</a>
-                    <a href="#offices" class="btn btn-outline-light btn-lg">Visit Offices</a>
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 slide-in-left">Get in Touch With HospiTour</h1>
+                    <p class="lead mb-4 slide-in-left" data-delay="200">We're here to help you transform your hospitality business. Reach out to our team for questions, support, or partnership opportunities.</p>
+                    <div class="hero-buttons d-flex flex-wrap gap-3 slide-in-left" data-delay="400">
+                        <button class="btn btn-accent btn-lg" id="contactSalesBtn">
+                            <i class="fas fa-headset me-2"></i>Contact Sales
+                        </button>
+                        <button class="btn btn-light btn-lg" id="supportBtn">
+                            <i class="fas fa-life-ring me-2"></i>Get Support
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Contact HospiTour" class="img-fluid rounded-3 shadow-lg">
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Methods Section -->
-    <section class="contact-section">
+    <!-- Contact Methods -->
+    <section class="py-5" id="contactMethods">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get in Touch</h2>
-                <p class="section-subtitle">
-                    Multiple ways to reach our hospitality experts. We're here to help you succeed.
-                </p>
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">How Can We Help You?</h2>
+                <p class="text-muted fade-in" data-delay="200">Choose the best way to reach our team</p>
             </div>
             
-            <div class="contact-cards">
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="bi bi-telephone"></i>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in" data-delay="0">
+                        <div class="contact-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Sales & General Inquiries</h4>
+                        <p class="text-muted">Interested in our solutions? Our sales team is ready to answer your questions and help you get started.</p>
+                        <div class="contact-info mt-4">
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +254 700 123 456</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> sales@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 contact-action" data-type="sales">Contact Sales</button>
                     </div>
-                    <h3 class="contact-title">Call Us</h3>
-                    <p class="contact-info">
-                        Speak directly with our hospitality consultants for immediate assistance.
-                    </p>
-                    <a href="tel:+1-555-123-4567" class="contact-link">+1 (555) 123-4567</a>
-                    <div class="mt-2 text-sm text-muted">Mon-Fri, 9AM-6PM EST</div>
                 </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="bi bi-envelope"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in" data-delay="100">
+                        <div class="contact-icon">
+                            <i class="fas fa-life-ring"></i>
+                        </div>
+                        <h4>Customer Support</h4>
+                        <p class="text-muted">Need help with your account or have technical questions? Our support team is available 24/7.</p>
+                        <div class="contact-info mt-4">
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +254 700 123 457</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> support@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 contact-action" data-type="support">Get Support</button>
                     </div>
-                    <h3 class="contact-title">Email Us</h3>
-                    <p class="contact-info">
-                        Send us your questions and we'll get back to you within 24 hours.
-                    </p>
-                    <a href="mailto:hello@hospitour.com" class="contact-link">hospitour.com.ng</a>
-                    <div class="mt-2 text-sm text-muted">24/7 Support</div>
                 </div>
-                
-                <div class="contact-card">
-                    <div class="contact-icon">
-                        <i class="bi bi-chat-dots"></i>
+                <div class="col-lg-4 col-md-6">
+                    <div class="contact-card fade-in" data-delay="200">
+                        <div class="contact-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4>Partnerships</h4>
+                        <p class="text-muted">Interested in partnering with HospiTour? Let's explore opportunities to work together.</p>
+                        <div class="contact-info mt-4">
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +254 700 123 458</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> partnerships@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 contact-action" data-type="partnerships">Discuss Partnership</button>
                     </div>
-                    <h3 class="contact-title">Live Chat</h3>
-                    <p class="contact-info">
-                        Chat with our support team in real-time for quick answers.
-                    </p>
-                    <a href="#" class="contact-link">Start Live Chat</a>
-                    <div class="mt-2 text-sm text-muted">Mon-Sun, 8AM-10PM EST</div>
                 </div>
             </div>
-            
-            <!-- Contact Form -->
-            <div class="row justify-content-center">
+        </div>
+    </section>
+
+    <!-- Contact Form & Info -->
+    <section class="py-5 bg-light" id="contactForm">
+        <div class="container">
+            <div class="row g-5">
                 <div class="col-lg-8">
-                    <div class="contact-form-container">
-                        <h3 class="form-title" id="contact-form">Send us a Message</h3>
-                        <form id="contactForm">
+                    <div class="contact-form fade-in">
+                        <h3 class="mb-4">Send Us a Message</h3>
+                        <p class="text-muted mb-4">Fill out the form below and our team will get back to you within 24 hours.</p>
+                        
+                        <form id="mainContactForm">
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">First Name *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName" class="form-label">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Last Name *</label>
-                                        <input type="text" class="form-control" required>
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName" class="form-label">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" required>
                                 </div>
                             </div>
                             
                             <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Email Address *</label>
-                                        <input type="email" class="form-control" required>
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" required>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Phone Number</label>
-                                        <input type="tel" class="form-control">
-                                    </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone">
                                 </div>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label">Company Name</label>
-                                <input type="text" class="form-control">
+                            <div class="mb-3">
+                                <label for="company" class="form-label">Company Name</label>
+                                <input type="text" class="form-control" id="company">
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label">Business Type *</label>
-                                <select class="form-control" required>
-                                    <option value="">Select your business type</option>
-                                    <option value="hotel">Hotel/Resort</option>
-                                    <option value="tour">Tour Operator</option>
-                                    <option value="rental">Vacation Rental</option>
-                                    <option value="restaurant">Restaurant/Bar</option>
-                                    <option value="venue">Event Venue</option>
-                                    <option value="venue">Catering Services</option>
+                            <div class="mb-3">
+                                <label for="inquiryType" class="form-label">Inquiry Type *</label>
+                                <select class="form-select" id="inquiryType" required>
+                                    <option value="" selected disabled>Select an option</option>
+                                    <option value="sales">Sales Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="partnership">Partnership Opportunity</option>
+                                    <option value="billing">Billing Question</option>
                                     <option value="other">Other</option>
                                 </select>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label">How can we help you? *</label>
-                                <textarea class="form-control" rows="4" placeholder="Tell us about your hospitality business needs..." required></textarea>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message *</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
                             </div>
                             
-                            <div class="form-group">
-                                <label class="form-label">How did you hear about us?</label>
-                                <select class="form-control">
-                                    <option value="">Select an option</option>
-                                    <option value="search">Search Engine</option>
-                                    <option value="social">Social Media</option>
-                                    <option value="referral">Referral</option>
-                                    <option value="event">Industry Event</option>
-                                    <option value="other">Other</option>
-                                </select>
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" id="consent" required>
+                                <label class="form-check-label" for="consent">
+                                    I agree to the <a href="#" class="text-primary">Privacy Policy</a> and consent to HospiTour contacting me about my inquiry.
+                                </label>
                             </div>
                             
-                            <button type="submit" class="btn btn-primary w-100 py-3">
-                                <i class="bi bi-send me-2"></i>Send Message
-                            </button>
+                            <button type="submit" class="btn btn-primary btn-lg w-100">Send Message</button>
                         </form>
                     </div>
                 </div>
+                
+                <div class="col-lg-4">
+                    <div class="fade-in" data-delay="200">
+                        <h3 class="mb-4">Contact Information</h3>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-map-marker-alt text-primary me-2"></i> Our Headquarters</h5>
+                            <p class="text-muted mb-0">Westlands Business District<br>Nairobi, Kenya</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock text-primary me-2"></i> Business Hours</h5>
+                            <p class="text-muted mb-0">Monday - Friday: 8:00 AM - 6:00 PM EAT<br>Saturday: 9:00 AM - 1:00 PM EAT</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-phone text-primary me-2"></i> Phone Numbers</h5>
+                            <p class="text-muted mb-1">Sales: +254 700 123 456</p>
+                            <p class="text-muted mb-1">Support: +254 700 123 457</p>
+                            <p class="text-muted mb-0">General: +254 700 123 459</p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h5><i class="fas fa-envelope text-primary me-2"></i> Email Addresses</h5>
+                            <p class="text-muted mb-1">sales@hospitour.com</p>
+                            <p class="text-muted mb-1">support@hospitour.com</p>
+                            <p class="text-muted mb-0">info@hospitour.com</p>
+                        </div>
+                        
+                        <div class="social-links mt-4">
+                            <h5 class="mb-3">Follow Us</h5>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Offices Section -->
-    <section id="offices" class="offices-section">
+    <!-- Regional Offices -->
+    <section class="py-5" id="offices">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Our Global Offices</h2>
-                <p class="section-subtitle">
-                    With teams around the world, we're always close to serve your hospitality needs.
-                </p>
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Our Regional Offices</h2>
+                <p class="text-muted fade-in" data-delay="200">We have teams across Africa to serve you better</p>
             </div>
             
-            <div class="office-cards">
-                <div class="office-card">
-                    <div class="office-flag">🇺🇸</div>
-                    <h3 class="office-title">New York, USA</h3>
-                    <p class="office-address">
-                        123 Hospitality Avenue<br>
-                        Suite 500<br>
-                        New York, NY 10001
-                    </p>
-                    <div class="office-hours">
-                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM EST
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="office-card fade-in" data-delay="0">
+                        <div class="office-image" style="background-image: url('https://images.unsplash.com/photo-1524368535928-5b5e00ddc76b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <h4>Nairobi, Kenya</h4>
+                        <p class="text-muted">Our headquarters serving East Africa</p>
+                        <div class="office-info">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Westlands Business District</p>
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +254 700 123 456</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> kenya@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 view-office" data-office="nairobi">View on Map</button>
                     </div>
-                    <a href="tel:+1-555-123-4567" class="contact-link">+1 (555) 123-4567</a>
                 </div>
                 
-                <div class="office-card">
-                    <div class="office-flag">🇬🇧</div>
-                    <h3 class="office-title">London, UK</h3>
-                    <p class="office-address">
-                        45 Tourism Street<br>
-                        London EC2A 4NE<br>
-                        United Kingdom
-                    </p>
-                    <div class="office-hours">
-                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM GMT
+                <div class="col-lg-4 col-md-6">
+                    <div class="office-card fade-in" data-delay="100">
+                        <div class="office-image" style="background-image: url('https://images.unsplash.com/photo-1578660664323-67c2e8c60d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <h4>Lagos, Nigeria</h4>
+                        <p class="text-muted">Serving West African markets</p>
+                        <div class="office-info">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Victoria Island</p>
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +234 800 123 4567</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> nigeria@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 view-office" data-office="lagos">View on Map</button>
                     </div>
-                    <a href="tel:+44-20-7946-0958" class="contact-link">+44 20 7946 0958</a>
                 </div>
                 
-                <div class="office-card">
-                    <div class="office-flag">🇸🇬</div>
-                    <h3 class="office-title">Singapore</h3>
-                    <p class="office-address">
-                        78 Marina View<br>
-                        #12-05 Asia Square Tower 1<br>
-                        Singapore 018961
-                    </p>
-                    <div class="office-hours">
-                        <strong>Hours:</strong> Mon-Fri, 9AM-6PM SGT
+                <div class="col-lg-4 col-md-6">
+                    <div class="office-card fade-in" data-delay="200">
+                        <div class="office-image" style="background-image: url('https://images.unsplash.com/photo-1580060839134-75a5edca2e99?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <h4>Johannesburg, South Africa</h4>
+                        <p class="text-muted">Covering Southern Africa region</p>
+                        <div class="office-info">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Sandton Central</p>
+                            <p class="mb-1"><i class="fas fa-phone me-2 text-primary"></i> +27 11 123 4567</p>
+                            <p class="mb-0"><i class="fas fa-envelope me-2 text-primary"></i> sa@hospitour.com</p>
+                        </div>
+                        <button class="btn btn-outline-primary mt-3 view-office" data-office="johannesburg">View on Map</button>
                     </div>
-                    <a href="tel:+234-803-966-1354" class="contact-link">+234-803-966 1354</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-5 bg-light" id="map">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Find Us</h2>
+                <p class="text-muted fade-in" data-delay="200">Visit our offices or connect with us remotely</p>
+            </div>
+            
+            <div class="map-container fade-in" data-delay="400">
+                <!-- In a real implementation, you would embed a Google Map or similar here -->
+                <div style="width: 100%; height: 100%; background: #e9ecef; display: flex; align-items: center; justify-content: center;">
+                    <div class="text-center p-4">
+                        <i class="fas fa-map-marked-alt fa-3x text-primary mb-3"></i>
+                        <h4>Interactive Map</h4>
+                        <p class="text-muted">This would display an interactive map showing our office locations</p>
+                        <button class="btn btn-primary" id="openMap">Open in Maps</button>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="py-5" id="faq">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Common Questions</h2>
-                <p class="section-subtitle">
-                    Quick answers to frequently asked questions about getting started with HospiTour.
-                </p>
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Frequently Asked Questions</h2>
+                <p class="text-muted fade-in" data-delay="200">Quick answers to common questions</p>
             </div>
             
-            <div class="accordion" id="faqAccordion">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                            How quickly can I get started with HospiTour?
-                        </button>
-                    </h2>
-                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            You can start your free trial immediately after signing up. Most businesses are fully operational within 24-48 hours. Our onboarding team will guide you through the setup process and ensure everything is configured to meet your specific needs.
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="faq-card fade-in" data-delay="0">
+                        <div class="faq-question">
+                            <span>What are your customer support hours?</span>
+                            <i class="fas fa-chevron-down fa-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Our customer support team is available 24/7 for urgent technical issues. For general inquiries, our business hours are Monday to Friday, 8:00 AM to 6:00 PM EAT, and Saturdays from 9:00 AM to 1:00 PM EAT.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                            Do you offer custom solutions for large hotel chains?
-                        </button>
-                    </h2>
-                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Absolutely! Our Enterprise plan includes custom solutions tailored for large hotel chains and hospitality groups. We offer dedicated account management, custom integrations, white-label solutions, and enterprise-grade support to meet the complex needs of multi-property operations.
+                    
+                    <div class="faq-card fade-in" data-delay="100">
+                        <div class="faq-question">
+                            <span>How quickly can I expect a response to my inquiry?</span>
+                            <i class="fas fa-chevron-down fa-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We aim to respond to all inquiries within 24 hours during business days. Sales inquiries typically receive a response within 4-6 hours, while technical support requests are prioritized based on severity.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                            What kind of support do you provide?
-                        </button>
-                    </h2>
-                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            We provide comprehensive support through multiple channels: email support for all plans, priority phone support for Professional and Enterprise plans, 24/7 dedicated support for Enterprise customers, live chat during business hours, and extensive documentation and training resources.
+                    
+                    <div class="faq-card fade-in" data-delay="200">
+                        <div class="faq-question">
+                            <span>Do you offer customized solutions for large hotel chains?</span>
+                            <i class="fas fa-chevron-down fa-toggle"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Yes, we offer enterprise-level customized solutions for hotel chains and large hospitality groups. Our team will work with you to understand your specific needs and develop a tailored implementation plan.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                            Can I integrate with my existing systems?
-                        </button>
-                    </h2>
-                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            Yes, HospiTour offers robust API access and pre-built integrations with popular hospitality systems including PMS, POS, channel managers, payment gateways, and accounting software. Our technical team can help with custom integrations for unique requirements.
+                    
+                    <div class="faq-card fade-in" data-delay="300">
+                        <div class="faq-question">
+                            <span>What regions in Africa do you currently serve?</span>
+                            <i class="fas fa-chevron-down fa-toggle"></i>
                         </div>
-                    </div>
-                </div>
-                
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                            Is there training available for my staff?
-                        </button>
-                    </h2>
-                    <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                        <div class="accordion-body">
-                            We provide comprehensive training resources including video tutorials, documentation, live webinars, and one-on-one training sessions. Enterprise customers receive customized on-site or virtual training for their entire team to ensure smooth adoption.
+                        <div class="faq-answer">
+                            <p>We currently serve clients in 15 African countries across East, West, and Southern Africa. Our regional offices in Kenya, Nigeria, and South Africa allow us to provide localized support and understand regional market dynamics.</p>
                         </div>
                     </div>
                 </div>
@@ -759,156 +753,184 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
+    <section class="py-5 bg-primary text-white">
         <div class="container">
-            <h2 class="cta-title">Ready to Transform Your Hospitality Business?</h2>
-            <p class="cta-subtitle">
-                Join thousands of hotels, tour operators, and hospitality professionals who trust HospiTour to power their success.
-            </p>
-            <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center">
-                <a href="get-started.html" class="btn btn-light btn-lg">Start Free Trial</a>
-                <a href="demo.html" class="btn btn-outline-light btn-lg">Schedule Demo</a>
+            <div class="row justify-content-center text-center fade-in">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Ready to Get Started?</h2>
+                    <p class="lead mb-4">Contact our team today to learn how HospiTour can transform your hospitality business.</p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <button class="btn btn-light btn-lg px-4" id="scheduleDemoBtn">Schedule a Demo</button>
+                        <button class="btn btn-outline-light btn-lg px-4" id="callUsBtn">Call Us Now</button>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="bg-dark text-white py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 mb-4">
-                    <div class="footer-brand">
-                        <div style="width: 30px; height: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 0.9rem;">HT</div>
-                        HospiTour
-                    </div>
-                    <p style="color: #94a3b8; margin-bottom: 2rem;">
-                        The complete ecosystem for hospitality and tourism excellence. Streamline operations and create unforgettable experiences.
-                    </p>
+                    <h5 class="mb-3"><i class="fas fa-hotel me-2"></i>HospiTour</h5>
+                    <p class="text-muted">Transforming Africa's hospitality industry with innovative technology solutions.</p>
                     <div class="d-flex gap-3">
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-twitter"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" style="color: #94a3b8; font-size: 1.2rem;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Platform</h5>
-                        <a href="features.html">Features</a>
-                        <a href="solutions.html">Solutions</a>
-                        <a href="pricing.html">Pricing</a>
-                        <a href="demo.html">Demo</a>
-                    </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="mb-3">Solutions</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="solutions.html#operations" class="text-muted text-decoration-none">Operations</a></li>
+                        <li class="mb-2"><a href="solutions.html#staff" class="text-muted text-decoration-none">Staff Management</a></li>
+                        <li class="mb-2"><a href="solutions.html#marketing" class="text-muted text-decoration-none">Marketing</a></li>
+                        <li class="mb-2"><a href="solutions.html#pricing" class="text-muted text-decoration-none">Pricing</a></li>
+                    </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Resources</h5>
-                        <a href="#">Blog</a>
-                        <a href="#">Documentation</a>
-                        <a href="#">Support</a>
-                        <a href="#">API</a>
-                    </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="mb-3">Company</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="about.html" class="text-muted text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Careers</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Press</a></li>
+                    </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Company</h5>
-                        <a href="about.html">About</a>
-                        <a href="#">Careers</a>
-                        <a href="contact.html">Contact</a>
-                        <a href="#">Partners</a>
-                    </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Help Center</a></li>
+                        <li class="mb-2"><a href="contact.html" class="text-muted text-decoration-none">Contact</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Status</a></li>
+                    </ul>
                 </div>
                 
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <div class="footer-links">
-                        <h5>Legal</h5>
-                        <a href="#">Privacy</a>
-                        <a href="#">Terms</a>
-                        <a href="#">Security</a>
-                        <a href="#">Compliance</a>
-                    </div>
+                <div class="col-lg-2 col-6 mb-4">
+                    <h6 class="mb-3">Legal</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Privacy</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Terms</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Security</a></li>
+                        <li class="mb-2"><a href="#" class="text-muted text-decoration-none">Compliance</a></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="copyright">
-                <p>&copy; 2024 HospiTour. All rights reserved. The complete ecosystem for hospitality and tourism excellence.</p>
+            <hr class="my-4 bg-secondary">
+            
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="text-muted mb-0">&copy; 2024 HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="text-muted mb-0">Designed with ❤️ for Africa's hospitality industry</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Form submission handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
             
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="bi bi-arrow-repeat spinner"></i> Sending...';
-            submitBtn.disabled = true;
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type} show`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
             
-            // Simulate form submission
-            setTimeout(() => {
-                // Show success message
-                alert('Thank you for your message! We will get back to you within 24 hours.');
+            // Hero button functionality
+            document.getElementById('contactSalesBtn').addEventListener('click', function() {
+                document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('inquiryType').value = 'sales';
+            });
+            
+            document.getElementById('supportBtn').addEventListener('click', function() {
+                document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('inquiryType').value = 'support';
+            });
+            
+            // Contact action buttons
+            document.querySelectorAll('.contact-action').forEach(button => {
+                button.addEventListener('click', function() {
+                    const type = this.getAttribute('data-type');
+                    document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth' });
+                    document.getElementById('inquiryType').value = type;
+                    showNotification(`Directing you to ${type} contact form`, 'info');
+                });
+            });
+            
+            // Office view buttons
+            document.querySelectorAll('.view-office').forEach(button => {
+                button.addEventListener('click', function() {
+                    const office = this.getAttribute('data-office');
+                    showNotification(`Showing ${office} office location on map`, 'info');
+                    // In a real implementation, this would center the map on the selected office
+                });
+            });
+            
+            // FAQ functionality
+            document.querySelectorAll('.faq-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                });
+            });
+            
+            // Form submission
+            document.getElementById('mainContactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form values
+                const firstName = document.getElementById('firstName').value;
+                const email = document.getElementById('email').value;
+                const inquiryType = document.getElementById('inquiryType').value;
+                
+                // Simulate form submission
+                showNotification(`Thank you ${firstName}! Your ${inquiryType} inquiry has been submitted. We'll contact you at ${email} soon.`, 'success');
                 
                 // Reset form
                 this.reset();
-                
-                // Restore button
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 2000);
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
             });
-        }, observerOptions);
-
-        // Observe contact cards
-        document.querySelectorAll('.contact-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Observe office cards
-        document.querySelectorAll('.office-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+            
+            // Schedule demo button
+            document.getElementById('scheduleDemoBtn').addEventListener('click', function() {
+                showNotification('Redirecting to demo scheduling calendar...', 'info');
+                // In a real implementation, this would open a scheduling modal or redirect
+            });
+            
+            // Call us button
+            document.getElementById('callUsBtn').addEventListener('click', function() {
+                showNotification('Calling our main office at +254 700 123 456', 'info');
+                // In a real implementation, this would initiate a phone call on mobile devices
+            });
+            
+            // Open map button
+            document.getElementById('openMap').addEventListener('click', function() {
+                showNotification('Opening interactive map in new window...', 'info');
+                // In a real implementation, this would open a full-screen map or redirect to Google Maps
             });
         });
     </script>

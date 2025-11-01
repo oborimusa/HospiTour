@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - HospiTour</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --hospitour-primary: #1a5276;
+            --hospitour-secondary: #3498db;
+            --hospitour-accent: #e67e22;
+            --hospitour-success: #27ae60;
+            --hospitour-warning: #f39c12;
+            --hospitour-light: #f8f9fa;
+            --hospitour-dark: #2c3e50;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--hospitour-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            font-size: 1.5rem;
+        }
+        
+        .nav-link {
+            color: var(--hospitour-dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            color: var(--hospitour-accent) !important;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .btn-primary {
+            background: var(--hospitour-primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: #144360;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+        }
+        
+        .btn-accent {
+            background: var(--hospitour-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        
+        .btn-outline-primary {
+            border: 2px solid var(--hospitour-primary);
+            color: var(--hospitour-primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--hospitour-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
+            color: white;
+            padding: 8rem 0 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--hospitour-dark);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--hospitour-accent);
+            transition: width 0.3s ease;
+        }
+        
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .resource-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resource-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .resource-card:hover::before {
+            left: 100%;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-top: 4px solid var(--hospitour-accent);
+        }
+        
+        .resource-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--hospitour-accent);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover .resource-icon {
+            transform: scale(1.1);
+            background: var(--hospitour-accent);
+            color: white;
+        }
+        
+        .article-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+        
+        .article-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+        
+        .article-tag {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--hospitour-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .stats-section {
+            background: var(--hospitour-light);
+            padding: 4rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--hospitour-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--hospitour-dark);
+            font-weight: 500;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--hospitour-accent);
+            height: 100%;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .footer {
+            background: var(--hospitour-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .footer a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--hospitour-accent);
+            transform: translateY(-2px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+        }
+        
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .notification.success {
+            background: var(--hospitour-success);
+        }
+        
+        .notification.error {
+            background: #e74c3c;
+        }
+        
+        .notification.info {
+            background: var(--hospitour-secondary);
+        }
+        
+        .resource-tabs {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .resource-tab {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .resource-tab:hover {
+            background: var(--hospitour-light);
+        }
+        
+        .resource-tab.active {
+            background: var(--hospitour-primary);
+            color: white;
+            border-bottom: 3px solid var(--hospitour-accent);
+        }
+        
+        .resource-content {
+            display: none;
+        }
+        
+        .resource-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .search-box {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+        
+        .search-box input {
+            padding-right: 50px;
+            border-radius: 50px;
+            border: 2px solid #e9ecef;
+        }
+        
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+        }
+        
+        .filter-tag {
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-tag:hover, .filter-tag.active {
+            background: var(--hospitour-primary);
+            color: white;
+            border-color: var(--hospitour-primary);
+        }
+        
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--hospitour-primary) 0%, var(--hospitour-secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            border-radius: 12px;
+        }
+        
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form .form-control {
+            border-radius: 50px;
+            border: none;
+            padding: 0.75rem 1.5rem;
+        }
+        
+        .newsletter-form .btn {
+            border-radius: 50px;
+            padding: 0.75rem 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0 3rem;
+                text-align: center;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .resource-tabs {
+                flex-direction: column;
+            }
+            
+            .filter-tags {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel me-2"></i>HospiTour
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Element -->
+    <div class="notification" id="notification"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 slide-in-left">Hospitality Resources & Insights</h1>
+                    <p class="lead mb-4 slide-in-left" data-delay="200">Access industry reports, guides, case studies, and expert advice to grow your hospitality business in Africa.</p>
+                    <div class="search-box slide-in-left" data-delay="400">
+                        <input type="text" class="form-control form-control-lg" placeholder="Search resources, articles, guides..." id="resourceSearch">
+                        <button class="btn btn-accent" id="searchButton">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resource Categories -->
+    <section class="py-5" id="resourceCategories">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Explore Our Resources</h2>
+                <p class="text-muted fade-in" data-delay="200">Everything you need to stay ahead in the hospitality industry</p>
+            </div>
+            
+            <div class="filter-tags fade-in" data-delay="400">
+                <div class="filter-tag active" data-filter="all">All Resources</div>
+                <div class="filter-tag" data-filter="guides">Guides</div>
+                <div class="filter-tag" data-filter="case-studies">Case Studies</div>
+                <div class="filter-tag" data-filter="reports">Industry Reports</div>
+                <div class="filter-tag" data-filter="webinars">Webinars</div>
+                <div class="filter-tag" data-filter="templates">Templates</div>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="0" data-category="guides">
+                        <div class="resource-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Guides & How-Tos</h4>
+                        <p class="text-muted">Step-by-step guides to implement best practices and optimize your hospitality operations.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">24 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="100" data-category="case-studies">
+                        <div class="resource-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Case Studies</h4>
+                        <p class="text-muted">Real success stories from African hospitality businesses using HospiTour solutions.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">18 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="200" data-category="reports">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h4>Industry Reports</h4>
+                        <p class="text-muted">Data-driven insights and analysis on hospitality trends across African markets.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">12 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="300" data-category="webinars">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>Webinars & Videos</h4>
+                        <p class="text-muted">Watch expert-led sessions and product demonstrations to enhance your skills.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">32 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="400" data-category="templates">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-download"></i>
+                        </div>
+                        <h4>Templates & Tools</h4>
+                        <p class="text-muted">Download ready-to-use templates for checklists, reports, and operational documents.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">28 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="resource-card fade-in" data-delay="500">
+                        <div class="resource-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Training Resources</h4>
+                        <p class="text-muted">Access training materials to upskill your team and improve service quality.</p>
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <span class="text-primary fw-bold">15 Resources</span>
+                            <button class="btn btn-outline-primary btn-sm explore-resource">Explore</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Articles -->
+    <section class="py-5 bg-light" id="featuredArticles">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="section-title">Featured Articles</h2>
+                <a href="#" class="btn btn-outline-primary">View All Articles</a>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="0">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Operations</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 8 min read</span>
+                            </div>
+                            <h5>5 Ways to Streamline Hotel Operations in 2024</h5>
+                            <p class="text-muted">Discover practical strategies to optimize your hotel operations and improve efficiency without increasing costs.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="100">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Marketing</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 6 min read</span>
+                            </div>
+                            <h5>Increasing Direct Bookings: A Guide for African Hotels</h5>
+                            <p class="text-muted">Learn how to reduce dependency on OTAs and build a sustainable direct booking strategy for your property.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="200">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Staff Management</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 10 min read</span>
+                            </div>
+                            <h5>Effective Staff Training for Enhanced Guest Experience</h5>
+                            <p class="text-muted">Implement a comprehensive training program that empowers your staff to deliver exceptional service consistently.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read More <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Industry Reports -->
+    <section class="py-5" id="industryReports">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Latest Industry Reports</h2>
+                <p class="text-muted fade-in" data-delay="200">Data-driven insights to inform your business strategy</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="resource-card fade-in" data-delay="0">
+                        <div class="d-flex align-items-start">
+                            <div class="resource-icon me-4">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div>
+                                <h4>African Hospitality Market Outlook 2024</h4>
+                                <p class="text-muted">Comprehensive analysis of hospitality trends, recovery patterns, and growth opportunities across key African markets.</p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <span class="text-muted me-3"><i class="far fa-calendar me-1"></i> Published: March 2024</span>
+                                    <span class="text-muted"><i class="far fa-file-pdf me-1"></i> PDF, 2.4 MB</span>
+                                </div>
+                                <button class="btn btn-accent mt-3 download-report">Download Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="resource-card fade-in" data-delay="100">
+                        <div class="d-flex align-items-start">
+                            <div class="resource-icon me-4">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div>
+                                <h4>Post-Pandemic Traveler Preferences in Africa</h4>
+                                <p class="text-muted">Research on changing traveler expectations and how African hospitality businesses can adapt to meet new demands.</p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <span class="text-muted me-3"><i class="far fa-calendar me-1"></i> Published: February 2024</span>
+                                    <span class="text-muted"><i class="far fa-file-pdf me-1"></i> PDF, 1.8 MB</span>
+                                </div>
+                                <button class="btn btn-accent mt-3 download-report">Download Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 fade-in" data-delay="200">
+                <button class="btn btn-outline-primary" id="viewAllReports">View All Reports</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-5 bg-light" id="caseStudies">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Success Stories</h2>
+                <p class="text-muted fade-in" data-delay="200">See how African hospitality businesses are thriving with HospiTour</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="0">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Hotel</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 12 min read</span>
+                            </div>
+                            <h5>Nairobi Boutique Hotel Increases Revenue by 42%</h5>
+                            <p class="text-muted">How a 30-room boutique hotel implemented HospiTour's marketing and operations solutions to drive growth.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read Case Study <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="100">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Restaurant</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 10 min read</span>
+                            </div>
+                            <h5>Lagos Restaurant Cuts Operational Costs by 28%</h5>
+                            <p class="text-muted">Implementation of inventory management and staff scheduling tools leads to significant cost savings.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read Case Study <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="article-card fade-in" data-delay="200">
+                        <div class="article-image" style="background-image: url('https://images.unsplash.com/photo-1539667547526-4f7151d6b14f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
+                        <div class="article-content">
+                            <div class="article-meta">
+                                <span class="article-tag">Tour Operator</span>
+                                <span class="ms-3"><i class="far fa-clock me-1"></i> 15 min read</span>
+                            </div>
+                            <h5>Safari Company Doubles Booking Capacity</h5>
+                            <p class="text-muted">How a Tanzanian tour operator streamlined operations and expanded their business with HospiTour.</p>
+                            <a href="#" class="btn btn-link ps-0 text-primary text-decoration-none">Read Case Study <i class="fas fa-arrow-right ms-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 fade-in" data-delay="300">
+                <button class="btn btn-outline-primary" id="viewAllCaseStudies">View All Case Studies</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Webinars Section -->
+    <section class="py-5" id="webinars">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h2 class="section-title">Upcoming Webinars</h2>
+                <a href="#" class="btn btn-outline-primary">View All Webinars</a>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="resource-card fade-in" data-delay="0">
+                        <div class="d-flex align-items-start">
+                            <div class="resource-icon me-4">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div>
+                                <span class="badge bg-warning mb-2">Upcoming</span>
+                                <h4>Digital Marketing Strategies for African Hotels</h4>
+                                <p class="text-muted">Learn how to create effective digital marketing campaigns that drive direct bookings and increase visibility.</p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <span class="text-muted me-3"><i class="far fa-calendar me-1"></i> April 15, 2024</span>
+                                    <span class="text-muted"><i class="far fa-clock me-1"></i> 2:00 PM EAT</span>
+                                </div>
+                                <button class="btn btn-accent mt-3 register-webinar">Register Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6">
+                    <div class="resource-card fade-in" data-delay="100">
+                        <div class="d-flex align-items-start">
+                            <div class="resource-icon me-4">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <div>
+                                <span class="badge bg-warning mb-2">Upcoming</span>
+                                <h4>Staff Management Best Practices</h4>
+                                <p class="text-muted">Discover how to optimize staff scheduling, improve performance, and reduce turnover in your hospitality business.</p>
+                                <div class="d-flex align-items-center mt-3">
+                                    <span class="text-muted me-3"><i class="far fa-calendar me-1"></i> April 22, 2024</span>
+                                    <span class="text-muted"><i class="far fa-clock me-1"></i> 11:00 AM EAT</span>
+                                </div>
+                                <button class="btn btn-accent mt-3 register-webinar">Register Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="newsletter-section fade-in">
+                <div class="row justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h2 class="mb-3">Stay Updated with Hospitality Insights</h2>
+                        <p class="mb-4">Get the latest industry news, tips, and resources delivered to your inbox</p>
+                        <div class="newsletter-form">
+                            <div class="input-group mb-3">
+                                <input type="email" class="form-control" placeholder="Enter your email address">
+                                <button class="btn btn-accent" type="button">Subscribe</button>
+                            </div>
+                            <p class="small opacity-75">By subscribing, you agree to our Privacy Policy. You can unsubscribe at any time.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">
+                        <i class="fas fa-hotel me-2"></i>HospiTour
+                    </h5>
+                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">For Businesses</a></li>
+                        <li class="mb-2"><a href="#">For Professionals</a></li>
+                        <li class="mb-2"><a href="#">Marketplace</a></li>
+                        <li class="mb-2"><a href="#">Resources</a></li>
+                        <li class="mb-2"><a href="#">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Solutions</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Business Marketplace</a></li>
+                        <li class="mb-2"><a href="#">Staff Management</a></li>
+                        <li class="mb-2"><a href="#">Digital Marketing</a></li>
+                        <li class="mb-2"><a href="#">Operations Tools</a></li>
+                        <li class="mb-2"><a href="#">Partner Network</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Support</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Help Center</a></li>
+                        <li class="mb-2"><a href="#">Contact Us</a></li>
+                        <li class="mb-2"><a href="#">Community</a></li>
+                        <li class="mb-2"><a href="#">Webinars</a></li>
+                        <li class="mb-2"><a href="#">Status</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-3 mb-4">
+                    <h6 class="mb-3">Contact</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="fas fa-envelope me-2"></i>
+                            <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-phone me-2"></i>
+                            <a href="tel:+234800000000">+234 800 000 0000</a>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            Lagos, Nigeria
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="me-3">Privacy Policy</a>
+                    <a href="#" class="me-3">Terms of Service</a>
+                    <a href="#">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Filter functionality
+            const filterTags = document.querySelectorAll('.filter-tag');
+            const resourceCards = document.querySelectorAll('.resource-card');
+            
+            filterTags.forEach(tag => {
+                tag.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Update active filter
+                    filterTags.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter resources
+                    resourceCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+            
+            // Search functionality
+            document.getElementById('searchButton').addEventListener('click', function() {
+                const searchTerm = document.getElementById('resourceSearch').value.toLowerCase();
+                if (searchTerm) {
+                    showNotification(`Searching for: ${searchTerm}`, 'info');
+                    // In a real implementation, you would filter resources based on search term
+                }
+            });
+            
+            // Explore resource buttons
+            document.querySelectorAll('.explore-resource').forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.closest('.resource-card').getAttribute('data-category');
+                    showNotification(`Loading ${category} resources...`, 'info');
+                });
+            });
+            
+            // Download report buttons
+            document.querySelectorAll('.download-report').forEach(button => {
+                button.addEventListener('click', function() {
+                    showNotification('Preparing your download...', 'success');
+                    // Simulate download delay
+                    setTimeout(() => {
+                        showNotification('Report downloaded successfully!', 'success');
+                    }, 1500);
+                });
+            });
+            
+            // Webinar registration
+            document.querySelectorAll('.register-webinar').forEach(button => {
+                button.addEventListener('click', function() {
+                    const webinarTitle = this.closest('.resource-card').querySelector('h4').textContent;
+                    showNotification(`Registering for: ${webinarTitle}`, 'info');
+                });
+            });
+            
+            // View all buttons
+            document.getElementById('viewAllReports').addEventListener('click', function() {
+                showNotification('Loading all industry reports...', 'info');
+            });
+            
+            document.getElementById('viewAllCaseStudies').addEventListener('click', function() {
+                showNotification('Loading all case studies...', 'info');
+            });
+            
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                notification.textContent = message;
+                notification.className = `notification ${type} show`;
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Newsletter subscription
+            document.querySelector('.newsletter-form .btn').addEventListener('click', function() {
+                const email = document.querySelector('.newsletter-form input').value;
+                if (email && email.includes('@')) {
+                    showNotification('Thank you for subscribing to our newsletter!', 'success');
+                    document.querySelector('.newsletter-form input').value = '';
+                } else {
+                    showNotification('Please enter a valid email address', 'error');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
