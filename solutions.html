@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solutions - HospiTour</title>
+    <title>Complete Solutions - HospiTour</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,30 +14,21 @@
     />
     <style>
       :root {
-        --hospitour-primary: #1a5276;
-        --hospitour-secondary: #3498db;
-        --hospitour-accent: #e67e22;
-        --hospitour-success: #27ae60;
-        --hospitour-warning: #f39c12;
-        --hospitour-light: #f8f9fa;
-        --hospitour-dark: #2c3e50;
+        --primary: #1a5276;
+        --secondary: #3498db;
+        --accent: #e67e22;
+        --success: #27ae60;
+        --light: #f8f9fa;
+        --dark: #2c3e50;
       }
 
       body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-          Roboto, sans-serif;
-        color: var(--hospitour-dark);
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        color: var(--dark);
         line-height: 1.6;
-        overflow-x: hidden;
       }
 
-      /* Remove the initial opacity for testing */
-      .fade-in,
-      .slide-in-left {
-        opacity: 1 !important;
-        transform: none !important;
-      }
-
+      /* Navigation */
       .navbar {
         background: white;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -48,17 +39,21 @@
       .navbar.scrolled {
         padding: 0.5rem 0;
         background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
       }
 
+      * {
+        opacity: 1 !important;
+        visibility: visible !important;
+        color: #000000 !important;
+      }
       .navbar-brand {
         font-weight: 700;
-        color: var(--hospitour-primary);
+        color: var(--primary);
         font-size: 1.5rem;
       }
 
       .nav-link {
-        color: var(--hospitour-dark) !important;
+        color: var(--dark) !important;
         font-weight: 500;
         margin: 0 0.5rem;
         transition: color 0.3s ease;
@@ -67,7 +62,7 @@
 
       .nav-link:hover,
       .nav-link.active {
-        color: var(--hospitour-accent) !important;
+        color: var(--accent) !important;
       }
 
       .nav-link::after {
@@ -77,7 +72,7 @@
         left: 0;
         width: 0;
         height: 2px;
-        background: var(--hospitour-accent);
+        background: var(--accent);
         transition: width 0.3s ease;
       }
 
@@ -86,8 +81,9 @@
         width: 100%;
       }
 
+      /* Buttons */
       .btn-primary {
-        background: var(--hospitour-primary);
+        background: var(--primary);
         border: none;
         padding: 0.75rem 2rem;
         font-weight: 600;
@@ -101,7 +97,7 @@
       }
 
       .btn-accent {
-        background: var(--hospitour-accent);
+        background: var(--accent);
         color: white;
         border: none;
         padding: 0.75rem 2rem;
@@ -116,8 +112,8 @@
       }
 
       .btn-outline-primary {
-        border: 2px solid var(--hospitour-primary);
-        color: var(--hospitour-primary);
+        border: 2px solid var(--primary);
+        color: var(--primary);
         background: transparent;
         padding: 0.75rem 2rem;
         font-weight: 600;
@@ -125,16 +121,17 @@
       }
 
       .btn-outline-primary:hover {
-        background: var(--hospitour-primary);
+        background: var(--primary);
         color: white;
         transform: translateY(-2px);
       }
 
+      /* Hero Section */
       .hero-section {
         background: linear-gradient(
           135deg,
-          var(--hospitour-primary) 0%,
-          var(--hospitour-secondary) 100%
+          var(--primary) 0%,
+          var(--secondary) 100%
         );
         color: white;
         padding: 8rem 0 6rem;
@@ -161,10 +158,11 @@
         z-index: 2;
       }
 
+      /* Section Titles */
       .section-title {
         position: relative;
         margin-bottom: 3rem;
-        color: var(--hospitour-dark);
+        color: var(--dark);
       }
 
       .section-title::after {
@@ -174,7 +172,7 @@
         left: 0;
         width: 60px;
         height: 4px;
-        background: var(--hospitour-accent);
+        background: var(--accent);
         transition: width 0.3s ease;
       }
 
@@ -183,6 +181,7 @@
         transform: translateX(-50%);
       }
 
+      /* Solution Cards */
       .solution-category-card {
         background: white;
         border-radius: 12px;
@@ -219,7 +218,7 @@
       .solution-category-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        border-top: 4px solid var(--hospitour-accent);
+        border-top: 4px solid var(--accent);
       }
 
       .solution-category-icon {
@@ -231,24 +230,25 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 1.5rem;
-        color: var(--hospitour-accent);
+        color: var(--accent);
         font-size: 2rem;
         transition: all 0.3s ease;
       }
 
       .solution-category-card:hover .solution-category-icon {
         transform: scale(1.1);
-        background: var(--hospitour-accent);
+        background: var(--accent);
         color: white;
       }
 
+      /* Feature Cards */
       .feature-card {
         background: white;
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         transition: all 0.3s ease;
-        border-left: 4px solid var(--hospitour-secondary);
+        border-left: 4px solid var(--secondary);
         margin-bottom: 1.5rem;
         cursor: pointer;
       }
@@ -267,10 +267,11 @@
         align-items: center;
         justify-content: center;
         margin-bottom: 1rem;
-        color: var(--hospitour-secondary);
+        color: var(--secondary);
         font-size: 1.3rem;
       }
 
+      /* Integration Cards */
       .integration-card {
         background: white;
         border-radius: 12px;
@@ -285,7 +286,7 @@
       .integration-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        border-top: 4px solid var(--hospitour-primary);
+        border-top: 4px solid var(--primary);
       }
 
       .integration-logo {
@@ -300,6 +301,7 @@
         font-size: 1.5rem;
       }
 
+      /* Pricing Cards */
       .pricing-card {
         background: white;
         border-radius: 12px;
@@ -313,7 +315,7 @@
       }
 
       .pricing-card.featured {
-        border-color: var(--hospitour-accent);
+        border-color: var(--accent);
         transform: scale(1.05);
       }
 
@@ -322,7 +324,7 @@
         position: absolute;
         top: 20px;
         right: -30px;
-        background: var(--hospitour-accent);
+        background: var(--accent);
         color: white;
         padding: 5px 30px;
         transform: rotate(45deg);
@@ -339,8 +341,9 @@
         transform: scale(1.05) translateY(-5px);
       }
 
+      /* Stats Section */
       .stats-section {
-        background: var(--hospitour-light);
+        background: var(--light);
         padding: 4rem 0;
       }
 
@@ -352,21 +355,22 @@
       .stat-number {
         font-size: 2.5rem;
         font-weight: 700;
-        color: var(--hospitour-primary);
+        color: var(--primary);
         display: block;
       }
 
       .stat-label {
-        color: var(--hospitour-dark);
+        color: var(--dark);
         font-weight: 500;
       }
 
+      /* Testimonial Cards */
       .testimonial-card {
         background: white;
         border-radius: 12px;
         padding: 2rem;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        border-left: 4px solid var(--hospitour-accent);
+        border-left: 4px solid var(--accent);
         height: 100%;
       }
 
@@ -378,8 +382,9 @@
         margin-right: 1rem;
       }
 
+      /* Footer */
       .footer {
-        background: var(--hospitour-dark);
+        background: var(--dark);
         color: white;
         padding: 4rem 0 2rem;
       }
@@ -407,10 +412,11 @@
       }
 
       .social-links a:hover {
-        background: var(--hospitour-accent);
+        background: var(--accent);
         transform: translateY(-2px);
       }
 
+      /* Notification */
       .notification {
         position: fixed;
         top: 20px;
@@ -438,17 +444,16 @@
       }
 
       .notification.success {
-        background: var(--hospitour-success);
+        background: var(--success);
       }
-
       .notification.error {
         background: #e74c3c;
       }
-
       .notification.info {
-        background: var(--hospitour-secondary);
+        background: var(--secondary);
       }
 
+      /* Solution Tabs */
       .solution-tabs {
         background: white;
         border-radius: 12px;
@@ -466,13 +471,13 @@
       }
 
       .solution-tab:hover {
-        background: var(--hospitour-light);
+        background: var(--light);
       }
 
       .solution-tab.active {
-        background: var(--hospitour-primary);
+        background: var(--primary);
         color: white;
-        border-bottom: 3px solid var(--hospitour-accent);
+        border-bottom: 3px solid var(--accent);
       }
 
       .solution-content {
@@ -495,6 +500,7 @@
         }
       }
 
+      /* Animations */
       .fade-in {
         opacity: 0;
         transform: translateY(30px);
@@ -517,6 +523,7 @@
         transform: translateX(0);
       }
 
+      /* Responsive */
       @media (max-width: 768px) {
         .hero-section {
           padding: 6rem 0 4rem;
@@ -590,7 +597,7 @@
             <a href="#" class="btn btn-outline-primary me-2" id="loginBtn"
               >Login</a
             >
-            <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
+            <a href="#" class="btn btn-primary text-light" id="signupBtn">Get Started</a>
           </div>
         </div>
       </div>
@@ -604,10 +611,10 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-6 hero-content">
-            <h1 class="display-4 fw-bold mb-4 slide-in-left">
+            <h1 class="display-4 fw-bold mb-4 slide-in-left text-light">
               Complete Solutions for Africa's Hospitality Industry
             </h1>
-            <p class="lead mb-4 slide-in-left" data-delay="200">
+            <p class="lead mb-4 slide-in-left text-light" data-delay="200">
               From digital transformation to staff management, discover how
               HospiTour's integrated platform can transform your hospitality
               business operations and drive growth.
@@ -629,15 +636,15 @@
             >
               <div class="d-flex align-items-center">
                 <i class="fas fa-check-circle text-warning me-2"></i>
-                <span>All-in-One Platform</span>
+                <span class="text-light">All-in-One Platform</span>
               </div>
               <div class="d-flex align-items-center">
                 <i class="fas fa-check-circle text-warning me-2"></i>
-                <span>30+ Integrated Tools</span>
+                <span class="text-light">30+ Integrated Tools</span>
               </div>
               <div class="d-flex align-items-center">
                 <i class="fas fa-check-circle text-warning me-2"></i>
-                <span>98% Customer Satisfaction</span>
+                <span class="text-light">98% Customer Satisfaction</span>
               </div>
             </div>
           </div>
@@ -830,9 +837,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-boxes"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-boxes"></i></div>
                 <h5>Inventory Optimization</h5>
                 <p class="text-muted">
                   Track and manage room inventory, restaurant tables, and
@@ -845,9 +850,7 @@
             </div>
             <div class="col-lg-6">
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-tasks"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-tasks"></i></div>
                 <h5>Workflow Automation</h5>
                 <p class="text-muted">
                   Automate check-ins, housekeeping assignments, maintenance
@@ -906,9 +909,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-chart-bar"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
                 <h5>Performance Analytics</h5>
                 <p class="text-muted">
                   Track staff performance, guest satisfaction scores, and
@@ -969,9 +970,7 @@
               </p>
 
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-globe"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-globe"></i></div>
                 <h5>Channel Management</h5>
                 <p class="text-muted">
                   Manage availability and rates across all online travel
@@ -998,9 +997,7 @@
             </div>
             <div class="col-lg-6">
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-chart-pie"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
                 <h5>Campaign Analytics</h5>
                 <p class="text-muted">
                   Track the performance of your marketing campaigns with
@@ -1012,9 +1009,7 @@
               </div>
 
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-users"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-users"></i></div>
                 <h5>Guest Relationship Management</h5>
                 <p class="text-muted">
                   Build lasting relationships with your guests through
@@ -1150,9 +1145,7 @@
             </div>
             <div class="col-lg-6">
               <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-receipt"></i>
-                </div>
+                <div class="feature-icon"><i class="fas fa-receipt"></i></div>
                 <h5>Automated Invoicing</h5>
                 <p class="text-muted">
                   Generate and send professional invoices automatically, with
@@ -1426,11 +1419,9 @@
                 in efficiency and our guests love the seamless experience."
               </p>
               <div class="text-warning">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i>
               </div>
             </div>
           </div>
@@ -1454,11 +1445,9 @@
                 difference."
               </p>
               <div class="text-warning">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i>
               </div>
             </div>
           </div>
@@ -1481,11 +1470,9 @@
                 effortless and our revenue has grown by 35% in just 6 months."
               </p>
               <div class="text-warning">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                ><i class="fas fa-star"></i>
               </div>
             </div>
           </div>
@@ -1673,86 +1660,86 @@
     </section>
 
     <!-- Footer -->
-     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="mb-3">
-                        <i class="fas fa-hotel me-2"></i>HospiTour
-                    </h5>
-                    <p class="mb-3">Africa's premier platform for hospitality and tourism professionals. Connect, collaborate, and grow with us.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Quick Links</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">For Businesses</a></li>
-                        <li class="mb-2"><a href="#">For Professionals</a></li>
-                        <li class="mb-2"><a href="#">Marketplace</a></li>
-                        <li class="mb-2"><a href="#">Resources</a></li>
-                        <li class="mb-2"><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Solutions</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Business Marketplace</a></li>
-                        <li class="mb-2"><a href="#">Staff Management</a></li>
-                        <li class="mb-2"><a href="#">Digital Marketing</a></li>
-                        <li class="mb-2"><a href="#">Operations Tools</a></li>
-                        <li class="mb-2"><a href="#">Partner Network</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Support</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#">Help Center</a></li>
-                        <li class="mb-2"><a href="#">Contact Us</a></li>
-                        <li class="mb-2"><a href="#">Community</a></li>
-                        <li class="mb-2"><a href="#">Webinars</a></li>
-                        <li class="mb-2"><a href="#">Status</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-md-3 mb-4">
-                    <h6 class="mb-3">Contact</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">
-                            <i class="fas fa-envelope me-2"></i>
-                            <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-phone me-2"></i>
-                            <a href="tel:+234800000000">+234 800 000 0000</a>
-                        </li>
-                        <li class="mb-2">
-                            <i class="fas fa-map-marker-alt me-2"></i>
-                            Lagos, Nigeria
-                        </li>
-                    </ul>
-                </div>
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5 class="mb-3"><i class="fas fa-hotel me-2"></i>HospiTour</h5>
+            <p class="mb-3">
+              Africa's premier platform for hospitality and tourism
+              professionals. Connect, collaborate, and grow with us.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="#" class="me-3">Privacy Policy</a>
-                    <a href="#" class="me-3">Terms of Service</a>
-                    <a href="#">Cookie Policy</a>
-                </div>
-            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Quick Links</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="businesses.html">For Businesses</a></li>
+              <li class="mb-2"><a href="professionals.html">For Professionals</a></li>
+              <li class="mb-2"><a href="market.html">Marketplace</a></li>
+              <li class="mb-2"><a href="resources.html">Resources</a></li>
+              <li class="mb-2"><a href="about.html">About Us</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Solutions</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#">Business Marketplace</a></li>
+              <li class="mb-2"><a href="#">Staff Management</a></li>
+              <li class="mb-2"><a href="#">Digital Marketing</a></li>
+              <li class="mb-2"><a href="#">Operations Tools</a></li>
+              <li class="mb-2"><a href="#">Partner Network</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Support</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2"><a href="#">Help Center</a></li>
+              <li class="mb-2"><a href="#">Contact Us</a></li>
+              <li class="mb-2"><a href="#">Community</a></li>
+              <li class="mb-2"><a href="#">Webinars</a></li>
+              <li class="mb-2"><a href="#">Status</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-2 col-md-3 mb-4">
+            <h6 class="mb-3">Contact</h6>
+            <ul class="list-unstyled">
+              <li class="mb-2">
+                <i class="fas fa-envelope me-2"></i
+                ><a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-phone me-2"></i
+                ><a href="tel:+234800000000">+234 800 000 0000</a>
+              </li>
+              <li class="mb-2">
+                <i class="fas fa-map-marker-alt me-2"></i>Lagos, Nigeria
+              </li>
+            </ul>
+          </div>
         </div>
+        <hr class="my-4" style="border-color: rgba(237, 59, 59, 0.1)" />
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
+          </div>
+          <div class="col-md-6 text-md-end">
+            <a href="#" class="me-3">Privacy Policy</a>
+            <a href="#" class="me-3">Terms of Service</a>
+            <a href="#">Cookie Policy</a>
+          </div>
+        </div>
+      </div>
     </footer>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      // Enhanced animations and functionality
       document.addEventListener("DOMContentLoaded", function () {
         // Fade-in animation
         const fadeElements = document.querySelectorAll(".fade-in");
