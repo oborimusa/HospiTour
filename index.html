@@ -572,56 +572,35 @@
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="fas fa-hotel me-2"></i>HospiTour
-        </a>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="businesses.html">For Businesses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="professionals.html"
-                >For Professionals</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="solutions.html">Solutions</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="resources.html">Resources</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="about.html">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
-            </li>
-          </ul>
-
-          <!-- LANGUAGE SELECTOR IN NAVBAR (CORRECT PLACEMENT) -->
-          <div class="d-flex align-items-center">
-            <select
-              class="language-selector form-select me-3"
-              id="languageSelector"
-            >
-              <option value="en">🇬🇧 EN</option>
-              <option value="fr">🇫🇷 FR</option>
-              <option value="pt">🇵🇹 PT</option>
-              <option value="sw">🇹🇿 SW</option>
-            </select>
-            <a href="#" class="btn btn-outline-primary me-2" id="loginBtn"
-              >Login</a
-            >
-            <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
-          </div>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel me-2"></i>HospiTour
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- Notification Element -->
@@ -724,7 +703,7 @@
               <button
                 class="btn btn-outline-primary btn-sm solution-learn-more"
               >
-                Learn More
+                <a href="professional-clients.html">Learn More</a>
               </button>
             </div>
           </div>
