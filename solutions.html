@@ -1,390 +1,445 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Solutions - HospiTour</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-      :root {
-        --primary: #1a5276;
-        --secondary: #3498db;
-        --accent: #e67e22;
-        --success: #27ae60;
-        --light: #f8f9fa;
-        --dark: #2c3e50;
-      }
+        :root {
+            --primary: #1a5276;
+            --secondary: #3498db;
+            --accent: #e67e22;
+            --success: #27ae60;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+        }
 
-      body {
-        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
-        color: var(--dark);
-        line-height: 1.6;
-      }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+        }
 
-      /* Navigation */
-      .navbar {
-        background: white;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        padding: 1rem 0;
-        transition: all 0.3s ease;
-      }
-
-      .navbar.scrolled {
-        padding: 0.5rem 0;
-        background: rgba(255, 255, 255, 0.95);
-      }
-
-      * {
+        * {
         opacity: 1 !important;
         visibility: visible !important;
         color: #000000 !important;
       }
-      .navbar-brand {
-        font-weight: 700;
-        color: var(--primary);
-        font-size: 1.5rem;
-      }
 
-      .nav-link {
-        color: var(--dark) !important;
-        font-weight: 500;
-        margin: 0 0.5rem;
-        transition: color 0.3s ease;
-        position: relative;
-      }
+        /* Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
 
-      .nav-link:hover,
-      .nav-link.active {
-        color: var(--accent) !important;
-      }
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
 
-      .nav-link::after {
-        content: "";
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background: var(--accent);
-        transition: width 0.3s ease;
-      }
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
 
-      .nav-link:hover::after,
-      .nav-link.active::after {
-        width: 100%;
-      }
+        .nav-link {
+            color: var(--dark) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-      /* Buttons */
-      .btn-primary {
-        background: var(--primary);
-        border: none;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent) !important;
+        }
 
-      .btn-primary:hover {
-        background: #144360;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
-      }
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
 
-      .btn-accent {
-        background: var(--accent);
-        color: white;
-        border: none;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
 
-      .btn-accent:hover {
-        background: #d35400;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
-      }
+        /* Buttons */
+        .btn-primary {
+            background: var(--primary);
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-      .btn-outline-primary {
-        border: 2px solid var(--primary);
-        color: var(--primary);
-        background: transparent;
-        padding: 0.75rem 2rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
+        .btn-primary:hover {
+            background: #144360;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(26, 82, 118, 0.3);
+        }
 
-      .btn-outline-primary:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-2px);
-      }
+        .btn-accent {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-      /* Hero Section */
-      .hero-section {
-        background: linear-gradient(
-          135deg,
-          var(--primary) 0%,
-          var(--secondary) 100%
-        );
-        color: white;
-        padding: 8rem 0 6rem;
-        position: relative;
-        overflow: hidden;
-        min-height: 70vh;
-        display: flex;
-        align-items: center;
-      }
+        .btn-accent:hover {
+            background: #d35400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
 
-      .hero-section::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
-        background-size: cover;
-      }
+        .btn-outline-primary {
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            background: transparent;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
 
-      .hero-content {
-        position: relative;
-        z-index: 2;
-      }
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
 
-      /* Section Titles */
-      .section-title {
-        position: relative;
-        margin-bottom: 3rem;
-        color: var(--dark);
-      }
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+        }
 
-      .section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 60px;
-        height: 4px;
-        background: var(--accent);
-        transition: width 0.3s ease;
-      }
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><polygon fill="white" points="0,1000 1000,0 1000,1000"/></svg>');
+            background-size: cover;
+        }
 
-      .section-title.centered::after {
-        left: 50%;
-        transform: translateX(-50%);
-      }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
 
-      /* Solution Cards */
-      .solution-category-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2.5rem;
-        height: 100%;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        border-top: 4px solid transparent;
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-      }
+        /* Section Titles */
+        .section-title {
+            position: relative;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
 
-      .solution-category-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(230, 126, 34, 0.1),
-          transparent
-        );
-        transition: left 0.6s ease;
-      }
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
 
-      .solution-category-card:hover::before {
-        left: 100%;
-      }
+        .section-title.centered::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-      .solution-category-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        border-top: 4px solid var(--accent);
-      }
+        /* Solution Cards */
+        .solution-category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
 
-      .solution-category-icon {
-        width: 80px;
-        height: 80px;
-        background: rgba(230, 126, 34, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.5rem;
-        color: var(--accent);
-        font-size: 2rem;
-        transition: all 0.3s ease;
-      }
+        .solution-category-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(230, 126, 34, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
 
-      .solution-category-card:hover .solution-category-icon {
-        transform: scale(1.1);
-        background: var(--accent);
-        color: white;
-      }
+        .solution-category-card:hover::before {
+            left: 100%;
+        }
 
-      /* Feature Cards */
-      .feature-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        border-left: 4px solid var(--secondary);
-        margin-bottom: 1.5rem;
-        cursor: pointer;
-      }
+        .solution-category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            border-top: 4px solid var(--accent);
+        }
 
-      .feature-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-      }
+        .solution-category-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-size: 2rem;
+            transition: all 0.3s ease;
+        }
 
-      .feature-icon {
-        width: 50px;
-        height: 50px;
-        background: rgba(52, 152, 219, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1rem;
-        color: var(--secondary);
-        font-size: 1.3rem;
-      }
+        .solution-category-card:hover .solution-category-icon {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: white;
+        }
 
-      /* Integration Cards */
-      .integration-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        cursor: pointer;
-        height: 100%;
-      }
+        /* Feature Cards */
+        .feature-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
 
-      .integration-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-        border-top: 4px solid var(--primary);
-      }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
 
-      .integration-logo {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 1rem;
-        font-weight: bold;
-        font-size: 1.5rem;
-      }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(52, 152, 219, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-size: 1.3rem;
+        }
 
-      /* Pricing Cards */
-      .pricing-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2.5rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-        position: relative;
-        overflow: hidden;
-        height: 100%;
-      }
+        /* Demo Modal */
+        .demo-modal .modal-content {
+            border-radius: 16px;
+            overflow: hidden;
+        }
 
-      .pricing-card.featured {
-        border-color: var(--accent);
-        transform: scale(1.05);
-      }
+        .demo-modal .modal-header {
+            background: var(--primary);
+            color: white;
+            border-bottom: none;
+        }
 
-      .pricing-card.featured::before {
-        content: "Most Popular";
-        position: absolute;
-        top: 20px;
-        right: -30px;
-        background: var(--accent);
-        color: white;
-        padding: 5px 30px;
-        transform: rotate(45deg);
-        font-size: 0.8rem;
-        font-weight: 600;
-      }
+        .demo-modal .modal-body {
+            padding: 0;
+        }
 
-      .pricing-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      }
+        .demo-video {
+            width: 100%;
+            height: 400px;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: var(--dark);
+        }
 
-      .pricing-card.featured:hover {
-        transform: scale(1.05) translateY(-5px);
-      }
+        .demo-placeholder {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
 
-      /* Stats Section */
-      .stats-section {
-        background: var(--light);
-        padding: 4rem 0;
-      }
+        .demo-steps {
+            padding: 2rem;
+        }
 
-      .stat-item {
-        text-align: center;
-        padding: 1rem;
-      }
+        .demo-step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
 
-      .stat-number {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--primary);
-        display: block;
-      }
+        .demo-step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
 
-      .stat-label {
-        color: var(--dark);
-        font-weight: 500;
-      }
+        /* Interactive Demo */
+        .interactive-demo {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
 
-      /* Testimonial Cards */
-      .testimonial-card {
-        background: white;
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        border-left: 4px solid var(--accent);
-        height: 100%;
-      }
+        .demo-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
 
-      .testimonial-avatar {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-right: 1rem;
-      }
+        .demo-screen {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
 
-      /* Footer */
-      .footer {
-        background: var(--dark);
+        .demo-element {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .demo-element:hover {
+            transform: scale(1.05);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+        }
+
+        .notification.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .notification.success { background: var(--success); }
+        .notification.error { background: #e74c3c; }
+        .notification.info { background: var(--secondary); }
+
+        /* Solution Tabs */
+        .solution-tabs {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .solution-tab {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .solution-tab:hover {
+            background: var(--light);
+        }
+
+        .solution-tab.active {
+            background: var(--primary);
+            color: white;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .solution-content {
+            display: none;
+        }
+
+        .solution-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.6s ease;
+        }
+
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+         .footer {
+        background: var(--hospitour-dark);
         color: white;
         padding: 4rem 0 2rem;
       }
@@ -399,1268 +454,685 @@
         color: white;
       }
 
-      .social-links a {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        margin-right: 0.5rem;
-        transition: all 0.3s ease;
-      }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 6rem 0 4rem;
+                text-align: center;
+            }
 
-      .social-links a:hover {
-        background: var(--accent);
-        transform: translateY(-2px);
-      }
+            .hero-buttons {
+                justify-content: center;
+            }
 
-      /* Notification */
-      .notification {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        color: white;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        display: none;
-      }
+            .demo-video {
+                height: 250px;
+            }
 
-      .notification.show {
-        display: block;
-        animation: slideIn 0.3s ease;
-      }
-
-      @keyframes slideIn {
-        from {
-          transform: translateX(100%);
+            .demo-controls {
+                justify-content: center;
+            }
         }
-        to {
-          transform: translateX(0);
-        }
-      }
-
-      .notification.success {
-        background: var(--success);
-      }
-      .notification.error {
-        background: #e74c3c;
-      }
-      .notification.info {
-        background: var(--secondary);
-      }
-
-      /* Solution Tabs */
-      .solution-tabs {
-        background: white;
-        border-radius: 12px;
-        padding: 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        margin-bottom: 2rem;
-        overflow: hidden;
-      }
-
-      .solution-tab {
-        padding: 1.5rem 2rem;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        border-bottom: 3px solid transparent;
-      }
-
-      .solution-tab:hover {
-        background: var(--light);
-      }
-
-      .solution-tab.active {
-        background: var(--primary);
-        color: white;
-        border-bottom: 3px solid var(--accent);
-      }
-
-      .solution-content {
-        display: none;
-      }
-
-      .solution-content.active {
-        display: block;
-        animation: fadeIn 0.5s ease;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Animations */
-      .fade-in {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.6s ease;
-      }
-
-      .fade-in.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .slide-in-left {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: all 0.6s ease;
-      }
-
-      .slide-in-left.visible {
-        opacity: 1;
-        transform: translateX(0);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .hero-section {
-          padding: 6rem 0 4rem;
-          text-align: center;
-        }
-
-        .hero-buttons {
-          justify-content: center;
-        }
-
-        .pricing-card.featured {
-          transform: none;
-          margin: 1rem 0;
-        }
-
-        .pricing-card.featured:hover {
-          transform: translateY(-5px);
-        }
-
-        .solution-tabs {
-          flex-direction: column;
-        }
-      }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="fas fa-hotel me-2"></i>HospiTour
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="businesses.html">For Businesses</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="professionals.html"
-                >For Professionals</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="solutions.html">Solutions</a>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#">Resources</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-          </ul>
-          <div class="d-flex align-items-center">
-            <select
-              class="language-selector form-select me-3"
-              id="languageSelector"
-            >
-              <option value="en">EN</option>
-              <option value="fr">FR</option>
-              <option value="pt">PT</option>
-              <option value="sw">SW</option>
-            </select>
-            <a href="#" class="btn btn-outline-primary me-2" id="loginBtn"
-              >Login</a
-            >
-            <a href="#" class="btn btn-primary text-light" id="signupBtn">Get Started</a>
-          </div>
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-hotel me-2"></i>HospiTour
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="businesses.html">For Businesses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="professionals.html">For Professionals</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="solutions.html">Solutions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resources.html">Resources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <select class="language-selector form-select me-3" id="languageSelector">
+                        <option value="en">EN</option>
+                        <option value="fr">FR</option>
+                        <option value="pt">PT</option>
+                        <option value="sw">SW</option>
+                    </select>
+                    <a href="#" class="btn btn-outline-primary me-2" id="loginBtn">Login</a>
+                    <a href="#" class="btn btn-primary" id="signupBtn">Get Started</a>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
 
     <!-- Notification Element -->
     <div class="notification" id="notification"></div>
 
+    <!-- Demo Modals -->
+    <div class="modal fade demo-modal" id="mainDemoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="demoModalTitle">Product Demo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="demo-video">
+                        <div class="demo-placeholder">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>Interactive Product Demo</h4>
+                        <p class="text-muted">See how HospiTour works in action</p>
+                    </div>
+                    <div class="demo-steps">
+                        <h5>What you'll see in this demo:</h5>
+                        <div class="demo-step">
+                            <div class="demo-step-number">1</div>
+                            <div>
+                                <h6>Dashboard Overview</h6>
+                                <p class="text-muted mb-0">See your business metrics at a glance</p>
+                            </div>
+                        </div>
+                        <div class="demo-step">
+                            <div class="demo-step-number">2</div>
+                            <div>
+                                <h6>Booking Management</h6>
+                                <p class="text-muted mb-0">Manage reservations across all channels</p>
+                            </div>
+                        </div>
+                        <div class="demo-step">
+                            <div class="demo-step-number">3</div>
+                            <div>
+                                <h6>Staff Scheduling</h6>
+                                <p class="text-muted mb-0">Optimize your team management</p>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary" id="startInteractiveDemo">Start Interactive Demo</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Demo Modal -->
+    <div class="modal fade demo-modal" id="featureDemoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="featureDemoTitle">Feature Demo</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="featureDemoContent">
+                        <!-- Dynamic content will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trial Signup Modal -->
+    <div class="modal fade" id="trialModal" tabindex="-1">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Start Your Free Trial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="trialForm">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="Enter your name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Business Email</label>
+                            <input type="email" class="form-control" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Company Name</label>
+                            <input type="text" class="form-control" placeholder="Enter company name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Business Type</label>
+                            <select class="form-select" required>
+                                <option value="">Select business type</option>
+                                <option value="hotel">Hotel</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="tour">Tour Operator</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" required>
+                            <label class="form-check-label">
+                                I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Start Free Trial</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero-section" id="home">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-lg-6 hero-content">
-            <h1 class="display-4 fw-bold mb-4 slide-in-left text-light">
-              Complete Solutions for Africa's Hospitality Industry
-            </h1>
-            <p class="lead mb-4 slide-in-left text-light" data-delay="200">
-              From digital transformation to staff management, discover how
-              HospiTour's integrated platform can transform your hospitality
-              business operations and drive growth.
-            </p>
-            <div
-              class="hero-buttons d-flex flex-wrap gap-3 slide-in-left"
-              data-delay="400"
-            >
-              <button class="btn btn-accent btn-lg" id="viewDemoBtn">
-                <i class="fas fa-play-circle me-2"></i>View Demo
-              </button>
-              <button class="btn btn-light btn-lg" id="comparePlansBtn">
-                <i class="fas fa-chart-bar me-2"></i>Compare Plans
-              </button>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-4 fw-bold mb-4 slide-in-left text-light">Complete Solutions for Africa's Hospitality Industry</h1>
+                    <p class="lead mb-4 slide-in-left text-light" data-delay="200">
+                        From digital transformation to staff management, discover how HospiTour's integrated platform can transform your hospitality business operations and drive growth.
+                    </p>
+                    <div class="hero-buttons d-flex flex-wrap gap-3 slide-in-left" data-delay="400">
+                        <button class="btn btn-accent btn-lg" id="viewDemoBtn">
+                            <i class="fas fa-play-circle me-2"></i>View Demo
+                        </button>
+                        <button class="btn btn-light btn-lg" id="comparePlansBtn">
+                            <i class="fas fa-chart-bar me-2"></i>Compare Plans
+                        </button>
+                    </div>
+                    <div class="mt-4 d-flex flex-wrap gap-4 slide-in-left" data-delay="600">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">All-in-One Platform</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">30+ Integrated Tools</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-warning me-2"></i>
+                            <span class="text-light">98% Customer Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 text-center">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hospitality Solutions" class="img-fluid rounded-3 shadow-lg" style="max-height: 500px">
+                    </div>
+                </div>
             </div>
-            <div
-              class="mt-4 d-flex flex-wrap gap-4 slide-in-left"
-              data-delay="600"
-            >
-              <div class="d-flex align-items-center">
-                <i class="fas fa-check-circle text-warning me-2"></i>
-                <span class="text-light">All-in-One Platform</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-check-circle text-warning me-2"></i>
-                <span class="text-light">30+ Integrated Tools</span>
-              </div>
-              <div class="d-flex align-items-center">
-                <i class="fas fa-check-circle text-warning me-2"></i>
-                <span class="text-light">98% Customer Satisfaction</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 text-center">
-            <div class="hero-image">
-              <img
-                src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Hospitality Solutions"
-                class="img-fluid rounded-3 shadow-lg"
-                style="max-height: 500px"
-              />
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
     <!-- Stats Section -->
     <section class="stats-section" id="stats">
-      <div class="container">
-        <div class="row text-center">
-          <div class="col-lg-3 col-6 stat-item">
-            <span class="stat-number" id="businessesPowered">1250</span>
-            <span class="stat-label">Businesses Powered</span>
-          </div>
-          <div class="col-lg-3 col-6 stat-item">
-            <span class="stat-number" id="revenueGrowth">35%</span>
-            <span class="stat-label">Avg. Revenue Growth</span>
-          </div>
-          <div class="col-lg-3 col-6 stat-item">
-            <span class="stat-number" id="timeSaved">15</span>
-            <span class="stat-label">Hours Saved Weekly</span>
-          </div>
-          <div class="col-lg-3 col-6 stat-item">
-            <span class="stat-number" id="integrationPartners">50+</span>
-            <span class="stat-label">Integration Partners</span>
-          </div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="businessesPowered">1250</span>
+                    <span class="stat-label">Businesses Powered</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="revenueGrowth">35%</span>
+                    <span class="stat-label">Avg. Revenue Growth</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="timeSaved">15</span>
+                    <span class="stat-label">Hours Saved Weekly</span>
+                </div>
+                <div class="col-lg-3 col-6 stat-item">
+                    <span class="stat-number" id="integrationPartners">50+</span>
+                    <span class="stat-label">Integration Partners</span>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Solution Categories -->
     <section class="py-5" id="solutionCategories">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="section-title centered fade-in">
-            Comprehensive Hospitality Solutions
-          </h2>
-          <p class="text-muted fade-in" data-delay="200">
-            Everything you need to manage and grow your hospitality business in
-            one integrated platform
-          </p>
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title centered fade-in">Comprehensive Hospitality Solutions</h2>
+                <p class="text-muted fade-in" data-delay="200">
+                    Everything you need to manage and grow your hospitality business in one integrated platform
+                </p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-category-card fade-in" data-delay="0" data-category="operations">
+                        <div class="solution-category-icon"><i class="fas fa-cogs"></i></div>
+                        <h4>Operations Management</h4>
+                        <p class="text-muted">
+                            Streamline daily operations with our complete suite of management tools for bookings, inventory, and workflow automation.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-light text-dark">Booking Engine</span>
+                            <span class="badge bg-light text-dark">Inventory Management</span>
+                            <span class="badge bg-light text-dark">Workflow Automation</span>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm mt-3 explore-solution">Explore Features</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-category-card fade-in" data-delay="100" data-category="staff">
+                        <div class="solution-category-icon"><i class="fas fa-users-cog"></i></div>
+                        <h4>Staff & HR Management</h4>
+                        <p class="text-muted">
+                            Recruit, train, schedule, and manage your team with our comprehensive human resources and staff optimization tools.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-light text-dark">Scheduling</span>
+                            <span class="badge bg-light text-dark">Performance Tracking</span>
+                            <span class="badge bg-light text-dark">Training Portal</span>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm mt-3 explore-solution">Explore Features</button>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="solution-category-card fade-in" data-delay="200" data-category="marketing">
+                        <div class="solution-category-icon"><i class="fas fa-bullhorn"></i></div>
+                        <h4>Marketing & Distribution</h4>
+                        <p class="text-muted">
+                            Reach more customers and increase bookings with our integrated marketing tools and global distribution network.
+                        </p>
+                        <div class="d-flex flex-wrap gap-2 mt-3">
+                            <span class="badge bg-light text-dark">Digital Marketing</span>
+                            <span class="badge bg-light text-dark">Channel Management</span>
+                            <span class="badge bg-light text-dark">CRM</span>
+                        </div>
+                        <button class="btn btn-outline-primary btn-sm mt-3 explore-solution">Explore Features</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row g-4">
-          <div class="col-lg-4 col-md-6">
-            <div
-              class="solution-category-card fade-in"
-              data-delay="0"
-              data-category="operations"
-            >
-              <div class="solution-category-icon">
-                <i class="fas fa-cogs"></i>
-              </div>
-              <h4>Operations Management</h4>
-              <p class="text-muted">
-                Streamline daily operations with our complete suite of
-                management tools for bookings, inventory, and workflow
-                automation.
-              </p>
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <span class="badge bg-light text-dark">Booking Engine</span>
-                <span class="badge bg-light text-dark"
-                  >Inventory Management</span
-                >
-                <span class="badge bg-light text-dark"
-                  >Workflow Automation</span
-                >
-              </div>
-              <button
-                class="btn btn-outline-primary btn-sm mt-3 explore-solution"
-              >
-                Explore Features
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div
-              class="solution-category-card fade-in"
-              data-delay="100"
-              data-category="staff"
-            >
-              <div class="solution-category-icon">
-                <i class="fas fa-users-cog"></i>
-              </div>
-              <h4>Staff & HR Management</h4>
-              <p class="text-muted">
-                Recruit, train, schedule, and manage your team with our
-                comprehensive human resources and staff optimization tools.
-              </p>
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <span class="badge bg-light text-dark">Scheduling</span>
-                <span class="badge bg-light text-dark"
-                  >Performance Tracking</span
-                >
-                <span class="badge bg-light text-dark">Training Portal</span>
-              </div>
-              <button
-                class="btn btn-outline-primary btn-sm mt-3 explore-solution"
-              >
-                Explore Features
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div
-              class="solution-category-card fade-in"
-              data-delay="200"
-              data-category="marketing"
-            >
-              <div class="solution-category-icon">
-                <i class="fas fa-bullhorn"></i>
-              </div>
-              <h4>Marketing & Distribution</h4>
-              <p class="text-muted">
-                Reach more customers and increase bookings with our integrated
-                marketing tools and global distribution network.
-              </p>
-              <div class="d-flex flex-wrap gap-2 mt-3">
-                <span class="badge bg-light text-dark">Digital Marketing</span>
-                <span class="badge bg-light text-dark">Channel Management</span>
-                <span class="badge bg-light text-dark">CRM</span>
-              </div>
-              <button
-                class="btn btn-outline-primary btn-sm mt-3 explore-solution"
-              >
-                Explore Features
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- Solution Tabs -->
     <section class="py-5 bg-light" id="solutionDetails">
-      <div class="container">
-        <h2 class="section-title centered fade-in">Explore Our Solutions</h2>
+        <div class="container">
+            <h2 class="section-title centered fade-in">Explore Our Solutions</h2>
 
-        <div class="solution-tabs d-flex flex-wrap fade-in" data-delay="200">
-          <div class="solution-tab active" data-tab="operations">
-            <i class="fas fa-cogs me-2"></i>Operations
-          </div>
-          <div class="solution-tab" data-tab="staff">
-            <i class="fas fa-users-cog me-2"></i>Staff Management
-          </div>
-          <div class="solution-tab" data-tab="marketing">
-            <i class="fas fa-bullhorn me-2"></i>Marketing
-          </div>
-          <div class="solution-tab" data-tab="analytics">
-            <i class="fas fa-chart-line me-2"></i>Analytics
-          </div>
-          <div class="solution-tab" data-tab="payments">
-            <i class="fas fa-credit-card me-2"></i>Payments
-          </div>
+            <div class="solution-tabs d-flex flex-wrap fade-in" data-delay="200">
+                <div class="solution-tab active" data-tab="operations"><i class="fas fa-cogs me-2"></i>Operations</div>
+                <div class="solution-tab" data-tab="staff"><i class="fas fa-users-cog me-2"></i>Staff Management</div>
+                <div class="solution-tab" data-tab="marketing"><i class="fas fa-bullhorn me-2"></i>Marketing</div>
+                <div class="solution-tab" data-tab="analytics"><i class="fas fa-chart-line me-2"></i>Analytics</div>
+                <div class="solution-tab" data-tab="payments"><i class="fas fa-credit-card me-2"></i>Payments</div>
+            </div>
+
+            <!-- Operations Content -->
+            <div class="solution-content active" id="operations-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Streamline Your Operations</h3>
+                        <p class="text-muted mb-4">
+                            Our operations management suite helps you automate routine tasks, manage bookings across all channels, and optimize your resource allocation.
+                        </p>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-calendar-check"></i></div>
+                            <h5>Unified Booking Management</h5>
+                            <p class="text-muted">
+                                Manage reservations from all channels in one dashboard with real-time availability updates and automated confirmations.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="booking-management">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-boxes"></i></div>
+                            <h5>Inventory Optimization</h5>
+                            <p class="text-muted">
+                                Track and manage room inventory, restaurant tables, and activity slots with smart forecasting and allocation tools.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="inventory-optimization">See Demo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-tasks"></i></div>
+                            <h5>Workflow Automation</h5>
+                            <p class="text-muted">
+                                Automate check-ins, housekeeping assignments, maintenance requests, and other routine operational tasks.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="workflow-automation">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-mobile-alt"></i></div>
+                            <h5>Mobile Operations</h5>
+                            <p class="text-muted">
+                                Manage your operations on-the-go with our mobile app for staff communication, task management, and real-time updates.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="mobile-operations">See Demo</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-accent start-trial-btn" data-plan="operations">Start Free Trial</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staff Management Content -->
+            <div class="solution-content" id="staff-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Optimize Your Team Management</h3>
+                        <p class="text-muted mb-4">
+                            From recruitment to performance tracking, our staff management tools help you build and maintain a high-performing team.
+                        </p>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-user-clock"></i></div>
+                            <h5>Smart Scheduling</h5>
+                            <p class="text-muted">
+                                Create optimized staff schedules based on demand forecasts, employee availability, and skill requirements.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="smart-scheduling">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
+                            <h5>Performance Analytics</h5>
+                            <p class="text-muted">
+                                Track staff performance, guest satisfaction scores, and productivity metrics to identify training needs and recognize top performers.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="performance-analytics">See Demo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                            <h5>Training Portal</h5>
+                            <p class="text-muted">
+                                Access our library of hospitality training modules or create custom training programs for your team.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="training-portal">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                            <h5>Payroll Integration</h5>
+                            <p class="text-muted">
+                                Seamlessly integrate with payroll systems to automate time tracking, overtime calculations, and payment processing.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="payroll-integration">See Demo</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-accent start-trial-btn" data-plan="staff">Start Free Trial</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketing Content -->
+            <div class="solution-content" id="marketing-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Amplify Your Marketing</h3>
+                        <p class="text-muted mb-4">
+                            Reach more customers and drive direct bookings with our comprehensive marketing and distribution tools.
+                        </p>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                            <h5>Channel Management</h5>
+                            <p class="text-muted">
+                                Manage availability and rates across all online travel agencies and booking channels from a single dashboard.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="channel-management">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-envelope-open-text"></i></div>
+                            <h5>Email Marketing</h5>
+                            <p class="text-muted">
+                                Create targeted email campaigns to engage past guests, promote special offers, and drive repeat bookings.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="email-marketing">See Demo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
+                            <h5>Campaign Analytics</h5>
+                            <p class="text-muted">
+                                Track the performance of your marketing campaigns with detailed analytics and ROI reporting.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="campaign-analytics">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-users"></i></div>
+                            <h5>Guest Relationship Management</h5>
+                            <p class="text-muted">
+                                Build lasting relationships with your guests through personalized communication and loyalty programs.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="guest-relationship">See Demo</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-accent start-trial-btn" data-plan="marketing">Start Free Trial</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Content -->
+            <div class="solution-content" id="analytics-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Data-Driven Insights</h3>
+                        <p class="text-muted mb-4">
+                            Make informed business decisions with our comprehensive analytics and reporting tools.
+                        </p>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                            <h5>Performance Dashboards</h5>
+                            <p class="text-muted">
+                                Monitor key business metrics with customizable dashboards that provide real-time insights into your operations.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="performance-dashboards">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-search-dollar"></i></div>
+                            <h5>Revenue Management</h5>
+                            <p class="text-muted">
+                                Optimize pricing and maximize revenue with dynamic pricing tools and demand forecasting.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="revenue-management">See Demo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                            <h5>Financial Reporting</h5>
+                            <p class="text-muted">
+                                Generate comprehensive financial reports, including P&L statements, cash flow analysis, and tax reporting.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="financial-reporting">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-user-check"></i></div>
+                            <h5>Guest Satisfaction Analytics</h5>
+                            <p class="text-muted">
+                                Track guest feedback and satisfaction scores to identify areas for improvement and enhance the guest experience.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="guest-satisfaction">See Demo</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-accent start-trial-btn" data-plan="analytics">Start Free Trial</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payments Content -->
+            <div class="solution-content" id="payments-content">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <h3 class="mb-4">Secure Payment Processing</h3>
+                        <p class="text-muted mb-4">
+                            Streamline your payment processing with secure, reliable solutions tailored for the hospitality industry.
+                        </p>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
+                            <h5>Multi-Currency Processing</h5>
+                            <p class="text-muted">
+                                Accept payments in multiple currencies with competitive exchange rates and automated conversion.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="multi-currency">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h5>PCI-Compliant Security</h5>
+                            <p class="text-muted">
+                                Ensure the highest level of security with PCI-DSS compliant payment processing and data encryption.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="pci-security">See Demo</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-receipt"></i></div>
+                            <h5>Automated Invoicing</h5>
+                            <p class="text-muted">
+                                Generate and send professional invoices automatically, with options for recurring billing and payment reminders.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="automated-invoicing">See Demo</button>
+                        </div>
+
+                        <div class="feature-card">
+                            <div class="feature-icon"><i class="fas fa-exchange-alt"></i></div>
+                            <h5>Payment Gateway Integration</h5>
+                            <p class="text-muted">
+                                Connect with popular payment gateways and local payment methods across Africa and beyond.
+                            </p>
+                            <button class="btn btn-outline-primary btn-sm feature-demo" data-feature="payment-gateway">See Demo</button>
+                        </div>
+
+                        <div class="text-center mt-4">
+                            <button class="btn btn-accent start-trial-btn" data-plan="payments">Start Free Trial</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <!-- Operations Content -->
-        <div class="solution-content active" id="operations-content">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="mb-4">Streamline Your Operations</h3>
-              <p class="text-muted mb-4">
-                Our operations management suite helps you automate routine
-                tasks, manage bookings across all channels, and optimize your
-                resource allocation.
-              </p>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-calendar-check"></i>
-                </div>
-                <h5>Unified Booking Management</h5>
-                <p class="text-muted">
-                  Manage reservations from all channels in one dashboard with
-                  real-time availability updates and automated confirmations.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-boxes"></i></div>
-                <h5>Inventory Optimization</h5>
-                <p class="text-muted">
-                  Track and manage room inventory, restaurant tables, and
-                  activity slots with smart forecasting and allocation tools.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-tasks"></i></div>
-                <h5>Workflow Automation</h5>
-                <p class="text-muted">
-                  Automate check-ins, housekeeping assignments, maintenance
-                  requests, and other routine operational tasks.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h5>Mobile Operations</h5>
-                <p class="text-muted">
-                  Manage your operations on-the-go with our mobile app for staff
-                  communication, task management, and real-time updates.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="text-center mt-4">
-                <button class="btn btn-accent" id="startOperationsTrial">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Staff Management Content -->
-        <div class="solution-content" id="staff-content">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="mb-4">Optimize Your Team Management</h3>
-              <p class="text-muted mb-4">
-                From recruitment to performance tracking, our staff management
-                tools help you build and maintain a high-performing team.
-              </p>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-user-clock"></i>
-                </div>
-                <h5>Smart Scheduling</h5>
-                <p class="text-muted">
-                  Create optimized staff schedules based on demand forecasts,
-                  employee availability, and skill requirements.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
-                <h5>Performance Analytics</h5>
-                <p class="text-muted">
-                  Track staff performance, guest satisfaction scores, and
-                  productivity metrics to identify training needs and recognize
-                  top performers.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-graduation-cap"></i>
-                </div>
-                <h5>Training Portal</h5>
-                <p class="text-muted">
-                  Access our library of hospitality training modules or create
-                  custom training programs for your team.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-hand-holding-usd"></i>
-                </div>
-                <h5>Payroll Integration</h5>
-                <p class="text-muted">
-                  Seamlessly integrate with payroll systems to automate time
-                  tracking, overtime calculations, and payment processing.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="text-center mt-4">
-                <button class="btn btn-accent" id="startStaffTrial">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Marketing Content -->
-        <div class="solution-content" id="marketing-content">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="mb-4">Amplify Your Marketing</h3>
-              <p class="text-muted mb-4">
-                Reach more customers and drive direct bookings with our
-                comprehensive marketing and distribution tools.
-              </p>
-
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-globe"></i></div>
-                <h5>Channel Management</h5>
-                <p class="text-muted">
-                  Manage availability and rates across all online travel
-                  agencies and booking channels from a single dashboard.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-envelope-open-text"></i>
-                </div>
-                <h5>Email Marketing</h5>
-                <p class="text-muted">
-                  Create targeted email campaigns to engage past guests, promote
-                  special offers, and drive repeat bookings.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
-                <h5>Campaign Analytics</h5>
-                <p class="text-muted">
-                  Track the performance of your marketing campaigns with
-                  detailed analytics and ROI reporting.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-users"></i></div>
-                <h5>Guest Relationship Management</h5>
-                <p class="text-muted">
-                  Build lasting relationships with your guests through
-                  personalized communication and loyalty programs.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="text-center mt-4">
-                <button class="btn btn-accent" id="startMarketingTrial">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Analytics Content -->
-        <div class="solution-content" id="analytics-content">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="mb-4">Data-Driven Insights</h3>
-              <p class="text-muted mb-4">
-                Make informed business decisions with our comprehensive
-                analytics and reporting tools.
-              </p>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-chart-line"></i>
-                </div>
-                <h5>Performance Dashboards</h5>
-                <p class="text-muted">
-                  Monitor key business metrics with customizable dashboards that
-                  provide real-time insights into your operations.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-search-dollar"></i>
-                </div>
-                <h5>Revenue Management</h5>
-                <p class="text-muted">
-                  Optimize pricing and maximize revenue with dynamic pricing
-                  tools and demand forecasting.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-file-invoice-dollar"></i>
-                </div>
-                <h5>Financial Reporting</h5>
-                <p class="text-muted">
-                  Generate comprehensive financial reports, including P&L
-                  statements, cash flow analysis, and tax reporting.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-user-check"></i>
-                </div>
-                <h5>Guest Satisfaction Analytics</h5>
-                <p class="text-muted">
-                  Track guest feedback and satisfaction scores to identify areas
-                  for improvement and enhance the guest experience.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="text-center mt-4">
-                <button class="btn btn-accent" id="startAnalyticsTrial">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Payments Content -->
-        <div class="solution-content" id="payments-content">
-          <div class="row">
-            <div class="col-lg-6">
-              <h3 class="mb-4">Secure Payment Processing</h3>
-              <p class="text-muted mb-4">
-                Streamline your payment processing with secure, reliable
-                solutions tailored for the hospitality industry.
-              </p>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-credit-card"></i>
-                </div>
-                <h5>Multi-Currency Processing</h5>
-                <p class="text-muted">
-                  Accept payments in multiple currencies with competitive
-                  exchange rates and automated conversion.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-shield-alt"></i>
-                </div>
-                <h5>PCI-Compliant Security</h5>
-                <p class="text-muted">
-                  Ensure the highest level of security with PCI-DSS compliant
-                  payment processing and data encryption.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="feature-card">
-                <div class="feature-icon"><i class="fas fa-receipt"></i></div>
-                <h5>Automated Invoicing</h5>
-                <p class="text-muted">
-                  Generate and send professional invoices automatically, with
-                  options for recurring billing and payment reminders.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-exchange-alt"></i>
-                </div>
-                <h5>Payment Gateway Integration</h5>
-                <p class="text-muted">
-                  Connect with popular payment gateways and local payment
-                  methods across Africa and beyond.
-                </p>
-                <button class="btn btn-outline-primary btn-sm feature-demo">
-                  See Demo
-                </button>
-              </div>
-
-              <div class="text-center mt-4">
-                <button class="btn btn-accent" id="startPaymentsTrial">
-                  Start Free Trial
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Integration Partners -->
-    <section class="py-5" id="integrations">
-      <div class="container">
-        <h2 class="section-title centered fade-in">Seamless Integrations</h2>
-        <p class="text-muted text-center mb-5 fade-in" data-delay="200">
-          Connect HospiTour with your existing tools and systems
-        </p>
-
-        <div class="row g-4">
-          <div class="col-lg-3 col-md-4 col-6">
-            <div class="integration-card fade-in" data-delay="0">
-              <div class="integration-logo bg-primary text-white">PMS</div>
-              <h6>Property Management</h6>
-              <p class="text-muted small">Connect with major PMS systems</p>
-              <button class="btn btn-outline-primary btn-sm mt-2">
-                Learn More
-              </button>
+    <!-- Interactive Demo Section -->
+    <section class="py-5 bg-white" id="interactiveDemo" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="text-center mb-4">Interactive Product Demo</h2>
+                    <p class="text-center text-muted mb-5">Explore HospiTour's features in this interactive demonstration</p>
+                    
+                    <div class="interactive-demo">
+                        <div class="demo-controls">
+                            <button class="btn btn-outline-primary active" data-screen="dashboard">Dashboard</button>
+                            <button class="btn btn-outline-primary" data-screen="bookings">Bookings</button>
+                            <button class="btn btn-outline-primary" data-screen="staff">Staff</button>
+                            <button class="btn btn-outline-primary" data-screen="analytics">Analytics</button>
+                        </div>
+                        
+                        <div class="demo-screen">
+                            <div id="demoDashboard" class="demo-screen-content">
+                                <h4><i class="fas fa-tachometer-alt me-2"></i>Business Dashboard</h4>
+                                <p class="text-muted">Your central hub for managing all operations</p>
+                                
+                                <div class="row mt-4">
+                                    <div class="col-md-3">
+                                        <div class="card text-center demo-element" data-feature="revenue">
+                                            <div class="card-body">
+                                                <h5 class="text-primary">$12,450</h5>
+                                                <p class="small text-muted">Today's Revenue</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card text-center demo-element" data-feature="occupancy">
+                                            <div class="card-body">
+                                                <h5 class="text-success">78%</h5>
+                                                <p class="small text-muted">Occupancy Rate</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card text-center demo-element" data-feature="bookings">
+                                            <div class="card-body">
+                                                <h5 class="text-warning">24</h5>
+                                                <p class="small text-muted">New Bookings</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="card text-center demo-element" data-feature="satisfaction">
+                                            <div class="card-body">
+                                                <h5 class="text-info">4.8/5</h5>
+                                                <p class="small text-muted">Guest Rating</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h5>Recent Activity</h5>
+                                    <ul class="list-group">
+                                        <li class="list-group-item demo-element" data-feature="activity">
+                                            <i class="fas fa-check-circle text-success me-2"></i>
+                                            Check-in completed for Room 205
+                                        </li>
+                                        <li class="list-group-item demo-element" data-feature="activity">
+                                            <i class="fas fa-utensils text-warning me-2"></i>
+                                            New restaurant reservation for 4 people
+                                        </li>
+                                        <li class="list-group-item demo-element" data-feature="activity">
+                                            <i class="fas fa-bell text-info me-2"></i>
+                                            Maintenance request for Room 112
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button class="btn btn-primary me-2" id="prevDemoStep">Previous</button>
+                            <button class="btn btn-primary" id="nextDemoStep">Next</button>
+                            <button class="btn btn-outline-secondary ms-2" id="exitDemo">Exit Demo</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6">
-            <div class="integration-card fade-in" data-delay="100">
-              <div class="integration-logo bg-success text-white">POS</div>
-              <h6>Point of Sale</h6>
-              <p class="text-muted small">
-                Restaurant and retail POS integration
-              </p>
-              <button class="btn btn-outline-primary btn-sm mt-2">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6">
-            <div class="integration-card fade-in" data-delay="200">
-              <div class="integration-logo bg-warning text-white">OTA</div>
-              <h6>Booking Channels</h6>
-              <p class="text-muted small">Connect with global OTAs</p>
-              <button class="btn btn-outline-primary btn-sm mt-2">
-                Learn More
-              </button>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-6">
-            <div class="integration-card fade-in" data-delay="300">
-              <div class="integration-logo bg-secondary text-white">PAY</div>
-              <h6>Payment Processors</h6>
-              <p class="text-muted small">Multiple payment gateway options</p>
-              <button class="btn btn-outline-primary btn-sm mt-2">
-                Learn More
-              </button>
-            </div>
-          </div>
         </div>
-
-        <div class="text-center mt-4 fade-in" data-delay="400">
-          <button class="btn btn-outline-primary" id="viewAllIntegrations">
-            View All Integrations
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="py-5 bg-light" id="pricing">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="section-title centered fade-in">Flexible Pricing Plans</h2>
-          <p class="text-muted fade-in" data-delay="200">
-            Choose the plan that fits your business needs
-          </p>
-        </div>
-
-        <div class="row justify-content-center">
-          <!-- Starter Plan -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="pricing-card fade-in" data-delay="0">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title">Starter</h5>
-                <div class="price mb-3">
-                  <span class="h1 text-primary">$49</span>
-                  <span class="text-muted">/month</span>
-                </div>
-                <p class="text-muted mb-4">
-                  Perfect for small hotels & restaurants
-                </p>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Up to 50
-                    bookings/month
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Basic
-                    operations management
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Email support
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>1 POS device
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-times text-muted me-2"></i
-                    ><span class="text-muted">Advanced analytics</span>
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-times text-muted me-2"></i
-                    ><span class="text-muted">Staff management</span>
-                  </li>
-                </ul>
-                <button class="btn btn-outline-primary w-100">
-                  Get Started
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Professional Plan -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="pricing-card featured fade-in" data-delay="100">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title">Professional</h5>
-                <div class="price mb-3">
-                  <span class="h1 text-primary">$149</span>
-                  <span class="text-muted">/month</span>
-                </div>
-                <p class="text-muted mb-4">
-                  Ideal for growing hospitality businesses
-                </p>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Up to 500
-                    bookings/month
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Advanced
-                    operations
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Priority
-                    support
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Up to 5 POS
-                    devices
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Staff
-                    management
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Basic
-                    analytics
-                  </li>
-                </ul>
-                <button class="btn btn-primary w-100">Get Started</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Enterprise Plan -->
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="pricing-card fade-in" data-delay="200">
-              <div class="card-body text-center p-4">
-                <h5 class="card-title">Enterprise</h5>
-                <div class="price mb-3">
-                  <span class="h1 text-primary">Custom</span>
-                </div>
-                <p class="text-muted mb-4">For large hotels & resort chains</p>
-                <ul class="list-unstyled mb-4">
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Unlimited
-                    bookings
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Full feature
-                    access
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>24/7 dedicated
-                    support
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Unlimited POS
-                    devices
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Advanced
-                    analytics
-                  </li>
-                  <li class="mb-2">
-                    <i class="fas fa-check text-success me-2"></i>Custom
-                    integrations
-                  </li>
-                </ul>
-                <button class="btn btn-outline-primary w-100">
-                  Contact Sales
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="text-center mt-4 fade-in" data-delay="300">
-          <p class="text-muted">
-            All plans include a 30-day free trial • No credit card required
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="py-5" id="testimonials">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="section-title centered fade-in">What Our Clients Say</h2>
-          <p class="text-muted fade-in" data-delay="200">
-            Hear from hospitality businesses across Africa
-          </p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <div class="testimonial-card fade-in" data-delay="0">
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                  alt="Sarah K."
-                  class="testimonial-avatar"
-                />
-                <div>
-                  <h6 class="mb-0">Sarah K.</h6>
-                  <small class="text-muted">Hotel Manager, Nairobi</small>
-                </div>
-              </div>
-              <p class="text-muted">
-                "HospiTour transformed our operations. We've seen a 40% increase
-                in efficiency and our guests love the seamless experience."
-              </p>
-              <div class="text-warning">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4">
-            <div class="testimonial-card fade-in" data-delay="100">
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                  alt="David M."
-                  class="testimonial-avatar"
-                />
-                <div>
-                  <h6 class="mb-0">David M.</h6>
-                  <small class="text-muted">Restaurant Owner, Lagos</small>
-                </div>
-              </div>
-              <p class="text-muted">
-                "The staff management tools alone have saved us 15 hours per
-                week. Our team is more organized and our customers notice the
-                difference."
-              </p>
-              <div class="text-warning">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 mb-4">
-            <div class="testimonial-card fade-in" data-delay="200">
-              <div class="d-flex align-items-center mb-3">
-                <img
-                  src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
-                  alt="Amina J."
-                  class="testimonial-avatar"
-                />
-                <div>
-                  <h6 class="mb-0">Amina J.</h6>
-                  <small class="text-muted">Tour Operator, Dar es Salaam</small>
-                </div>
-              </div>
-              <p class="text-muted">
-                "Since implementing HospiTour, our booking process has become
-                effortless and our revenue has grown by 35% in just 6 months."
-              </p>
-              <div class="text-warning">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i><i class="fas fa-star"></i
-                ><i class="fas fa-star"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="py-5 bg-light" id="faq">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 text-center fade-in">
-            <h2 class="mb-3">Frequently Asked Questions</h2>
-            <p class="text-muted mb-5">
-              Find answers to common questions about HospiTour solutions
-            </p>
-          </div>
-        </div>
-
-        <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="accordion" id="faqAccordion">
-              <!-- FAQ Item 1 -->
-              <div class="accordion-item fade-in" data-delay="100">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#faq1"
-                  >
-                    How long does it take to implement HospiTour?
-                  </button>
-                </h2>
-                <div
-                  id="faq1"
-                  class="accordion-collapse collapse show"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Most businesses can get started with HospiTour in under 48
-                    hours. Our implementation team provides step-by-step
-                    guidance, and no technical expertise is required. For
-                    enterprise setups, we offer dedicated implementation
-                    support.
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ Item 2 -->
-              <div class="accordion-item fade-in" data-delay="150">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#faq2"
-                  >
-                    Can HospiTour integrate with my existing systems?
-                  </button>
-                </h2>
-                <div
-                  id="faq2"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Yes! HospiTour integrates seamlessly with most Property
-                    Management Systems (PMS), Point of Sale (POS) systems,
-                    payment gateways, and booking channels. We provide
-                    integration support for all our partners.
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ Item 3 -->
-              <div class="accordion-item fade-in" data-delay="200">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#faq3"
-                  >
-                    Is training provided for our staff?
-                  </button>
-                </h2>
-                <div
-                  id="faq3"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Absolutely. We provide comprehensive training for your team,
-                    including online tutorials, live training sessions, and
-                    dedicated support. Our training portal also offers ongoing
-                    learning resources.
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ Item 4 -->
-              <div class="accordion-item fade-in" data-delay="250">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#faq4"
-                  >
-                    What kind of support do you offer?
-                  </button>
-                </h2>
-                <div
-                  id="faq4"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    We offer 24/7 email and chat support for all plans.
-                    Professional and Enterprise plans include phone support and
-                    dedicated account management. Enterprise customers receive
-                    24/7 priority support.
-                  </div>
-                </div>
-              </div>
-
-              <!-- FAQ Item 5 -->
-              <div class="accordion-item fade-in" data-delay="300">
-                <h2 class="accordion-header">
-                  <button
-                    class="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#faq5"
-                  >
-                    Can I upgrade or downgrade my plan?
-                  </button>
-                </h2>
-                <div
-                  id="faq5"
-                  class="accordion-collapse collapse"
-                  data-bs-parent="#faqAccordion"
-                >
-                  <div class="accordion-body">
-                    Yes, you can change your plan at any time. Upgrades take
-                    effect immediately, while downgrades apply at the end of
-                    your current billing cycle. All changes can be made directly
-                    from your account dashboard.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <!-- CTA Section -->
     <section class="py-5 bg-primary text-white">
-      <div class="container">
-        <div class="row justify-content-center text-center fade-in">
-          <div class="col-lg-8">
-            <h2 class="mb-4">Ready to Transform Your Hospitality Business?</h2>
-            <p class="lead mb-4">
-              Join hundreds of hospitality businesses across Africa using
-              HospiTour to streamline operations and drive growth.
-            </p>
-            <div
-              class="d-flex flex-column flex-sm-row justify-content-center gap-3"
-            >
-              <button class="btn btn-light btn-lg px-4">
-                Start Free Trial
-              </button>
-              <button class="btn btn-outline-light btn-lg px-4">
-                Schedule a Demo
-              </button>
+        <div class="container">
+            <div class="row justify-content-center text-center fade-in">
+                <div class="col-lg-8">
+                    <h2 class="mb-4">Ready to Transform Your Hospitality Business?</h2>
+                    <p class="lead mb-4">
+                        Join hundreds of hospitality businesses across Africa using HospiTour to streamline operations and drive growth.
+                    </p>
+                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
+                        <button class="btn btn-light btn-lg px-4 start-trial-btn" data-plan="professional">Start Free Trial</button>
+                        <button class="btn btn-outline-light btn-lg px-4" id="ctaDemoBtn">Schedule a Demo</button>
+                    </div>
+                    <p class="small mt-3 opacity-75">No credit card required • 30-day free trial • Setup in 48 hours</p>
+                </div>
             </div>
-            <p class="small mt-3 opacity-75">
-              No credit card required • 30-day free trial • Setup in 48 hours
-            </p>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer bg-light">
+    <footer class="footer bg-white">
       <div class="container">
         <div class="row">
           <div class="col-lg-4 mb-4">
@@ -1679,11 +1151,11 @@
           <div class="col-lg-2 col-md-3 mb-4">
             <h6 class="mb-3">Quick Links</h6>
             <ul class="list-unstyled">
-              <li class="mb-2"><a href="businesses.html">For Businesses</a></li>
-              <li class="mb-2"><a href="professionals.html">For Professionals</a></li>
-              <li class="mb-2"><a href="market.html">Marketplace</a></li>
-              <li class="mb-2"><a href="resources.html">Resources</a></li>
-              <li class="mb-2"><a href="about.html">About Us</a></li>
+              <li class="mb-2"><a href="#">For Businesses</a></li>
+              <li class="mb-2"><a href="#">For Professionals</a></li>
+              <li class="mb-2"><a href="#">Marketplace</a></li>
+              <li class="mb-2"><a href="#">Resources</a></li>
+              <li class="mb-2"><a href="#">About Us</a></li>
             </ul>
           </div>
           <div class="col-lg-2 col-md-3 mb-4">
@@ -1706,24 +1178,26 @@
               <li class="mb-2"><a href="#">Status</a></li>
             </ul>
           </div>
+
           <div class="col-lg-2 col-md-3 mb-4">
             <h6 class="mb-3">Contact</h6>
             <ul class="list-unstyled">
               <li class="mb-2">
-                <i class="fas fa-envelope me-2"></i
-                ><a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
+                <i class="fas fa-envelope me-2"></i>
+                <a href="mailto:hello@hospitour.com">hello@hospitour.com</a>
               </li>
               <li class="mb-2">
-                <i class="fas fa-phone me-2"></i
-                ><a href="tel:+234800000000">+234 800 000 0000</a>
+                <i class="fas fa-phone me-2"></i>
+                <a href="tel:+234800000000">+234 800 000 0000</a>
               </li>
               <li class="mb-2">
-                <i class="fas fa-map-marker-alt me-2"></i>Lagos, Nigeria
+                <i class="fas fa-map-marker-alt me-2"></i>
+                Lagos, Nigeria
               </li>
             </ul>
           </div>
         </div>
-        <hr class="my-4" style="border-color: rgba(237, 59, 59, 0.1)" />
+        <hr class="my-4" style="border-color: rgba(255, 255, 255, 0.1)" />
         <div class="row align-items-center">
           <div class="col-md-6">
             <p class="mb-0">&copy; 2025 HospiTour. All rights reserved.</p>
@@ -1733,6 +1207,7 @@
             <a href="#" class="me-3">Terms of Service</a>
             <a href="#">Cookie Policy</a>
           </div>
+          <!-- REMOVED LANGUAGE SELECTOR FROM HERE -->
         </div>
       </div>
     </footer>
@@ -1740,133 +1215,955 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // Fade-in animation
-        const fadeElements = document.querySelectorAll(".fade-in");
-        const slideLeftElements = document.querySelectorAll(".slide-in-left");
+        // Wait for DOM to be fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+            console.log("DOM loaded - initializing all buttons");
+            
+            // Initialize Bootstrap components
+            const mainDemoModal = new bootstrap.Modal(document.getElementById('mainDemoModal'));
+            const featureDemoModal = new bootstrap.Modal(document.getElementById('featureDemoModal'));
+            const trialModal = new bootstrap.Modal(document.getElementById('trialModal'));
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const delay = entry.target.getAttribute("data-delay") || 0;
-              setTimeout(() => {
-                entry.target.classList.add("visible");
-              }, delay);
+            // Feature demo data
+            const featureDemos = {
+                'booking-management': {
+                    title: 'Unified Booking Management',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <h4>Booking Management Demo</h4>
+                            <p class="text-muted">See how to manage reservations across all channels</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Multi-Channel Sync</h6>
+                                    <p class="text-muted mb-0">Real-time synchronization with OTAs and direct bookings</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Automated Confirmations</h6>
+                                    <p class="text-muted mb-0">Send booking confirmations and reminders automatically</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Availability Management</h6>
+                                    <p class="text-muted mb-0">Prevent overbooking with real-time availability updates</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'inventory-optimization': {
+                    title: 'Inventory Optimization',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-boxes"></i>
+                            </div>
+                            <h4>Inventory Management Demo</h4>
+                            <p class="text-muted">Optimize your room and resource allocation</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Smart Forecasting</h6>
+                                    <p class="text-muted mb-0">Predict demand and optimize inventory allocation</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Dynamic Pricing</h6>
+                                    <p class="text-muted mb-0">Adjust rates based on demand and availability</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Resource Tracking</h6>
+                                    <p class="text-muted mb-0">Monitor room status, maintenance, and housekeeping</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'workflow-automation': {
+                    title: 'Workflow Automation',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-tasks"></i>
+                            </div>
+                            <h4>Workflow Automation Demo</h4>
+                            <p class="text-muted">Automate routine operational tasks</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Automated Check-ins</h6>
+                                    <p class="text-muted mb-0">Streamline guest arrival processes</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Housekeeping Management</h6>
+                                    <p class="text-muted mb-0">Automate room cleaning schedules</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Maintenance Workflows</h6>
+                                    <p class="text-muted mb-0">Track and resolve maintenance requests</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'mobile-operations': {
+                    title: 'Mobile Operations',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4>Mobile Operations Demo</h4>
+                            <p class="text-muted">Manage your business on-the-go</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Real-time Updates</h6>
+                                    <p class="text-muted mb-0">Stay updated with live business metrics</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Staff Communication</h6>
+                                    <p class="text-muted mb-0">Coordinate with your team seamlessly</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Task Management</h6>
+                                    <p class="text-muted mb-0">Assign and track tasks from anywhere</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'smart-scheduling': {
+                    title: 'Smart Scheduling',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-user-clock"></i>
+                            </div>
+                            <h4>Smart Scheduling Demo</h4>
+                            <p class="text-muted">Optimize your staff scheduling</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Demand Forecasting</h6>
+                                    <p class="text-muted mb-0">Predict staffing needs based on bookings</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Auto-scheduling</h6>
+                                    <p class="text-muted mb-0">Generate optimal schedules automatically</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Shift Management</h6>
+                                    <p class="text-muted mb-0">Manage shift swaps and time-off requests</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'performance-analytics': {
+                    title: 'Performance Analytics',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <h4>Performance Analytics Demo</h4>
+                            <p class="text-muted">Track and improve staff performance</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Performance Metrics</h6>
+                                    <p class="text-muted mb-0">Monitor key performance indicators</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Guest Feedback</h6>
+                                    <p class="text-muted mb-0">Track guest satisfaction scores</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Training Insights</h6>
+                                    <p class="text-muted mb-0">Identify training needs and opportunities</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'training-portal': {
+                    title: 'Training Portal',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>Training Portal Demo</h4>
+                            <p class="text-muted">Develop your team with comprehensive training</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Course Library</h6>
+                                    <p class="text-muted mb-0">Access hospitality training modules</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Progress Tracking</h6>
+                                    <p class="text-muted mb-0">Monitor team training progress</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Certification Management</h6>
+                                    <p class="text-muted mb-0">Track certifications and compliance</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'payroll-integration': {
+                    title: 'Payroll Integration',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <h4>Payroll Integration Demo</h4>
+                            <p class="text-muted">Streamline your payroll processes</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Time Tracking</h6>
+                                    <p class="text-muted mb-0">Automated time and attendance tracking</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Overtime Calculation</h6>
+                                    <p class="text-muted mb-0">Automatic overtime calculations</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Payment Processing</h6>
+                                    <p class="text-muted mb-0">Seamless integration with payroll systems</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'channel-management': {
+                    title: 'Channel Management',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h4>Channel Management Demo</h4>
+                            <p class="text-muted">Manage all your booking channels</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Multi-Channel Sync</h6>
+                                    <p class="text-muted mb-0">Sync availability across all platforms</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Rate Management</h6>
+                                    <p class="text-muted mb-0">Manage rates across all channels</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Performance Analytics</h6>
+                                    <p class="text-muted mb-0">Track channel performance</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'email-marketing': {
+                    title: 'Email Marketing',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-envelope-open-text"></i>
+                            </div>
+                            <h4>Email Marketing Demo</h4>
+                            <p class="text-muted">Engage customers with targeted campaigns</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Campaign Builder</h6>
+                                    <p class="text-muted mb-0">Create beautiful email campaigns</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Audience Segmentation</h6>
+                                    <p class="text-muted mb-0">Target specific customer groups</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Performance Tracking</h6>
+                                    <p class="text-muted mb-0">Monitor campaign effectiveness</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'campaign-analytics': {
+                    title: 'Campaign Analytics',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h4>Campaign Analytics Demo</h4>
+                            <p class="text-muted">Measure marketing campaign performance</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>ROI Tracking</h6>
+                                    <p class="text-muted mb-0">Track return on investment</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Conversion Analysis</h6>
+                                    <p class="text-muted mb-0">Analyze conversion rates</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Customer Insights</h6>
+                                    <p class="text-muted mb-0">Gain valuable customer insights</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'guest-relationship': {
+                    title: 'Guest Relationship Management',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h4>Guest Relationship Demo</h4>
+                            <p class="text-muted">Build lasting guest relationships</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Guest Profiles</h6>
+                                    <p class="text-muted mb-0">Comprehensive guest profiles</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Personalized Communication</h6>
+                                    <p class="text-muted mb-0">Tailored guest communication</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Loyalty Programs</h6>
+                                    <p class="text-muted mb-0">Build guest loyalty and retention</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'performance-dashboards': {
+                    title: 'Performance Dashboards',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4>Performance Dashboards Demo</h4>
+                            <p class="text-muted">Monitor your business performance</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Real-time Metrics</h6>
+                                    <p class="text-muted mb-0">Live business performance data</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Customizable Views</h6>
+                                    <p class="text-muted mb-0">Tailor dashboards to your needs</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Trend Analysis</h6>
+                                    <p class="text-muted mb-0">Identify business trends and patterns</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'revenue-management': {
+                    title: 'Revenue Management',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-search-dollar"></i>
+                            </div>
+                            <h4>Revenue Management Demo</h4>
+                            <p class="text-muted">Optimize your pricing strategy</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Dynamic Pricing</h6>
+                                    <p class="text-muted mb-0">Adjust prices based on demand</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Demand Forecasting</h6>
+                                    <p class="text-muted mb-0">Predict future demand patterns</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Competitive Analysis</h6>
+                                    <p class="text-muted mb-0">Monitor competitor pricing</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'financial-reporting': {
+                    title: 'Financial Reporting',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-file-invoice-dollar"></i>
+                            </div>
+                            <h4>Financial Reporting Demo</h4>
+                            <p class="text-muted">Comprehensive financial insights</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>P&L Statements</h6>
+                                    <p class="text-muted mb-0">Generate profit and loss reports</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Cash Flow Analysis</h6>
+                                    <p class="text-muted mb-0">Track cash flow movements</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Tax Reporting</h6>
+                                    <p class="text-muted mb-0">Prepare for tax season</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'guest-satisfaction': {
+                    title: 'Guest Satisfaction Analytics',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <h4>Guest Satisfaction Demo</h4>
+                            <p class="text-muted">Measure and improve guest experience</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Feedback Collection</h6>
+                                    <p class="text-muted mb-0">Gather guest feedback automatically</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Sentiment Analysis</h6>
+                                    <p class="text-muted mb-0">Analyze guest sentiment</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Improvement Tracking</h6>
+                                    <p class="text-muted mb-0">Track service improvements</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'multi-currency': {
+                    title: 'Multi-Currency Processing',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h4>Multi-Currency Demo</h4>
+                            <p class="text-muted">Accept payments in multiple currencies</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Currency Support</h6>
+                                    <p class="text-muted mb-0">Support for 50+ currencies</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Auto Conversion</h6>
+                                    <p class="text-muted mb-0">Automatic currency conversion</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Competitive Rates</h6>
+                                    <p class="text-muted mb-0">Best exchange rates</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'pci-security': {
+                    title: 'PCI-Compliant Security',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4>Security Demo</h4>
+                            <p class="text-muted">Enterprise-grade payment security</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>PCI DSS Compliance</h6>
+                                    <p class="text-muted mb-0">Full PCI DSS compliance</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Data Encryption</h6>
+                                    <p class="text-muted mb-0">End-to-end encryption</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Fraud Prevention</h6>
+                                    <p class="text-muted mb-0">Advanced fraud detection</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'automated-invoicing': {
+                    title: 'Automated Invoicing',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <h4>Automated Invoicing Demo</h4>
+                            <p class="text-muted">Streamline your invoicing process</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Auto-generation</h6>
+                                    <p class="text-muted mb-0">Automatic invoice generation</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Recurring Billing</h6>
+                                    <p class="text-muted mb-0">Set up recurring invoices</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Payment Reminders</h6>
+                                    <p class="text-muted mb-0">Automated payment reminders</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                'payment-gateway': {
+                    title: 'Payment Gateway Integration',
+                    content: `
+                        <div class="demo-video">
+                            <div class="demo-placeholder">
+                                <i class="fas fa-exchange-alt"></i>
+                            </div>
+                            <h4>Payment Gateway Demo</h4>
+                            <p class="text-muted">Connect with multiple payment providers</p>
+                        </div>
+                        <div class="demo-steps">
+                            <h5>Key Features:</h5>
+                            <div class="demo-step">
+                                <div class="demo-step-number">1</div>
+                                <div>
+                                    <h6>Multiple Providers</h6>
+                                    <p class="text-muted mb-0">Support for 20+ payment gateways</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">2</div>
+                                <div>
+                                    <h6>Local Methods</h6>
+                                    <p class="text-muted mb-0">African payment methods supported</p>
+                                </div>
+                            </div>
+                            <div class="demo-step">
+                                <div class="demo-step-number">3</div>
+                                <div>
+                                    <h6>Seamless Integration</h6>
+                                    <p class="text-muted mb-0">Easy setup and integration</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+
+            // ========== DEMO BUTTONS ==========
+            
+            // Main demo button
+            const viewDemoBtn = document.getElementById('viewDemoBtn');
+            if (viewDemoBtn) {
+                viewDemoBtn.addEventListener('click', function() {
+                    console.log("Main demo button clicked");
+                    mainDemoModal.show();
+                });
             }
-          });
-        });
 
-        fadeElements.forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateY(30px)";
-          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-          observer.observe(el);
-        });
+            // Feature demo buttons
+            const featureDemoButtons = document.querySelectorAll('.feature-demo');
+            console.log(`Found ${featureDemoButtons.length} feature demo buttons`);
+            
+            featureDemoButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const feature = this.getAttribute('data-feature');
+                    console.log(`Feature demo button clicked: ${feature}`);
+                    
+                    const demoData = featureDemos[feature];
+                    
+                    if (demoData) {
+                        document.getElementById('featureDemoTitle').textContent = demoData.title;
+                        document.getElementById('featureDemoContent').innerHTML = demoData.content;
+                        featureDemoModal.show();
+                    } else {
+                        showNotification('Demo coming soon for this feature!', 'info');
+                    }
+                });
+            });
 
-        slideLeftElements.forEach((el) => {
-          el.style.opacity = "0";
-          el.style.transform = "translateX(-50px)";
-          el.style.transition = "opacity 0.6s ease, transform 0.6s ease";
-          observer.observe(el);
-        });
-
-        // Solution tabs functionality
-        const solutionTabs = document.querySelectorAll(".solution-tab");
-        solutionTabs.forEach((tab) => {
-          tab.addEventListener("click", function () {
-            const tabName = this.getAttribute("data-tab");
-
-            // Update active tab
-            solutionTabs.forEach((t) => t.classList.remove("active"));
-            this.classList.add("active");
-
-            // Show corresponding content
-            document
-              .querySelectorAll(".solution-content")
-              .forEach((content) => {
-                content.classList.remove("active");
-              });
-            document
-              .getElementById(tabName + "-content")
-              .classList.add("active");
-          });
-        });
-
-        // View All Integrations button
-        document
-          .getElementById("viewAllIntegrations")
-          ?.addEventListener("click", function () {
-            showNotification("Loading all integration partners...", "info");
-          });
-
-        // Notification function
-        function showNotification(message, type = "info") {
-          const notification = document.getElementById("notification");
-          notification.textContent = message;
-          notification.className = `notification ${type} show`;
-
-          setTimeout(() => {
-            notification.classList.remove("show");
-          }, 3000);
-        }
-
-        // Navbar scroll effect
-        window.addEventListener("scroll", function () {
-          const navbar = document.querySelector(".navbar");
-          if (window.scrollY > 100) {
-            navbar.classList.add("scrolled");
-          } else {
-            navbar.classList.remove("scrolled");
-          }
-        });
-
-        // Demo buttons functionality
-        document
-          .getElementById("viewDemoBtn")
-          ?.addEventListener("click", function () {
-            showNotification("Opening demo video...", "info");
-          });
-
-        document
-          .getElementById("comparePlansBtn")
-          ?.addEventListener("click", function () {
-            document
-              .getElementById("pricing")
-              .scrollIntoView({ behavior: "smooth" });
-          });
-
-        // Explore solution buttons
-        document.querySelectorAll(".explore-solution").forEach((button) => {
-          button.addEventListener("click", function () {
-            const category = this.closest(
-              ".solution-category-card"
-            ).getAttribute("data-category");
-            const tab = document.querySelector(
-              `.solution-tab[data-tab="${category}"]`
-            );
-            if (tab) {
-              tab.click();
-              document
-                .getElementById("solutionDetails")
-                .scrollIntoView({ behavior: "smooth" });
+            // Interactive demo functionality
+            const startInteractiveDemoBtn = document.getElementById('startInteractiveDemo');
+            if (startInteractiveDemoBtn) {
+                startInteractiveDemoBtn.addEventListener('click', function() {
+                    mainDemoModal.hide();
+                    document.getElementById('interactiveDemo').style.display = 'block';
+                    document.getElementById('interactiveDemo').scrollIntoView({ behavior: 'smooth' });
+                });
             }
-          });
-        });
 
-        // Feature demo buttons
-        document.querySelectorAll(".feature-demo").forEach((button) => {
-          button.addEventListener("click", function () {
-            showNotification("Opening feature demo...", "info");
-          });
-        });
+            const exitDemoBtn = document.getElementById('exitDemo');
+            if (exitDemoBtn) {
+                exitDemoBtn.addEventListener('click', function() {
+                    document.getElementById('interactiveDemo').style.display = 'none';
+                });
+            }
 
-        // Trial buttons
-        document.querySelectorAll('[id$="Trial"]').forEach((button) => {
-          button.addEventListener("click", function () {
-            showNotification("Starting your free trial...", "success");
-          });
+            // Demo screen controls
+            const demoControls = document.querySelectorAll('.demo-controls .btn');
+            demoControls.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    demoControls.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    showNotification(`Switched to ${this.textContent} view`, 'info');
+                });
+            });
+
+            // Demo element interactions
+            const demoElements = document.querySelectorAll('.demo-element');
+            demoElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    const feature = this.getAttribute('data-feature');
+                    showNotification(`Viewing ${feature} details`, 'info');
+                });
+            });
+
+            // ========== TRIAL BUTTONS ==========
+            
+            // Trial buttons - ALL trial buttons
+            const trialButtons = document.querySelectorAll('.start-trial-btn');
+            console.log(`Found ${trialButtons.length} trial buttons`);
+            
+            trialButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const plan = this.getAttribute('data-plan') || 'professional';
+                    console.log(`Trial button clicked for plan: ${plan}`);
+                    
+                    // Show trial modal
+                    trialModal.show();
+                    
+                    // Update modal title based on plan
+                    const modalTitle = document.querySelector('#trialModal .modal-title');
+                    if (modalTitle) {
+                        modalTitle.textContent = `Start Your ${plan.charAt(0).toUpperCase() + plan.slice(1)} Free Trial`;
+                    }
+                });
+            });
+
+            // Trial form submission
+            const trialForm = document.getElementById('trialForm');
+            if (trialForm) {
+                trialForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    console.log("Trial form submitted");
+                    
+                    // Show success message
+                    showNotification('Your free trial has been started! Check your email for setup instructions.', 'success');
+                    
+                    // Close modal
+                    trialModal.hide();
+                    
+                    // Reset form
+                    trialForm.reset();
+                });
+            }
+
+            // ========== OTHER BUTTONS ==========
+            
+            // Compare plans button
+            const comparePlansBtn = document.getElementById('comparePlansBtn');
+            if (comparePlansBtn) {
+                comparePlansBtn.addEventListener('click', function() {
+                    document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' });
+                });
+            }
+
+            // Explore solution buttons
+            const exploreSolutionButtons = document.querySelectorAll('.explore-solution');
+            exploreSolutionButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.closest('.solution-category-card').getAttribute('data-category');
+                    const tab = document.querySelector(`.solution-tab[data-tab="${category}"]`);
+                    if (tab) {
+                        tab.click();
+                        document.getElementById('solutionDetails').scrollIntoView({ behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // Solution tabs functionality
+            const solutionTabs = document.querySelectorAll('.solution-tab');
+            solutionTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    solutionTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding content
+                    document.querySelectorAll('.solution-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabName + '-content').classList.add('active');
+                });
+            });
+
+            // CTA demo button
+            const ctaDemoBtn = document.getElementById('ctaDemoBtn');
+            if (ctaDemoBtn) {
+                ctaDemoBtn.addEventListener('click', function() {
+                    mainDemoModal.show();
+                });
+            }
+
+            // ========== UTILITY FUNCTIONS ==========
+            
+            // Notification function
+            function showNotification(message, type = 'info') {
+                const notification = document.getElementById('notification');
+                if (notification) {
+                    notification.textContent = message;
+                    notification.className = `notification ${type} show`;
+                    
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 5000);
+                }
+            }
+
+            // Initialize animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const slideLeftElements = document.querySelectorAll('.slide-in-left');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const delay = entry.target.getAttribute('data-delay') || 0;
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, delay);
+                    }
+                });
+            });
+
+            fadeElements.forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            slideLeftElements.forEach((el) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateX(-50px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            console.log("All buttons initialized successfully");
+            console.log(`- ${featureDemoButtons.length} demo buttons`);
+            console.log(`- ${trialButtons.length} trial buttons`);
+            console.log(`- ${exploreSolutionButtons.length} explore buttons`);
         });
-      });
     </script>
-  </body>
+</body>
 </html>
